@@ -1,2 +1,3 @@
 # binidini
-p2p delivery service
+P2p delivery service. Send & Deliver Anything & Anywhere. 
+

@@ -1,0 +1,3 @@
+binidini_web_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: BinidiniWebBundle:Default:index }

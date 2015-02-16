@@ -1,0 +1,12 @@
+binidini_api:
+    resource: "@BinidiniApiBundle/Resources/config/routing.yml"
+    prefix:   /
+
+binidini_web:
+    resource: "@BinidiniWebBundle/Resources/config/routing.yml"
+    prefix:   /
+
+binidini_core:
+    resource: "@BinidiniCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+

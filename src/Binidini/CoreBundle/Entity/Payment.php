@@ -30,10 +30,10 @@ class Payment
      */
     private $amount;
 
-    /*
+    /**
      * @var integer
      *
-     * @ORM\Column(name="credit_debit_flag", columnDefinition="ENUM(-1, 1))
+     * @ORM\Column(name="flag_credit_debit", type="integer")
      */
     private $flagCreditDebit;
 
@@ -186,5 +186,28 @@ class Payment
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set flagCreditDebit
+     *
+     * @param integer $flagCreditDebit
+     * @return Payment
+     */
+    public function setFlagCreditDebit($flagCreditDebit)
+    {
+        $this->flagCreditDebit = $flagCreditDebit;
+
+        return $this;
+    }
+
+    /**
+     * Get flagCreditDebit
+     *
+     * @return integer 
+     */
+    public function getFlagCreditDebit()
+    {
+        return $this->flagCreditDebit;
     }
 }

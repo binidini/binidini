@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            Титимити - p2p сервис доставки
+        {% endblock %}
+    </title>
+
+    {% block stylesheets %}
+        <link href="{{ asset('bundles/binidiniweb/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/binidiniweb/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/binidiniweb/css/animate.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/binidiniweb/css/style.css') }}" rel="stylesheet">
+    {% endblock %}
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <img src="{{ asset('bundles/binidiniweb/img/logo.png') }}"/>
+            </div>
+
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="text-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            {% block fos_user_content %}{% endblock %}
+
+            <p class="m-t"> <small>Титимити - p2p сервис доставки &copy; 2015</small> </p>
+        </div>
+    </div>
+
+    {% block javascripts %}
+        <script src="{{ asset('bundles/binidiniweb/js/jquery-2.1.1.js') }}"></script>
+        <script src="{{ asset('bundles/binidiniweb/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+</body>
+
+</html>

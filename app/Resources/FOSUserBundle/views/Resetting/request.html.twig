@@ -1,0 +1,26 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <h3>Восстановление пароля</h3>
+    <!--p>
+        связывает людей, которым надо что-то и куда-то перевезти с водителями, перевозчиками и туристами, которые в любом случае едут в этом направлении.
+    </p-->
+    {% if invalid_username is defined %}
+        <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+    {% endif %}
+
+    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="m-t">
+
+        <div class="form-group input-group ">
+            <span class="input-group-addon">+7</span>
+            <input type="text" id="username" name="_username" class="form-control" placeholder="Номер телефона" required="required"  maxlength="10" pattern=".*\d{10}.*">
+            <span class="input-group-addon">10 цифр</span>
+        </div>
+
+        <button type="submit" id="_submit" name="_submit" class="btn btn-primary block full-width m-b" >Выслать новый пароль</button>
+
+    </form>
+
+{% endblock fos_user_content %}

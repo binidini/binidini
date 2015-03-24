@@ -16,9 +16,21 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+            new Misd\GuzzleBundle\MisdGuzzleBundle(),
+            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
+            new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
+
             new Binidini\CoreBundle\BinidiniCoreBundle(),
             new Binidini\WebBundle\BinidiniWebBundle(),
             new Binidini\ApiBundle\BinidiniApiBundle(),
+            new Binidini\SearchBundle\BinidiniSearchBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

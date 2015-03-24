@@ -1,4 +1,50 @@
 services:
-#    binidini_core.example:
-#        class: Binidini\CoreBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    binidini_user.registration.form.type:
+        class: Binidini\CoreBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: binidini_user_registration }
+
+    binidini.subscriber.user_registration:
+        class: Binidini\CoreBundle\EventListener\RegistrationListener
+        arguments: [@old_sound_rabbit_mq.binidini_registration_producer]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    binidini.listener.user_aware:
+        class: Binidini\CoreBundle\EventListener\UserAwareListener
+        arguments: [@security.context]
+        tags:
+            - { name: kernel.event_listener, event: binidini_core.shipping.pre_create, method: setUser  }
+
+    binidini.listener.shipping:
+        class: Binidini\CoreBundle\EventListener\ShippingListener
+        arguments: [@doctrine.odm.mongodb.document_manager]
+        tags:
+            - { name: kernel.event_listener, event: binidini_core.shipping.post_create, method: onShippingPostCreate }
+
+    smsc.client:
+        class: %guzzle.client.class%
+        arguments: ['https://smsc.ru/']
+        tags:
+            - { name: guzzle.client }
+
+    binidini.send_sms_service:
+        class: Binidini\CoreBundle\Service\SendSmsService
+        arguments:
+            - @logger
+            - @smsc.client
+            - %smsc_login%
+            - %smsc_password%
+            - %smsc_sender%
+        tags:
+              - { name: monolog.logger, channel: sms }
+
+    binidini.registration_sms_service:
+        class: Binidini\CoreBundle\Worker\SendRegistrationSmsWorker
+        arguments: [@binidini.send_sms_service]
+
+    binidini.form.type.shipping:
+        class: Binidini\CoreBundle\Form\Type\ShippingType
+        tags:
+            - { name: form.type, alias: binidini_core_shipping}

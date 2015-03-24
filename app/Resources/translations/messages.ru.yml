@@ -1,0 +1,21 @@
+init: начальный
+new: новый
+accepted: принят
+delivered: доставлен
+paid: оплачен
+completed: завершен
+rejected: отказ
+canceled: отменен
+conflict: спорный
+
+new orders: Новые заказы
+accepted orders: Принятые заказы
+delivered orders: Доставленные заказы
+paid orders: Оплаченные заказы
+completed orders: Завершенные заказы
+rejected orders: Отказы
+canceled orders: Отмененные заказы
+conflict orders: Спорные заказы
+' orders': Все заказы
+
+binidini_core.shipping.create: заказ

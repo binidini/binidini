@@ -1,0 +1,51 @@
+winzou_state_machine:
+    binidini_core_shipping:
+        class: Binidini\CoreBundle\Entity\Shipping
+        property_path: state
+        graph: logic
+        states:
+            - init
+            - new
+            - accepted
+            - dispatched
+            - on_way
+            - delivered     #awaiting_payment
+            - paid          #awaiting_payment_confirmation
+            - completed
+            - rejected      #awaiting_cancel_confirmation
+            - canceled
+            - conflict
+        transitions:
+            create:
+                from: [init]
+                to: new
+            accept:
+                from: [new]
+                to: accepted
+            dispatch:
+                from: [accepted]
+                to: dispatched
+            load:
+                from: [dispatched]
+                to: on_way
+            deliver:
+                from: [on_way]
+                to: delivered
+            pay:
+                from: [delivered]
+                to: paid
+            complete:
+                from: [paid]
+                to: completed
+            reject:
+                from: [accepted, dispatched, on_way, delivered, paid]
+                to: rejected
+            cancel:
+                from: [rejected]
+                to: canceled
+            dispute:
+                from: [rejected]
+                to: conflict
+            resolve:
+                from: [conflict]
+                to: canceled

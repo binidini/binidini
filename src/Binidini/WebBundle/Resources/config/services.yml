@@ -2,3 +2,8 @@ services:
 #    binidini_web.example:
 #        class: Binidini\WebBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    binidini_web.twig_extension:
+        class: Binidini\WebBundle\Twig\WebExtension
+        public: false
+        tags:
+            - { name: twig.extension }

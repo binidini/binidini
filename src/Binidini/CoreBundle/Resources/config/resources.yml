@@ -1,0 +1,17 @@
+sylius_resource:
+    settings:
+        allowed_paginate: [10, 25, 50, 100]
+        default_page_size: 10
+    resources:
+        binidini_core.user:
+            driver: doctrine/orm
+            classes:
+                model: Binidini\CoreBundle\Entity\User
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+        binidini_core.shipping:
+            driver: doctrine/orm
+            classes:
+                model: Binidini\CoreBundle\Entity\Shipping
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository

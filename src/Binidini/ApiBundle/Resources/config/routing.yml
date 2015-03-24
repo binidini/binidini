@@ -1,3 +1,10 @@
-binidini_api_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: BinidiniApiBundle:Default:index }
+# This file is part of the Binidini project.
+# (c) Denis Manilo
+
+binidini_api_user:
+    resource: @BinidiniApiBundle/Resources/config/routing/user.yml
+    prefix: /users
+
+binidini_api_parcel:
+    resource: @BinidiniApiBundle/Resources/config/routing/parcel.yml
+    prefix: /parcels

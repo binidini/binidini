@@ -1,12 +1,14 @@
+binidini_search:
+    resource: "@BinidiniSearchBundle/Resources/config/routing.yml"
+    prefix:   /
+
 binidini_api:
     resource: "@BinidiniApiBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /api
 
 binidini_web:
     resource: "@BinidiniWebBundle/Resources/config/routing.yml"
     prefix:   /
 
-binidini_core:
-    resource: "@BinidiniCoreBundle/Resources/config/routing.yml"
-    prefix:   /
-
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

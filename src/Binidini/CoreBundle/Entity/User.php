@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name = "bd_user")
+ * @ORM\Table(name = "user")
  *
  * @ORM\AttributeOverrides({
  *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(type="string", name="email_canonical", length=255, unique=false)),

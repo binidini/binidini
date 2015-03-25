@@ -1,0 +1,11 @@
+{% macro pagination(paginator) %}
+    {% if paginator.haveToPaginate() %}
+        {{ pagerfanta(paginator, 'twitter_bootstrap3_translated') }}
+    {% endif %}
+{% endmacro %}
+
+{% macro paging(paginator) %}
+    {% if paginator.nbresults > 0 %}
+        {{ (paginator.currentpage-1)*paginator.maxperpage+1 }}-{{ min(paginator.currentpage*paginator.maxperpage, paginator.nbresults) }} из {{ paginator.nbresults }}
+    {% endif %}
+{% endmacro %}

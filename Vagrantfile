@@ -32,7 +32,7 @@ Vagrant.configure(2) do |config|
     sudo cp /vagrant/vagrant/default /etc/nginx/sites-available/default
     sudo service nginx restart
     cd /vagrant/
-    cp vagrant/parameters.yml app/config/parameters.yml
+    cp app/config/parameters.yml.dist app/config/parameters.yml
     composer install
     ./app/console assets:install
     ./app/console doctrine:database:create

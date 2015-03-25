@@ -1,0 +1,119 @@
+{% import 'BinidiniWebBundle:Frontend/Macros:page.html.twig' as page %}
+
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
+
+{% block pagetitle %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-3">
+            <h2>Мои посылки</h2>
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="text-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+        <div class="col-sm-9">
+            <div class="title-action">
+                <a href="{{ path('binidini_core_shipping_new') }}" class="btn btn-primary btn-outline"><i class="fa fa-plus-square"></i> Новый заказ</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        {% if shipments.nbresults > 0 %}
+                            Заказы {{ page.paging(shipments) }}
+
+                            <div class="ibox-tools">
+
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    по {{ shipments.maxperpage() }} записей
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li>
+                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 10, 'state': app.request.get('state') } ) }}">по
+                                            10 записей</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 25, 'state': app.request.get('state') } ) }}">по
+                                            25 записей</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 50, 'state': app.request.get('state') } ) }}">по
+                                            50 записей</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 100, 'state': app.request.get('state') } ) }}">по
+                                            100 записей</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        {% else %}
+                            заказов нет
+                        {% endif %}
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-12 text-right">
+                                {{ page.pagination(shipments) }}
+                            </div>
+                        </div>
+
+                        {% if shipments.nbresults > 0 %}
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>{{ sylius_resource_sort('id', 'Номер', 'desc') }}</th>
+                                        <th>Что</th>
+                                        <th>Откуда</th>
+                                        <th>Куда</th>
+                                        <th>{{ sylius_resource_sort('pickupDatetime', 'Отправка', 'desc') }}</th>
+                                        <th>{{ sylius_resource_sort('deliveryDatetime', 'Доставка', 'desc') }}</th>
+                                        <th class="text-right">Цена</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for shipment in shipments %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path('binidini_core_shipping_show', {'id': shipment.id}) }}">{{ shipment.id }}</a>
+                                            </td>
+                                            <td>{{ shipment.name[:24] }}</td>
+                                            <td>{{ shipment.pickupAddress[:64] }}</td>
+                                            <td>{{ shipment.deliveryAddress[:64] }}</td>
+                                            <td>{{ shipment.pickupDatetime | date('d.m H:i') }}</td>
+                                            <td>{{ shipment.deliveryDatetime | date('d.m H:i') }}</td>
+                                            <td class="text-right">{{ shipment.deliveryPrice | price }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                </div>
+
+                                <div class="col-sm-6 text-right">
+                                    {{ page.pagination(shipments) }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

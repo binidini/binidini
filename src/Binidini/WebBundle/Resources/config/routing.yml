@@ -34,6 +34,24 @@ binidini_core_shipping_index:
                 state: $state
             template: BinidiniWebBundle:Frontend/Shipping:index.html.twig
 
+
+binidini_core_transports:
+    path: /transports
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+                state: $state
+            template: BinidiniWebBundle:Frontend/Shipping:index.html.twig
+
+
 binidini_core_shipping_show:
     path: /shipping/{id}
     methods: [GET]
@@ -41,3 +59,17 @@ binidini_core_shipping_show:
         _controller: binidini_core.controller.shipping:showAction
         _sylius:
             template: BinidiniWebBundle:Frontend/Shipping:show.html.twig
+
+
+binidini_search:
+    path: /search
+    methods: [GET]
+    defaults:
+        _controller: binidini_search.controller.shipment:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            template: BinidiniWebBundle:Frontend/Shipping:search.html.twig

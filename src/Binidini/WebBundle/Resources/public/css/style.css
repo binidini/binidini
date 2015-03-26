@@ -929,6 +929,11 @@ button.dim:active:before {
   background-color: #ed5565;
   color: #FFFFFF;
 }
+.label-refused,
+.badge-redused {
+  background-color: #ed5565;
+  color: #FFFFFF;
+}
 .label-canceled,
 .badge-canceled {
   background-color: inherit;
@@ -2818,6 +2823,9 @@ table.table-mail tr td {
   color: #888888;
 }
 .text-rejected {
+  color: #ed5565
+}
+.text-refused {
   color: #ed5565
 }
 .text-canceled {

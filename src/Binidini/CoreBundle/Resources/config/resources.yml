@@ -21,3 +21,9 @@ sylius_resource:
                 model: Binidini\SearchBundle\Document\Shipment
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository
+        binidini_core.bid:
+            driver: doctrine/orm
+            classes:
+                model: Binidini\CoreBundle\Entity\Bid
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository

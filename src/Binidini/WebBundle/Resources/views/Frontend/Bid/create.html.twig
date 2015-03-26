@@ -1,0 +1,11 @@
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
+
+{% block content %}
+
+    {{ form_start(form, {'action': path('binidini_core_bid_new', {'shipping_id': app.request.get('shipping_id')})} ) }}
+    {{ form_widget(form.shipping, {'value':app.request.get('shipping_id')}) }}
+    {{ form_rest(form) }}
+    <input type="submit"/>
+    {{ form_end(form) }}
+
+{% endblock %}

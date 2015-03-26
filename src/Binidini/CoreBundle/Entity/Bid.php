@@ -2,7 +2,9 @@
 
 namespace Binidini\CoreBundle\Entity;
 
+use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\UserInterface;
 
 /**
  * Bid
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name = "bid")
  * @ORM\Entity
  */
-class Bid
+class Bid implements UserAwareInterface
 {
     const STATE_NEW        = 'new';
 
@@ -109,10 +111,10 @@ class Bid
     /**
      * Set user
      *
-     * @param \Binidini\CoreBundle\Entity\User $user
+     * @param \FOS\UserBundle\Model\UserInterface $user
      * @return Bid
      */
-    public function setUser(\Binidini\CoreBundle\Entity\User $user = null)
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
 
@@ -122,7 +124,7 @@ class Bid
     /**
      * Get user
      *
-     * @return \Binidini\CoreBundle\Entity\User 
+     * @return \FOS\UserBundle\Model\UserInterface
      */
     public function getUser()
     {

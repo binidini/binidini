@@ -16,6 +16,7 @@ services:
         arguments: [@security.context]
         tags:
             - { name: kernel.event_listener, event: binidini_core.shipping.pre_create, method: setUser  }
+            - { name: kernel.event_listener, event: binidini_core.bid.pre_create, method: setUser  }
 
     binidini.listener.shipping:
         class: Binidini\CoreBundle\EventListener\ShippingListener
@@ -48,3 +49,8 @@ services:
         class: Binidini\CoreBundle\Form\Type\ShippingType
         tags:
             - { name: form.type, alias: binidini_core_shipping}
+
+    binidini.form.type.bid:
+        class: Binidini\CoreBundle\Form\Type\BidType
+        tags:
+            - { name: form.type, alias: binidini_core_bid}

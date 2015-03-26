@@ -19,3 +19,4 @@ conflict orders: Спорные заказы
 ' orders': Все заказы
 
 binidini_core.shipping.create: заказ
+binidini_web.shipping.create: заказ

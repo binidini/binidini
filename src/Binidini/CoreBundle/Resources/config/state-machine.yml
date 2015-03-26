@@ -12,7 +12,8 @@ winzou_state_machine:
             - delivered     #awaiting_payment
             - paid          #awaiting_payment_confirmation
             - completed
-            - rejected      #awaiting_cancel_confirmation
+            - rejected      # rejected by carrier, awaiting_cancel confirmation from sender
+            - refused       # refused by sender, awaiting cancel confirmation from carrier
             - canceled
             - conflict
         transitions:
@@ -40,11 +41,14 @@ winzou_state_machine:
             reject:
                 from: [accepted, dispatched, on_way, delivered, paid]
                 to: rejected
+            refuse:
+                from: [accepted, dispatched, on_way, delivered, paid]
+                to: refused
             cancel:
-                from: [rejected]
+                from: [rejected, refused]
                 to: canceled
             dispute:
-                from: [rejected]
+                from: [rejected, refused]
                 to: conflict
             resolve:
                 from: [conflict]

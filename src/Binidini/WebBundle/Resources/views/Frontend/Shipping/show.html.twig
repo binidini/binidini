@@ -4,6 +4,34 @@
     <div class="row wrapper border-bottom white-bg page-heading" xmlns="http://www.w3.org/1999/html">
         <div class="col-sm-4">
             <h2>Детализация заказа</h2>
+
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="text-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="col-sm-8">
+            <div class="title-action">
+                {% if app.user.id == shipping.user.id %}
+                    {% if shipping.state == 'accepted' %}
+                        <a href="#" class="btn btn-primary">Выдан</a>
+                    {% elseif shipping.state == 'delivered' %}
+                        <a href="#" class="btn btn-primary">Оплачен</a>
+                    {% endif %}
+                {% endif %}
+                {% if app.user.id == shipping.carrier.id %}
+                    {% if shipping.state == 'dispatched' %}
+                        <a href="#" class="btn btn-primary">Получен</a>
+                    {% elseif shipping.state == 'on_way' %}
+                        <a href="#" class="btn btn-primary">Доставлен</a>
+                    {% elseif shipping.state == 'paid' %}
+                        <a href="#" class="btn btn-primary">Оплачен</a>
+                    {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -17,7 +45,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="m-b-md">
-                                    <span class="label label-{{ shipping.state }} pull-right">{{ shipping.state | trans }}</span>
+
                                     <h2>{{ shipping.name }}</h2>
                                 </div>
                                 <dl class="dl-horizontal">

@@ -10,6 +10,7 @@
 namespace Binidini\WebBundle\Twig;
 
 use Binidini\CoreBundle\Entity\Shipping;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class WebExtension extends \Twig_Extension
 {
@@ -18,6 +19,7 @@ class WebExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('price', array($this, 'priceFilter')),
             new \Twig_SimpleFilter('weight', array($this, 'weightFilter')),
+            new \Twig_SimpleFilter('timeago', array($this, 'timeagoFilter')),
         );
     }
 
@@ -31,6 +33,28 @@ class WebExtension extends \Twig_Extension
         return $weight . ' кг';
     }
 
+    public function timeagoFilter(\DateTime $datetime)
+    {
+
+        $time = time() - $datetime->getTimestamp();
+
+        $units = array(
+            31536000 => 'г',
+            2592000 => 'м',
+            604800 => 'н',
+            86400 => 'д',
+            3600 => 'ч',
+            60 => 'мин',
+            1 => 'сек'
+        );
+
+        foreach ($units as $unit => $val) {
+            if ($time < $unit) continue;
+            $numberOfUnits = floor($time / $unit);
+            return ($val == 'сек') ? 'только что' :
+                $numberOfUnits .$val . ' назад';
+        }
+    }
 
     public function getName()
     {

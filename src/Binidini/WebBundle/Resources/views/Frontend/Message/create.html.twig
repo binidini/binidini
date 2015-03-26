@@ -1,0 +1,18 @@
+{% set shipping_id = app.request.get('shipping_id') %}
+{{ form_start(form, {'action': path('binidini_core_shipping_message_new', {'shipping_id': shipping_id}), 'attr': {'class': 'form-horizontal'} }) }}
+{{ form_errors(form) }}
+<div class="form-group">
+    <div class="col-sm-12">
+        {{ form_widget(form.text, {'attr': {'class': 'form-control', 'placeholder': 'Написать сообщение'}}) }}
+        {{ form_widget(form.shipping, {'attr': {'value': shipping_id}}) }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3">
+        <button class="btn btn-primary" type="submit">
+            Отправить
+        </button>
+    </div>
+</div>
+{{ form_rest(form) }}
+{{ form_end(form) }}

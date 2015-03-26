@@ -174,6 +174,11 @@ class Shipping implements UserAwareInterface
     private $bids;
 
     /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="shipping")
+     */
+    private $messages;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -639,5 +644,38 @@ class Shipping implements UserAwareInterface
     public function setUpdatedAtValue()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * Add messages
+     *
+     * @param \Binidini\CoreBundle\Entity\Message $messages
+     * @return Shipping
+     */
+    public function addMessage(\Binidini\CoreBundle\Entity\Message $messages)
+    {
+        $this->messages[] = $messages;
+
+        return $this;
+    }
+
+    /**
+     * Remove messages
+     *
+     * @param \Binidini\CoreBundle\Entity\Message $messages
+     */
+    public function removeMessage(\Binidini\CoreBundle\Entity\Message $messages)
+    {
+        $this->messages->removeElement($messages);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMessages()
+    {
+        return $this->messages;
     }
 }

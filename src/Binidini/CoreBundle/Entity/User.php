@@ -136,7 +136,7 @@ class User extends BaseUser
         return preg_replace('/(\d{3})\d{3}(\d{4})/', '(${1}) xxx${2}', $this->getUsername());
     }
 
-    /*
+    /**
      * Display name for user
      */
     public function getName()

@@ -678,4 +678,8 @@ class Shipping implements UserAwareInterface
     {
         return $this->messages;
     }
+
+    public function isNew(){
+        return $this->state == self::STATE_NEW;
+    }
 }

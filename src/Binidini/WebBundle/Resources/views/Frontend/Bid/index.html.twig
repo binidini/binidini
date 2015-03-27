@@ -1,7 +1,23 @@
-{% extends 'BinidiniWebBundle::layout.html.twig' %}
-
-{% block content %}
-
-    index
-
-{% endblock %}
+<div class="feed-activity-list">
+    {% for message in messages %}
+        <div class="feed-element">
+            <a href="#" class="pull-left">
+                <img alt="image" class="img-circle" src="img/a2.jpg">
+            </a>
+            <div class="media-body ">
+                <strong>{{ message.user.name}}</strong> отправил сообщение.<br>
+                <small class="text-muted pull-right">{{ message.createdAt | timeago}}</small>
+                <small class="text-muted">{{ message.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
+                <div class="well">
+                    {{ message.text }}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="col-sm-12">
+            <h3 class="text-center">
+                По заказу сообщений нет
+            </h3>
+        </div>
+    {% endfor %}
+</div>

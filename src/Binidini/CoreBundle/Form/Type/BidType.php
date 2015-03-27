@@ -1,12 +1,5 @@
 <?php
-/*
- * This file is part of the Binidini project.
- *
- * (c) Denis Manilo
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+
 namespace Binidini\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -19,6 +12,7 @@ class BidType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('price', 'integer')
             ->add('comment', 'textarea')
             ->add('shipping', 'entity_hidden', ['data_class' => 'Binidini\CoreBundle\Entity\Shipping']);
     }

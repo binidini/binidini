@@ -5,6 +5,7 @@ namespace Binidini\CoreBundle\Entity;
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Bid
@@ -26,12 +27,19 @@ class Bid implements UserAwareInterface
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="price", type="integer")
+     * @Assert\Range(min=0)
+     */
+    private $price;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="comment", type="string", length=255)
      */
     private $comment;
-
 
     /**
      * @ORM\ManyToOne(targetEntity="Shipping", inversedBy="bids")
@@ -129,5 +137,28 @@ class Bid implements UserAwareInterface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set price
+     *
+     * @param integer $price
+     * @return Bid
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return integer 
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }

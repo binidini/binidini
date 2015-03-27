@@ -1,22 +1,40 @@
 <div class="feed-activity-list">
-    {% for message in messages %}
+    {% set userIdDetected = false %}
+    {% for bid in bids %}
+        {% if not userIdDetected %}
+            {% set isShippingSender = bid.shipping.user.id == app.user.id %}
+            {% set userIdDetected = true %}
+        {% endif %}
         <div class="feed-element">
             <a href="#" class="pull-left">
                 <img alt="image" class="img-circle" src="img/a2.jpg">
             </a>
+
             <div class="media-body ">
-                <strong>{{ message.user.name}}</strong> отправил сообщение.<br>
-                <small class="text-muted pull-right">{{ message.createdAt | timeago}}</small>
-                <small class="text-muted">{{ message.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
-                <div class="well">
-                    {{ message.text }}
+                <strong>{{ bid.user.name }}</strong> отправил заявку<br>
+                <small class="text-muted pull-right">{{ bid.createdAt | timeago }}</small>
+                <small class="text-muted">{{ bid.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
+            </div>
+            <div class="row">
+                <div class="well col-md-8">
+                    {{ bid.comment | nl2br }}
                 </div>
+                {% if isShippingSender %}
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-w-m btn-success btn-well">Принять
+                            за {{ bid.price|price }}</button>
+                    </div>
+                {% else %}
+                    <div class="col-md-3">
+                        <button type="button" disabled class="btn btn-w-m btn-disabled btn-well">{{ bid.price|price }}</button>
+                    </div>
+                {% endif %}
             </div>
         </div>
     {% else %}
         <div class="col-sm-12">
             <h3 class="text-center">
-                По заказу сообщений нет
+                По заказу заявок нет
             </h3>
         </div>
     {% endfor %}

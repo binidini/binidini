@@ -19,7 +19,6 @@ binidini_core_shipping_message_new:
     defaults:
         _controller: binidini_core.controller.message:createAction
         _sylius:
-            template: BinidiniWebBundle:Frontend/Message:create.html.twig
             redirect:
                 route: binidini_core_shipping_show
                 parameters: { id: $shipping_id }

@@ -16,12 +16,14 @@ binidini_core_bid_index:
     defaults:
         _controller: binidini_core.controller.bid:indexAction
         _sylius:
+            criteria:
+                shipping: $shipping_id
             paginate: $paginate
             sortable: true
             sorting:
-                id: desc
+                price: desc
             filterable: true
-            template: BinidiniWebBundle:Frontend/Shipping:search.html.twig
+            template: BinidiniWebBundle:Frontend/Bid:index.html.twig
 
 binidini_core_bid_show:
     path: /shipping/{shipping_id}/bid/{id}

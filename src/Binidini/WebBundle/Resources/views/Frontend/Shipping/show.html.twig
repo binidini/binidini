@@ -131,224 +131,75 @@
                                 <div class="panel blank-panel">
                                     <div class="panel-heading">
                                         <div class="panel-options">
+                                            {% set isNewShipping = shipping.isNew() %}
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#tab-1" data-toggle="tab">Вопросы и ответы</a></li>
-                                                <li class=""><a href="#tab-2" data-toggle="tab">История</a></li>
-                                                <li class=""><a href="#tab-1" data-toggle="tab">Заявки</a></li>
+                                                {% if isNewShipping %}
+                                                    <li class="active"><a href="#tab-3" data-toggle="tab">Заявки</a></li>
+                                                    <li class=""><a href="#tab-1" data-toggle="tab">Вопросы и ответы</a></li>
+                                                    <li class=""><a href="#tab-2" data-toggle="tab">История</a></li>
+                                                {% else %}
+                                                    <li class="active"><a href="#tab-1" data-toggle="tab">Вопросы и ответы</a></li>
+                                                    <li class=""><a href="#tab-2" data-toggle="tab">История</a></li>
+                                                    <li class=""><a href="#tab-3" data-toggle="tab">Заявки</a></li>
+                                                {% endif %}
                                             </ul>
                                         </div>
                                     </div>
-
                                     <div class="panel-body">
-
                                         <div class="tab-content">
-                                            <div class="tab-pane active" id="tab-1">
-                                                {% render path('binidini_core_shipping_message_new', {'shipping_id': shipping.id}) %}
+                                            <div class="tab-pane{% if not isNewShipping %} active{% endif %}" id="tab-1">
+                                                {{ form_start(message_form, {'action': path('binidini_core_shipping_message_new', {'shipping_id': shipping.id}), 'attr': {'class': 'form-horizontal'} }) }}
+                                                {{ form_errors(message_form) }}
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        {{ form_widget(message_form.text, {'attr': {'class': 'form-control', 'placeholder': 'Написать сообщение'}}) }}
+                                                        {{ form_widget(message_form.shipping, {'attr': {'value': shipping.id}}) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                        <button class="btn btn-primary" type="submit">
+                                                            Отправить
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                {{ form_rest(message_form) }}
+                                                {{ form_end(message_form) }}
                                                 <div class="hr-line-dashed"></div>
                                                 {% render path('binidini_core_shipping_message_index', {'shipping_id':shipping.id}) %}
                                             </div>
                                             <div class="tab-pane" id="tab-2">
 
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Status</th>
-                                                        <th>Title</th>
-                                                        <th>Start Time</th>
-                                                        <th>End Time</th>
-                                                        <th>Comments</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
-                                                        </td>
-                                                        <td>
-                                                            Create project in webapp
-                                                        </td>
-                                                        <td>
-                                                            12.07.2014 10:10:1
-                                                        </td>
-                                                        <td>
-                                                            14.07.2014 10:16:36
-                                                        </td>
-                                                        <td>
-                                                            <p class="small">
-                                                                Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable.
-                                                            </p>
-                                                        </td>
+                                            </div>
+                                            <div class="tab-pane{% if isNewShipping %} active{% endif %}" id="tab-3">
+                                                {% if isNewShipping and shipping.user.id != app.user.id %}
+                                                {{ form_start(bid_form, {'action': path('binidini_core_bid_new', {'shipping_id': shipping.id}), 'attr': {'class': 'form-horizontal'} }) }}
+                                                {{ form_errors(bid_form) }}
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        {{ form_widget(bid_form.price, {'attr': {'class': 'form-control', 'value':shipping.guaranteeCost}}) }}
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        {{ form_widget(bid_form.comment, {'attr': {'class': 'form-control', 'placeholder': 'Добавить сообщение', 'rows':1}}) }}
+                                                        {{ form_widget(bid_form.shipping, {'attr': {'value': shipping.id}}) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                        <button class="btn btn-primary" type="submit">Подать заявку</button>
+                                                    </div>
+                                                </div>
 
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span class="label label-primary"><i class="fa fa-check"></i> Accepted</span>
-                                                        </td>
-                                                        <td>
-                                                            Various versions
-                                                        </td>
-                                                        <td>
-                                                            12.07.2014 10:10:1
-                                                        </td>
-                                                        <td>
-                                                            14.07.2014 10:16:36
-                                                        </td>
-                                                        <td>
-                                                            <p class="small">
-                                                                Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                                                            </p>
-                                                        </td>
+                                                {{ form_rest(bid_form) }}
+                                                {{ form_end(bid_form) }}
 
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span class="label label-primary"><i class="fa fa-check"></i> Sent</span>
-                                                        </td>
-                                                        <td>
-                                                            There are many variations
-                                                        </td>
-                                                        <td>
-                                                            12.07.2014 10:10:1
-                                                        </td>
-                                                        <td>
-                                                            14.07.2014 10:16:36
-                                                        </td>
-                                                        <td>
-                                                            <p class="small">
-                                                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which
-                                                            </p>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span class="label label-primary"><i class="fa fa-check"></i> Reported</span>
-                                                        </td>
-                                                        <td>
-                                                            Latin words
-                                                        </td>
-                                                        <td>
-                                                            12.07.2014 10:10:1
-                                                        </td>
-                                                        <td>
-                                                            14.07.2014 10:16:36
-                                                        </td>
-                                                        <td>
-                                                            <p class="small">
-                                                                Latin words, combined with a handful of model sentence structures
-                                                            </p>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span class="label label-primary"><i class="fa fa-check"></i> Accepted</span>
-                                                        </td>
-                                                        <td>
-                                                            The generated Lorem
-                                                        </td>
-                                                        <td>
-                                                            12.07.2014 10:10:1
-                                                        </td>
-                                                        <td>
-                                                            14.07.2014 10:16:36
-                                                        </td>
-                                                        <td>
-                                                            <p class="small">
-                                                                The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                                                            </p>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span class="label label-primary"><i class="fa fa-check"></i> Sent</span>
-                                                        </td>
-                                                        <td>
-                                                            The first line
-                                                        </td>
-                                                        <td>
-                                                            12.07.2014 10:10:1
-                                                        </td>
-                                                        <td>
-                                                            14.07.2014 10:16:36
-                                                        </td>
-                                                        <td>
-                                                            <p class="small">
-                                                                The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                                                            </p>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span class="label label-primary"><i class="fa fa-check"></i> Reported</span>
-                                                        </td>
-                                                        <td>
-                                                            The standard chunk
-                                                        </td>
-                                                        <td>
-                                                            12.07.2014 10:10:1
-                                                        </td>
-                                                        <td>
-                                                            14.07.2014 10:16:36
-                                                        </td>
-                                                        <td>
-                                                            <p class="small">
-                                                                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.
-                                                            </p>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
-                                                        </td>
-                                                        <td>
-                                                            Lorem Ipsum is that
-                                                        </td>
-                                                        <td>
-                                                            12.07.2014 10:10:1
-                                                        </td>
-                                                        <td>
-                                                            14.07.2014 10:16:36
-                                                        </td>
-                                                        <td>
-                                                            <p class="small">
-                                                                Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable.
-                                                            </p>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span class="label label-primary"><i class="fa fa-check"></i> Sent</span>
-                                                        </td>
-                                                        <td>
-                                                            Contrary to popular
-                                                        </td>
-                                                        <td>
-                                                            12.07.2014 10:10:1
-                                                        </td>
-                                                        <td>
-                                                            14.07.2014 10:16:36
-                                                        </td>
-                                                        <td>
-                                                            <p class="small">
-                                                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                                                            </p>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    </tbody>
-                                                </table>
+                                                <div class="hr-line-dashed"></div>
+                                                {% endif %}
+                                                {% render path('binidini_core_bid_index', {'shipping_id':shipping.id}) %}
 
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
                         </div>

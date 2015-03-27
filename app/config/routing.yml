@@ -7,7 +7,7 @@ binidini_api:
     prefix:   /api
 
 binidini_web:
-    resource: "@BinidiniWebBundle/Resources/config/routing.yml"
+    resource: "@BinidiniWebBundle/Resources/config/routing/main.yml"
     prefix:   /
 
 fos_user:

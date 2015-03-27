@@ -40,7 +40,7 @@ class Message implements UserAwareInterface
     /**
      * @var Shipping
      *
-     * @ORM\ManyToOne(targetEntity="Shipping")
+     * @ORM\ManyToOne(targetEntity="Shipping", inversedBy="messages")
      * @ORM\JoinColumn(name="shipping_id", referencedColumnName="id", nullable=false)
      */
     protected $shipping;

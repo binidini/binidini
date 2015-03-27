@@ -1,0 +1,9 @@
+# This file is part of the Binidini package.
+# (c) Denis Manilo
+
+binidini_frontend:
+    resource: @BinidiniWebBundle/Resources/config/routing/frontend/main.yml
+
+binidini_backend:
+    resource: @BinidiniWebBundle/Resources/config/routing/backend/main.yml
+    prefix: /administration

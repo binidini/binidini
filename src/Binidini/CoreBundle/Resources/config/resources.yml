@@ -13,7 +13,7 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Binidini\CoreBundle\Entity\Shipping
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                controller: Binidini\CoreBundle\Controller\ShippingController
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
         binidini_search.shipment:
             driver: doctrine/mongodb-odm

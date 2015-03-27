@@ -1,0 +1,27 @@
+binidini_core_shipping_message_index:
+    path: /shipping/{shipping_id}/messages/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.message:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                shipping: $shipping_id
+            template: BinidiniWebBundle:Frontend/Message:index.html.twig
+
+binidini_core_shipping_message_new:
+    path: shipping/{shipping_id}/messages/new
+    methods: [GET, POST]
+    defaults:
+        _controller: binidini_core.controller.message:createAction
+        _sylius:
+            template: BinidiniWebBundle:Frontend/Message:create.html.twig
+            redirect:
+                route: binidini_core_shipping_show
+                parameters: { id: $shipping_id }
+            criteria:
+                shipping: $shipping_id

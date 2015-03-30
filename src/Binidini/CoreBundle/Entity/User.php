@@ -133,7 +133,7 @@ class User extends BaseUser
 
     public function getMobileMask()
     {
-        return preg_replace('/(\d{3})\d{3}(\d{4})/', '(${1}) xxx${2}', $this->getUsername());
+        return preg_replace('/(\d{3})\d{3}(\d{4})/', '+7 (${1}) xxx${2}', $this->getUsername());
     }
 
     /**

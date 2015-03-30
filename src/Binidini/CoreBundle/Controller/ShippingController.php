@@ -10,6 +10,7 @@
 
 namespace Binidini\CoreBundle\Controller;
 
+use Binidini\CoreBundle\Entity\Shipping;
 use Binidini\CoreBundle\Form\Type\BidType;
 use Binidini\CoreBundle\Form\Type\MessageType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -22,6 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ShippingController extends ResourceController
 {
+    protected $stateMachineGraph = Shipping::GRAPH;
 
     public function showAction(Request $request)
     {

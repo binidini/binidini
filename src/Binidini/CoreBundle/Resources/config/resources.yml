@@ -31,5 +31,5 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Binidini\CoreBundle\Entity\Bid
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                controller: Binidini\CoreBundle\Controller\BidController
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository

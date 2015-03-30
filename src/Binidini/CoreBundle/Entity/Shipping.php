@@ -24,6 +24,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Shipping implements UserAwareInterface
 {
+    const GRAPH             = 'logic';
+
+    const TRANSITION_ACCEPT = 'accept';
+
     const STATE_INIT        = 'init';
     const STATE_NEW         = 'new';
     const STATE_ACCEPTED    = 'accepted';
@@ -680,6 +684,6 @@ class Shipping implements UserAwareInterface
     }
 
     public function isNew(){
-        return $this->state == self::STATE_NEW;
+        return $this->state === self::STATE_NEW;
     }
 }

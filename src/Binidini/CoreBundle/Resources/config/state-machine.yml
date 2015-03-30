@@ -3,6 +3,7 @@ winzou_state_machine:
         class: Binidini\CoreBundle\Entity\Shipping
         property_path: state
         graph: logic
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
             - init
             - new
@@ -17,39 +18,85 @@ winzou_state_machine:
             - canceled
             - conflict
         transitions:
-            create:
+            create: #by sender
                 from: [init]
                 to: new
-            accept:
+            accept: #by sender
                 from: [new]
                 to: accepted
-            dispatch:
+            dispatch: #by sender
                 from: [accepted]
                 to: dispatched
-            load:
+            load:  #by carrier
                 from: [dispatched]
                 to: on_way
-            deliver:
+            deliver:  #by carrier
                 from: [on_way]
                 to: delivered
-            pay:
+            pay:  #by sender
                 from: [delivered]
                 to: paid
-            complete:
+            complete: #by carrier
                 from: [paid]
                 to: completed
-            reject:
+            reject:  #by sender
                 from: [accepted, dispatched, on_way, delivered, paid]
                 to: rejected
-            refuse:
+            refuse:  #by carrier
                 from: [accepted, dispatched, on_way, delivered, paid]
                 to: refused
-            cancel:
-                from: [rejected, refused]
+            cancel:  #by sender
+                from: [new, rejected]
                 to: canceled
-            dispute:
-                from: [rejected, refused]
+            annul:   #by carrier
+                from: [refused]
+                to: canceled
+            dispute: #by sender
+                from: [rejected]
                 to: conflict
-            resolve:
+            debate:  #by carrier
+                from: [refused]
+                to: conflict
+            resolve:  #by manager
                 from: [conflict]
                 to: canceled
+        callbacks:
+            before:
+                check_accept:   { on: 'accept',   do: [@binidini.shipping.logic.service, 'checkSender'],  args: ['object'] }
+                check_dispatch: { on: 'dispatch', do: [@binidini.shipping.logic.service, 'checkSender'],  args: ['object'] }
+                check_load:     { on: 'load',     do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
+                check_deliver:  { on: 'deliver',  do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
+                check_pay:      { on: 'pay',      do: [@binidini.shipping.logic.service, 'checkSender'],  args: ['object'] }
+                check_complete: { on: 'complete', do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
+                check_reject:   { on: 'reject',   do: [@binidini.shipping.logic.service, 'checkSender'],  args: ['object'] }
+                check_refuse:   { on: 'refuse',   do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
+                check_cancel:   { on: 'cancel',   do: [@binidini.shipping.logic.service, 'checkSender'],  args: ['object'] }
+                check_annul:    { on: 'annul',    do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
+                check_dispute:  { on: 'dispute',  do: [@binidini.shipping.logic.service, 'checkSender'],  args: ['object'] }
+                check_debate:   { on: 'debate',   do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
+                check_resolve:  { on: 'resolve',  do: [@binidini.shipping.logic.service, 'checkResolver'],args: ['object'] }
+    binidini_core_bid:
+        class: Binidini\CoreBundle\Entity\Bid
+        property_path: state
+        graph: simple
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            - new
+            - accepted  #by sender
+            - rejected  #by sender
+            - canceled  #by carrier
+        transitions:
+            accept: #by sender
+                from: [new]
+                to: accepted
+            reject:  #by sender
+                from: [new]
+                to: rejected
+            cancel:  #by carrier
+                from: [new]
+                to: canceled
+        callbacks:
+            before:
+                accept:   { on: 'accept',   do: [@binidini.bid.logic.service, 'acceptTransition'],  args: ['object'] }
+                reject:   { on: 'reject',   do: [@binidini.bid.logic.service, 'checkSender'],  args: ['object'] }
+                cancel:   { on: 'cancel',   do: [@binidini.bid.logic.service, 'checkCarrier'],  args: ['object'] }

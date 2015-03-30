@@ -60,3 +60,15 @@ services:
         class: Binidini\CoreBundle\Form\Type\BidType
         tags:
             - { name: form.type, alias: binidini_core_bid}
+
+    binidini.shipping.logic.service:
+        class: Binidini\CoreBundle\Service\ShippingLogicService
+        arguments: [@security.context]
+
+    binidini.bid.logic.service:
+        class: Binidini\CoreBundle\Service\BidLogicService
+        arguments:
+            - @security.context
+            - @doctrine.odm.mongodb.document_manager
+            - @doctrine.orm.entity_manager
+            - @sm.factory

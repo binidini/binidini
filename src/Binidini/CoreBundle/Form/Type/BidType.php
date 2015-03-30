@@ -12,8 +12,8 @@ class BidType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('price', 'integer')
-            ->add('comment', 'textarea')
+            ->add('price')
+            ->add('comment', 'textarea', ['required' => false])
             ->add('shipping', 'entity_hidden', ['data_class' => 'Binidini\CoreBundle\Entity\Shipping']);
     }
 

@@ -7,8 +7,6 @@ binidini_core_bid_new:
             redirect:
                 route: binidini_core_shipping_show
                 parameters: { id: $shipping_id }
-            template: BinidiniWebBundle:Frontend/Bid:create.html.twig
-
 
 binidini_core_bid_index:
     path: /shipping/{shipping_id}/bid
@@ -21,14 +19,16 @@ binidini_core_bid_index:
             paginate: $paginate
             sortable: true
             sorting:
-                price: desc
+                price: asc
             filterable: true
             template: BinidiniWebBundle:Frontend/Bid:index.html.twig
 
-binidini_core_bid_show:
-    path: /shipping/{shipping_id}/bid/{id}
+binidini_core_shipping_bid_state_transition:
+    path: /shipping/{shipping_id}/bid/{id}/state/{transition}
     methods: [GET]
     defaults:
-        _controller: binidini_core.controller.bid:showAction
+        _controller: binidini_core.controller.bid:updateStateAction
         _sylius:
-            template: BinidiniWebBundle:Frontend/Bid:show.html.twig
+            redirect:
+                route: binidini_core_shipping_show
+                parameters: { id: $shipping_id }

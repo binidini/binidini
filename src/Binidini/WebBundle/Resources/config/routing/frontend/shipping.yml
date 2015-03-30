@@ -47,3 +47,9 @@ binidini_core_transports:
                 carrier: ['expr:service("security.context").getToken().getUser().getId()']
                 state: $state
             template: BinidiniWebBundle:Frontend/Shipping:transports.html.twig
+
+binidini_core_shipping_state_transition:
+    path: /shipping/{id}/state/{transition}
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:updateStateAction

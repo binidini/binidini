@@ -15,7 +15,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Bid implements UserAwareInterface
 {
+    const GRAPH             = 'simple';
+
     const STATE_NEW        = 'new';
+    const STATE_REJECTED   = 'rejected';
+    const STATE_CANCELED   = 'canceled';
 
     /**
      * @var integer
@@ -29,7 +33,8 @@ class Bid implements UserAwareInterface
     /**
      * @var integer
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="price", type="integer", options={"default" = 0})
+     * @Assert\NotBlank()
      * @Assert\Range(min=0)
      */
     private $price;
@@ -37,19 +42,19 @@ class Bid implements UserAwareInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="string", length=255)
+     * @ORM\Column(name="comment", type="string", length=255, nullable=true)
      */
     private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="Shipping", inversedBy="bids")
-     * @ORM\JoinColumn(name="shipping_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="shipping_id", referencedColumnName="id", nullable=false)
      */
     protected $shipping;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="bids")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     protected $user;
 
@@ -57,6 +62,8 @@ class Bid implements UserAwareInterface
      * Bid state.
      *
      * @var string
+     *
+     * @ORM\Column(name="state", type="string", length=32)
      */
     protected $state = Bid::STATE_NEW;
 
@@ -195,5 +202,32 @@ class Bid implements UserAwareInterface
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return Bid
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    public function isNew(){
+        return $this->state === self::STATE_NEW;
     }
 }

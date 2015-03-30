@@ -21,6 +21,6 @@ binidini_core_shipping_message_new:
         _sylius:
             redirect:
                 route: binidini_core_shipping_show
-                parameters: { id: $shipping_id }
+                parameters: { id: $shipping_id, tab: message }
             criteria:
                 shipping: $shipping_id

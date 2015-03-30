@@ -17,20 +17,25 @@
                 <small class="text-muted">{{ bid.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
             </div>
             <div class="row">
-                <div class="well col-md-12">
-                    {{ bid.comment | nl2br }}
-                </div>
-                {% if isShippingSender and bid.shipping.isNew() and bid.isNew()%}
+                {% if bid.comment %}
+                    <div class="well col-md-12">
+                        {{ bid.comment | nl2br }}
+                    </div>
+                {% endif %}
+                {% if isShippingSender and bid.shipping.isNew() and bid.isNew() %}
                     <div class="col-md-12">
-                        <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'accept'}) }}" class="btn btn-w-m btn-primary">Принять за {{ bid.price|price }}</a>
-                        <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'reject'}) }}" class="btn btn-w-m btn-success ">Отказать</a>
+                        <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'accept'}) }}"
+                           class="btn btn-w-m btn-primary">Принять за {{ bid.price|price }}</a>
+                        <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'reject'}) }}"
+                           class="btn btn-w-m btn-success ">Отказать</a>
                     </div>
                 {% else %}
                     <div class="col-md-12">
                         <button type="button" class="btn btn-w-m btn-disabled btn-well">{{ bid.price|price }}</button>
-                    {% if isBidOwner and bid.isNew() %}
-                            <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'cancel'}) }}" class="btn btn-w-m btn-success btn-well">Отменить</a>
-                    {% endif %}
+                        {% if isBidOwner and bid.isNew() %}
+                            <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'cancel'}) }}"
+                               class="btn btn-w-m btn-success btn-well">Отменить</a>
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>

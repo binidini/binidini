@@ -14,6 +14,8 @@ namespace Binidini\CoreBundle\Controller;
 use Binidini\CoreBundle\Entity\Bid;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Bid controller
@@ -51,7 +53,34 @@ class BidController extends ResourceController
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view($form));
         }
-
+        $errors = $this->getErrorMessages($form);
+        /**
+         * @var $flashBack FlashBag
+         */
+        $flashBack = $this->get('session')->getFlashBag();
+        foreach ($errors as $error) {
+            foreach($error as $message){
+                $flashBack->add('warning', $message);
+            }
+        }
         return $this->redirectHandler->redirectTo($resource);
+    }
+
+    private function getErrorMessages(\Symfony\Component\Form\Form $form)
+    {
+        $errors = array();
+        foreach ($form->getErrors() as $key => $error) {
+            if ($form->isRoot()) {
+                $errors['#'][] = $error->getMessage();
+            } else {
+                $errors[] = $error->getMessage();
+            }
+        }
+        foreach ($form->all() as $child) {
+            if (!$child->isValid()) {
+                $errors[$child->getName()] = $this->getErrorMessages($child);
+            }
+        }
+        return $errors;
     }
 }

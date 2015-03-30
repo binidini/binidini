@@ -156,17 +156,17 @@
                                 <div class="panel blank-panel">
                                     <div class="panel-heading">
                                         <div class="panel-options">
-                                            {% set isNewShipping = shipping.isNew() %}
+                                            {% set messageTabIsActive = not shipping.isNew() or app.request.get('tab') == 'message' %}
                                             <ul class="nav nav-tabs">
-                                                <li class="{{ isNewShipping ? '' : 'active' }}"><a href="#tab-1" data-toggle="tab">Сообщения</a></li>
-                                                <li class="{{ isNewShipping ? 'active' : '' }}"><a href="#tab-3" data-toggle="tab">Заявки</a></li>
+                                                <li class="{{ messageTabIsActive ? 'active' : '' }}"><a href="#tab-1" data-toggle="tab">Сообщения</a></li>
+                                                <li class="{{ not messageTabIsActive ? 'active' : '' }}"><a href="#tab-3" data-toggle="tab">Заявки</a></li>
                                                 <li class=""><a href="#tab-2" data-toggle="tab">История</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="panel-body">
                                         <div class="tab-content">
-                                            <div class="tab-pane {{ isNewShipping ? '' : ' active' }}" id="tab-1">
+                                            <div class="tab-pane {{ messageTabIsActive ? ' active': '' }}" id="tab-1">
                                                 {{ form_start(message_form, {'action': path('binidini_core_shipping_message_new', {'shipping_id': shipping.id}), 'attr': {'class': 'form-horizontal'} }) }}
                                                 {{ form_errors(message_form) }}
                                                 <div class="form-group">
@@ -193,8 +193,8 @@
                                             <div class="tab-pane" id="tab-2">
 
                                             </div>
-                                            <div class="tab-pane {{ isNewShipping ? ' active' : '' }}" id="tab-3">
-                                                {% if isNewShipping and shipping.user.id != app.user.id %}
+                                            <div class="tab-pane {{ not messageTabIsActive ? ' active' : '' }}" id="tab-3">
+                                                {% if not messageTabIsActive and shipping.user.id != app.user.id %}
                                                 {{ form_start(bid_form, {'action': path('binidini_core_bid_new', {'shipping_id': shipping.id}), 'attr': {'class': 'form-horizontal'} }) }}
                                                 {{ form_errors(bid_form) }}
                                                 <div class="form-group">
@@ -204,7 +204,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-sm-3">
+                                                    <div class="col-sm-4">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-rub"></i></span>
                                                             {{ form_widget(bid_form.price, {'attr': {'class': 'form-control', 'value':shipping.deliveryPrice}}) }}

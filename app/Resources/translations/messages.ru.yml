@@ -1,22 +1,29 @@
-init: начальный
-new: новый
-accepted: принят
-delivered: доставлен
-paid: оплачен
-completed: завершен
-rejected: отказ
-canceled: отменен
-conflict: спорный
+binidini.shipping.state.init: начальный
+binidini.shipping.state.new: новый
+binidini.shipping.state.dispatched: выдан
+binidini.shipping.state.accepted: принят
+binidini.shipping.state.dispathced: выдан
+binidini.shipping.state.delivered: доставлен
+binidini.shipping.state.paid: оплачен
+binidini.shipping.state.completed: завершен
+binidini.shipping.state.rejected: отказ
+binidini.shipping.state.refused: аннулирован
+binidini.shipping.state.canceled: отменен
+binidini.shipping.state.conflict: спорный
 
-new orders: Новые заказы
-accepted orders: Принятые заказы
-delivered orders: Доставленные заказы
-paid orders: Оплаченные заказы
-completed orders: Завершенные заказы
-rejected orders: Отказы
-canceled orders: Отмененные заказы
-conflict orders: Спорные заказы
-' orders': Все заказы
+binidini.shipping.state.fillter.new: Новые заказы
+binidini.shipping.state.fillter.accepted: Принятые заказы
+binidini.shipping.state.fillter.dispatched: Отгруженные заказы
+binidini.shipping.state.fillter.delivered: Доставленные заказы
+binidini.shipping.state.fillter.paid: Оплаченные заказы
+binidini.shipping.state.fillter.completed: Завершенные заказы
+binidini.shipping.state.fillter.rejected: Отказы
+binidini.shipping.state.fillter.refused: Аннулированные заказы
+binidini.shipping.state.fillter.canceled: Отмененные заказы
+binidini.shipping.state.fillter.conflict: Спорные заказы
+binidini.shipping.state.fillter.: Все заказы
 
-binidini_core.shipping.create: заказ
-binidini_web.shipping.create: заказ
+binidini.bid.state.new: новая
+binidini.bid.state.accepted: принята
+binidini.bid.state.rejected: отказ
+binidini.bid.state.canceled: отменена

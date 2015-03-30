@@ -883,70 +883,6 @@ button.dim:active:before {
   color: #8B91A0;
 }
 
-
-.label-init,
-.badge-init {
-  background-color: #ed5565;
-  color: #FFFFFF;
-}
-.label-new,
-.badge-new {
-  background-color: #1ab394;
-  color: #FFFFFF;
-}
-.label-accepted,
-.badge-accepted {
-  background-color: #1ab394;
-  color: #FFFFFF;
-}
-.label-dispatched,
-.badge-dispatched {
-  background-color: #1ab394;
-  color: #FFFFFF;
-}
-.label-on_way,
-.badge-on_way {
-  background-color: #1ab394;
-  color: #FFFFFF;
-}
-.label-delivered,
-.badge-delivered {
-  background-color: #1ab394;
-  color: #FFFFFF;
-}
-.label-paid,
-.badge-paid {
-  background-color: #1ab394;
-  color: #FFFFFF;
-}
-.label-completed,
-.badge-completed {
-  background-color: inherit;
-  color: inherit;
-}
-.label-rejected,
-.badge-rejected {
-  background-color: #ed5565;
-  color: #FFFFFF;
-}
-.label-refused,
-.badge-redused {
-  background-color: #ed5565;
-  color: #FFFFFF;
-}
-.label-canceled,
-.badge-canceled {
-  background-color: inherit;
-  color: inherit;
-}
-.label-conflict,
-.badge-conflict {
-  background-color: #f8ac59;
-  color: #FFFFFF;
-}
-
-
-
 /* TOOGLE SWICH */
 .onoffswitch {
   position: relative;
@@ -2798,45 +2734,6 @@ table.table-mail tr td {
   margin-top: 0;
 }
 /* COLORS */
-.text-init {
-  color: #ed5565;
-}
-.text-new {
-  color: #1ab394;
-}
-.text-accepted {
-  color: #1ab394;
-}
-.text-dispatched {
-  color: #1ab394;
-}
-.text-on_way {
-   color: #1ab394;
- }
-.text-delivered {
-  color: #1ab394;
-}
-.text-paid {
-  color: #1ab394;
-}
-.text-completed {
-  color: #888888;
-}
-.text-rejected {
-  color: #ed5565
-}
-.text-refused {
-  color: #ed5565
-}
-.text-canceled {
-  color: #888888
-}
-.text-conflict {
-  color: #f8ac59
-}
-
-
-
 .text-navy {
   color: #1ab394;
 }

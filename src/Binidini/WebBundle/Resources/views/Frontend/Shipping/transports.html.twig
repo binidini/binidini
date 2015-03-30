@@ -67,7 +67,7 @@
                                     &nbsp;&nbsp;&nbsp;
                                     <div class="btn-group">
                                         <button data-toggle="dropdown"
-                                                class="btn btn-primary btn-outline dropdown-toggle">{{ (app.request.get('state') ~ ' orders') | trans }}
+                                                class="btn btn-primary btn-outline dropdown-toggle">{{ ('binidini.shipping.state.fillter.' ~ app.request.get('state')) | trans }}
                                             <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
                                             <li>
@@ -76,6 +76,9 @@
                                             <li class="divider"></li>
                                             <li>
                                                 <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'accepted' }) }}">Принятые
+                                                    заказы</a></li>
+                                            <li>
+                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'dispatched' }) }}">Отгруженные
                                                     заказы</a></li>
                                             <li>
                                                 <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'delivered' }) }}">Доставленные
@@ -88,6 +91,9 @@
                                                     заказы</a></li>
                                             <li>
                                                 <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'rejected' }) }}">Отказы</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'refused' }) }}">Аннулированные заказы</a>
                                             </li>
                                             <li>
                                                 <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'canceled' }) }}">Отмененные
@@ -129,7 +135,7 @@
                                             <td>{{ shipping.pickupDatetime | date('d.m H:i') }}</td>
                                             <td>{{ shipping.deliveryDatetime | date('d.m H:i') }}</td>
                                             <td>
-                                                <span class="text-{{ shipping.state }}">{{ shipping.state | trans }}</span>
+                                                <span class="text-{{ shipping.state }}">{{ ('binidini.shipping.state.' ~ shipping.state) | trans }}</span>
                                             </td>
                                             <td class="text-right">{{ shipping.deliveryPrice | price }}</td>
                                         </tr>

@@ -72,6 +72,14 @@ class BidLogicService
         $shipment = $this->dm->find('\Binidini\SearchBundle\Document\Shipment', $bid->getShipping()->getId());
         $this->dm->remove($shipment);
         $this->dm->flush($shipment);
+
+        foreach ($shipping->getBids() as $bid)
+        {
+            if ($bid->isNew()) {
+                $bid->setState(Bid::STATE_REJECTED);
+                $this->em->flush($bid);
+            }
+        }
     }
 
     protected function getUser()

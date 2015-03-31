@@ -53,7 +53,7 @@ class Shipment
     /**
      * @var integer
      *
-     * @MongoDB\Field(name="guarantee_cost", type="int")
+     * @MongoDB\Field(name="insurance", type="int")
      */
     private $insurance;
 

@@ -59,6 +59,7 @@
                                     <h2>{{ shipping.name }}</h2>
                                 </div>
                                 <dl class="dl-horizontal">
+                                    <dt>Статус</dt><dd><span class="badge-big badge-{{ shipping.state }}"> {{ ('binidini.shipping.state.' ~ shipping.state) | trans }}</span></dd>
                                     <dt>Оплата:</dt> <dd>{{ shipping.deliveryPrice | price }}</span></dd>
                                     <dt>Страховка:</dt> <dd>{{ shipping.insurance | price }}</dd>
                                 </dl>

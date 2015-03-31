@@ -65,58 +65,17 @@
                         {% endif %}
                     </div>
                     <div class="ibox-content">
-                        {% if shippings.nbresults > 0 %}
 
                             <div class="row">
                                 <div class="col-sm-6 pagination">
-                                    &nbsp;&nbsp;&nbsp;
-                                    <div class="btn-group">
-                                        <button data-toggle="dropdown"
-                                                class="btn btn-primary btn-outline dropdown-toggle">{{ ('binidini.shipping.state.fillter.' ~ app.request.get('state')) | trans }}
-                                            <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}">Все
-                                                    заказы</a></li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'new' }) }}">Новые
-                                                    заказы</a></li>
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'accepted' }) }}">Принятые
-                                                    заказы</a></li>
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'dispatched' }) }}">Отгруженные
-                                                    заказы</a></li>
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'delivered' }) }}">Доставленные
-                                                    заказы</a></li>
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'paid' }) }}">Оплаченные
-                                                    заказы</a></li>
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'completed' }) }}">Завершенные
-                                                    заказы</a></li>
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'rejected' }) }}">Отказы</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'refused' }) }}">Аннулированные заказы</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'canceled' }) }}">Отмененные
-                                                    заказы</a></li>
-                                            <li>
-                                                <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': 'conflict' }) }}">Спорные
-                                                    заказы</a></li>
-                                        </ul>
-                                    </div>
+                                    {{ include('BinidiniWebBundle::Frontend/Shipping/_state_filter.html.twig', {'type': 'shipping'}) }}
                                 </div>
                                 <div class="col-sm-6 text-right">
                                     {{ page.pagination(shippings) }}
                                 </div>
                             </div>
 
+                        {% if shippings.nbresults > 0 %}
 
                             <div class="table-responsive">
                                 <table class="table table-bordered">

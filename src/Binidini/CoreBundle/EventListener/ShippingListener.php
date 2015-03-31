@@ -42,6 +42,7 @@ class ShippingListener
         $shipment
             ->setId($shipping->getId())
             ->setDeliveryPrice($shipping->getDeliveryPrice())
+            ->setPaymentGuarantee($shipping->getPaymentGuarantee())
             ->setDeliveryAddress($shipping->getDeliveryAddress())
             ->setDeliveryDatetime($shipping->getDeliveryDatetime())
             ->setPickupAddress($shipping->getPickupAddress())
@@ -49,7 +50,7 @@ class ShippingListener
             ->setName($shipping->getName())
             ->setDescription($shipping->getDescription())
             ->setWeight($shipping->getWeight())
-            ->setGuaranteeCost($shipping->getGuaranteeCost())
+            ->setInsurance($shipping->getInsurance())
             ->setX($shipping->getX())
             ->setY($shipping->getY())
             ->setZ($shipping->getZ());

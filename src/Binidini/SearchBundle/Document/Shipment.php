@@ -44,11 +44,18 @@ class Shipment
     private $deliveryPrice;
 
     /**
+     * @var boolean
+     *
+     * @MongoDB\Field(name="payment_guarantee", type="boolean", options={"default" = false})
+     */
+    private $paymentGuarantee;
+
+    /**
      * @var integer
      *
      * @MongoDB\Field(name="guarantee_cost", type="int")
      */
-    private $guaranteeCost;
+    private $insurance;
 
     /**
      * @var string
@@ -380,25 +387,48 @@ class Shipment
         return $this->z;
     }
 
+
     /**
-     * Set guaranteeCost
+     * Set paymentGuarantee
      *
-     * @param int $guaranteeCost
+     * @param boolean $paymentGuarantee
      * @return self
      */
-    public function setGuaranteeCost($guaranteeCost)
+    public function setPaymentGuarantee($paymentGuarantee)
     {
-        $this->guaranteeCost = $guaranteeCost;
+        $this->paymentGuarantee = $paymentGuarantee;
         return $this;
     }
 
     /**
-     * Get guaranteeCost
+     * Get paymentGuarantee
      *
-     * @return int $guaranteeCost
+     * @return boolean $paymentGuarantee
      */
-    public function getGuaranteeCost()
+    public function getPaymentGuarantee()
     {
-        return $this->guaranteeCost;
+        return $this->paymentGuarantee;
+    }
+
+    /**
+     * Set insurance
+     *
+     * @param int $insurance
+     * @return self
+     */
+    public function setInsurance($insurance)
+    {
+        $this->insurance = $insurance;
+        return $this;
+    }
+
+    /**
+     * Get insurance
+     *
+     * @return int $insurance
+     */
+    public function getInsurance()
+    {
+        return $this->insurance;
     }
 }

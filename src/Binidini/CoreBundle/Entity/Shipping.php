@@ -106,13 +106,20 @@ class Shipping implements UserAwareInterface
     private $deliveryPrice;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="payment_guarantee", type="boolean", options={"default" = false})
+     */
+    private $paymentGuarantee;
+
+    /**
      * @var integer
      *
-     * @ORM\Column(name="guarantee_cost", type="integer", options={"default" = 0})
+     * @ORM\Column(name="insurance", type="integer", options={"default" = 0})
      * @Assert\NotBlank()
      * @Assert\Range(min=0)
      */
-    private $guaranteeCost;
+    private $insurance;
 
     /**
      * @var string
@@ -573,30 +580,6 @@ class Shipping implements UserAwareInterface
     }
 
     /**
-     * Set guaranteeCost
-     *
-     * @param integer $guaranteeCost
-     * @return Shipping
-     */
-    public function setGuaranteeCost($guaranteeCost)
-    {
-        $this->guaranteeCost = $guaranteeCost;
-
-        return $this;
-    }
-
-    /**
-     * Get guaranteeCost
-     *
-     * @return integer 
-     */
-    public function getGuaranteeCost()
-    {
-        return $this->guaranteeCost;
-    }
-
-
-    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
@@ -685,5 +668,51 @@ class Shipping implements UserAwareInterface
 
     public function isNew(){
         return $this->state === self::STATE_NEW;
+    }
+
+    /**
+     * Set paymentGuarantee
+     *
+     * @param boolean $paymentGuarantee
+     * @return Shipping
+     */
+    public function setPaymentGuarantee($paymentGuarantee)
+    {
+        $this->paymentGuarantee = $paymentGuarantee;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentGuarantee
+     *
+     * @return boolean 
+     */
+    public function getPaymentGuarantee()
+    {
+        return $this->paymentGuarantee;
+    }
+
+    /**
+     * Set insurance
+     *
+     * @param integer $insurance
+     * @return Shipping
+     */
+    public function setInsurance($insurance)
+    {
+        $this->insurance = $insurance;
+
+        return $this;
+    }
+
+    /**
+     * Get insurance
+     *
+     * @return integer 
+     */
+    public function getInsurance()
+    {
+        return $this->insurance;
     }
 }

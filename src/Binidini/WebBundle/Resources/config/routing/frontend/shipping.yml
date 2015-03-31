@@ -32,7 +32,7 @@ binidini_core_shipping_show:
             template: BinidiniWebBundle:Frontend/Shipping:show.html.twig
 
 
-binidini_core_transports:
+binidini_core_carrier_index:
     path: /transports
     methods: [GET]
     defaults:

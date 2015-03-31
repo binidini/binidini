@@ -39,10 +39,10 @@ winzou_state_machine:
             complete: #by carrier
                 from: [paid]
                 to: completed
-            reject:  #by carrier
+            reject:  #by sender
                 from: [accepted, dispatched, on_way, delivered, paid]
                 to: rejected
-            refuse:  #by sender
+            refuse:  #by carrier
                 from: [accepted, dispatched, on_way, delivered, paid]
                 to: refused
             cancel:  #by sender

@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
@@ -21,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name = "shipping")
  * @ORM\Entity
+ * @Gedmo\Loggable
  */
 class Shipping implements UserAwareInterface
 {
@@ -174,7 +176,7 @@ class Shipping implements UserAwareInterface
      * Shipping state.
      *
      * @var string
-     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="state", type="string", length=32)
      */
     private $state;

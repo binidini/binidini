@@ -92,13 +92,13 @@
 }
 .label-canceled,
 .badge-canceled {
-    background-color: inherit;
-    color: inherit;
+    background-color: #1a7bb9;
+    color: #ffffff;
 }
 .label-conflict,
 .badge-conflict {
     background-color: #ed5565;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .btn-well {

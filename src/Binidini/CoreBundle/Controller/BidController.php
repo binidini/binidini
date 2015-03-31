@@ -60,7 +60,7 @@ class BidController extends ResourceController
         $flashBack = $this->get('session')->getFlashBag();
         foreach ($errors as $error) {
             foreach($error as $message){
-                $flashBack->add('warning', $message);
+                $flashBack->add('danger', $message);
             }
         }
         return $this->redirectHandler->redirectTo($resource);

@@ -7,8 +7,8 @@ binidini.shipping.state.delivered: доставлен
 binidini.shipping.state.paid: оплачен
 binidini.shipping.state.completed: завершен
 binidini.shipping.state.rejected: отказ
-binidini.shipping.state.refused: аннулирован
-binidini.shipping.state.canceled: отменен
+binidini.shipping.state.refused: отменен
+binidini.shipping.state.canceled: аннулирован
 binidini.shipping.state.conflict: спорный
 
 binidini.shipping.state.fillter.new: Новые заказы
@@ -17,9 +17,9 @@ binidini.shipping.state.fillter.dispatched: Отгруженные заказы
 binidini.shipping.state.fillter.delivered: Доставленные заказы
 binidini.shipping.state.fillter.paid: Оплаченные заказы
 binidini.shipping.state.fillter.completed: Завершенные заказы
-binidini.shipping.state.fillter.rejected: Отказы
-binidini.shipping.state.fillter.refused: Аннулированные заказы
-binidini.shipping.state.fillter.canceled: Отмененные заказы
+binidini.shipping.state.fillter.rejected: Отказы перевозчика
+binidini.shipping.state.fillter.refused: Отмены отправителя
+binidini.shipping.state.fillter.canceled: Аннулированные заказы
 binidini.shipping.state.fillter.conflict: Спорные заказы
 binidini.shipping.state.fillter.: Все заказы
 

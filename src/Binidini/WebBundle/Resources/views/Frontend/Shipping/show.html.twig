@@ -19,13 +19,13 @@
                 {% if app.user.id == shipping.user.id and shipping.state in ['accepted', 'dispatched', 'on_way', 'delivered', 'paid']%}
                     <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'reject'}) }}" class="btn btn-danger btn-outline">Отменить</a>
                 {% endif %}
-                {% if app.user.id == shipping.user.id and shipping.state == 'new'%} <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}" class="btn btn-primary">Снять</a> {% endif %}
+                {% if app.user.id == shipping.user.id and shipping.state == 'new'%} <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}" class="btn btn-primary">Аннулировать</a> {% endif %}
                 {% if app.user.id == shipping.user.id and shipping.state == 'accepted'%} <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'dispatch'}) }}" class="btn btn-primary">Выдан</a> {% endif %}
                 {% if app.user.id == shipping.user.id and shipping.state == 'delivered'%} <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'pay'}) }}" class="btn btn-primary">Оплачен</a> {% endif %}
                 {% if app.user.id == shipping.user.id and shipping.state == 'rejected'%}
-                    <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}" class="btn btn-primary">Завершить</a>
+                    <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}" class="btn btn-primary">Аннулировать</a>
                     {% if shipping.guaranteeCost > 0 %}
-                        <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'dispute'}) }}" class="btn btn-danger">Потребовать гарантию</a>
+                        <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'dispute'}) }}" class="btn btn-danger">Востребовать гарантию</a>
                     {% endif %}
                 {% endif %}
 
@@ -38,7 +38,7 @@
                     {% if app.user.id == shipping.carrier.id and shipping.state == 'paid'%} <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'complete'}) }}" class="btn btn-primary">Оплачен</a> {% endif %}
                     {% if app.user.id == shipping.carrier.id and shipping.state == 'refused'%}
                         <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'debate'}) }}" class="btn btn-danger">Потребовать оплату</a>
-                        <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'annul'}) }}" class="btn btn-primary">Завершить</a>
+                        <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'annul'}) }}" class="btn btn-primary">Аннулировать</a>
                     {% endif %}
                 {% endif %}
             </div>
@@ -104,51 +104,41 @@
                                 <dl class="dl-horizontal">
                                     <dt>Статус:</dt>
                                     <dd>
-                                        <div class="progress progress-striped active">
-                                            <div style="width: 14%" class="progress-bar {{ (shipping.state == 'new') ? 'progress-bar-success' : '' }}">
-                                                <span>новый</span>
+                                        {% if shipping.state == "rejected" %}
+                                        <button type="button" class="btn btn-w-m btn-rounded btn-warning"><i class="fa fa-exclamation-circle"> </i> отказ перевозчика</button>
+                                        {% elseif shipping.state == "refused" %}
+                                            <button type="button" class="btn btn-w-m btn-rounded btn-warning"><i class="fa fa-exclamation-triangle"> </i> отменен отправителем</button>
+                                        {% elseif shipping.state == "conflict" %}
+                                            <button type="button" class="btn btn-w-m btn-rounded btn-danger"><i class="fa fa-chain-broken"> </i> спорный</button>
+                                        {% elseif shipping.state == "canceled" %}
+                                            <button type="button" class="btn btn-w-m btn-rounded btn-success"><i class="fa fa-circle-o"> </i> аннулирован</button>
+                                        {% else %}
+                                            <div class="progress progress-striped active">
+                                                <div style="width: 14%" class="progress-bar {{ (shipping.state == 'new') ? 'progress-bar-success' : '' }}">
+                                                    <span>новый</span>
+                                                </div>
+                                                <div style="width: 14%" class="progress-bar {{ (shipping.state == 'accepted') ? 'progress-bar-success' : '' }}">
+                                                    <span>принят</span>
+                                                </div>
+                                                <div style="width: 14%" class="progress-bar {{ (shipping.state == 'dispatched') ? 'progress-bar-success' : '' }}">
+                                                    <span>выдан</span>
+                                                </div>
+                                                <div style="width: 14%" class="progress-bar {{ (shipping.state == 'on_way') ? 'progress-bar-success' : '' }}">
+                                                    <span>в пути</span>
+                                                </div>
+                                                <div style="width: 14%" class="progress-bar {{ (shipping.state == 'delivered') ? 'progress-bar-success' : '' }}">
+                                                    <span>доставлен</span>
+                                                </div>
+                                                <div style="width: 14%" class="progress-bar {{ (shipping.state == 'paid') ? 'progress-bar-success' : '' }}">
+                                                    <span>оплачен</span>
+                                                </div>
+                                                <div style="width: 16%" class="progress-bar {{ (shipping.state == 'completed') ? 'progress-bar-success' : '' }}">
+                                                    <span>завершен</span>
+                                                </div>
                                             </div>
-                                            <div style="width: 14%" class="progress-bar {{ (shipping.state == 'accepted') ? 'progress-bar-success' : '' }}">
-                                                <span>принят</span>
-                                            </div>
-                                            <div style="width: 14%" class="progress-bar {{ (shipping.state == 'dispatched') ? 'progress-bar-success' : '' }}">
-                                                <span>выдан</span>
-                                            </div>
-                                            <div style="width: 14%" class="progress-bar {{ (shipping.state == 'on_way') ? 'progress-bar-success' : '' }}">
-                                                <span>в пути</span>
-                                            </div>
-                                            <div style="width: 14%" class="progress-bar {{ (shipping.state == 'delivered') ? 'progress-bar-success' : '' }}">
-                                                <span>доставлен</span>
-                                            </div>
-                                            <div style="width: 14%" class="progress-bar {{ (shipping.state == 'paid') ? 'progress-bar-success' : '' }}">
-                                                <span>оплачен</span>
-                                            </div>
-                                            <div style="width: 16%" class="progress-bar {{ (shipping.state == 'completed') ? 'progress-bar-success' : '' }}">
-                                                <span>завершен</span>
-                                            </div>
-
-                                            success
-                                        </div>
-                                    </dd>
-                                    <dt></dt>
-                                    <dd>
-                                        <div class="progress progress-striped active">
-                                            <div style="width: 25%" class="progress-bar {{ (shipping.state == 'rejected') ? 'progress-bar-danger' : '' }}">
-                                                <span>отказ перевозчика</span>
-                                            </div>
-                                            <div style="width: 25%" class="progress-bar {{ (shipping.state == 'refused') ? 'progress-bar-danger' : '' }}">
-                                                <span>аннулирован отправителем</span>
-                                            </div>
-                                            <div style="width: 25%" class="progress-bar {{ (shipping.state == 'conflict') ? 'progress-bar-danger' : '' }}">
-                                                <span>спорный</span>
-                                            </div>
-                                            <div style="width: 25%" class="progress-bar {{ (shipping.state == 'canceled') ? 'progress-bar-success' : '' }}">
-                                                <span>отменен</span>
-                                            </div>
-                                        </div>
+                                        {% endif %}
                                     </dd>
                                 </dl>
-
                             </div>
                         </div>
                         <div class="row m-t-sm">

@@ -180,8 +180,27 @@
                                                 <div class="hr-line-dashed"></div>
                                                 {% render path('binidini_core_shipping_message_index', {'shipping_id':shipping.id}) %}
                                             </div>
-                                            <div class="tab-pane" id="tab-2">
-
+                                            <div class="tab-pane active" id="tab-2">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="col-md-3">Время</th>
+                                                        <th>Статус</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for entry in entries %}
+                                                    <tr>
+                                                        <td>
+                                                            {{ entry.loggedAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-{{ entry.data.state }}">{{ ('binidini.shipping.state.'~entry.data.state)|trans }}</span>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
                                             </div>
                                             <div class="tab-pane {{ not messageTabIsActive ? ' active' : '' }}" id="tab-3">
                                                 {% if not messageTabIsActive and shipping.user.id != app.user.id %}

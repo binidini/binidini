@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Binidini\WebBundle\BinidiniWebBundle(),
             new Binidini\ApiBundle\BinidiniApiBundle(),
             new Binidini\SearchBundle\BinidiniSearchBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -76,17 +76,9 @@ class User extends BaseUser
     /**
      * @var integer
      *
-     * @ORM\Column(name="insurance", type="integer", options={"default" = 0})
+     * @ORM\Column(name="hold_amount", type="integer", options={"default" = 0})
      */
-    private $insurance;
-
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="guarantee", type="integer", options={"default" = 0})
-     */
-    private $guarantee;
+    private $holdAmount;
 
 
     /**
@@ -372,55 +364,7 @@ class User extends BaseUser
         return $this->patronymic;
     }
 
-    /**
-     * Set insurance
-     *
-     * @param integer $insurance
-     * @return User
-     */
-    public function setInsurance($insurance)
-    {
-        $this->insurance = $insurance;
-
-        return $this;
-    }
-
-    /**
-     * Get insurance
-     *
-     * @return integer 
-     */
-    public function getInsurance()
-    {
-        return $this->insurance;
-    }
-
-    /**
-     * Set guarantee
-     *
-     * @param integer $guarantee
-     * @return User
-     */
-    public function setGuarantee($guarantee)
-    {
-        $this->guarantee = $guarantee;
-
-        return $this;
-    }
-
-    /**
-     * Get guarantee
-     *
-     * @return integer 
-     */
-    public function getGuarantee()
-    {
-        return $this->guarantee;
-    }
-
-
-
-    /**
+     /**
      * Set balance
      *
      * @param integer $balance
@@ -505,5 +449,28 @@ class User extends BaseUser
     public function isBusiness()
     {
         return $this->type == User::TYPE_BUSINESS;
+    }
+
+    /**
+     * Set holdAmount
+     *
+     * @param integer $holdAmount
+     * @return User
+     */
+    public function setHoldAmount($holdAmount)
+    {
+        $this->holdAmount = $holdAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get holdAmount
+     *
+     * @return integer 
+     */
+    public function getHoldAmount()
+    {
+        return $this->holdAmount;
     }
 }

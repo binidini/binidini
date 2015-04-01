@@ -24,6 +24,9 @@ winzou_state_machine:
             accept: #by sender
                 from: [new]
                 to: accepted
+            return: #by carrier
+                from: [accepted]
+                to: new
             dispatch: #by sender
                 from: [accepted]
                 to: dispatched

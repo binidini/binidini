@@ -1,16 +1,17 @@
 <div class="feed-activity-list">
-        {% for message in messages %}
-
+    {% for message in messages %}
+        {% set profile = path('binidini_core_profile_show', {id: message.user.id}) %}
         <div class="feed-element">
-            <a href="#" class="pull-left">
+            <a href="{{ profile }}" class="pull-left">
                 <img alt="image" class="img-circle" src="img/a2.jpg">
             </a>
+
             <div class="media-body ">
-                <strong>{{ message.user.name}}</strong> отправил сообщение.<br>
-                <small class="text-muted pull-right">{{ message.createdAt | timeago}}</small>
+                <a href="{{ profile }}"><strong>{{ message.user.name }}</strong></a> отправил сообщение.<br>
+                <small class="text-muted pull-right">{{ message.createdAt | timeago }}</small>
                 <small class="text-muted">{{ message.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
                 <div class="well">
-                   {{ message.text | nl2br}}
+                    {{ message.text | nl2br }}
                 </div>
             </div>
         </div>

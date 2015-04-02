@@ -64,7 +64,7 @@
                     <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-archive"></i> <span class="nav-label">Мои отправки</span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">Мои настройки</span> </a>
+                    <a href="{{ path('fos_user_profile_edit') }}"><i class="fa fa-gears"></i> <span class="nav-label">Мои настройки</span> </a>
                 </li>
             </ul>
 

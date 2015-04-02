@@ -1,7 +1,8 @@
 binidini_core_profile_show:
-    path: /profile/{id}
+    path: /user/{id}
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.user:showAction
         _sylius:
             template: FOSUserBundle:Profile:show.html.twig
+

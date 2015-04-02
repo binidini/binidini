@@ -72,14 +72,12 @@ class User extends BaseUser
      */
     private $balance;
 
-
     /**
      * @var integer
      *
      * @ORM\Column(name="hold_amount", type="integer", options={"default" = 0})
      */
     private $holdAmount;
-
 
     /**
      * @ORM\OneToMany(targetEntity="Bid", mappedBy="user")
@@ -90,7 +88,6 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Payment", mappedBy="user")
      */
     private $payments;
-
 
     /**
      * @var string
@@ -105,6 +102,13 @@ class User extends BaseUser
      * @ORM\Column(name="type", type="string", length=32, options={"default" = 1})
      */
     private $type;
+
+    /**
+     * @var string
+     *
+     *  @ORM\Column(name="about_me", type="string", length=255, nullable=true)
+     */
+    private $aboutMe;
 
 
     public function __construct()
@@ -126,6 +130,11 @@ class User extends BaseUser
     public function getMobileMask()
     {
         return preg_replace('/(\d{3})\d{3}(\d{4})/', '+7 (${1}) xxx${2}', $this->getUsername());
+    }
+
+    public function getMobilePhone()
+    {
+        return sprintf('+7%1$s', $this->getUsername());
     }
 
     /**
@@ -472,5 +481,28 @@ class User extends BaseUser
     public function getHoldAmount()
     {
         return $this->holdAmount;
+    }
+
+    /**
+     * Set aboutMe
+     *
+     * @param string $aboutMe
+     * @return User
+     */
+    public function setAboutMe($aboutMe)
+    {
+        $this->aboutMe = $aboutMe;
+
+        return $this;
+    }
+
+    /**
+     * Get aboutMe
+     *
+     * @return string
+     */
+    public function getAboutMe()
+    {
+        return $this->aboutMe;
     }
 }

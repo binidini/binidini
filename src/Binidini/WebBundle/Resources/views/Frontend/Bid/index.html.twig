@@ -1,18 +1,19 @@
 <div class="feed-activity-list">
     {% set userIdDetected = false %}
     {% for bid in bids %}
+        {% set profile = path('binidini_core_profile_show', {id: bid.user.id}) %}
         {% if not userIdDetected %}
             {% set isShippingSender = bid.shipping.user.id == app.user.id %}
             {% set userIdDetected = true %}
         {% endif %}
         {% set isBidOwner = bid.user.id == app.user.id %}
         <div class="feed-element">
-            <a href="#" class="pull-left">
+            <a href="{{ profile }}" class="pull-left">
                 <img alt="image" class="img-circle" src="img/a2.jpg">
             </a>
 
             <div class="media-body ">
-                <strong>{{ bid.user.name }}</strong> доставит за {{ bid.price|price }}<br>
+                <a href="{{ profile }}"><strong>{{ bid.user.name }}</strong></a> доставит за {{ bid.price|price }}<br>
                 <small class="text-muted pull-right">{{ bid.createdAt | timeago }}</small>
                 <small class="text-muted">{{ bid.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
             </div>
@@ -32,11 +33,12 @@
                 {% else %}
                     <div class="col-md-12">
                         <button type="button" class="btn btn-w-m btn-disabled btn-well">{{ bid.price|price }}</button>
-                    {% if isBidOwner and bid.shipping.isNew() and bid.isNew() %}
-                        <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'cancel'}) }}" class="btn btn-w-m btn-success btn-well">Отменить</a>
-                    {% else %}
-                        <span class="text-{{ bid.state }}">{{ ('binidini.bid.state.' ~ bid.state) | trans}}</span>
-                    {% endif %}
+                        {% if isBidOwner and bid.shipping.isNew() and bid.isNew() %}
+                            <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'cancel'}) }}"
+                               class="btn btn-w-m btn-success btn-well">Отменить</a>
+                        {% else %}
+                            <span class="text-{{ bid.state }}">{{ ('binidini.bid.state.' ~ bid.state) | trans }}</span>
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>

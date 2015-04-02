@@ -12,10 +12,8 @@ namespace Binidini\CoreBundle\Service;
 
 use Binidini\CoreBundle\Entity\Bid;
 use Binidini\CoreBundle\Entity\Shipping;
-use Binidini\SearchBundle\Document\Shipment;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
-use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 

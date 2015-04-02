@@ -29,6 +29,7 @@ class Shipping implements UserAwareInterface
     const GRAPH             = 'logic';
 
     const TRANSITION_ACCEPT = 'accept';
+    const TRANSITION_RECALL = 'recall';
 
     const STATE_INIT        = 'init';
     const STATE_NEW         = 'new';
@@ -39,6 +40,9 @@ class Shipping implements UserAwareInterface
     const STATE_REJECTED    = 'rejected';      #awaiting_cancel_confirmation
     const STATE_CANCELED    = 'canceled';
     const STATE_CONFLICT    = 'conflict';
+
+    //время в минутах, втечение которого перевозчик может отозвать заявку после принятия ее отправителем
+    const CARRIER_RECALL_TIME = 10;
 
     /**
      * @var integer

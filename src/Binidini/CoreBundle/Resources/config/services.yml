@@ -63,7 +63,9 @@ services:
 
     binidini.shipping.logic.service:
         class: Binidini\CoreBundle\Service\ShippingLogicService
-        arguments: [@security.context]
+        arguments:
+            - @security.context
+            - @doctrine.odm.mongodb.document_manager
 
     binidini.bid.logic.service:
         class: Binidini\CoreBundle\Service\BidLogicService

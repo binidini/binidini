@@ -10,16 +10,19 @@
 namespace Binidini\CoreBundle\Service;
 
 use Binidini\CoreBundle\Entity\Shipping;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class ShippingLogicService
 {
     protected $securityContext;
+    protected $dm;
 
-    public function __construct(SecurityContextInterface $securityContext)
+    public function __construct(SecurityContextInterface $securityContext, DocumentManager $documentManager)
     {
         $this->securityContext = $securityContext;
+        $this->dm = $documentManager;
     }
 
     public function checkSender(Shipping $shipping)
@@ -34,9 +37,17 @@ class ShippingLogicService
             throw new AccessDeniedHttpException("Вы не являетесь перевозчиком. Данная операция запрещена.");
     }
 
+    public function removeShipment(Shipping $shipping)
+    {
+        if ($shipment = $this->dm->find('\Binidini\SearchBundle\Document\Shipment', $shipping->getId())) {
+            $this->dm->remove($shipment);
+            $this->dm->flush($shipment);
+        }
+    }
+
     public function checkResolver(Shipping $shipping)
     {
-        //todo check manager role
+        throw new AccessDeniedHttpException("Данная операция не реализована.");
     }
 
     protected function getUser()

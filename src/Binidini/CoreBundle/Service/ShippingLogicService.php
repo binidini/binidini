@@ -45,6 +45,12 @@ class ShippingLogicService
         }
     }
 
+    public function beforeComplete(Shipping $shipping)
+    {
+        $this->checkCarrier($shipping);
+        $shipping->release();
+    }
+
     public function checkResolver(Shipping $shipping)
     {
         throw new AccessDeniedHttpException("Данная операция не реализована.");

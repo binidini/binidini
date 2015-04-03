@@ -10,11 +10,11 @@
 
 namespace Binidini\CoreBundle\Entity;
 
-use Binidini\CoreBundle\Exception\AppException;
+use Binidini\CoreBundle\Exception\InsufficientFrozenAmount;
+use Binidini\CoreBundle\Exception\InsufficientUserBalance;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * @ORM\Entity
@@ -131,7 +131,7 @@ class User extends BaseUser
     public function hold($amount)
     {
         if ($amount > $this->balance) {
-            throw new AppException("Недостаточно средств на счете.");
+            throw new InsufficientUserBalance("Недостаточно средств на счете пользователя.");
         }
         $this->balance -= $amount;
         $this->holdAmount += $amount;
@@ -141,7 +141,7 @@ class User extends BaseUser
     {
         if ($amount > $this->holdAmount) {
             // такой ситуации быть не должно
-            throw new AppException("Нет средств для разморозки. Свяжитесь с администрацией системы.");
+            throw new InsufficientFrozenAmount("Нет средств для разморозки.");
         }
         $this->holdAmount -= $amount;
         $this->balance += $amount;

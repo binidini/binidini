@@ -49,7 +49,10 @@ winzou_state_machine:
                 from: [accepted, dispatched, on_way, delivered, paid]
                 to: refused
             cancel:  #by sender
-                from: [new, rejected]
+                from: [new]
+                to: canceled
+            nullify:  #by sender
+                from: [rejected]
                 to: canceled
             annul:   #by carrier
                 from: [refused]
@@ -71,11 +74,12 @@ winzou_state_machine:
                 check_load:     { on: 'load',     do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
                 check_deliver:  { on: 'deliver',  do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
                 check_pay:      { on: 'pay',      do: [@binidini.shipping.logic.service, 'checkSender'],  args: ['object'] }
-                check_complete: { on: 'complete', do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
+                check_complete: { on: 'complete', do: [@binidini.shipping.logic.service, 'beforeComplete'], args: ['object'] }
                 check_reject:   { on: 'reject',   do: [@binidini.shipping.logic.service, 'checkResolver'],args: ['object'] }
                 check_refuse:   { on: 'refuse',   do: [@binidini.shipping.logic.service, 'checkResolver'],args: ['object'] }
                 check_cancel:   { on: 'cancel',   do: [@binidini.shipping.logic.service, 'checkSender'],  args: ['object'] }
-                check_annul:    { on: 'annul',    do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
+                check_nullify:  { on: 'nullify',  do: [@binidini.shipping.logic.service, 'checkResolver'], args: ['object'] }
+                check_annul:    { on: 'annul',    do: [@binidini.shipping.logic.service, 'checkResolver'], args: ['object'] }
                 check_dispute:  { on: 'dispute',  do: [@binidini.shipping.logic.service, 'checkSender'],  args: ['object'] }
                 check_debate:   { on: 'debate',   do: [@binidini.shipping.logic.service, 'checkCarrier'], args: ['object'] }
                 check_resolve:  { on: 'resolve',  do: [@binidini.shipping.logic.service, 'checkResolver'],args: ['object'] }

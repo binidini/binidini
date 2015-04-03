@@ -14,6 +14,7 @@ use Binidini\CoreBundle\Entity\Bid;
 use Binidini\CoreBundle\Entity\Shipping;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
+use SM\Factory\Factory as StateMachineFactory;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
@@ -24,7 +25,7 @@ class BidLogicService
     protected $em;
     protected $smFactory;
 
-    public function __construct(SecurityContextInterface $securityContext, DocumentManager $documentManager, EntityManager $entityManager, $sm)
+    public function __construct(SecurityContextInterface $securityContext, DocumentManager $documentManager, EntityManager $entityManager, StateMachineFactory $sm)
     {
         $this->securityContext = $securityContext;
         $this->dm = $documentManager;
@@ -65,7 +66,6 @@ class BidLogicService
         $shipping->setCarrier($bid->getUser());
         $shipping->hold();
         $shippingSM->apply(Shipping::TRANSITION_ACCEPT);
-        $this->em->flush($shipping);
 
         $shipment = $this->dm->find('\Binidini\SearchBundle\Document\Shipment', $bid->getShipping()->getId());
         $this->dm->remove($shipment);

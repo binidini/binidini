@@ -37,14 +37,32 @@
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element">
-                        <span>
+                    <div class="dropdown profile-element"> <span>
                             <img alt="image" class="img-circle" src="{{ asset('bundles/binidiniweb/img/logo48x48.png') }}" />
-                        </span>
-                        <a href="{{ path('fos_user_profile_show') }}">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ app.user.name }}</strong></span></span>
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                                <span class="block m-t-xs"> <strong class="font-bold">{{ app.user.name }}</strong></span>
+                            </span>
+                            <span class="text-muted text-xs block">
+                                Счет:
+                                {{ app.user.balance }}{% if app.user.holdAmount > 0 %}/{{ app.user.holdAmount }}{% endif %}
+                                руб.
+                                <b class="caret"></b>
+                            </span>
                         </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="{{ path('fos_user_profile_show') }}">Профиль</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Пополнить счет</a></li>
+                            <li><a href="#">Снять со счета</a></li>
+                            <li><a href="#">Выписка</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ path("fos_user_security_logout") }}">Выход</a></li>
+                        </ul>
                     </div>
+
+
                     <div class="logo-element">
                         bd
                     </div>

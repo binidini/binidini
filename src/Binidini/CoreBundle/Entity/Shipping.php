@@ -9,7 +9,8 @@
  */
 namespace Binidini\CoreBundle\Entity;
 
-use Binidini\CoreBundle\Exception\AppException;
+use Binidini\CoreBundle\Exception\InsufficientFrozenAmount;
+use Binidini\CoreBundle\Exception\InsufficientUserBalance;
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -229,18 +230,18 @@ class Shipping implements UserAwareInterface
         if ($this->insurance > 0) {
             try {
                 $this->carrier->hold($this->insurance);
-            } catch (AppException $ex) {
-                throw new AppException("У перевозчика нет средств на страховку.");
+            } catch (InsufficientUserBalance $ex) {
+                throw new InsufficientUserBalance("У перевозчика нет средств на страховку.");
             }
         }
 
         if ($this->paymentGuarantee && $this->deliveryPrice > 0) {
             try {
                 $this->user->hold($this->deliveryPrice);
-            } catch (AppException $ex) {
+            } catch (InsufficientUserBalance $ex) {
                 //вернем деньги перевозчику
                 $this->carrier->release($this->insurance);
-                throw new AppException("У отправителя нет средств на гарантию.");
+                throw new InsufficientUserBalance("У отправителя нет средств на гарантию.");
             }
         }
     }
@@ -250,18 +251,18 @@ class Shipping implements UserAwareInterface
         if ($this->insurance > 0) {
             try {
                 $this->carrier->release($this->insurance);
-            } catch (AppException $ex) {
-                throw new AppException("У перевозчика недостаточно средств для разморозки.");
+            } catch (InsufficientFrozenAmount $ex) {
+                throw new InsufficientFrozenAmount("У перевозчика недостаточно средств для разморозки.");
             }
         }
 
         if ($this->paymentGuarantee && $this->deliveryPrice > 0) {
             try {
                 $this->user->release($this->deliveryPrice);
-            } catch (AppException $ex) {
+            } catch (InsufficientFrozenAmount $ex) {
                 //заморозим обратно деньги перевозчика
                 $this->carrier->hold($this->insurance);
-                throw new AppException("У отправителя недостаточно средств для разморозки.");
+                throw new InsufficientFrozenAmount("У отправителя недостаточно средств для разморозки.");
             }
         }
     }

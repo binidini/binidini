@@ -26,7 +26,8 @@
         "winzou/state-machine-bundle": "0.2.*",
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/mongodb-odm-bundle": "3.0.*@dev",
-        "stof/doctrine-extensions-bundle": "~1.1@dev"
+        "stof/doctrine-extensions-bundle": "~1.1@dev",
+        "webfactory/exceptions-bundle": "@stable"
     },
     "scripts": {
         "post-install-cmd": [

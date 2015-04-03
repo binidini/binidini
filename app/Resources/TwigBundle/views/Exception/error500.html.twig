@@ -1,0 +1,22 @@
+{% extends "TwigBundle::layout.html.twig" %}
+
+
+{% block title %}
+    Титимити - p2p сервис доставки | Ошибка 500
+{% endblock %}
+
+{% block content %}
+
+    <div class="middle-box text-center animated fadeInDown">
+        <h1>500</h1>
+        <h3 class="font-bold">Ошибка сервера</h3>
+
+        <div class="error-desc">
+            Мы извиняемся. Произошла внутренняя ошибка сервера.<br/>
+            Вы можете перейти на главную страницу: <br/>
+            <a href="{{ path('binidini_home') }}" class="btn btn-primary m-t">На главную</a>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -2,6 +2,10 @@
     color: #1ab394;
 }
 
+.text-error {
+    color: #ed5565;
+}
+
 .text-init {
     color: #ed5565;
 }
@@ -86,7 +90,7 @@
     color: #FFFFFF;
 }
 .label-refused,
-.badge-redused {
+.badge-refused {
     background-color: #f8ac59;
     color: #FFFFFF;
 }

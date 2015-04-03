@@ -5,6 +5,7 @@ binidini.shipping.state.accepted: принят
 binidini.shipping.state.dispathced: выдан
 binidini.shipping.state.delivered: доставлен
 binidini.shipping.state.paid: оплачен
+binidini.shipping.state.on_way: в пути
 binidini.shipping.state.completed: завершен
 binidini.shipping.state.rejected: отказ
 binidini.shipping.state.refused: отменен

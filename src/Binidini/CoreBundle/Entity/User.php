@@ -2,6 +2,8 @@
 
 namespace Binidini\CoreBundle\Entity;
 
+use Binidini\CoreBundle\Exception\InsufficientFrozenAmount;
+use Binidini\CoreBundle\Exception\InsufficientUserBalance;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -119,10 +121,28 @@ class User extends BaseUser
         $this->payments = new ArrayCollection();
 
         $this->balance = 0;
-        $this->insurance = 0;
-        $this->guarantee = 0;
+        $this->holdAmount = 0;
 
         $this->type = User::TYPE_INDIVIDUAL;
+    }
+
+    public function hold($amount)
+    {
+        if ($amount > $this->balance) {
+            throw new InsufficientUserBalance("Недостаточно средств на счете пользователя.");
+        }
+        $this->balance -= $amount;
+        $this->holdAmount += $amount;
+    }
+
+    public function release($amount)
+    {
+        if ($amount > $this->holdAmount) {
+            // такой ситуации быть не должно
+            throw new InsufficientFrozenAmount("Нет средств для разморозки.");
+        }
+        $this->holdAmount -= $amount;
+        $this->balance += $amount;
     }
 
     public function getMobileMask()

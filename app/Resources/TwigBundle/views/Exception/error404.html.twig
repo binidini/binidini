@@ -1,0 +1,26 @@
+{% extends "TwigBundle::layout.html.twig" %}
+
+
+{% block title %}
+    Титимити - p2p сервис доставки | Ошибка 404
+{% endblock %}
+
+{% block content %}
+
+<div class="middle-box text-center animated fadeInDown">
+
+    <h1>404</h1>
+
+    <h3 class="font-bold">Страница не найдена</h3>
+
+    <div class="error-desc">
+        Проверьте правильность написания адреса. <br/>
+        Вы можете перейти на главную страницу: <br/>
+        <a href="{{ path('binidini_home') }}" class="btn btn-primary m-t">На главную</a>
+    </div>
+
+
+
+</div>
+
+{% endblock %}

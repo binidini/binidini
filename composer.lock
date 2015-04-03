@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7e35fff8ab15240a9ee0ffe19902e79",
+    "hash": "9efeb6060ef4913292eea1d7836682b2",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3041,6 +3041,54 @@
             "time": "2014-10-06 11:00:55"
         },
         {
+            "name": "webfactory/exceptions-bundle",
+            "version": "4.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webfactory/exceptions-bundle.git",
+                "reference": "f896cdf60b299edd34c02ddd20c1ef3bbb628e76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webfactory/exceptions-bundle/zipball/f896cdf60b299edd34c02ddd20c1ef3bbb628e76",
+                "reference": "f896cdf60b299edd34c02ddd20c1ef3bbb628e76",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/twig-bundle": "~2.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "symfony/framework-bundle": "~2.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-default": "3.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webfactory\\Bundle\\ExceptionsBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "webfactory GmbH",
+                    "email": "info@webfactory.de",
+                    "homepage": "http://www.webfactory.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple controller to display error pages during development plus some building blocks for more user-friendly error pages.",
+            "homepage": "http://inside.webfactory.de/de/blog/symfony2-exception-handling-and-custom-error-pages-explained.html",
+            "time": "2015-01-07 13:54:55"
+        },
+        {
             "name": "white-october/pagerfanta-bundle",
             "version": "v1.0.2",
             "target-dir": "WhiteOctober/PagerfantaBundle",
@@ -3403,7 +3451,8 @@
         "friendsofsymfony/user-bundle": 20,
         "doctrine/mongodb-odm": 20,
         "doctrine/mongodb-odm-bundle": 20,
-        "stof/doctrine-extensions-bundle": 20
+        "stof/doctrine-extensions-bundle": 20,
+        "webfactory/exceptions-bundle": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,

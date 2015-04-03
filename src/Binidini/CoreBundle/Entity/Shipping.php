@@ -9,6 +9,7 @@
  */
 namespace Binidini\CoreBundle\Entity;
 
+use Binidini\CoreBundle\Exception\AppException;
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -106,6 +107,7 @@ class Shipping implements UserAwareInterface
      * @var integer
      *
      * @ORM\Column(name="delivery_price", type="integer", options={"default" = 0})
+     * @Gedmo\Versioned
      * @Assert\NotBlank()
      * @Assert\Range(min=0)
      */
@@ -165,12 +167,16 @@ class Shipping implements UserAwareInterface
 
 
     /**
+     * @var User
+     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="parcels")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
 
     /**
+     * @var User
+     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="shipments")
      * @ORM\JoinColumn(name="carrier_id", referencedColumnName="id")
      */
@@ -216,6 +222,48 @@ class Shipping implements UserAwareInterface
 
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+    }
+
+    public function hold()
+    {
+        if ($this->insurance > 0) {
+            try {
+                $this->carrier->hold($this->insurance);
+            } catch (AppException $ex) {
+                throw new AppException("У перевозчика нет средств на страховку.");
+            }
+        }
+
+        if ($this->paymentGuarantee && $this->deliveryPrice > 0) {
+            try {
+                $this->user->hold($this->deliveryPrice);
+            } catch (AppException $ex) {
+                //вернем деньги перевозчику
+                $this->carrier->release($this->insurance);
+                throw new AppException("У отправителя нет средств на гарантию.");
+            }
+        }
+    }
+
+    public function release()
+    {
+        if ($this->insurance > 0) {
+            try {
+                $this->carrier->release($this->insurance);
+            } catch (AppException $ex) {
+                throw new AppException("У перевозчика недостаточно средств для разморозки.");
+            }
+        }
+
+        if ($this->paymentGuarantee && $this->deliveryPrice > 0) {
+            try {
+                $this->user->release($this->deliveryPrice);
+            } catch (AppException $ex) {
+                //заморозим обратно деньги перевозчика
+                $this->carrier->hold($this->insurance);
+                throw new AppException("У отправителя недостаточно средств для разморозки.");
+            }
+        }
     }
 
     /**

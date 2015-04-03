@@ -61,10 +61,10 @@ class BidLogicService
             ));
         }
 
-        $shippingSM->apply(Shipping::TRANSITION_ACCEPT);
-
         $shipping->setDeliveryPrice($bid->getPrice());
         $shipping->setCarrier($bid->getUser());
+        $shipping->hold();
+        $shippingSM->apply(Shipping::TRANSITION_ACCEPT);
         $this->em->flush($shipping);
 
         $shipment = $this->dm->find('\Binidini\SearchBundle\Document\Shipment', $bid->getShipping()->getId());

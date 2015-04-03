@@ -74,3 +74,9 @@ services:
             - @doctrine.odm.mongodb.document_manager
             - @doctrine.orm.entity_manager
             - @sm.factory
+
+    binidini.exceptions.listner:
+        class: Binidini\CoreBundle\EventListener\ExceptionListener
+        arguments: [@router, @session]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

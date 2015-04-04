@@ -12,7 +12,8 @@ namespace Binidini\CoreBundle\Service;
 
 use Binidini\CoreBundle\Entity\Bid;
 use Binidini\CoreBundle\Entity\Shipping;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use Binidini\CoreBundle\Exception\RecallTimeException;
+use Binidini\SearchBundle\Document\Shipment;
 use Doctrine\ORM\EntityManager;
 use SM\Factory\Factory as StateMachineFactory;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -21,14 +22,14 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class BidLogicService
 {
     protected $securityContext;
-    protected $dm;
+    protected $sls;
     protected $em;
     protected $smFactory;
 
-    public function __construct(SecurityContextInterface $securityContext, DocumentManager $documentManager, EntityManager $entityManager, StateMachineFactory $sm)
+    public function __construct(SecurityContextInterface $securityContext, ShippingLogicService $shippingLogicService, EntityManager $entityManager, StateMachineFactory $sm)
     {
         $this->securityContext = $securityContext;
-        $this->dm = $documentManager;
+        $this->sls = $shippingLogicService;
         $this->em = $entityManager;
         $this->smFactory = $sm;
     }
@@ -67,17 +68,39 @@ class BidLogicService
         $shipping->hold();
         $shippingSM->apply(Shipping::TRANSITION_ACCEPT);
 
-        $shipment = $this->dm->find('\Binidini\SearchBundle\Document\Shipment', $bid->getShipping()->getId());
-        $this->dm->remove($shipment);
-        $this->dm->flush($shipment);
+        $this->sls->removeShipment($shipping);
 
-        foreach ($shipping->getBids() as $bid)
+        foreach ($shipping->getBids() as $b)
         {
-            if ($bid->isNew()) {
-                $bid->setState(Bid::STATE_REJECTED);
-                $this->em->flush($bid);
+            if ($b->isNew()) {
+                $b->setState(Bid::STATE_AUTO_REJECTED);
+                $this->em->flush($b);
             }
         }
+    }
+
+    public function recallTransition(Bid $bid)
+    {
+        $this->checkCarrier($bid);
+
+        $shipping = $bid->getShipping();
+
+        if ((time() - $bid->getUpdatedAt()->getTimestamp()) / 60 > Shipping::CARRIER_RECALL_TIME) {
+            throw new RecallTimeException("Вы не можете отозвать заявку. Прошлo больше ".Shipping::CARRIER_RECALL_TIME." минут.");
+        }
+
+        $repository = $this->em->getRepository('Gedmo\Loggable\Entity\LogEntry');
+        $repository->revert($shipping, 1);
+
+        foreach ($shipping->getBids() as $b)
+        {
+            if ($b->isAutoRejected()) {
+                $b->setState(Bid::STATE_NEW);
+                $this->em->flush($b);
+            }
+        }
+
+        $this->sls->addShipment($shipping);
     }
 
     protected function getUser()

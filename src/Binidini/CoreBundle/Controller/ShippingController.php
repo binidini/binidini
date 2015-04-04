@@ -36,7 +36,4 @@ class ShippingController extends ResourceController
 
     }
 
-
-
-
 }

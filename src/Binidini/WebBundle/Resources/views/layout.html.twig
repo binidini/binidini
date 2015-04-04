@@ -75,7 +75,7 @@
                 <li>
                     <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Моя страница</span></a>
                 </li>
-                <li {{ croute.is_current_route('binidini_core_transports') }}>
+                <li {{ croute.is_current_route('binidini_core_carrier_index') }}>
                     <a href="{{ path('binidini_core_carrier_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-truck"></i> <span class="nav-label">Мои перевозки</span></a>
                 </li>
                 <li {{ croute.is_current_route('binidini_core_shipping_index') }}>
@@ -114,19 +114,20 @@
         {% block pagetitle %}
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-sm-4">
-                    <h2>Заголов страницы</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="#">Главная</a>
-                        </li>
-                        <li class="active">
-                            <strong>подстраница</strong>
-                        </li>
-                    </ol>
+                    <h2>{% block pageheader %}{% endblock %}</h2>
+                    {% block flashes %}
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="text-{{ type }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endblock %}
                 </div>
                 <div class="col-sm-8">
                     <div class="title-action">
-                        <a href="" class="btn btn-primary">Действие</a>
+                        {% block actions %}{% endblock %}
                     </div>
                 </div>
             </div>

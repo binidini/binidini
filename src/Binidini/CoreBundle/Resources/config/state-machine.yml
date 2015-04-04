@@ -107,8 +107,12 @@ winzou_state_machine:
             cancel:  #by carrier
                 from: [new]
                 to: canceled
+            recall:
+                from: [accepted]
+                to: canceled
         callbacks:
             before:
-                accept:   { on: 'accept',   do: [@binidini.bid.logic.service, 'acceptTransition'],  args: ['object'] }
-                reject:   { on: 'reject',   do: [@binidini.bid.logic.service, 'checkSender'],  args: ['object'] }
-                cancel:   { on: 'cancel',   do: [@binidini.bid.logic.service, 'checkCarrier'],  args: ['object'] }
+                accept:   { on: 'accept', do: [@binidini.bid.logic.service, 'acceptTransition'],  args: ['object'] }
+                reject:   { on: 'reject', do: [@binidini.bid.logic.service, 'checkSender'],  args: ['object'] }
+                cancel:   { on: 'cancel', do: [@binidini.bid.logic.service, 'checkCarrier'],  args: ['object'] }
+                recall:   { on: 'recall', do: [@binidini.bid.logic.service, 'recallTransition'], args: ['object']}

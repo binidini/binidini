@@ -18,8 +18,10 @@ class Bid implements UserAwareInterface
     const GRAPH             = 'simple';
 
     const STATE_NEW        = 'new';
+    const STATE_ACCEPTED   = 'accepted';
     const STATE_REJECTED   = 'rejected';
     const STATE_CANCELED   = 'canceled';
+    const STATE_AUTO_REJECTED = 'auto_rejected';
 
     /**
      * @var integer
@@ -77,8 +79,15 @@ class Bid implements UserAwareInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
     /**
      * Get id
      *
@@ -227,7 +236,48 @@ class Bid implements UserAwareInterface
         return $this->state;
     }
 
-    public function isNew(){
+    public function isNew()
+    {
         return $this->state === self::STATE_NEW;
+    }
+
+    public function isAutoRejected()
+    {
+        return $this->state === self::STATE_AUTO_REJECTED;
+    }
+
+    public function isAccepted()
+    {
+        return $this->state === self::STATE_ACCEPTED;
+    }
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Bid
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->setUpdatedAt(new \DateTime());
     }
 }

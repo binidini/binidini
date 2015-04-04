@@ -1,0 +1,7 @@
+binidini_core_shipment_count:
+    path: /shipment/count
+    methods: [GET]
+    defaults:
+        _controller: binidini_search.controller.shipment:indexAction
+        _sylius:
+            template: BinidiniWebBundle:Frontend/Shipment:count.html.twig

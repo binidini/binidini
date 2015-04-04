@@ -69,7 +69,12 @@
                 </li>
                 <li {{ croute.is_current_route('binidini_search') }}>
                     <a class="count-info" href="{{ path('binidini_search') }}">
-                        <i class="fa fa-rub"></i><span class="nav-label">Заказы <span class="label label-danger">138</span></span>
+                        <i class="fa fa-rub"></i>
+                        <span class="nav-label">Заказы
+                            <span class="label label-danger">
+                                {% render path('binidini_core_shipment_count') %}
+                            </span>
+                        </span>
                     </a>
                 </li>
                 <li>

@@ -145,9 +145,12 @@
     display: block;
 }
 
-.thumbnail .preview{
-    width: 200px;
-    height: 200px;
+.thumbnail{
     background-size: cover;
     background-position: center;
+}
+
+.preview {
+    width: 200px;
+    height: 200px;
 }

@@ -1,32 +1,26 @@
 {% if bids.nbresults > 0 %}
-    {% if bids.nbresults > 0 %}
-
-        <li class="dropdown">
-            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
-                <i class="fa fa-bell"></i>  <span class="label label-primary">{{ bids.nbresults }}</span>
-            </a>
-            <ul class="dropdown-menu dropdown-messages">
-                {% set i = 0 %}
-                {% for bid in bids %}
-                    <li>
-                        <div class="dropdown-messages-box">
-                            <a href="{{ path('binidini_core_shipping_show', {'id': bid.shipping.id}) }}" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/a7.jpg">
-                            </a>
-                            <div >
-                                <a href="{{ path('binidini_core_shipping_show', {'id': bid.shipping.id}) }}" class="pull-right btn btn-primary ">{{ bid.price | price }}</a>
-                                <strong>{{ bid.sender.name }}</strong> принял Вашу заявку. <br>
-                                <small class="text-muted">{{ bid.createdAt | timeago }}, {{ bid.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
-                            </div>
+    <li class="dropdown" xmlns="http://www.w3.org/1999/html">
+        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+            <i class="fa fa-bell"></i> <span class="label label-primary">{{ bids.nbresults }}</span>
+        </a>
+        <ul class="dropdown-menu dropdown-alerts">
+            {% set i = 0 %}
+            {% for bid in bids %}
+                <li>
+                    <a href="{{ path('binidini_core_shipping_show', {'id': bid.shipping.id}) }}">
+                        <div>
+                            <img alt="image" class="img-circle pull-left" src="{{bid.user.imgpath|imagine_filter('photo38x38')}}">
+                            &nbsp;Вам пришла заявка на {{ bid.price | price }}<br>
+                            {{ bid.user.name }}
+                            <span class="pull-right text-muted small">{{ bid.createdAt | timeago }}</span>
                         </div>
-                    </li>
-                    {% set i = i + 1 %}
-                    {% if i < bids.nbresults %}
-                        <li class="divider"></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </li>
-
-    {% endif %}
+                    </a>
+                </li>
+                {% set i = i + 1 %}
+                {% if i < bids.nbresults %}
+                    <li class="divider"></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
 {% endif %}

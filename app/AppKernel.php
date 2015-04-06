@@ -27,12 +27,13 @@ class AppKernel extends Kernel
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+
 
             new Binidini\CoreBundle\BinidiniCoreBundle(),
             new Binidini\WebBundle\BinidiniWebBundle(),
             new Binidini\ApiBundle\BinidiniApiBundle(),
             new Binidini\SearchBundle\BinidiniSearchBundle(),
-            new Liip\ImagineBundle\LiipImagineBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

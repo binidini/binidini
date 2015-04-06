@@ -2,13 +2,6 @@ server {
     server_name localhost tytymyty tytymyty.local;
     root /vagrant/web;
 
-    location ~* \.(png|jpg|gif) {
-        try_files $uri $uri/ @noimage;
-    }
-    location @noimage {
-        rewrite ^ http://localhost:8080/bundles/binidiniweb/img/logo202x202.png;
-    }
-
     location / {
         # try to serve file directly, fallback to app.php
         try_files $uri /app.php$is_args$args;

@@ -68,7 +68,7 @@ doctrine:
 
 stof_doctrine_extensions:
     uploadable:
-        default_file_path:       %kernel.root_dir%/../web/uploads/pic
+        default_file_path:       %kernel.root_dir%/../web/media/pic
     orm:
         default:
             loggable: true
@@ -121,3 +121,23 @@ fos_user:
         form:
             type: binidini_user_profile
             validation_groups: [BinidiniRegistration]
+
+liip_imagine:
+    loaders:
+        default:
+            filesystem:
+                data_root: %kernel.root_dir%/../web/media/pic
+
+    filter_sets:
+        photo200x200:
+            quality: 75
+            filters:
+                thumbnail: { size: [200, 200], mode: outbound }
+        photo48x48:
+            quality: 75
+            filters:
+                thumbnail: { size: [48, 48], mode: outbound }
+        photo38x38:
+            quality: 75
+            filters:
+                thumbnail: { size: [38, 38], mode: outbound }

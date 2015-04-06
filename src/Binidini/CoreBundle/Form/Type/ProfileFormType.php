@@ -16,8 +16,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('lastName')
             ->add('patronymic')
             ->add('aboutMe', 'textarea', ['required' => false])
-            //->add('imgPath', 'file', array('required' => false, 'data_class' => null, 'mapped' => true))
-        ;
+            ->add('imgPath', 'file', ['required' => false, 'data_class' => null, 'mapped' => true]);
     }
 
     public function getName()

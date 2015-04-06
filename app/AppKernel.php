@@ -32,7 +32,7 @@ class AppKernel extends Kernel
             new Binidini\WebBundle\BinidiniWebBundle(),
             new Binidini\ApiBundle\BinidiniApiBundle(),
             new Binidini\SearchBundle\BinidiniSearchBundle(),
-
+            new Liip\ImagineBundle\LiipImagineBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,4 +1,5 @@
 {% extends "BinidiniWebBundle::layout.html.twig" %}
+
 {% set user = app.user %}
 {% set isItMe = true %}
 {% block pagetitle %}
@@ -19,11 +20,11 @@
                     <div class="ibox-content border-left-right">
                         <div class="row">
                             <div class="col-md-3">
-                                <img alt="image" class="img-responsive" src="img/profile_big.jpg">
-
-                                <div class="form-group">
-                                    {#{ form_widget(form.imgPath, {'attr': {'class': 'form-control', 'placeholder': 'Картинка профиля'}}) }}#}
-                                </div>
+                                <a href="#" class="thumbnail" style="width: 208px;height: 208px">
+                                    <div id="thumbnail" class="preview"
+                                         style="background-image: url('{{ user.imgPath | imagine_filter('photo200x200') }}')"></div>
+                                </a>
+                                <span class="btn btn-default btn-file">{{ user.imgPath? 'Изменить фотографию': 'Загрузить фотографию' }} {{ form_widget(form.imgPath,{'id':'imgUpload', 'data': app.user.imgPath}) }}</span>
                             </div>
                             <div class="col-md-8">
                                 <div class="form-group">
@@ -80,9 +81,7 @@
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -92,3 +91,21 @@
     {{ form_rest(form) }}
     {{ form_end(form) }}
 {% endblock %}
+
+{% block page_javascript %}
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#thumbnail').css("background-image", "url(" + this.result + ")");
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgUpload").change(function () {
+            readURL(this);
+        });
+    </script>
+{% endblock %}
+

@@ -16,7 +16,13 @@
                     <div class="ibox-content border-left-right">
                         <div class="row">
                             <div class="col-md-4">
-                            <img alt="image" class="img-responsive" src="img/profile_big.jpg">
+                                {% if user.imgPath %}
+                                    <img alt="image" class="img-responsive"
+                                         src="{{ user.imgPath|imagine_filter('photo200x200') }}">
+                                {% else %}
+                                    <img alt="image" class="img-responsive"
+                                         src="{{ asset('bundles/binidiniweb/img/logo202x202.png') }}">
+                                {% endif %}
                             </div>
                             <div class="col-md-8">
                                 <h2><strong>{{ user.Fio }}</strong></h2>
@@ -26,7 +32,7 @@
                                 {% if user.aboutme %}
                                     <h5 class="no-margins">О себе:</h5>
                                     <p class="no-padding no-margins">
-                                        {{ user.aboutme | nl2br}}
+                                        {{ user.aboutme | nl2br }}
                                     </p>
                                 {% endif %}
                                 <div class="hr-line-dashed"></div>

@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity
  * @ORM\Table(name = "user")
  *
- * @Gedmo\Uploadable(allowOverwrite=true, filenameGenerator="SHA1", path="/vagrant/web/uploads/pic")
+ * @Gedmo\Uploadable(allowOverwrite=true, filenameGenerator="SHA1")
  *
  */
 class User extends BaseUser
@@ -543,8 +543,10 @@ class User extends BaseUser
      */
     public function setImgPath($imgPath)
     {
-        $this->imgPath = $imgPath;
-
+        $this->imgIsChanged = (bool)$imgPath;
+        if ($this->imgIsChanged) {
+            $this->imgPath = $imgPath;
+        }
         return $this;
     }
 
@@ -558,8 +560,10 @@ class User extends BaseUser
         return $this->imgPath;
     }
 
-    public function getImagePath()
+    private $imgIsChanged = false;
+
+    public function imgIsChanged()
     {
-        return '/uploads/pic/' . $this->getImgPath();
-    }
+        return $this->imgIsChanged;
+     }
 }

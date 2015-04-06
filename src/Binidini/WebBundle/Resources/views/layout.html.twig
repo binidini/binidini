@@ -38,7 +38,11 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="{{ asset('bundles/binidiniweb/img/logo48x48.png') }}" />
+                            {% if app.user.imgPath %}
+                            <img alt="image" class="img-circle" src="{{ app.user.imgPath|imagine_filter('photo48x48') }}" />
+                            {% else %}
+                                <img alt="image" class="img-circle" src="{{ asset('bundles/binidiniweb/img/logo48x48.png') }}" />
+                            {% endif %}
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear">
@@ -173,5 +177,8 @@
     </script>
 {% endblock %}
 
+{% block page_javascript %}
+
+{% endblock %}
 </body>
 </html>

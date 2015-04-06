@@ -180,6 +180,7 @@ class Shipping implements UserAwareInterface
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="shipments")
      * @ORM\JoinColumn(name="carrier_id", referencedColumnName="id")
+     * @Gedmo\Versioned
      */
     private $carrier;
 
@@ -331,6 +332,21 @@ class Shipping implements UserAwareInterface
     public function getBids()
     {
         return $this->bids;
+    }
+
+    /**
+     * Get Accepted Bid
+     *
+     * @return \Binidini\CoreBundle\Entity\Bid
+     */
+    public function getAcceptedBid()
+    {
+        foreach($this->getBids() as $bid)
+        {
+            if ($bid->isAccepted()) {
+                return $bid;
+            }
+        }
     }
 
     /**

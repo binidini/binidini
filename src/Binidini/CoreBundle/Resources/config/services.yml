@@ -77,7 +77,7 @@ services:
         class: Binidini\CoreBundle\Service\BidLogicService
         arguments:
             - @security.context
-            - @doctrine.odm.mongodb.document_manager
+            - @binidini.shipping.logic.service
             - @doctrine.orm.entity_manager
             - @sm.factory
 

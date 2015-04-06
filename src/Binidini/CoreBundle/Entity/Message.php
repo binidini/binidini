@@ -158,4 +158,5 @@ class Message implements UserAwareInterface
     {
         return $this->shipping;
     }
+
 }

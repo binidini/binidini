@@ -20,16 +20,16 @@ binidini_shipping:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/shipping.yml
     prefix: /
 
+binidini_shipment:
+    resource: @BinidiniWebBundle/Resources/config/routing/frontend/shipment.yml
+    prefix: /
+
 binidini_message:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/message.yml
     prefix: /
 
 binidini_bid:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/bid.yml
-    prefix: /
-
-binidini_search:
-    resource: @BinidiniWebBundle/Resources/config/routing/frontend/search.yml
     prefix: /
 
 binidini_profile:

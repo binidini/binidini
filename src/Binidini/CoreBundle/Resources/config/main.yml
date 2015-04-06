@@ -2,26 +2,6 @@ imports:
     - { resource: @BinidiniCoreBundle/Resources/config/resources.yml}
     - { resource: @BinidiniCoreBundle/Resources/config/state-machine.yml}
 
-fos_rest:
-    disable_csrf_role: ROLE_API
-    view:
-        formats:
-            json: true
-        empty_content: 204
-    format_listener:
-        rules:
-            - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: true }
-            - { path: '^/' }
-
-fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
-    user_class: Binidini\CoreBundle\Entity\User
-    registration:
-        form:
-            type: binidini_user_registration
-            validation_groups: [BinidiniRegistration]
-
 old_sound_rabbit_mq:
     connections:
         default:

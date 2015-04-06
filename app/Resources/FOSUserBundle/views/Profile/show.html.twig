@@ -10,60 +10,68 @@
 
 {% block content %}
     <div class="wrapper wrapper-content">
-    <div class="row animated fadeInRight">
-        <div class="col-md-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content border-left-right">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img alt="image" class="img-responsive" src="img/profile_big.jpg">
-                        </div>
-                        <div class="col-md-8">
-                            <h2><strong>{{ "%s %s"|format(user.firstName, user.lastName) }}</strong></h2>
-                            <h3>{{ isItMe ? user.mobilephone: user.mobilemask }}</h3>
-                            <h4>{{ user.email }}</h4>
-                            {% if user.aboutme %}
-                                <h5 class="no-margins">О себе:</h5>
-                                <p class="no-padding no-margins">
-                                    {{ user.aboutme }}
-                                </p>
-                            {% endif %}
-                            <div class="hr-line-dashed"></div>
-                            <div class="rate">
-                                <div class="widget style1 lazur-bg">
-                                    <div class="row vertical-align">
-                                        <div class="col-xs-3 text-left">
-                                            <h2>Рейтинг:</h2>
-                                        </div>
-                                        <div class="col-xs-9 text-right">
-                                            <h2 class="font-bold">7.7/10</h2>
-                                        </div>
-                                    </div>
-                                </div>
+        <div class="row animated fadeInRight">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content border-left-right">
+                        <div class="row">
+                            <div class="col-md-4">
+                                {% if user.imgPath %}
+                                    <img alt="image" class="img-responsive"
+                                         src="{{ user.imgPath|imagine_filter('photo200x200') }}">
+                                {% else %}
+                                    <img alt="image" class="img-responsive"
+                                         src="{{ asset('bundles/binidiniweb/img/logo202x202.png') }}">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-8">
+                                <h2><strong>{{ user.Fio }}</strong></h2>
+
+                                <h3>{{ isItMe ? user.mobilephone: user.mobilemask }}</h3>
+                                <h4>{{ user.email }}</h4>
+                                {% if user.aboutme %}
+                                    <h5 class="no-margins">О себе:</h5>
+                                    <p class="no-padding no-margins">
+                                        {{ user.aboutme | nl2br }}
+                                    </p>
+                                {% endif %}
                                 <div class="hr-line-dashed"></div>
-                                <div class="widget style1 navy-bg">
-                                    <div class="row vertical-align">
-                                        <div class="col-xs-9 text-left">
-                                            <h2>Успешные перевозки:</h2>
-                                        </div>
-                                        <div class="col-xs-3 text-right">
-                                            <h2 class="font-bold">55</h2>
+                                <div class="rate">
+                                    <div class="widget style1 lazur-bg">
+                                        <div class="row vertical-align">
+                                            <div class="col-xs-3 text-left">
+                                                <h2>Рейтинг:</h2>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <h2 class="font-bold">7.7/10</h2>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="widget style1 navy-bg">
-                                    <div class="row vertical-align">
-                                        <div class="col-xs-9 text-left">
-                                            <h2>Успешные отправки:</h2>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row vertical-align">
+                                            <div class="col-xs-9 text-left">
+                                                <h2>Успешные перевозки:</h2>
+                                            </div>
+                                            <div class="col-xs-3 text-right">
+                                                <h2 class="font-bold">55</h2>
+                                            </div>
                                         </div>
-                                        <div class="col-xs-3 text-right">
-                                            <h2 class="font-bold">4</h2>
+                                    </div>
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row vertical-align">
+                                            <div class="col-xs-9 text-left">
+                                                <h2>Успешные отправки:</h2>
+                                            </div>
+                                            <div class="col-xs-3 text-right">
+                                                <h2 class="font-bold">4</h2>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>

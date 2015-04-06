@@ -10,7 +10,11 @@
 
         <div class="feed-element">
             <a href="{{ profile }}" class="pull-left">
-                <img alt="image" class="img-circle" src="img/a2.jpg">
+                {% if bid.user.imgPath %}
+                    <img alt="image" class="img-circle" src="{{bid.user.imgpath|imagine_filter('photo38x38')}}">
+                {% else %}
+                    <img alt="image" class="img-circle" src="{{ asset('bundles/binidiniweb/img/logo202x202.png') }}">
+                {% endif %}
             </a>
 
             <div class="media-body ">

@@ -1,12 +1,4 @@
 <?php
-/*
- * This file is part of the Binidini project.
- *
- * (c) Denis Manilo
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace Binidini\CoreBundle\Entity;
 
@@ -15,14 +7,13 @@ use Binidini\CoreBundle\Exception\InsufficientUserBalance;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name = "user")
  *
- * @ORM\AttributeOverrides({
- *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(type="string", name="email_canonical", length=255, unique=false)),
- * })
+ * @Gedmo\Uploadable(allowOverwrite=true, filenameGenerator="SHA1")
  *
  */
 class User extends BaseUser
@@ -49,6 +40,13 @@ class User extends BaseUser
      * @ORM\Column(name="last_name", type="string", length=128, nullable=true)
      */
     private $lastName;
+
+    /**
+     * @var string
+     * @ORM\Column(name="img_path", type="string", length=255, nullable=true)
+     * @Gedmo\UploadableFileName
+     */
+    private $imgPath;
 
     /**
      * @var string
@@ -108,7 +106,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     *  @ORM\Column(name="about_me", type="string", length=255, nullable=true)
+     * @ORM\Column(name="about_me", type="string", length=255, nullable=true)
      */
     private $aboutMe;
 
@@ -165,7 +163,7 @@ class User extends BaseUser
         $name = '';
         if ($this->isIndividual()) {
             if (empty($this->patronymic)) {
-                $name = $this->firstName . ' ' . $this->lastName;
+                $name = $this->lastName . ' ' . $this->firstName;
             } else {
                 $name = $this->firstName . ' ' . $this->patronymic;
             }
@@ -182,10 +180,21 @@ class User extends BaseUser
 
         return $name;
     }
+
+    public function getFio()
+    {
+        $name = $this->lastName . ' ' . $this->firstName;
+        if ($this->patronymic) {
+            $name .= ' ' . $this->patronymic;
+        }
+        $name = trim($name);
+        return $name;
+    }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -218,7 +227,7 @@ class User extends BaseUser
     /**
      * Get parcels
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getParcels()
     {
@@ -251,7 +260,7 @@ class User extends BaseUser
     /**
      * Get shipments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getShipments()
     {
@@ -284,7 +293,7 @@ class User extends BaseUser
     /**
      * Get bids
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBids()
     {
@@ -317,7 +326,7 @@ class User extends BaseUser
     /**
      * Get payments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPayments()
     {
@@ -340,7 +349,7 @@ class User extends BaseUser
     /**
      * Get firstName
      *
-     * @return string 
+     * @return string
      */
     public function getFirstName()
     {
@@ -363,7 +372,7 @@ class User extends BaseUser
     /**
      * Get lastName
      *
-     * @return string 
+     * @return string
      */
     public function getLastName()
     {
@@ -386,14 +395,14 @@ class User extends BaseUser
     /**
      * Get patronymic
      *
-     * @return string 
+     * @return string
      */
     public function getPatronymic()
     {
         return $this->patronymic;
     }
 
-     /**
+    /**
      * Set balance
      *
      * @param integer $balance
@@ -409,7 +418,7 @@ class User extends BaseUser
     /**
      * Get balance
      *
-     * @return integer 
+     * @return integer
      */
     public function getBalance()
     {
@@ -433,14 +442,14 @@ class User extends BaseUser
     /**
      * Get companyName
      *
-     * @return string 
+     * @return string
      */
     public function getCompanyName()
     {
         return $this->companyName;
     }
 
- 
+
     /**
      * Set type
      *
@@ -457,7 +466,7 @@ class User extends BaseUser
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -496,7 +505,7 @@ class User extends BaseUser
     /**
      * Get holdAmount
      *
-     * @return integer 
+     * @return integer
      */
     public function getHoldAmount()
     {
@@ -525,4 +534,36 @@ class User extends BaseUser
     {
         return $this->aboutMe;
     }
+
+    /**
+     * Set imgPath
+     *
+     * @param string $imgPath
+     * @return User
+     */
+    public function setImgPath($imgPath)
+    {
+        $this->imgIsChanged = (bool)$imgPath;
+        if ($this->imgIsChanged) {
+            $this->imgPath = $imgPath;
+        }
+        return $this;
+    }
+
+    /**
+     * Get imgPath
+     *
+     * @return string
+     */
+    public function getImgPath()
+    {
+        return $this->imgPath;
+    }
+
+    private $imgIsChanged = false;
+
+    public function imgIsChanged()
+    {
+        return $this->imgIsChanged;
+     }
 }

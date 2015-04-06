@@ -1,0 +1,111 @@
+{% extends "BinidiniWebBundle::layout.html.twig" %}
+
+{% set user = app.user %}
+{% set isItMe = true %}
+{% block pagetitle %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-5">
+            <h2>Мои настройки</h2>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+    {{ form_errors(form) }}
+
+    <div class="wrapper wrapper-content">
+        <div class="row animated fadeInRight">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content border-left-right">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="#" class="thumbnail" style="width: 208px;height: 208px">
+                                    <div id="thumbnail" class="preview"
+                                         style="background-image: url('{{ user.imgPath | imagine_filter('photo200x200') }}')"></div>
+                                </a>
+                                <span class="btn btn-default btn-file">{{ user.imgPath? 'Изменить фотографию': 'Загрузить фотографию' }} {{ form_widget(form.imgPath,{'id':'imgUpload', 'data': app.user.imgPath}) }}</span>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Фамилия:</label>
+
+                                    <div class="col-sm-5 no-padding">
+                                        {{ form_widget(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Фамилия'}, 'data':app.user.lastname}) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Имя:</label>
+
+                                    <div class="col-sm-5 no-padding">
+                                        {{ form_widget(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'Имя'}, 'data':app.user.firstname}) }}
+                                    </div>
+                                    <div class="col-sm-5 no-padding">
+                                        {{ form_errors(form.firstName) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Отчество:</label>
+
+                                    <div class="col-sm-5 no-padding">
+                                        {{ form_widget(form.patronymic, {'attr': {'class': 'form-control', 'placeholder': 'Отчество'}, 'data':app.user.patronymic}) }}
+                                    </div>
+                                    <div class="col-sm-5 no-padding">
+                                        {{ form_errors(form.patronymic) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Email:</label>
+
+                                    <div class="col-sm-5 no-padding">
+                                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}, 'data':app.user.email}) }}
+                                    </div>
+                                    <div class="col-sm-5 no-padding">
+                                        {{ form_errors(form.email) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">О себе:</label>
+
+                                    <div class="col-sm-5 no-padding">
+
+                                        {{ form_widget(form.aboutMe, {'attr': {'class': 'form-control', 'placeholder': 'О себе'}, 'data':app.user.aboutme}) }}
+                                    </div>
+                                    <div class="col-sm-5 no-padding">
+                                        {{ form_errors(form.aboutMe) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-7 no-padding">
+                                        <button type="submit" class="pull-right btn btn-w-m btn-primary">Сохранить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block page_javascript %}
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#thumbnail').css("background-image", "url(" + this.result + ")");
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgUpload").change(function () {
+            readURL(this);
+        });
+    </script>
+{% endblock %}
+

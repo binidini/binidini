@@ -1,20 +1,24 @@
 <div class="feed-activity-list">
     {% for message in messages %}
-        {% set profile = path('binidini_core_profile_show', {id: message.user.id}) %}
-        <div class="feed-element">
-            <a href="{{ profile }}" class="pull-left">
-                <img alt="image" class="img-circle" src="img/a2.jpg">
-            </a>
+    {% set profile = path('binidini_core_profile_show', {id: message.user.id}) %}
+    <div class="feed-element">
+        <a href="{{ profile }}" class="pull-left">
+            {% if message.user.imgPath %}
+            <img alt="image" class="img-circle" src="{{message.user.imgpath|imagine_filter('photo38x38')}}">
+            {% else %}
+            <img alt="image" class="img-circle" src="{{ asset('bundles/binidiniweb/img/logo202x202.png') }}">
+            {% endif %}
+        </a>
 
-            <div class="media-body ">
-                <a href="{{ profile }}"><strong>{{ message.user.name }}</strong></a> отправил сообщение.<br>
-                <small class="text-muted pull-right">{{ message.createdAt | timeago }}</small>
-                <small class="text-muted">{{ message.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
-                <div class="well">
-                    {{ message.text | nl2br }}
-                </div>
+        <div class="media-body ">
+            <a href="{{ profile }}"><strong>{{ message.user.name }}</strong></a> отправил сообщение.<br>
+            <small class="text-muted pull-right">{{ message.createdAt | timeago }}</small>
+            <small class="text-muted">{{ message.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
+            <div class="well">
+                {{ message.text | nl2br }}
             </div>
         </div>
+    </div>
     {% else %}
         <div class="col-sm-12">
             <h3 class="text-center">

@@ -5,6 +5,12 @@ services:
         tags:
             - { name: form.type, alias: binidini_user_registration }
 
+    binidini_user.profile.form.type:
+        class: Binidini\CoreBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: binidini_user_profile }
+
     binidini.subscriber.user_registration:
         class: Binidini\CoreBundle\EventListener\RegistrationListener
         arguments: [@old_sound_rabbit_mq.binidini_registration_producer]

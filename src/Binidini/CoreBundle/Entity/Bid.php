@@ -19,6 +19,7 @@ class Bid implements UserAwareInterface
 
     const STATE_NEW        = 'new';
     const STATE_ACCEPTED   = 'accepted';
+    const STATE_AGREED     = 'agreed';
     const STATE_REJECTED   = 'rejected';
     const STATE_CANCELED   = 'canceled';
     const STATE_AUTO_REJECTED = 'auto_rejected';
@@ -249,6 +250,11 @@ class Bid implements UserAwareInterface
     public function isAccepted()
     {
         return $this->state === self::STATE_ACCEPTED;
+    }
+
+    public function isAgreed()
+    {
+        return $this->state === self::STATE_AGREED;
     }
     /**
      * Set updatedAt

@@ -1,7 +1,20 @@
-binidini_core_shipment_count:
+binidini_search_shipment_count:
     path: /shipment/count
     methods: [GET]
     defaults:
         _controller: binidini_search.controller.shipment:indexAction
         _sylius:
             template: BinidiniWebBundle:Frontend/Shipment:count.html.twig
+
+binidini_search_shipment_index:
+    path: /search
+    methods: [GET]
+    defaults:
+        _controller: binidini_search.controller.shipment:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            template: BinidiniWebBundle:Frontend/Shipment:search.html.twig

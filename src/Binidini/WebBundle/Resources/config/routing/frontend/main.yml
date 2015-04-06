@@ -32,10 +32,6 @@ binidini_bid:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/bid.yml
     prefix: /
 
-binidini_search:
-    resource: @BinidiniWebBundle/Resources/config/routing/frontend/search.yml
-    prefix: /
-
 binidini_profile:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/user.yml
     prefix: /

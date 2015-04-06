@@ -27,10 +27,16 @@
 .text-paid {
     color: #1ab394;
 }
+.text-agreed {
+    color: #1ab394;
+}
 .text-completed {
     color: #888888;
 }
 .text-rejected {
+    color: #f8ac59
+}
+.text-auto_rejected {
     color: #f8ac59
 }
 .text-refused {
@@ -84,8 +90,18 @@
     background-color: #1ab394;
     color: #FFFFFF;
 }
+.label-agreed,
+.badge-agreed {
+    background-color: #1ab394;
+    color: #FFFFFF;
+}
 .label-rejected,
 .badge-rejected {
+    background-color: #f8ac59;
+    color: #FFFFFF;
+}
+.label-auto_rejected,
+.badge-auto_rejected {
     background-color: #f8ac59;
     color: #FFFFFF;
 }
@@ -96,7 +112,7 @@
 }
 .label-canceled,
 .badge-canceled {
-    background-color: #1a7bb9;
+    background-color: #888888;
     color: #ffffff;
 }
 .label-conflict,

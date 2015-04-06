@@ -26,6 +26,7 @@ binidini.shipping.state.fillter.: Все заказы
 
 binidini.bid.state.new: новая
 binidini.bid.state.accepted: принята
+binidini.bid.state.agreed: согласована
 binidini.bid.state.rejected: отказ
 binidini.bid.state.auto_rejected: отказ
 binidini.bid.state.canceled: отменена

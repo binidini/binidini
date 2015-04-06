@@ -46,9 +46,9 @@ class BidLogicService
             throw new AccessDeniedHttpException("Вы не являетесь перевозчиком. Данная операция запрещена.");
     }
 
-    public function acceptTransition(Bid $bid)
+    public function agreeTransition(Bid $bid)
     {
-        $this->checkSender($bid);
+        $this->checkCarrier($bid);
 
         $shipping = $bid->getShipping();
 
@@ -72,35 +72,11 @@ class BidLogicService
 
         foreach ($shipping->getBids() as $b)
         {
-            if ($b->isNew()) {
+            if ( $b->isNew() || $b->isAccepted() ) {
                 $b->setState(Bid::STATE_AUTO_REJECTED);
                 $this->em->flush($b);
             }
         }
-    }
-
-    public function recallTransition(Bid $bid)
-    {
-        $this->checkCarrier($bid);
-
-        $shipping = $bid->getShipping();
-
-        if ((time() - $bid->getUpdatedAt()->getTimestamp()) / 60 > Shipping::CARRIER_RECALL_TIME) {
-            throw new RecallTimeException("Вы не можете отозвать заявку. Прошлo больше ".Shipping::CARRIER_RECALL_TIME." минут.");
-        }
-
-        $repository = $this->em->getRepository('Gedmo\Loggable\Entity\LogEntry');
-        $repository->revert($shipping, 1);
-
-        foreach ($shipping->getBids() as $b)
-        {
-            if ($b->isAutoRejected()) {
-                $b->setState(Bid::STATE_NEW);
-                $this->em->flush($b);
-            }
-        }
-
-        $this->sls->addShipment($shipping);
     }
 
     protected function getUser()

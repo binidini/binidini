@@ -17,6 +17,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('lastName')
             ->add('patronymic')
             ->add('companyName')
+            ->add('address')
             ->add('type', 'choice',
                 [
                     'choices' => [

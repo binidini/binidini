@@ -110,6 +110,8 @@
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
+                    {% render path('binidini_user_bids_accepted') %}
+                    {% render path('binidini_sender_bids_new') %}
                     <li>
                         <a href="{{ path("fos_user_security_logout") }}">
                             <i class="fa fa-sign-out"></i> Выход

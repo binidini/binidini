@@ -16,7 +16,7 @@ binidini_core_bid_index:
         _sylius:
             criteria:
                 shipping: $shipping_id
-            paginate: $paginate
+            paginate: false
             sortable: true
             sorting:
                 price: asc
@@ -32,3 +32,29 @@ binidini_core_shipping_bid_state_transition:
             redirect:
                 route: binidini_core_shipping_show
                 parameters: { id: $shipping_id }
+
+binidini_user_bids_accepted:
+    path: /user/bids/accepted
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.bid:indexAction
+        _sylius:
+            paginate: 10
+            filterable: true
+            criteria:
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+                state: 'accepted'
+            template: BinidiniWebBundle:Frontend/Bid:alert_accepted.html.twig
+
+binidini_sender_bids_new:
+    path: /sender/bids/new
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.bid:indexAction
+        _sylius:
+            paginate: 10
+            filterable: true
+            criteria:
+                sender: ['expr:service("security.context").getToken().getUser().getId()']
+                state: 'new'
+            template: BinidiniWebBundle:Frontend/Bid:alert_new.html.twig

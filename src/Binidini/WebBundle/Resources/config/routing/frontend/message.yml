@@ -4,7 +4,7 @@ binidini_core_shipping_message_index:
     defaults:
         _controller: binidini_core.controller.message:indexAction
         _sylius:
-            paginate: $paginate
+            paginate: false
             sortable: true
             sorting:
                 id: desc

@@ -1,0 +1,26 @@
+{% if bids.nbresults > 0 %}
+    <li class="dropdown" xmlns="http://www.w3.org/1999/html">
+        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+            <i class="fa fa-smile-o"></i> <span class="label label-warning">{{ bids.nbresults }}</span>
+        </a>
+        <ul class="dropdown-menu dropdown-alerts">
+            {% set i = 0 %}
+            {% for bid in bids %}
+                <li>
+                    <a href="{{ path('binidini_core_shipping_show', {'id': bid.shipping.id}) }}">
+                        <div>
+                            <img alt="image" class="img-circle pull-left" src="{{bid.sender.imgpath|imagine_filter('photo38x38')}}">
+                            &nbsp;Ваша заявка на {{ bid.price | price }} принята.<br>
+                            {{ bid.sender.name }}
+                            <span class="pull-right text-muted small"> {{ bid.createdAt | timeago }}</span>
+                        </div>
+                    </a>
+                </li>
+                {% set i = i + 1 %}
+                {% if i < bids.nbresults %}
+                    <li class="divider"></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+{% endif %}

@@ -62,6 +62,12 @@ class Bid implements UserAwareInterface
     protected $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="sender_id", referencedColumnName="id", nullable=false)
+     */
+    protected $sender;
+
+    /**
      * Bid state.
      *
      * @var string
@@ -77,18 +83,20 @@ class Bid implements UserAwareInterface
      */
     private $createdAt;
 
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-    }
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
+
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
     /**
      * Get id
      *
@@ -131,6 +139,8 @@ class Bid implements UserAwareInterface
     public function setShipping(\Binidini\CoreBundle\Entity\Shipping $shipping = null)
     {
         $this->shipping = $shipping;
+
+        $this->sender = $shipping->getUser();
 
         return $this;
     }
@@ -286,4 +296,29 @@ class Bid implements UserAwareInterface
     {
         $this->setUpdatedAt(new \DateTime());
     }
+
+
+    /**
+     * Set sender
+     *
+     * @param \FOS\UserBundle\Model\UserInterface $sender
+     * @return Bid
+     */
+    public function setSender(UserInterface $sender)
+    {
+        $this->sender = $sender;
+
+        return $this;
+    }
+
+    /**
+     * Get sender
+     *
+     * @return \FOS\UserBundle\Model\UserInterface
+     */
+    public function getSender()
+    {
+        return $this->sender;
+    }
+
 }

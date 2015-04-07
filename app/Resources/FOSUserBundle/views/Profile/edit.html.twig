@@ -2,6 +2,8 @@
 
 {% set user = app.user %}
 {% set isItMe = true %}
+{% set isItCompany = user.type == 2 %}
+
 {% block pagetitle %}
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-sm-5">
@@ -9,6 +11,7 @@
         </div>
     </div>
 {% endblock %}
+
 {% block content %}
     {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
     {{ form_errors(form) }}
@@ -27,15 +30,45 @@
                                 <span class="btn btn-default btn-file">{{ user.imgPath? 'Изменить фотографию': 'Загрузить фотографию' }} {{ form_widget(form.imgPath,{'id':'imgUpload', 'data': app.user.imgPath}) }}</span>
                             </div>
                             <div class="col-md-8">
+
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Фамилия:</label>
+                                    <label class="col-sm-3 control-label">
+                                        Тип аккаунта:
+                                    </label>
+
+                                    <div class="col-sm-5 profile-type">
+                                        {{ form_widget(form.type, {'attr':{'class':'radio radio-inline'}}) }}
+                                    </div>
+                                </div>
+                                <div class="form-group company-field {{ not isItCompany?'hide' }}">
+                                    <label class="col-sm-3 control-label">Название компании:</label>
+
+                                    <div class="col-sm-5 no-padding">
+                                        {{ form_widget(form.companyName, {'attr': {'class': 'form-control', 'placeholder': 'Название компании'}, 'data':app.user.companyName}) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group no-margins company-field {{ not isItCompany?'hide' }}">
+                                    <div class="col-sm-3 control-label">
+
+                                    </div>
+                                    <div class="col-sm-5 no-padding">
+                                        <h4>Контактное лицо</h4>
+
+                                        <div class="hr-line-dashed" style="margin-top: 0"></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Фамилия:</label>
 
                                     <div class="col-sm-5 no-padding">
                                         {{ form_widget(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Фамилия'}, 'data':app.user.lastname}) }}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Имя:</label>
+                                    <label class="col-sm-3 control-label">Имя:</label>
 
                                     <div class="col-sm-5 no-padding">
                                         {{ form_widget(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'Имя'}, 'data':app.user.firstname}) }}
@@ -45,7 +78,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Отчество:</label>
+                                    <label class="col-sm-3 control-label">Отчество:</label>
 
                                     <div class="col-sm-5 no-padding">
                                         {{ form_widget(form.patronymic, {'attr': {'class': 'form-control', 'placeholder': 'Отчество'}, 'data':app.user.patronymic}) }}
@@ -54,8 +87,11 @@
                                         {{ form_errors(form.patronymic) }}
                                     </div>
                                 </div>
+                                <div class="form-group company-field {{ not isItCompany?'hide' }}">
+
+                                </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Email:</label>
+                                    <label class="col-sm-3 control-label">Email:</label>
 
                                     <div class="col-sm-5 no-padding">
                                         {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}, 'data':app.user.email}) }}
@@ -65,7 +101,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">О себе:</label>
+                                    <label class="col-sm-3 control-label user-field {{ isItCompany?'hide' }}">О себе:</label>
+                                    <label class="col-sm-3 control-label {{ not isItCompany?'hide' }} company-field">О компании:</label>
 
                                     <div class="col-sm-5 no-padding">
 
@@ -105,6 +142,10 @@
         }
         $("#imgUpload").change(function () {
             readURL(this);
+        });
+        $(".profile-type input").change(function () {
+            $('.company-field').toggleClass('hide');
+            $('.user-field').toggleClass('hide');
         });
     </script>
 {% endblock %}

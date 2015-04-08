@@ -2,6 +2,7 @@
 
 namespace Binidini\CoreBundle\Entity;
 
+use Binidini\CoreBundle\Exception\AppException;
 use Binidini\CoreBundle\Exception\InsufficientFrozenAmount;
 use Binidini\CoreBundle\Exception\InsufficientUserBalance;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,7 +20,31 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class User extends BaseUser
 {
     const TYPE_INDIVIDUAL = 1;
-    const TYPE_BUSINESS = 2;
+    const TYPE_BUSINESS   = 2;
+
+    const BIT_ACCEPT_BID = 0;
+    const BIT_REJECT_BID = 1;
+    const BIT_CANCEL_BID = 2;
+    const BIT_RECALL_BID = 3;
+    const BIT_AGREE_BID  = 4;
+
+    const BIT_CREATE_SHIPPING   = 10;
+    const BIT_ACCEPT_SHIPPING   = 11;
+    const BIT_RECALL_SHIPPING   = 12;
+    const BIT_DISPATCH_SHIPPING =13;
+    const BIT_LOAD_SHIPPING     = 14;
+    const BIT_DELIVER_SHIPPING  = 15;
+    const BIT_PAY_SHIPPING      = 16;
+    const BIT_COMPLETE_SHIPPING = 17;
+    const BIT_REJECT_SHIPPING   = 18;
+    const BIT_REFUSE_SHIPPING   = 19;
+    const BIT_CANCEL_SHIPPING   = 20;
+    const BIT_NULLIFY_SHIPPING  = 21;
+    const BIT_ANNUL_SHIPPING    = 22;
+    const BIT_DISPUTE_SHIPPING  = 23;
+    const BIT_DEBATE_SHIPPING   = 24;
+    const BIT_RESOLVE_SHIPPING  = 25;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -113,10 +138,26 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
+
     private $address;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sms_mask", type="integer", options={"default"=0})
+     */
+
+    private $smsMask;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="email_mask", type="integer", options={"default"=0})
+     */
+
+    private $emailMask;
 
     public function __construct()
     {
@@ -595,5 +636,100 @@ class User extends BaseUser
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * Set smsMask
+     *
+     * @param integer $smsMask
+     * @return User
+     */
+    public function setSmsMask($smsMask)
+    {
+        $this->smsMask = $smsMask;
+
+        return $this;
+    }
+
+    /**
+     * Get smsMask
+     *
+     * @return integer 
+     */
+    public function getSmsMask()
+    {
+        return $this->smsMask;
+    }
+
+    /**
+     * Set emailMask
+     *
+     * @param integer $emailMask
+     * @return User
+     */
+    public function setEmailMask($emailMask)
+    {
+        $this->emailMask = $emailMask;
+
+        return $this;
+    }
+
+    /**
+     * Get emailMask
+     *
+     * @return integer 
+     */
+    public function getEmailMask()
+    {
+        return $this->emailMask;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsBidAcceptNotification()
+    {
+        return $this->getSmsN(self::BIT_ACCEPT_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsBidAcceptNotification($flag)
+    {
+        $this->setSmsN(self::BIT_ACCEPT_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsBidAgreeNotification()
+    {
+        return $this->getSmsN(self::BIT_AGREE_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsBidAgreeNotification($flag)
+    {
+        $this->setSmsN(self::BIT_AGREE_BID, $flag);
+    }
+
+
+    private function getSmsN($n) {
+        return ($this->smsMask & (1 << $n)) != 0;
+    }
+
+    private function setSmsN($n, $new) {
+        $this->smsMask = ($this->smsMask & ~(1 << $n)) | ($new << $n);
+    }
+
+    private function getEmailN($n) {
+        return ($this->emailMask & (1 << $n)) != 0;
+    }
+
+    private function setEmailN($n, $new=true) {
+        $this->emailMask = ($this->emailMask & ~(1 << $n)) | ($new << $n);
     }
 }

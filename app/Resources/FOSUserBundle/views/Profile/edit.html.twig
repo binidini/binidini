@@ -13,8 +13,6 @@
 {% endblock %}
 
 {% block content %}
-    {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
-    {{ form_errors(form) }}
 
     <div class="wrapper wrapper-content">
         <div class="row animated fadeInRight">
@@ -41,6 +39,9 @@
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab-1">
                                                 <div class="row">
+                                                    {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+                                                    {{ form_errors(form) }}
+
                                                     <div class="col-md-3">
                                                         <a href="#" class="thumbnail" style="width: 208px;height: 208px">
                                                             <div id="thumbnail" class="preview"
@@ -142,10 +143,76 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    {{ form_rest(form) }}
+                                                    {{ form_end(form) }}
+
                                                 </div>
                                             </div>
                                             <div class="tab-pane" id="tab-2">
-                                                tab-2
+                                                <div class="row m-t-sm">
+                                                    <div class="col-md-6">
+                                                        <h4>Уведомления для перевозчика</h4>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>sms</th>
+                                                                <th>Событие</th>
+                                                                <th>email</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td><input type="checkbox"/></td>
+                                                                <td>Mark</td>
+                                                                <td>Otto</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Jacob</td>
+                                                                <td>Thornton</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Larry</td>
+                                                                <td>the Bird</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h4>Уведомления для отправителя</h4>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>First Name</th>
+                                                                <th>Last Name</th>
+                                                                <th>Username</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Mark</td>
+                                                                <td>Otto</td>
+                                                                <td>@mdo</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Jacob</td>
+                                                                <td>Thornton</td>
+                                                                <td>@fat</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Larry</td>
+                                                                <td>the Bird</td>
+                                                                <td>@twitter</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -157,8 +224,6 @@
             </div>
         </div>
     </div>
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
 {% endblock %}
 
 {% block page_javascript %}

@@ -3,6 +3,7 @@
 namespace Binidini\CoreBundle\Form\Type;
 
 use Binidini\CoreBundle\Entity\User;
+use Binidini\CoreBundle\Form\DataTransformer\MaskToBoolTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -11,6 +12,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('email', 'email', ['required' => false])
             ->add('firstName')
@@ -30,7 +32,12 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
                 ]
             )
             ->add('aboutMe', 'textarea', ['required' => false])
-            ->add('imgPath', 'file', ['required' => false, 'data_class' => null, 'mapped' => true]);
+            ->add('imgPath', 'file', ['required' => false, 'data_class' => null, 'mapped' => true])
+            // Блок настроек оповещения
+            ->add('smsBidAcceptNotification', 'checkbox', ['required' => false])
+            ->add('smsBidAgreeNotification', 'checkbox', ['required' => false])
+        ;
+
     }
 
     public function getName()

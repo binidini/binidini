@@ -1,0 +1,34 @@
+{% if shipping.user.id != app.user.id %}
+    {{ form_start(bid_form, {'action': path('binidini_core_bid_new', {'shipping_id': shipping.id}), 'attr': {'class': 'form-horizontal'} }) }}
+    {{ form_errors(bid_form) }}
+    <div class="form-group">
+        <div class="col-sm-12">
+            {{ form_widget(bid_form.comment, {'attr': {'class': 'form-control', 'placeholder': 'Вы можете написать необходимые пояснения к заявке.'}}) }}
+            {{ form_widget(bid_form.shipping, {'attr': {'value': shipping.id}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4">
+            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-rub"></i>
+                                                                </span>
+                {{ form_widget(bid_form.price, {'attr': {'class': 'form-control', 'value':shipping.deliveryPrice}}) }}
+                <span class="input-group-btn">
+                                                                    <button class="btn btn-primary" type="submit">Подать
+                                                                        заявку
+                                                                    </button>
+                                                                </span>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            {{ form_errors(bid_form.comment) }}
+            {{ form_errors(bid_form.price) }}
+            <span class="help-block m-b-none">Укажите Вашу стоимость доставки заказа в рублях.</span>
+        </div>
+    </div>
+    {{ form_rest(bid_form) }}
+    {{ form_end(bid_form) }}
+    <div class="hr-line-dashed"></div>
+{% endif %}
+                                                {% render path('binidini_core_bid_index', {'shipping_id':shipping.id}) %}

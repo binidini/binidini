@@ -1,0 +1,26 @@
+binidini_core_review_index:
+    path: /user/{user_id}/reviews/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.review:indexAction
+        _sylius:
+            paginate: false
+            sortable: true
+            sorting:
+                id: desc
+            criteria:
+                userTo: $userId
+            template: BinidiniWebBundle:Frontend/Review:index.html.twig
+
+binidini_core_review_new:
+    path: shipping/{shipping_id}/reviews/new
+    methods: [GET, POST]
+    defaults:
+        _controller: binidini_core.controller.review:createAction
+        _sylius:
+            redirect:
+                route: binidini_core_shipping_show
+                parameters: { id: $shipping_id, tab: review }
+            criteria:
+                shipping: $shipping_id
+

@@ -5,6 +5,7 @@ namespace Binidini\CoreBundle\Controller;
 use Binidini\CoreBundle\Entity\Shipping;
 use Binidini\CoreBundle\Form\Type\BidType;
 use Binidini\CoreBundle\Form\Type\MessageType;
+use Binidini\CoreBundle\Form\Type\ReviewType;
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +30,8 @@ class ShippingController extends ResourceController
                     'entries' => $entries,
                     'shipping' => $shipping,
                     'bid_form' => $this->createForm(new BidType())->createView(),
-                    'message_form' => $this->createForm(new MessageType())->createView()
+                    'message_form' => $this->createForm(new MessageType())->createView(),
+                    'review_form' => $this->createForm(new ReviewType())->createView(),
                 ]
             );
         return $this->handleView($view);

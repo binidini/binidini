@@ -33,3 +33,10 @@ sylius_resource:
                 model: Binidini\CoreBundle\Entity\Bid
                 controller: Binidini\CoreBundle\Controller\BidController
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+        binidini_core.review:
+            driver: doctrine/orm
+            classes:
+                model: Binidini\CoreBundle\Entity\Review
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+

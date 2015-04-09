@@ -1,0 +1,22 @@
+{{ form_start(message_form, {'action': path('binidini_core_shipping_message_new', {'shipping_id': shipping.id}), 'attr': {'class': 'form-horizontal'} }) }}
+{{ form_errors(message_form) }}
+<div class="form-group">
+    <div class="col-sm-12">
+        {{ form_widget(message_form.text, {'attr': {'class': 'form-control', 'placeholder': 'Написать сообщение'}}) }}
+        {{ form_widget(message_form.shipping, {'attr': {'value': shipping.id}}) }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3">
+        <button class="btn btn-primary" type="submit">
+            Отправить
+        </button>
+    </div>
+    <div class="col-sm-9">
+        {{ form_errors(message_form.text) }}
+    </div>
+</div>
+{{ form_rest(message_form) }}
+{{ form_end(message_form) }}
+<div class="hr-line-dashed"></div>
+{% render path('binidini_core_shipping_message_index', {'shipping_id':shipping.id}) %}

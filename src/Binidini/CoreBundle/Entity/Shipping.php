@@ -271,7 +271,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -294,7 +294,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get carrier
      *
-     * @return \Binidini\CoreBundle\Entity\User 
+     * @return \Binidini\CoreBundle\Entity\User
      */
     public function getCarrier()
     {
@@ -327,7 +327,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get bids
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBids()
     {
@@ -365,7 +365,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get pickupAddress
      *
-     * @return string 
+     * @return string
      */
     public function getPickupAddress()
     {
@@ -388,7 +388,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get deliveryAddress
      *
-     * @return string 
+     * @return string
      */
     public function getDeliveryAddress()
     {
@@ -411,7 +411,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get pickupDatetime
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPickupDatetime()
     {
@@ -434,7 +434,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get deliveryDatetime
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeliveryDatetime()
     {
@@ -480,7 +480,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get state
      *
-     * @return string 
+     * @return string
      */
     public function getState()
     {
@@ -505,7 +505,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get deliveryPrice
      *
-     * @return integer 
+     * @return integer
      */
     public function getDeliveryPrice()
     {
@@ -528,7 +528,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -551,7 +551,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -574,7 +574,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get weight
      *
-     * @return integer 
+     * @return integer
      */
     public function getWeight()
     {
@@ -597,7 +597,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get x
      *
-     * @return integer 
+     * @return integer
      */
     public function getX()
     {
@@ -620,7 +620,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get y
      *
-     * @return integer 
+     * @return integer
      */
     public function getY()
     {
@@ -643,7 +643,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get z
      *
-     * @return integer 
+     * @return integer
      */
     public function getZ()
     {
@@ -666,7 +666,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -689,7 +689,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -730,14 +730,19 @@ class Shipping implements UserAwareInterface
     /**
      * Get messages
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMessages()
     {
         return $this->messages;
     }
 
-    public function isNew(){
+    /**
+     * Checking than is new status
+     * @return bool
+     */
+    public function isNew()
+    {
         return $this->state === self::STATE_NEW;
     }
 
@@ -757,7 +762,7 @@ class Shipping implements UserAwareInterface
     /**
      * Get paymentGuarantee
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPaymentGuarantee()
     {
@@ -780,10 +785,20 @@ class Shipping implements UserAwareInterface
     /**
      * Get insurance
      *
-     * @return integer 
+     * @return integer
      */
     public function getInsurance()
     {
         return $this->insurance;
+    }
+
+    /**
+     * Checking can be shipping has review
+     *
+     * @return bool
+     */
+    public function canHasReview()
+    {
+        return in_array($this->getState(), [self::STATE_CONFLICT, self::STATE_COMPLETED]);
     }
 }

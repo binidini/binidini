@@ -35,3 +35,7 @@ binidini_bid:
 binidini_profile:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/user.yml
     prefix: /
+
+binidini_review:
+    resource: @BinidiniWebBundle/Resources/config/routing/frontend/review.yml
+    prefix: /

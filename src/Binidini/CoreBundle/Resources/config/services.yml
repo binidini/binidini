@@ -92,3 +92,9 @@ services:
         arguments: [@router, @session]
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+    binidini.listener.edit_user_profile:
+        class: Binidini\CoreBundle\EventListener\EditUserProfileListener
+        arguments: [@stof_doctrine_extensions.uploadable.manager, @doctrine.orm.entity_manager]
+        tags:
+            - { name: kernel.event_listener, event: fos_user.profile.edit.completed }

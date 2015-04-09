@@ -13,9 +13,4 @@ class BinidiniCoreBundle extends Bundle
         parent::build($container);
         $container->addCompilerPass(new FOSUserOverridePass());
     }
-
-    public function getParent()
-    {
-        return 'FOSUserBundle';
-    }
 }

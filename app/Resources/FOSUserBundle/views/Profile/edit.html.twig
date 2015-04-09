@@ -39,10 +39,9 @@
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab-1">
                                                 <div class="row">
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4 ">
                                                         <a href="#" class="thumbnail" style="width: 208px;height: 208px">
-                                                            <div id="thumbnail" class="preview"
-                                                                 style="background-image: url('{{ user.imgPath | imagine_filter('photo200x200') }}')"></div>
+                                                            <div id="thumbnail" class="preview" style="background-image: url('{{ user.imgPath | imagine_filter('photo200x200') }}')"></div>
                                                         </a>
                                                         <span class="btn btn-default btn-file">{{ user.imgPath? 'Изменить фотографию': 'Загрузить фотографию' }} {{ form_widget(form.imgPath,{'id':'imgUpload', 'data': user.imgPath}) }}</span>
                                                     </div>
@@ -134,17 +133,17 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </div>
                                             <div class="tab-pane" id="tab-2">
                                                 <div class="row m-t-sm">
                                                     <div class="col-md-6">
-                                                        <h4>Уведомления для перевозчика</h4>
-                                                        <table class="table table-bordered">
+                                                        <table class="table table-striped">
                                                             <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Событие</th>
+                                                                <th>Уведомления для перевозчика</th>
                                                                 <th>sms</th>
                                                                 <th>email</th>
                                                             </tr>
@@ -254,12 +253,11 @@
                                                         </table>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <h4>Уведомления для отправителя</h4>
-                                                        <table class="table table-bordered">
+                                                        <table class="table table-striped">
                                                             <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Событие</th>
+                                                                <th>Уведомления для отправителя</th>
                                                                 <th>sms</th>
                                                                 <th>email</th>
                                                             </tr>

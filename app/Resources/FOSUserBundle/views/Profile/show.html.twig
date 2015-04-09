@@ -1,4 +1,10 @@
 {% extends "BinidiniWebBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/binidiniweb/css/plugins/raty/jquery.raty.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% set isItMe = user.id == app.user.id %}
 {% set isItCompany = user.type == 2 %}
 {% block pagetitle %}
@@ -23,7 +29,8 @@
                                  src="{{ user.imgPath | imagine_filter('photo590x400') }}">
                         </div>
                         <div class="ibox-content profile-content">
-                            <h4><strong>{{ isItCompany? user.name: user.Fio}}</strong></h4>
+                            <h4><strong>{{ isItCompany? user.name: user.Fio }}</strong></h4>
+
                             <p><i class="fa fa-map-marker"></i> {{ user.address }}</p>
                             {% if isItCompany %}
                                 <h5>Контактное лицо</h5>
@@ -87,27 +94,21 @@
                     </div>
                     <div class="ibox-content">
                         <div>
-                            <div class="feed-activity-list">
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle"
-                                             src="{{ asset('bundles/binidiniweb/img/logo202x202.png') }}">
-                                    </a>
-
-                                    <div class="media-body ">
-                                        <small class="pull-right">2 часа назад</small>
-                                        <strong>Мистер Смит</strong> оставил отзыв<br>
-                                        <small class="text-muted">Сегодня в 12:10</small>
-                                        <div class="well">
-                                            Посылка была доставлена в срок
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% render path('binidini_core_review_index', {'user_id':user.id}) %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/raty/jquery.raty.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ratyInitialize();
+        });
+    </script>
 {% endblock %}

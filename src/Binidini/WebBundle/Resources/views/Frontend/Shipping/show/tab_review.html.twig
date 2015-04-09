@@ -23,4 +23,4 @@
 {{ form_rest(review_form) }}
 {{ form_end(review_form) }}
 <div class="hr-line-dashed"></div>
-
+{% render path('binidini_core_shipping_review_index', {'shipping_id':shipping.id}) %}

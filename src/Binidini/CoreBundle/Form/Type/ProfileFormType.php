@@ -36,6 +36,26 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             // Блок настроек оповещения
             ->add('smsBidAcceptNotification', 'checkbox', ['required' => false])
             ->add('smsBidAgreeNotification', 'checkbox', ['required' => false])
+            ->add('smsBidRejectNotification', 'checkbox', ['required' => false])
+            ->add('smsBidRecallNotification', 'checkbox', ['required' => false])
+            ->add('smsShippingDeliverNotification', 'checkbox', ['required' => false])
+            ->add('smsShippingPayNotification', 'checkbox', ['required' => false])
+            ->add('smsShippingCompleteNotification', 'checkbox', ['required' => false])
+            ->add('smsShippingRefuseNotification', 'checkbox', ['required' => false])
+            ->add('smsShippingDisputeNotification', 'checkbox', ['required' => false])
+            ->add('smsShippingDebateNotification', 'checkbox', ['required' => false])
+
+            ->add('emailBidAcceptNotification', 'checkbox', ['required' => false])
+            ->add('emailBidAgreeNotification', 'checkbox', ['required' => false])
+            ->add('emailBidRejectNotification', 'checkbox', ['required' => false])
+            ->add('emailBidRecallNotification', 'checkbox', ['required' => false])
+            ->add('emailShippingDeliverNotification', 'checkbox', ['required' => false])
+            ->add('emailShippingPayNotification', 'checkbox', ['required' => false])
+            ->add('emailShippingCompleteNotification', 'checkbox', ['required' => false])
+            ->add('emailShippingRefuseNotification', 'checkbox', ['required' => false])
+            ->add('emailShippingDisputeNotification', 'checkbox', ['required' => false])
+            ->add('emailShippingDebateNotification', 'checkbox', ['required' => false])
+
         ;
 
     }

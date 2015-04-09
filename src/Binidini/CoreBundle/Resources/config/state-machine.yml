@@ -24,9 +24,6 @@ winzou_state_machine:
             accept: #by sender
                 from: [new]
                 to: accepted
-            recall: #by carrier
-                from: [accepted]
-                to: new
             dispatch: #by sender
                 from: [accepted]
                 to: dispatched
@@ -69,7 +66,6 @@ winzou_state_machine:
         callbacks:
             before:
                 check_accept:   { on: 'accept',   do: [@binidini.shipping.logic.service, 'checkCarrier'],    args: ['object'] }
-                check_recall:   { on: 'recall',   do: [@binidini.shipping.logic.service, 'checkCarrier'],   args: ['object'] }
                 check_dispatch: { on: 'dispatch', do: [@binidini.shipping.logic.service, 'checkSender'],    args: ['object'] }
                 check_load:     { on: 'load',     do: [@binidini.shipping.logic.service, 'checkCarrier'],   args: ['object'] }
                 check_deliver:  { on: 'deliver',  do: [@binidini.shipping.logic.service, 'checkCarrier'],   args: ['object'] }

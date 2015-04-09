@@ -4,25 +4,28 @@
 {% set isItMe = true %}
 {% set isItCompany = user.type == 2 %}
 
-{% block pagetitle %}
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-sm-5">
-            <h2>Мои настройки</h2>
-        </div>
-    </div>
+{% block pageheader %}
+    Мои настройки
 {% endblock %}
 
+{% block actions %}
+    <a href="#" onclick="profile_form.submit()" class="btn btn-primary">Сохранить</a>
+{% endblock %}
 {% block content %}
-    {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
-    {{ form_errors(form) }}
 
     <div class="wrapper wrapper-content">
         <div class="row animated fadeInRight">
             <div class="col-md-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-content border-left-right">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'id': 'profile_form'} }) }}
                         <div class="row m-t-sm">
-                            <div class="col-lg-12">
+                            <div class="col-md-12">
+                                {{ form_errors(form) }}
+                            </div>
+                        </div>
+                        <div class="row m-t-sm">
+                            <div class="col-md-12">
                                 <div class="panel blank-panel">
                                     <div class="panel-heading">
                                         <div class="panel-options">
@@ -130,33 +133,283 @@
                                                                 {{ form_errors(form.aboutMe) }}
                                                             </div>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-7 no-padding">
-                                                                <button type="submit" class="pull-right btn btn-w-m btn-primary">Сохранить
-                                                                </button>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="tab-pane" id="tab-2">
-                                                tab-2
+                                                <div class="row m-t-sm">
+                                                    <div class="col-md-6">
+                                                        <h4>Уведомления для перевозчика</h4>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Событие</th>
+                                                                <th>sms</th>
+                                                                <th>email</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Заявка принята</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.smsBidAcceptNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.emailBidAcceptNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Заявка отклонена</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.smsBidRejectNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.emailBidRejectNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Заказ оплачен</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.smsShippingPayNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.emailShippingPayNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>Заказ отменен</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.smsShippingRefuseNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.emailShippingRefuseNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>Восстребована страховка</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.smsShippingDisputeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.emailShippingDisputeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h4>Уведомления для отправителя</h4>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Событие</th>
+                                                                <th>sms</th>
+                                                                <th>email</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+
+                                                                <td>1</td>
+                                                                <td>Заказ принят</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.smsBidAgreeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.emailBidAgreeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Заявка отозвана</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.smsBidRecallNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.emailBidRecallNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Заказ доставлен</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.smsShippingDeliverNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.emailShippingDeliverNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>Заказ успешно завершен</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.smsShippingCompleteNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.emailShippingCompleteNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>Потребована оплата</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.smsShippingDebateNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                                            {{ form_widget(form.emailShippingDebateNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                                                        </div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        Отметьте те уведомления, которые Вы хотите получать по смс и электронной почте, в качестве отправителя и перевозчика.
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {{ form_rest(form) }}{{ form_end(form) }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
 {% endblock %}
 
-{% block page_javascript %}
+{% block stylesheets %}
+    {{  parent() }}
+    <link href="{{ asset('bundles/binidiniweb/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/iCheck/icheck.min.js') }}"></script>
+
+
+    <!-- iCheck -->
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green'
+            });
+
+
+        });
+    </script>
+
+
     <script type="text/javascript">
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -175,5 +428,8 @@
             $('.user-field').toggleClass('hide');
         });
     </script>
+
 {% endblock %}
+
+
 

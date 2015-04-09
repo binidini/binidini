@@ -2,6 +2,7 @@
 
 namespace Binidini\CoreBundle\Entity;
 
+use Binidini\CoreBundle\Exception\AppException;
 use Binidini\CoreBundle\Exception\InsufficientFrozenAmount;
 use Binidini\CoreBundle\Exception\InsufficientUserBalance;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,7 +20,30 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class User extends BaseUser
 {
     const TYPE_INDIVIDUAL = 1;
-    const TYPE_BUSINESS = 2;
+    const TYPE_BUSINESS   = 2;
+
+    const BIT_ACCEPT_BID = 0;
+    const BIT_REJECT_BID = 1;
+    const BIT_CANCEL_BID = 2;
+    const BIT_RECALL_BID = 3;
+    const BIT_AGREE_BID  = 4;
+
+    const BIT_CREATE_SHIPPING   = 10;
+    const BIT_ACCEPT_SHIPPING   = 11;
+    const BIT_DISPATCH_SHIPPING = 12;
+    const BIT_LOAD_SHIPPING     = 13;
+    const BIT_DELIVER_SHIPPING  = 14;
+    const BIT_PAY_SHIPPING      = 15;
+    const BIT_COMPLETE_SHIPPING = 16;
+    const BIT_REJECT_SHIPPING   = 17;
+    const BIT_REFUSE_SHIPPING   = 18;
+    const BIT_CANCEL_SHIPPING   = 19;
+    const BIT_NULLIFY_SHIPPING  = 20;
+    const BIT_ANNUL_SHIPPING    = 21;
+    const BIT_DISPUTE_SHIPPING  = 22;
+    const BIT_DEBATE_SHIPPING   = 23;
+    const BIT_RESOLVE_SHIPPING  = 24;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -115,8 +139,24 @@ class User extends BaseUser
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
+
     private $address;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sms_mask", type="integer", options={"default"=0})
+     */
+
+    private $smsMask;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="email_mask", type="integer", options={"default"=0})
+     */
+
+    private $emailMask;
 
     public function __construct()
     {
@@ -595,5 +635,387 @@ class User extends BaseUser
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * Set smsMask
+     *
+     * @param integer $smsMask
+     * @return User
+     */
+    public function setSmsMask($smsMask)
+    {
+        $this->smsMask = $smsMask;
+
+        return $this;
+    }
+
+    /**
+     * Get smsMask
+     *
+     * @return integer 
+     */
+    public function getSmsMask()
+    {
+        return $this->smsMask;
+    }
+
+    /**
+     * Set emailMask
+     *
+     * @param integer $emailMask
+     * @return User
+     */
+    public function setEmailMask($emailMask)
+    {
+        $this->emailMask = $emailMask;
+
+        return $this;
+    }
+
+    /**
+     * Get emailMask
+     *
+     * @return integer 
+     */
+    public function getEmailMask()
+    {
+        return $this->emailMask;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsBidAcceptNotification()
+    {
+        return $this->getSmsN(self::BIT_ACCEPT_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsBidAcceptNotification($flag)
+    {
+        $this->setSmsN(self::BIT_ACCEPT_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsBidAgreeNotification()
+    {
+        return $this->getSmsN(self::BIT_AGREE_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsBidAgreeNotification($flag)
+    {
+        $this->setSmsN(self::BIT_AGREE_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsBidRejectNotification()
+    {
+        return $this->getSmsN(self::BIT_REJECT_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsBidRejectNotification($flag)
+    {
+        $this->setSmsN(self::BIT_REJECT_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsBidRecallNotification()
+    {
+        return $this->getSmsN(self::BIT_RECALL_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsBidRecallNotification($flag)
+    {
+        $this->setSmsN(self::BIT_RECALL_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsShippingDeliverNotification()
+    {
+        return $this->getSmsN(self::BIT_DELIVER_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsShippingDeliverNotification($flag)
+    {
+        $this->setSmsN(self::BIT_DELIVER_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsShippingPayNotification()
+    {
+        return $this->getSmsN(self::BIT_PAY_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsShippingPayNotification($flag)
+    {
+        $this->setSmsN(self::BIT_PAY_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsShippingCompleteNotification()
+    {
+        return $this->getSmsN(self::BIT_COMPLETE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsShippingCompleteNotification($flag)
+    {
+        $this->setSmsN(self::BIT_COMPLETE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsShippingRefuseNotification()
+    {
+        return $this->getSmsN(self::BIT_REFUSE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsShippingRefuseNotification($flag)
+    {
+        $this->setSmsN(self::BIT_REFUSE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsShippingDisputeNotification()
+    {
+        return $this->getSmsN(self::BIT_DISPUTE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsShippingDisputeNotification($flag)
+    {
+        $this->setSmsN(self::BIT_DISPUTE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSmsShippingDebateNotification()
+    {
+        return $this->getSmsN(self::BIT_DEBATE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsShippingDebateNotification($flag)
+    {
+        $this->setSmsN(self::BIT_DEBATE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailBidAcceptNotification()
+    {
+        return $this->getEmailN(self::BIT_ACCEPT_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailBidAcceptNotification($flag)
+    {
+        $this->setEmailN(self::BIT_ACCEPT_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailBidAgreeNotification()
+    {
+        return $this->getEmailN(self::BIT_AGREE_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailBidAgreeNotification($flag)
+    {
+        $this->setEmailN(self::BIT_AGREE_BID, $flag);
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function getEmailShippingDeliverNotification()
+    {
+        return $this->getEmailN(self::BIT_DELIVER_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailShippingDeliverNotification($flag)
+    {
+        $this->setEmailN(self::BIT_DELIVER_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailShippingPayNotification()
+    {
+        return $this->getEmailN(self::BIT_PAY_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailShippingPayNotification($flag)
+    {
+        $this->setEmailN(self::BIT_PAY_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailShippingCompleteNotification()
+    {
+        return $this->getEmailN(self::BIT_COMPLETE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailShippingCompleteNotification($flag)
+    {
+        $this->setEmailN(self::BIT_COMPLETE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailShippingRefuseNotification()
+    {
+        return $this->getEmailN(self::BIT_REFUSE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailShippingRefuseNotification($flag)
+    {
+        $this->setEmailN(self::BIT_REFUSE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailShippingDisputeNotification()
+    {
+        return $this->getEmailN(self::BIT_DISPUTE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailShippingDisputeNotification($flag)
+    {
+        $this->setEmailN(self::BIT_DISPUTE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailBidRejectNotification()
+    {
+        return $this->getEmailN(self::BIT_REJECT_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailBidRejectNotification($flag)
+    {
+        $this->setEmailN(self::BIT_REJECT_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailBidRecallNotification()
+    {
+        return $this->getEmailN(self::BIT_RECALL_BID);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailShippingDebateNotification()
+    {
+        return $this->getEmailN(self::BIT_DEBATE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailShippingDebateNotification($flag)
+    {
+        $this->setEmailN(self::BIT_DEBATE_SHIPPING, $flag);
+    }
+    /**
+     * @param bool $flag
+     */
+    public function setEmailBidRecallNotification($flag)
+    {
+        $this->setEmailN(self::BIT_RECALL_BID, $flag);
+    }
+
+    public function getSmsN($n) {
+        return ($this->smsMask & (1 << $n)) != 0;
+    }
+
+    private function setSmsN($n, $new) {
+        $this->smsMask = ($this->smsMask & ~(1 << $n)) | ($new << $n);
+    }
+
+    public function getEmailN($n) {
+        return ($this->emailMask & (1 << $n)) != 0;
+    }
+
+    private function setEmailN($n, $new=true) {
+        $this->emailMask = ($this->emailMask & ~(1 << $n)) | ($new << $n);
     }
 }

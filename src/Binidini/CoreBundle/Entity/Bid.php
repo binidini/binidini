@@ -2,9 +2,9 @@
 
 namespace Binidini\CoreBundle\Entity;
 
+use Binidini\CoreBundle\Model\SenderCarrierAwareInterface;
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name = "bid")
  * @ORM\Entity
  */
-class Bid implements UserAwareInterface
+class Bid implements UserAwareInterface, SenderCarrierAwareInterface
 {
     const GRAPH             = 'simple';
 
@@ -158,10 +158,10 @@ class Bid implements UserAwareInterface
     /**
      * Set user
      *
-     * @param \FOS\UserBundle\Model\UserInterface $user
+     * @param User $user
      * @return Bid
      */
-    public function setUser(UserInterface $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
@@ -171,11 +171,32 @@ class Bid implements UserAwareInterface
     /**
      * Get user
      *
-     * @return \FOS\UserBundle\Model\UserInterface
+     * @return User
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set carrier
+     *
+     * @param User $user
+     * @return Bid
+     */
+    public function setCarrier(User $user)
+    {
+        $this->setUser($user);
+    }
+
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getCarrier()
+    {
+        $this->getUser();
     }
 
     /**
@@ -301,10 +322,10 @@ class Bid implements UserAwareInterface
     /**
      * Set sender
      *
-     * @param \FOS\UserBundle\Model\UserInterface $sender
+     * @param User $sender
      * @return Bid
      */
-    public function setSender(UserInterface $sender)
+    public function setSender(User $sender)
     {
         $this->sender = $sender;
 
@@ -314,7 +335,7 @@ class Bid implements UserAwareInterface
     /**
      * Get sender
      *
-     * @return \FOS\UserBundle\Model\UserInterface
+     * @return User
      */
     public function getSender()
     {

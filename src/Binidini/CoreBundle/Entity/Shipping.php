@@ -11,10 +11,10 @@ namespace Binidini\CoreBundle\Entity;
 
 use Binidini\CoreBundle\Exception\InsufficientFrozenAmount;
 use Binidini\CoreBundle\Exception\InsufficientUserBalance;
+use Binidini\CoreBundle\Model\SenderCarrierAwareInterface;
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -26,7 +26,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity
  * @Gedmo\Loggable
  */
-class Shipping implements UserAwareInterface
+class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 {
     const GRAPH             = 'logic';
 
@@ -444,10 +444,10 @@ class Shipping implements UserAwareInterface
     /**
      * Set user
      *
-     * @param \FOS\UserBundle\Model\UserInterface $user
+     * @param User $user
      * @return Shipping
      */
-    public function setUser(UserInterface $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
@@ -457,13 +457,33 @@ class Shipping implements UserAwareInterface
     /**
      * Get user
      *
-     * @return \FOS\UserBundle\Model\UserInterface
+     * @return User
      */
     public function getUser()
     {
         return $this->user;
     }
 
+    /**
+     * Set sender
+     *
+     * @param User $user
+     * @return Shipping
+     */
+    public function setSender(User $user)
+    {
+        $this->setUser($user);
+    }
+
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getSender()
+    {
+        return $this->getUser();
+    }
     /**
      * Set state
      *

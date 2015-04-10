@@ -7,23 +7,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Binidini\CoreBundle\Model;
 
 use Binidini\CoreBundle\Entity\User;
 
-/**
- * User aware interface.
- *
-  */
-interface UserAwareInterface
+interface SenderCarrierAwareInterface
 {
     /**
      * Get user.
      *
      * @return User
      */
-    public function getUser();
+    public function getSender();
 
     /**
      * Set user.
@@ -32,5 +27,21 @@ interface UserAwareInterface
      *
      * @return self
      */
-    public function setUser(User $user);
+    public function setSender(User $user);
+
+    /**
+     * Get user.
+     *
+     * @return User
+     */
+    public function getCarrier();
+
+    /**
+     * Set user.
+     *
+     * @param User $user
+     *
+     * @return self
+     */
+    public function setCarrier(User $user);
 }

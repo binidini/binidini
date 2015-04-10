@@ -12,8 +12,7 @@ namespace Binidini\CoreBundle\Service;
 
 use Binidini\CoreBundle\Entity\Bid;
 use Binidini\CoreBundle\Entity\Shipping;
-use Binidini\CoreBundle\Exception\RecallTimeException;
-use Binidini\SearchBundle\Document\Shipment;
+use Binidini\CoreBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use SM\Factory\Factory as StateMachineFactory;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -79,7 +78,29 @@ class BidLogicService
         }
     }
 
-    protected function getUser()
+    public function notifyUser (Bid $bid, $transition)
+    {
+        $user = $bid->getUser();
+        $this->notify($user, $transition);
+    }
+
+    public function notifySender (Bid $bid, $transition)
+    {
+        $sender = $bid->getSender();
+        $this->notify($sender, $transition);
+    }
+
+    private function notify (User $user, $transition)
+    {
+        if ($user->getSmsN(constant('User::BIT_'.strtoupper($transition).'_BID'))) {
+
+        }
+        if ($user->getEmailN(constant('User::BIT_'.strtoupper($transition).'_BID'))) {
+
+        }
+    }
+
+    private function getUser()
     {
         if ($this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->securityContext->getToken()->getUser();

@@ -217,6 +217,20 @@ class Shipping implements UserAwareInterface
      */
     private $updatedAt;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="has_user_review", type="boolean")
+     */
+    private $hasUserReview;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="has_carrier_review", type="boolean")
+     */
+    private $hasCarrierReview;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -800,5 +814,51 @@ class Shipping implements UserAwareInterface
     public function canHasReview()
     {
         return in_array($this->getState(), [self::STATE_CONFLICT, self::STATE_COMPLETED]);
+    }
+
+    /**
+     * Set hasUserReview
+     *
+     * @param boolean $hasUserReview
+     * @return Shipping
+     */
+    public function setHasUserReview($hasUserReview)
+    {
+        $this->hasUserReview = $hasUserReview;
+
+        return $this;
+    }
+
+    /**
+     * Get hasUserReview
+     *
+     * @return boolean 
+     */
+    public function getHasUserReview()
+    {
+        return $this->hasUserReview;
+    }
+
+    /**
+     * Set hasCarrierReview
+     *
+     * @param boolean $hasCarrierReview
+     * @return Shipping
+     */
+    public function setHasCarrierReview($hasCarrierReview)
+    {
+        $this->hasCarrierReview = $hasCarrierReview;
+
+        return $this;
+    }
+
+    /**
+     * Get hasCarrierReview
+     *
+     * @return boolean 
+     */
+    public function getHasCarrierReview()
+    {
+        return $this->hasCarrierReview;
     }
 }

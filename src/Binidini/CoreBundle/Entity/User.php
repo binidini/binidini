@@ -14,35 +14,39 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity
  * @ORM\Table(name = "user")
  *
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(type="string", name="email_canonical", length=255, unique=false)),
+ * })
+ *
  * @Gedmo\Uploadable(allowOverwrite=true, filenameGenerator="SHA1")
  *
  */
 class User extends BaseUser
 {
     const TYPE_INDIVIDUAL = 1;
-    const TYPE_BUSINESS   = 2;
+    const TYPE_BUSINESS = 2;
 
     const BIT_ACCEPT_BID = 0;
     const BIT_REJECT_BID = 1;
     const BIT_CANCEL_BID = 2;
     const BIT_RECALL_BID = 3;
-    const BIT_AGREE_BID  = 4;
+    const BIT_AGREE_BID = 4;
 
-    const BIT_CREATE_SHIPPING   = 10;
-    const BIT_ACCEPT_SHIPPING   = 11;
+    const BIT_CREATE_SHIPPING = 10;
+    const BIT_ACCEPT_SHIPPING = 11;
     const BIT_DISPATCH_SHIPPING = 12;
-    const BIT_LOAD_SHIPPING     = 13;
-    const BIT_DELIVER_SHIPPING  = 14;
-    const BIT_PAY_SHIPPING      = 15;
+    const BIT_LOAD_SHIPPING = 13;
+    const BIT_DELIVER_SHIPPING = 14;
+    const BIT_PAY_SHIPPING = 15;
     const BIT_COMPLETE_SHIPPING = 16;
-    const BIT_REJECT_SHIPPING   = 17;
-    const BIT_REFUSE_SHIPPING   = 18;
-    const BIT_CANCEL_SHIPPING   = 19;
-    const BIT_NULLIFY_SHIPPING  = 20;
-    const BIT_ANNUL_SHIPPING    = 21;
-    const BIT_DISPUTE_SHIPPING  = 22;
-    const BIT_DEBATE_SHIPPING   = 23;
-    const BIT_RESOLVE_SHIPPING  = 24;
+    const BIT_REJECT_SHIPPING = 17;
+    const BIT_REFUSE_SHIPPING = 18;
+    const BIT_CANCEL_SHIPPING = 19;
+    const BIT_NULLIFY_SHIPPING = 20;
+    const BIT_ANNUL_SHIPPING = 21;
+    const BIT_DISPUTE_SHIPPING = 22;
+    const BIT_DEBATE_SHIPPING = 23;
+    const BIT_RESOLVE_SHIPPING = 24;
 
     /**
      * @ORM\Id
@@ -139,7 +143,6 @@ class User extends BaseUser
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-
     private $address;
 
     /**
@@ -147,7 +150,6 @@ class User extends BaseUser
      *
      * @ORM\Column(name="sms_mask", type="integer", options={"default"=0})
      */
-
     private $smsMask;
 
     /**
@@ -155,8 +157,50 @@ class User extends BaseUser
      *
      * @ORM\Column(name="email_mask", type="integer", options={"default"=0})
      */
-
     private $emailMask;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sender_rating", type="float", scale=2, options={"default"=0})
+     */
+    private $senderRating;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sender_rating_amount", type="integer", options={"default"=0})
+     */
+    private $senderRatingAmount;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sender_rating_count", type="integer", options={"default"=0})
+     */
+    private $senderRatingCount;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="carrier_rating", type="float", scale=2, options={"default"=0})
+     */
+    private $carrierRating;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="carrier_rating_amount", type="integer", options={"default"=0})
+     */
+    private $carrierRatingAmount;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="carrier_rating_count", type="integer", options={"default"=0})
+     */
+    private $carrierRatingCount;
+
 
     public function __construct()
     {
@@ -210,9 +254,9 @@ class User extends BaseUser
         $name = '';
         if ($this->isIndividual()) {
             if (empty($this->patronymic)) {
-                $name = $this->lastName . ' ' . $this->firstName;
+                $name = $this->lastName.' '.$this->firstName;
             } else {
-                $name = $this->firstName . ' ' . $this->patronymic;
+                $name = $this->firstName.' '.$this->patronymic;
             }
         } elseif ($this->isBusiness()) {
             $name .= $this->companyName;
@@ -230,11 +274,12 @@ class User extends BaseUser
 
     public function getFio()
     {
-        $name = $this->lastName . ' ' . $this->firstName;
+        $name = $this->lastName.' '.$this->firstName;
         if ($this->patronymic) {
-            $name .= ' ' . $this->patronymic;
+            $name .= ' '.$this->patronymic;
         }
         $name = trim($name);
+
         return $name;
     }
 
@@ -594,6 +639,7 @@ class User extends BaseUser
         if ($this->imgIsChanged) {
             $this->imgPath = $imgPath;
         }
+
         return $this;
     }
 
@@ -604,7 +650,11 @@ class User extends BaseUser
      */
     public function getImgPath()
     {
-        return $this->imgPath;
+        if ($this->imgPath) {
+            return $this->imgPath;
+        } else {
+            return 'default.png';
+        }
     }
 
     private $imgIsChanged = false;
@@ -612,7 +662,7 @@ class User extends BaseUser
     public function imgIsChanged()
     {
         return $this->imgIsChanged;
-     }
+    }
 
     /**
      * Set address
@@ -630,7 +680,7 @@ class User extends BaseUser
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
@@ -653,7 +703,7 @@ class User extends BaseUser
     /**
      * Get smsMask
      *
-     * @return integer 
+     * @return integer
      */
     public function getSmsMask()
     {
@@ -676,7 +726,7 @@ class User extends BaseUser
     /**
      * Get emailMask
      *
-     * @return integer 
+     * @return integer
      */
     public function getEmailMask()
     {
@@ -995,6 +1045,7 @@ class User extends BaseUser
     {
         $this->setEmailN(self::BIT_DEBATE_SHIPPING, $flag);
     }
+
     /**
      * @param bool $flag
      */
@@ -1003,19 +1054,160 @@ class User extends BaseUser
         $this->setEmailN(self::BIT_RECALL_BID, $flag);
     }
 
-    public function getSmsN($n) {
+    public function getSmsN($n)
+    {
         return ($this->smsMask & (1 << $n)) != 0;
     }
 
-    private function setSmsN($n, $new) {
+    private function setSmsN($n, $new)
+    {
         $this->smsMask = ($this->smsMask & ~(1 << $n)) | ($new << $n);
     }
 
-    public function getEmailN($n) {
+    public function getEmailN($n)
+    {
         return ($this->emailMask & (1 << $n)) != 0;
     }
 
-    private function setEmailN($n, $new=true) {
+    private function setEmailN($n, $new=true)
+    {
         $this->emailMask = ($this->emailMask & ~(1 << $n)) | ($new << $n);
+    }
+
+    /**
+     * Set senderRating
+     *
+     * @param float $senderRating
+     * @return User
+     */
+    public function setSenderRating($senderRating)
+    {
+        $this->senderRating = $senderRating;
+
+        return $this;
+    }
+
+    /**
+     * Get senderRating
+     *
+     * @return float
+     */
+    public function getSenderRating()
+    {
+        return $this->senderRating;
+    }
+
+    /**
+     * Set senderRatingCount
+     *
+     * @param integer $senderRatingCount
+     * @return User
+     */
+    public function setSenderRatingCount($senderRatingCount)
+    {
+        $this->senderRatingCount = $senderRatingCount;
+
+        return $this;
+    }
+
+    /**
+     * Get senderRatingCount
+     *
+     * @return integer 
+     */
+    public function getSenderRatingCount()
+    {
+        return $this->senderRatingCount;
+    }
+
+    /**
+     * Set carrierRating
+     *
+     * @param float $carrierRating
+     * @return User
+     */
+    public function setCarrierRating($carrierRating)
+    {
+        $this->carrierRating = $carrierRating;
+
+        return $this;
+    }
+
+    /**
+     * Get carrierRating
+     *
+     * @return float
+     */
+    public function getCarrierRating()
+    {
+        return $this->carrierRating;
+    }
+
+    /**
+     * Set carrierRatingCount
+     *
+     * @param integer $carrierRatingCount
+     * @return User
+     */
+    public function setCarrierRatingCount($carrierRatingCount)
+    {
+        $this->carrierRatingCount = $carrierRatingCount;
+        return $this;
+    }
+
+    /**
+     * Get carrierRatingCount
+     *
+     * @return integer 
+     */
+    public function getCarrierRatingCount()
+    {
+        return $this->carrierRatingCount;
+    }
+
+    /**
+     * Set senderRatingAmount
+     *
+     * @param integer $senderRatingAmount
+     * @return User
+     */
+    public function setSenderRatingAmount($senderRatingAmount)
+    {
+        $this->senderRatingAmount = $senderRatingAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get senderRatingAmount
+     *
+     * @return integer 
+     */
+    public function getSenderRatingAmount()
+    {
+        return $this->senderRatingAmount;
+    }
+
+    /**
+     * Set carrierRatingAmount
+     *
+     * @param integer $carrierRatingAmount
+     * @return User
+     */
+    public function setCarrierRatingAmount($carrierRatingAmount)
+    {
+        $this->carrierRatingAmount = $carrierRatingAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get carrierRatingAmount
+     *
+     * @return integer 
+     */
+    public function getCarrierRatingAmount()
+    {
+        return $this->carrierRatingAmount;
     }
 }

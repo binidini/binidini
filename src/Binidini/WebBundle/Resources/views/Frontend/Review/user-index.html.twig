@@ -2,9 +2,8 @@
     {% for review in reviews %}
         {% set profile = path('binidini_core_profile_show', {id: review.user.id}) %}
         <div class="feed-element">
-            <a href="#" class="pull-left">
-                <img alt="image" class="img-circle"
-                     src="{{ asset('bundles/binidiniweb/img/logo202x202.png') }}">
+            <a href="{{ profile }}" class="pull-left">
+                <img alt="image" class="img-circle" src="{{ review.user.imgPath|imagine_filter('photo38x38') }}">
             </a>
 
             <div class="media-body ">
@@ -12,17 +11,16 @@
                 <a href="{{ profile }}"><strong>{{ review.user.name }}</strong></a> оставил отзыв. <br>
                 <small class="text-muted">{{ review.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
                 <span id="raty-{{ review.id }}"></span>
+
                 <div class="well">
                     {{ review.text | nl2br }}
                 </div>
             </div>
         </div>
     {% else %}
-        <div class="col-sm-12">
-            <h3 class="text-center">
-                По заказу сообщений ннннет
-            </h3>
-        </div>
+        <h3 class="text-center">
+            О пользователе нет отзывов
+        </h3>
     {% endfor %}
 </div>
 

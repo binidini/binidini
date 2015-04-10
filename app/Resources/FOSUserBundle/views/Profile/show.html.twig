@@ -30,58 +30,52 @@
                         </div>
                         <div class="ibox-content profile-content">
                             <h4><strong>{{ isItCompany? user.name: user.Fio }}</strong></h4>
-
+                            {% if user.address %}
                             <p><i class="fa fa-map-marker"></i> {{ user.address }}</p>
+                            {% endif %}
                             {% if isItCompany %}
                                 <h5>Контактное лицо</h5>
                                 <h5><strong>{{ user.Fio }}</strong></h5>
                             {% endif %}
                             {% if user.email %}
-                                <p><i class="fa fa-mail-reply"></i> <a
-                                            href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+                                <p>
+                                    <i class="fa fa-mail-reply"></i>&nbsp<a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
                             {% endif %}
-                            <p><i class="fa fa-phone"></i><a href="tel:+7{{ user.username }} ">+7{{ user.username }}</a>
+                            <p><i class="fa fa-phone"></i>&nbsp<a href="tel:+7{{ user.username }} ">+7{{ user.username }}</a>
                             </p>
                             {% if user.aboutMe %}
                                 <h5>О {{ isItCompany? 'компании': 'себе' }}</h5>
                                 <p>{{ user.aboutMe | nl2br }}</p>
                             {% endif %}
-                            {% if not isItCompany %}
-                                <div class="row m-t-lg">
-                                    <div class="col-md-12">
-                                        <div class="widget style1 lazur-bg">
-                                            <div class="row vertical-align">
-                                                <div class="col-xs-3 text-left">
-                                                    <h2>Рейтинг:</h2>
-                                                </div>
-                                                <div class="col-xs-9 text-right">
-                                                    <h2 class="font-bold">7.7/10</h2>
-                                                </div>
+                            {% if user.carrierRating or user.senderRating %}
+                            <div class="row m-t-lg">
+                                <div class="col-md-12">
+                                    {% if user.senderRating %}
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row vertical-align">
+                                            <div class="col-xs-3 text-left">
+                                                <h4>Рейтинг заказчика:</h4>
                                             </div>
-                                        </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="widget style1 navy-bg">
-                                            <div class="row vertical-align">
-                                                <div class="col-xs-9 text-left">
-                                                    <h2>Перевозки:</h2>
-                                                </div>
-                                                <div class="col-xs-3 text-right">
-                                                    <h2 class="font-bold">55</h2>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="widget style1 navy-bg">
-                                            <div class="row vertical-align">
-                                                <div class="col-xs-9 text-left">
-                                                    <h2>Отправки:</h2>
-                                                </div>
-                                                <div class="col-xs-3 text-right">
-                                                    <h2 class="font-bold">4</h2>
-                                                </div>
+                                            <div class="col-xs-9 text-right">
+                                                <h2 class="font-bold">{{ user.senderRating}}</h2>
                                             </div>
                                         </div>
                                     </div>
+                                    {% endif %}
+                                    {% if user.carrierRating %}
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row vertical-align">
+                                            <div class="col-xs-3 text-left">
+                                                <h4>Курьерский рейтинг:</h4>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <h2 class="font-bold">{{ user.carrierRating}}</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
                                 </div>
+                            </div>
                             {% endif %}
                         </div>
                     </div>
@@ -94,7 +88,7 @@
                     </div>
                     <div class="ibox-content">
                         <div>
-                            {% render path('binidini_core_user_review_index', {'user_id':user.id}) %}
+                            {% render path('binidini_core_user_to_review_index', {'user_id': user.id}) %}
                         </div>
                     </div>
                 </div>

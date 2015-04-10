@@ -48,7 +48,7 @@ class Review implements UserAwareInterface
     /**
      * @var integer
      *
-     * @ORM\Column(name="rating", type="integer", nullable=false)
+     * @ORM\Column(name="rating", type="integer", nullable=false, options={"default" = 0})
      */
     private $rating;
 

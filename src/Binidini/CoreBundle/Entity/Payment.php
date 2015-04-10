@@ -168,10 +168,10 @@ class Payment
     /**
      * Set user
      *
-     * @param \Binidini\CoreBundle\Entity\User $user
+     * @param User $user
      * @return Payment
      */
-    public function setUser(\Binidini\CoreBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -181,7 +181,7 @@ class Payment
     /**
      * Get user
      *
-     * @return \Binidini\CoreBundle\Entity\User 
+     * @return User
      */
     public function getUser()
     {

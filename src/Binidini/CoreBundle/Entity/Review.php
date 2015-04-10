@@ -48,7 +48,7 @@ class Review implements UserAwareInterface
     /**
      * @var integer
      *
-     * @ORM\Column(name="rating", type="integer", nullable=false)
+     * @ORM\Column(name="rating", type="integer", nullable=false, options={"default" = 0})
      */
     private $rating;
 
@@ -131,10 +131,10 @@ class Review implements UserAwareInterface
     /**
      * Set user
      *
-     * @param \FOS\UserBundle\Model\UserInterface $user
+     * @param User $user
      * @return Shipping
      */
-    public function setUser(UserInterface $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
@@ -144,7 +144,7 @@ class Review implements UserAwareInterface
     /**
      * Get user
      *
-     * @return \FOS\UserBundle\Model\UserInterface
+     * @return User
      */
     public function getUser()
     {

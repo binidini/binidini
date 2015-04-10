@@ -4,7 +4,6 @@ namespace Binidini\CoreBundle\Entity;
 
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\UserInterface;
 
 /**
  * @ORM\Entity
@@ -116,10 +115,10 @@ class Message implements UserAwareInterface
     /**
      * Set user
      *
-     * @param \FOS\UserBundle\Model\UserInterface $user
+     * @param User $user
      * @return Shipping
      */
-    public function setUser(UserInterface $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
@@ -129,7 +128,7 @@ class Message implements UserAwareInterface
     /**
      * Get user
      *
-     * @return \FOS\UserBundle\Model\UserInterface
+     * @return User
      */
     public function getUser()
     {

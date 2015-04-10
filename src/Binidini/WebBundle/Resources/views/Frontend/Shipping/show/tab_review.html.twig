@@ -1,26 +1,28 @@
-{{ form_start(review_form, {'action': path('binidini_core_review_new', {'shipping_id': shipping.id}), 'attr': {'class': 'form-horizontal'} }) }}
-{{ form_errors(review_form) }}
-<div class="form-group">
-    <div class="col-sm-12">
-        {{ form_widget(review_form.rating, {'id': 'input-rating'}) }}
-        {{ form_widget(review_form.text, {'attr': {'class': 'form-control', 'placeholder': 'Написать отзыв'}}) }}
-        {{ form_widget(review_form.shipping, {'attr': {'value': shipping.id}}) }}
-        {{ form_widget(review_form.userTo, {'attr': {'value': shipping.user.id == app.user.id?shipping.carrier.id:shipping.user.id}}) }}
-        <br/>
-        Поставить оценку: <span id="raty"></span>
+{% if ((not shipping.hasUserReview) and app.user.id == shipping.user.id) or ((not shipping.hasCarrierReview) and app.user.id == shipping.carrier.id) %}
+    {{ form_start(review_form, {'action': path('binidini_core_review_new', {'shipping_id': shipping.id}), 'attr': {'class': 'form-horizontal'} }) }}
+    {{ form_errors(review_form) }}
+    <div class="form-group">
+        <div class="col-sm-12">
+            {{ form_widget(review_form.rating, {'id': 'input-rating', 'attr': {'value':0}}) }}
+            {{ form_widget(review_form.text, {'attr': {'class': 'form-control', 'placeholder': 'Написать отзыв'}}) }}
+            {{ form_widget(review_form.shipping, {'attr': {'value': shipping.id}}) }}
+            {{ form_widget(review_form.userTo, {'attr': {'value': shipping.user.id == app.user.id ? shipping.carrier.id: shipping.user.id}}) }}
+            <br/>
+            Поставить оценку: <span id="raty"></span>
+        </div>
     </div>
-</div>
-<div class="form-group">
-    <div class="col-sm-3">
-        <button class="btn btn-primary" type="submit">
-            Отправить
-        </button>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <button class="btn btn-primary" type="submit">
+                Отправить
+            </button>
+        </div>
+        <div class="col-sm-9">
+            {{ form_errors(review_form.text) }}
+        </div>
     </div>
-    <div class="col-sm-9">
-        {{ form_errors(review_form.text) }}
-    </div>
-</div>
-{{ form_rest(review_form) }}
-{{ form_end(review_form) }}
-<div class="hr-line-dashed"></div>
+    {{ form_rest(review_form) }}
+    {{ form_end(review_form) }}
+    <div class="hr-line-dashed"></div>
+{% endif %}
 {% render path('binidini_core_shipping_review_index', {'shipping_id':shipping.id}) %}

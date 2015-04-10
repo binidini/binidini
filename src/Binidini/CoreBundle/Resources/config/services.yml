@@ -98,3 +98,9 @@ services:
         arguments: [@stof_doctrine_extensions.uploadable.manager, @doctrine.orm.entity_manager]
         tags:
             - { name: kernel.event_listener, event: fos_user.profile.edit.completed }
+
+    binidini.listener.shipping:
+        class: Binidini\CoreBundle\EventListener\ReviewListener
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: kernel.event_listener, event: binidini_core.review.post_create, method: onReviewPostCreate }

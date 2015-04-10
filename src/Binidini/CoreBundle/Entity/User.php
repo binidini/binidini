@@ -67,17 +67,17 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="img_path", type="string", length=255, nullable=true)
-     * @Gedmo\UploadableFileName
-     */
-    private $imgPath;
-
-    /**
-     * @var string
      *
      * @ORM\Column(name="patronymic", type="string", length=128, nullable=true)
      */
     private $patronymic;
+
+    /**
+     * @var string
+     * @ORM\Column(name="img_path", type="string", length=255, nullable=true)
+     * @Gedmo\UploadableFileName
+     */
+    private $imgPath;
 
     /**
      * @ORM\OneToMany(targetEntity="Shipping", mappedBy="user")
@@ -139,7 +139,6 @@ class User extends BaseUser
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-
     private $address;
 
     /**
@@ -147,7 +146,6 @@ class User extends BaseUser
      *
      * @ORM\Column(name="sms_mask", type="integer", options={"default"=0})
      */
-
     private $smsMask;
 
     /**
@@ -155,8 +153,14 @@ class User extends BaseUser
      *
      * @ORM\Column(name="email_mask", type="integer", options={"default"=0})
      */
-
     private $emailMask;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="email_verified", type="boolean", options={"default"=false})
+     */
+    private $emailVerified;
 
     public function __construct()
     {
@@ -171,6 +175,9 @@ class User extends BaseUser
         $this->holdAmount = 0;
 
         $this->type = User::TYPE_INDIVIDUAL;
+
+        $this->smsMask = 0b1111111111111111111111111;
+        $this->emailMask = 0b1111111111111111111111111;
     }
 
     public function hold($amount)
@@ -1017,5 +1024,28 @@ class User extends BaseUser
 
     private function setEmailN($n, $new=true) {
         $this->emailMask = ($this->emailMask & ~(1 << $n)) | ($new << $n);
+    }
+
+    /**
+     * Set emailVerified
+     *
+     * @param boolean $emailVerified
+     * @return User
+     */
+    public function setEmailVerified($emailVerified)
+    {
+        $this->emailVerified = $emailVerified;
+
+        return $this;
+    }
+
+    /**
+     * Get emailVerified
+     *
+     * @return boolean 
+     */
+    public function getEmailVerified()
+    {
+        return $this->emailVerified;
     }
 }

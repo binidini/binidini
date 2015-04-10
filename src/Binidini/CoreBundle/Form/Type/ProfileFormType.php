@@ -23,8 +23,8 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('type', 'choice',
                 [
                     'choices' => [
-                        User::TYPE_INDIVIDUAL => 'Курьер',
-                        User::TYPE_BUSINESS => 'Компания',
+                        User::TYPE_INDIVIDUAL => 'Персональный',
+                        User::TYPE_BUSINESS => 'Юридическое лицо',
                     ],
                     'multiple' => false,
                     'expanded' => true,

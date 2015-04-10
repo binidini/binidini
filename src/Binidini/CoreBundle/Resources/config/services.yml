@@ -73,6 +73,11 @@ services:
             tags:
                 - { name: form.type, alias: binidini_core_review}
 
+    binidini.security.service:
+        class: Binidini\CoreBundle\Service\SecurityService
+        arguments:
+            - @security.context
+
     binidini.shipping.logic.service:
         class: Binidini\CoreBundle\Service\ShippingLogicService
         arguments:

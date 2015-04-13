@@ -1,5 +1,19 @@
-binidini_core_user_to_review_index:
+binidini_core_user_from_review_index:
     path: /user/{user_id}/reviews/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.review:indexAction
+        _sylius:
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                user: $user_id
+            template: BinidiniWebBundle:Frontend/Review:user-index.html.twig
+
+binidini_core_user_to_review_index:
+    path: /user/{user_id}/reviews/to/
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.review:indexAction

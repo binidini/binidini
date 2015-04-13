@@ -86,10 +86,36 @@
                     <div class="ibox-title">
                         <h5>Отзывы</h5>
                     </div>
-                    <div class="ibox-content">
-                        <div>
-                            {% render path('binidini_core_user_to_review_index', {'user_id': user.id}) %}
+                    <div class="ibox-content no-padding no-top-border">
+                        <div class="row m-t-sm no-padding no-margins">
+                            <div class="col-lg-12 no-padding">
+                                <div class="panel blank-panel no-padding">
+                                    <div class="panel-heading no-padding">
+                                        <div class="panel-options">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active">
+                                                    <a href="#tab-1" data-toggle="tab">О пользователе</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#tab-2" data-toggle="tab">От пользователя</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-1">
+                                                {% render path('binidini_core_user_to_review_index', {'user_id': user.id}) %}
+                                            </div>
+                                            <div class="tab-pane" id="tab-2">
+                                                {% render path('binidini_core_user_from_review_index', {'user_id': user.id}) %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -102,7 +128,15 @@
     <script src="{{ asset('bundles/binidiniweb/js/plugins/raty/jquery.raty.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            ratyInitialize();
+            $('.rating').each(function (e, obj) {
+                $(obj).raty({
+                    readOnly: true,
+                    starType: 'img',
+                    starOn: '{{ asset('bundles/binidiniweb/img/raty/star-on.png') }}',
+                    starOff: '{{ asset('bundles/binidiniweb/img/raty/star-off.png') }}',
+                    score: $(obj).attr('data-rating-score')
+                });
+            });
         });
     </script>
 {% endblock %}

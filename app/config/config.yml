@@ -67,6 +67,9 @@ doctrine:
                         alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
                         is_bundle: false
 
+parameters:
+    stof_doctrine_extensions.event_listener.logger.class: Binidini\CoreBundle\EventListener\LoggerListener
+
 stof_doctrine_extensions:
     uploadable:
         default_file_path:       %kernel.root_dir%/../web/media/pic

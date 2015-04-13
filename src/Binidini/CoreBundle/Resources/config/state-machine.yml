@@ -112,8 +112,10 @@ winzou_state_machine:
                 to: agreed
         callbacks:
             before:
-                accept: { on: 'accept', do: [@binidini.security.service, 'checkSender'],     args: ['object'] }
+                before_accept: { on: 'accept', do: [@binidini.security.service, 'checkSender'],     args: ['object'] }
                 reject: { on: 'reject', do: [@binidini.security.service, 'checkSender'],     args: ['object'] }
                 cancel: { on: 'cancel', do: [@binidini.security.service, 'checkCarrier'],    args: ['object'] }
                 recall: { on: 'recall', do: [@binidini.security.service, 'checkCarrier'],    args: ['object'] }
                 agree:  { on: 'agree',  do: [@binidini.bid.logic.service, 'agreeTransition'], args: ['object'] }
+            after:
+                after_accept: { on: 'accept', do: [@binidini.notification.service, 'notifyCarrier'], args: ['object', '"accept_bid"']}

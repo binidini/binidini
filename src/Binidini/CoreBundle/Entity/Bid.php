@@ -186,7 +186,9 @@ class Bid implements UserAwareInterface, SenderCarrierAwareInterface
      */
     public function setCarrier(User $user)
     {
-        $this->setUser($user);
+        $this->user = $user;
+
+        return $this;
     }
 
     /**
@@ -196,7 +198,7 @@ class Bid implements UserAwareInterface, SenderCarrierAwareInterface
      */
     public function getCarrier()
     {
-        $this->getUser();
+        return $this->user;
     }
 
     /**

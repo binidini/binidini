@@ -61,7 +61,7 @@ class RegistrationListener implements EventSubscriberInterface
     public function onRegistrationCompleted(FilterUserResponseEvent $event)
     {
         $user = $event->getUser();
-        $msg = array('mobile' => $user->getUsernameCanonical(), 'password' => $this->pwd);
+        $msg = array('mobile' => $user->getUsername(), 'password' => $this->pwd);
         $this->rabbitMqProducer->publish(serialize($msg));
 
     }

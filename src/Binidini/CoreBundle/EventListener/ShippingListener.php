@@ -13,6 +13,7 @@ use Binidini\SearchBundle\Document\Shipment;
 use Binidini\SearchBundle\Document\ShipmentItem;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Sylius\Component\Resource\Event\ResourceEvent;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 
 /**
@@ -54,7 +55,6 @@ class ShippingListener
             ->setX($shipping->getX())
             ->setY($shipping->getY())
             ->setZ($shipping->getZ());
-
 
         $this->dm->persist($shipment);
         $this->dm->flush();

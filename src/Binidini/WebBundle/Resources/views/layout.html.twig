@@ -81,9 +81,6 @@
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Моя страница</span></a>
-                </li>
                 <li {{ croute.is_current_route('binidini_core_carrier_index') }}>
                     <a href="{{ path('binidini_core_carrier_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-truck"></i> <span class="nav-label">Мои перевозки</span></a>
                 </li>

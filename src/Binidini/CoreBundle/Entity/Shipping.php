@@ -238,6 +238,9 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+
+        $this->hasCarrierReview = false;
+        $this->hasUserReview = false;
     }
 
     public function hold()
@@ -486,7 +489,9 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      */
     public function setSender(User $user)
     {
-        $this->setUser($user);
+        $this->user = $user;
+
+        return $this;
     }
 
     /**
@@ -496,7 +501,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      */
     public function getSender()
     {
-        return $this->getUser();
+        return $this->user;
     }
     /**
      * Set state

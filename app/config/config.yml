@@ -87,11 +87,16 @@ doctrine_mongodb:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    port:      %mailer_port%
+    username:  %mailer_user%
+    encryption: %mailer_encryption%
+    auth_mode:  %mailer_auth_mode%
+    password:  %mailer_password%
+    spool:
+        type: file
+        path: "%kernel.root_dir%/../spool"
 
 services:
     twig.extension.intl:
@@ -158,11 +163,27 @@ old_sound_rabbit_mq:
             lazy:     true
     producers:
         binidini_registration:
-            connection:       default
+            connection: default
             exchange_options: {name: 'binidini-registration', type: direct}
+        binidini_sms_notification:
+            connection: default
+            exchange_options: {name: 'binidini-sms-notification', type: direct}
+        binidini_email_notification:
+             connection: default
+             exchange_options: {name: 'binidini-email-notification', type: direct}
     consumers:
         binidini_registration:
             connection:       default
             exchange_options: {name: 'binidini-registration', type: direct}
             queue_options:    {name: 'binidini-registration'}
             callback:         binidini.registration_sms_service
+        binidini_sms_notification:
+            connection:       default
+            exchange_options: {name: 'binidini-sms-notification', type: direct}
+            queue_options:    {name: 'binidini-sms-notification'}
+            callback:         binidini.notification_sms_service
+        binidini_email_notification:
+            connection:       default
+            exchange_options: {name: 'binidini-email-notification', type: direct}
+            queue_options:    {name: 'binidini-email-notification'}
+            callback:         binidini.notification_email_service

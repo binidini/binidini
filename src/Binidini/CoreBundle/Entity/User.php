@@ -225,6 +225,15 @@ class User extends BaseUser
         $this->holdAmount = 0;
 
         $this->type = User::TYPE_INDIVIDUAL;
+        $this->emailVerified = false;
+
+        $this->senderRating = 0;
+        $this->senderRatingAmount = 0;
+        $this->senderRatingCount = 0;
+
+        $this->carrierRating = 0;
+        $this->carrierRatingAmount = 0;
+        $this->carrierRatingCount = 0;
 
         $this->smsMask = 0b1111111111111111111111111;
         $this->emailMask = 0b1111111111111111111111111;

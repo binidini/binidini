@@ -10,8 +10,7 @@
                 <small class="pull-right">{{ review.createdAt | timeago }}</small>
                 <a href="{{ profile }}"><strong>{{ review.user.name }}</strong></a> оставил отзыв. <br>
                 <small class="text-muted">{{ review.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
-                <span id="raty-{{ review.id }}"></span>
-
+                <span class="rating" data-rating-score="{{ review.rating }}"></span>
                 <div class="well">
                     {{ review.text | nl2br }}
                 </div>
@@ -23,17 +22,3 @@
         </h3>
     {% endfor %}
 </div>
-
-<script type="text/javascript">
-    function ratyInitialize() {
-        {% for review in reviews %}
-        $('#raty-{{ review.id }}').raty({
-            readOnly: true,
-            starType: 'img',
-            starOn: '{{ asset('bundles/binidiniweb/img/raty/star-on.png') }}',
-            starOff: '{{ asset('bundles/binidiniweb/img/raty/star-off.png') }}',
-            score:{{ review.rating }}
-        });
-        {% endfor %}
-    }
-</script>

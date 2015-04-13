@@ -221,6 +221,13 @@ class User extends BaseUser
         $this->bids = new ArrayCollection();
         $this->payments = new ArrayCollection();
 
+        $this->senderRating = 0;
+        $this->senderRatingAmount= 0;
+        $this->senderRatingCount = 0;
+        $this->carrierRating = 0;
+        $this->carrierRatingAmount = 0;
+        $this->carrierRatingCount = 0;
+
         $this->balance = 0;
         $this->holdAmount = 0;
 

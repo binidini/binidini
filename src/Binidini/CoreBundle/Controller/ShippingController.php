@@ -6,6 +6,7 @@ use Binidini\CoreBundle\Entity\Shipping;
 use Binidini\CoreBundle\Form\Type\BidType;
 use Binidini\CoreBundle\Form\Type\MessageType;
 use Binidini\CoreBundle\Form\Type\ReviewType;
+use FOS\UserBundle\Doctrine\UserManager;
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,22 @@ class ShippingController extends ResourceController
         /** @var $repository LogEntryRepository */
         $repository = $this->getDoctrine()->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
         $entries = $repository->getLogEntries($shipping);
+
+        $usersInHistory = [];
+        /** @var $userManager UserManager */
+        $userManager = $this->get('fos_user.user_manager');
+        $currentUser = $user = $this->getUser();
+        foreach ($entries as $key => $entry) {
+            if (!isset($usersInHistory[$entry->getUsername()])) {
+                if ($entry->getUsername() == $currentUser->getId()) {
+                    $user = $currentUser;
+                } else {
+                    $user = $userManager->findUserBy(['id' => $currentUser->getId()]);
+                }
+                $usersInHistory[$entry->getUsername()] = $user;
+            }
+        }
+
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('show.html'))
@@ -32,6 +49,7 @@ class ShippingController extends ResourceController
                     'bid_form' => $this->createForm(new BidType())->createView(),
                     'message_form' => $this->createForm(new MessageType())->createView(),
                     'review_form' => $this->createForm(new ReviewType())->createView(),
+                    'history_users' => $usersInHistory,
                 ]
             );
         return $this->handleView($view);

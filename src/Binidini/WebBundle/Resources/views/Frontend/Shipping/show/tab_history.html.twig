@@ -1,20 +1,51 @@
+{% if entries %}
 <table class="table table-striped">
     <thead>
     <tr>
         <th class="col-md-3">Время</th>
-        <th>Статус</th>
+        <th>Пользователь</th>
+        <th>Описание</th>
     </tr>
     </thead>
     <tbody>
     {% for entry in entries %}
+        {% set historyUser = history_users[entry.getUsername()] %}
+        {% if entry.data.deliveryPrice is defined %}
+            <tr>
+                <td>
+                    {{ entry.loggedAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}
+                </td>
+                <td>
+                    <a href="{{ path('binidini_core_profile_show', {id: historyUser.id}) }}">
+                        {{ historyUser.name }}
+                    </a>
+                </td>
+                <td>
+                    Новая цена: <strong>{{ entry.data.deliveryPrice | price }}</strong>
+                </td>
+            </tr>
+        {% endif %}
         <tr>
             <td>
                 {{ entry.loggedAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}
             </td>
             <td>
-                <span class="badge badge-{{ entry.data.state }}">{{ ('binidini.shipping.state.'~entry.data.state)|trans }}</span>
+                <a href="{{ path('binidini_core_profile_show', {id: historyUser.id}) }}">
+                    {{ historyUser.name }}
+                </a>
+
+            </td>
+            <td>
+                Новый статус: <span class="badge badge-{{ entry.data.state }}">{{ ('binidini.shipping.state.'~entry.data.state)|trans }}</span>
             </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
+{% else %}
+<div class="col-sm-12">
+    <h3 class="text-center">
+        По заказу истории изменения нет
+    </h3>
+</div>
+{% endif %}

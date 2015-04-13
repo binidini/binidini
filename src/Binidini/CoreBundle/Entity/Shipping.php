@@ -220,14 +220,14 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * @var bool
      *
-     * @ORM\Column(name="has_user_review", type="boolean")
+     * @ORM\Column(name="has_user_review", type="boolean", options={"default" = false})
      */
     private $hasUserReview;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="has_carrier_review", type="boolean")
+     * @ORM\Column(name="has_carrier_review", type="boolean", options={"default" = false})
      */
     private $hasCarrierReview;
 
@@ -235,7 +235,8 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     {
         $this->items = new ArrayCollection();
         $this->state = Shipping::STATE_NEW;
-
+        $this->hasCarrierReview = false;
+        $this->hasUserReview = false;
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
     }

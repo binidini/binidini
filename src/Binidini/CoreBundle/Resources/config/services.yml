@@ -104,7 +104,7 @@ services:
         tags:
             - { name: kernel.event_listener, event: fos_user.profile.edit.completed }
 
-    binidini.listener.shipping:
+    binidini.listener.review:
         class: Binidini\CoreBundle\EventListener\ReviewListener
         arguments: [@doctrine.orm.entity_manager]
         tags:

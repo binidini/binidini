@@ -174,9 +174,9 @@ old_sound_rabbit_mq:
             connection:       default
             exchange_options: {name: 'binidini-sms', type: direct}
             queue_options:    {name: 'binidini-sms'}
-            callback:         binidini.sms_service
+            callback:         binidini.sms_worker
         binidini_email:
             connection:       default
             exchange_options: {name: 'binidini-email', type: direct}
             queue_options:    {name: 'binidini-email'}
-            callback:         binidini.email_service
+            callback:         binidini.email_worker

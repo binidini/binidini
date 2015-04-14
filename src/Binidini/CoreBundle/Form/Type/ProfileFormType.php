@@ -34,6 +34,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('aboutMe', 'textarea', ['required' => false])
             ->add('imgPath', 'file', ['required' => false, 'data_class' => null, 'mapped' => true])
             // Блок настроек оповещения
+            ->add('smsBidCreateNotification', 'checkbox', ['required' => false])
             ->add('smsBidAcceptNotification', 'checkbox', ['required' => false])
             ->add('smsBidAgreeNotification', 'checkbox', ['required' => false])
             ->add('smsBidRejectNotification', 'checkbox', ['required' => false])
@@ -45,6 +46,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('smsShippingDisputeNotification', 'checkbox', ['required' => false])
             ->add('smsShippingDebateNotification', 'checkbox', ['required' => false])
 
+            ->add('emailBidCreateNotification', 'checkbox', ['required' => false])
             ->add('emailBidAcceptNotification', 'checkbox', ['required' => false])
             ->add('emailBidAgreeNotification', 'checkbox', ['required' => false])
             ->add('emailBidRejectNotification', 'checkbox', ['required' => false])

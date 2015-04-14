@@ -31,7 +31,7 @@
                         <div class="ibox-content profile-content">
                             <h4><strong>{{ isItCompany? user.name: user.Fio }}</strong></h4>
                             {% if user.address %}
-                            <p><i class="fa fa-map-marker"></i> {{ user.address }}</p>
+                                <p><i class="fa fa-map-marker"></i> {{ user.address }}</p>
                             {% endif %}
                             {% if isItCompany %}
                                 <h5>Контактное лицо</h5>
@@ -41,41 +41,42 @@
                                 <p><i class="fa fa-envelope"></i> <a
                                             href="mailto:{{ user.email }}"> {{ user.email }}</a></p>
                             {% endif %}
-                            <p><i class="fa fa-phone-square"></i><a href="tel:+7{{ user.username }} "> +7 {{ user.username }}</a>
+                            <p><i class="fa fa-phone-square"></i><a href="tel:+7{{ user.username }} ">
+                                    +7 {{ user.username }}</a>
                             </p>
                             {% if user.aboutMe %}
                                 <h5>О {{ isItCompany? 'компании': 'себе' }}</h5>
                                 <p>{{ user.aboutMe | nl2br }}</p>
                             {% endif %}
                             {% if user.carrierRating or user.senderRating %}
-                            <div class="row m-t-lg">
-                                <div class="col-md-12">
-                                    {% if user.senderRating %}
-                                    <div class="widget style1 navy-bg">
-                                        <div class="row vertical-align">
-                                            <div class="col-xs-3 text-left">
-                                                <h4>Рейтинг заказчика:</h4>
+                                <div class="row m-t-lg">
+                                    <div class="col-md-12">
+                                        {% if user.senderRating %}
+                                            <div class="widget style1 navy-bg">
+                                                <div class="row vertical-align">
+                                                    <div class="col-xs-3 text-left">
+                                                        <h4>Рейтинг заказчика:</h4>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        <h2 class="font-bold">{{ user.senderRating }}</h2>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-xs-9 text-right">
-                                                <h2 class="font-bold">{{ user.senderRating}}</h2>
+                                        {% endif %}
+                                        {% if user.carrierRating %}
+                                            <div class="widget style1 navy-bg">
+                                                <div class="row vertical-align">
+                                                    <div class="col-xs-3 text-left">
+                                                        <h4>Курьерский рейтинг:</h4>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        <h2 class="font-bold">{{ user.carrierRating }}</h2>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        {% endif %}
                                     </div>
-                                    {% endif %}
-                                    {% if user.carrierRating %}
-                                    <div class="widget style1 navy-bg">
-                                        <div class="row vertical-align">
-                                            <div class="col-xs-3 text-left">
-                                                <h4>Курьерский рейтинг:</h4>
-                                            </div>
-                                            <div class="col-xs-9 text-right">
-                                                <h2 class="font-bold">{{ user.carrierRating}}</h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endif %}
                                 </div>
-                            </div>
                             {% endif %}
                         </div>
                     </div>
@@ -94,10 +95,10 @@
                                         <div class="panel-options">
                                             <ul class="nav nav-tabs">
                                                 <li class="active">
-                                                    <a href="#tab-1" data-toggle="tab">О пользователе</a>
+                                                    <a href="#tab-1" data-url="{{ path('binidini_core_user_to_review_index', {'user_id': user.id}) }}" data-content="#tab-1" data-toggle="tab">О пользователе</a>
                                                 </li>
                                                 <li class="">
-                                                    <a href="#tab-2" data-toggle="tab">От пользователя</a>
+                                                    <a href="#tab-2" data-url="{{ path('binidini_core_user_from_review_index', {'user_id': user.id}) }}" data-content="#tab-2" data-toggle="tab">От пользователя</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -105,10 +106,10 @@
                                     <div class="panel-body">
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab-1">
-                                                {% render path('binidini_core_user_to_review_index', {'user_id': user.id}) %}
+
                                             </div>
                                             <div class="tab-pane" id="tab-2">
-                                                {% render path('binidini_core_user_from_review_index', {'user_id': user.id}) %}
+
                                             </div>
                                         </div>
                                     </div>
@@ -126,17 +127,17 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/binidiniweb/js/plugins/raty/jquery.raty.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/review.js') }}"></script>
+
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('.rating').each(function (e, obj) {
-                $(obj).raty({
-                    readOnly: true,
-                    starType: 'img',
-                    starOn: '{{ asset('bundles/binidiniweb/img/raty/star-on.png') }}',
-                    starOff: '{{ asset('bundles/binidiniweb/img/raty/star-off.png') }}',
-                    score: $(obj).attr('data-rating-score')
-                });
+        $(document).ready(function(){
+            tabAjax.reloadActiveTab(function () {
+                review.setReadonlyRating('.rating');
             });
+            tabAjax.initTab(function () {
+                review.setReadonlyRating('.rating');
+            })
         });
+
     </script>
 {% endblock %}

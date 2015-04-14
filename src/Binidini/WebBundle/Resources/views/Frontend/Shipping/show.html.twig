@@ -1,10 +1,10 @@
 {% extends 'BinidiniWebBundle::layout.html.twig' %}
 
 {% if shipping.canHasReview() %}
-    {% block stylesheets %}
-        {{ parent() }}
-        <link href="{{ asset('bundles/binidiniweb/css/plugins/raty/jquery.raty.css') }}" rel="stylesheet">
-    {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/binidiniweb/css/plugins/raty/jquery.raty.css') }}" rel="stylesheet">
+{% endblock %}
 {% endif %}
 
 {% block pageheader %}Детализация заказа{% endblock %}
@@ -149,20 +149,49 @@
 
 {% endblock %}
 
-{% if shipping.canHasReview() %}
-    {% block javascripts %}
-        {{ parent() }}
+{% block javascripts %}
+    {{ parent() }}
+    {% if shipping.canHasReview() %}
         <script src="{{ asset('bundles/binidiniweb/js/plugins/raty/jquery.raty.js') }}"></script>
-        <script type="text/javascript">
-            $('#raty').raty({
-                starType: 'img',
-                starOn: '{{ asset('bundles/binidiniweb/img/raty/star-on.png') }}',
-                starOff: '{{ asset('bundles/binidiniweb/img/raty/star-off.png') }}',
-                click: function (number) {
-                    $('#input-rating').val(number);
+        <script src="{{ asset('bundles/binidiniweb/js/review.js') }}"></script>
+    {% endif %}
+    <script type="text/javascript">
+        var reloadTab = {};
+        $(document).ready(function(){
+            var $activeTab = $('ul.nav-tabs li.active a[data-toggle="tab"]');
+            var $contentTab = $($activeTab.attr('data-content'));
+            var $url = $activeTab.attr('data-url');
+            var href = $activeTab.attr('href');
+            loader.show($contentTab);
+            reloadTab[href] = true;
+            $.get($url, function (data) {
+                $contentTab.html(data);
+                loader.hide($contentTab);
+                reloadTab[href] = false;
+                if (href=='#tab-4'){
+                    review.setReadonlyRating('.rating');
+                }
+            })
+
+        });
+        $("a[data-toggle='tab']").each(function(key, obj){
+            var href = $(obj).attr('href');
+            reloadTab[href] = reloadTab[href] == undefined;
+            $(obj).click(function(){
+                if (reloadTab[href]) {
+                    var $contentTab = $($(this).attr('data-content'));
+                    var $url = $(this).attr('data-url');
+                    loader.show($contentTab);
+                    $.get($url, function (data) {
+                        $contentTab.html(data);
+                        loader.hide($contentTab);
+                        reloadTab[href] = false;
+                        if (href=='#tab-4'){
+                            review.setReadonlyRating('.rating');
+                        }
+                    })
                 }
             });
-            ratyInitialize();
-        </script>
-    {% endblock %}
-{% endif %}
+        });
+    </script>
+{% endblock %}

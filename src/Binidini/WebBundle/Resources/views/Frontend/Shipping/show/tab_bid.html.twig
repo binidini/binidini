@@ -10,15 +10,9 @@
     <div class="form-group">
         <div class="col-sm-4">
             <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-rub"></i>
-                                                                </span>
+                <span class="input-group-addon"><i class="fa fa-rub"></i></span>
                 {{ form_widget(bid_form.price, {'attr': {'class': 'form-control', 'value':shipping.deliveryPrice}}) }}
-                <span class="input-group-btn">
-                                                                    <button class="btn btn-primary" type="submit">Подать
-                                                                        заявку
-                                                                    </button>
-                                                                </span>
+                <span class="input-group-btn"><button class="btn btn-primary" type="submit">Подать заявку</button></span>
             </div>
         </div>
         <div class="col-sm-9">
@@ -31,4 +25,6 @@
     {{ form_end(bid_form) }}
     <div class="hr-line-dashed"></div>
 {% endif %}
-                                                {% render path('binidini_core_bid_index', {'shipping_id':shipping.id}) %}
+<div class="feed-activity-list">
+
+</div>

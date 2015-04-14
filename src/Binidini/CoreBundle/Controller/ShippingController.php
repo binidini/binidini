@@ -19,10 +19,27 @@ class ShippingController extends ResourceController
     {
         /** @var $shipping Shipping */
         $shipping = $this->findOr404($request);
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('show.html'))
+            ->setTemplateVar($this->config->getResourceName())
+            ->setData(
+                [
+                    'shipping' => $shipping,
+                    'bid_form' => $this->createForm(new BidType())->createView(),
+                    'message_form' => $this->createForm(new MessageType())->createView(),
+                    'review_form' => $this->createForm(new ReviewType())->createView(),
+                ]
+            );
+        return $this->handleView($view);
+    }
+
+    public function historyIndexAction(Request $request){
+        /** @var $shipping Shipping */
+        $shipping = $this->findOr404($request);
         /** @var $repository LogEntryRepository */
         $repository = $this->getDoctrine()->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
         $entries = $repository->getLogEntries($shipping);
-
         $usersInHistory = [];
         /** @var $userManager UserManager */
         $userManager = $this->get('fos_user.user_manager');
@@ -37,18 +54,12 @@ class ShippingController extends ResourceController
                 $usersInHistory[$entry->getUsername()] = $user;
             }
         }
-
         $view = $this
             ->view()
-            ->setTemplate($this->config->getTemplate('show.html'))
-            ->setTemplateVar($this->config->getResourceName())
+            ->setTemplate($this->config->getTemplate('history_index.html'))
             ->setData(
                 [
                     'entries' => $entries,
-                    'shipping' => $shipping,
-                    'bid_form' => $this->createForm(new BidType())->createView(),
-                    'message_form' => $this->createForm(new MessageType())->createView(),
-                    'review_form' => $this->createForm(new ReviewType())->createView(),
                     'history_users' => $usersInHistory,
                 ]
             );

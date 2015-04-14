@@ -15,17 +15,29 @@
                 <div class="panel-options">
                     <ul class="nav nav-tabs">
                         <li class="{{ activeTab == 'message'? 'active': '' }}">
-                            <a href="#tab-1" data-toggle="tab">Сообщения</a>
+                            <a href="#tab-1"
+                               data-url="{{ path('binidini_core_shipping_message_index', {'shipping_id':shipping.id}) }}"
+                               data-content="#tab-1 .feed-activity-list"
+                               data-toggle="tab">Сообщения</a>
                         </li>
                         <li class="{{ activeTab == 'bid'? 'active': '' }}">
-                            <a href="#tab-2" data-toggle="tab">Заявки</a>
+                            <a href="#tab-2"
+                               data-url="{{ path('binidini_core_bid_index', {'shipping_id':shipping.id}) }}"
+                               data-content="#tab-2 .feed-activity-list"
+                               data-toggle="tab">Заявки</a>
                         </li>
                         <li class="{{ activeTab == 'history'? 'active': '' }}">
-                            <a href="#tab-3" data-toggle="tab">История</a>
+                            <a href="#tab-3"
+                               data-url="{{ path('binidini_core_shipping_history_index', {'id':shipping.id}) }}"
+                               data-content="#tab-3 .history-content"
+                               data-toggle="tab">История</a>
                         </li>
                         {% if shipping.canHasReview() %}
                             <li class="{{ activeTab == 'review'? 'active': '' }}">
-                                <a href="#tab-4" data-toggle="tab">Отзывы</a>
+                                <a href="#tab-4"
+                                   data-content="#tab-4 .feed-activity-list"
+                                   data-url="{{ path('binidini_core_shipping_review_index', {'shipping_id':shipping.id}) }}"
+                                   data-toggle="tab">Отзывы</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -40,7 +52,7 @@
                         {{ include('BinidiniWebBundle::Frontend/Shipping/show/tab_bid.html.twig') }}
                     </div>
                     <div class="tab-pane {{ activeTab == 'history'? 'active': '' }}" id="tab-3">
-                        {{ include('BinidiniWebBundle::Frontend/Shipping/show/tab_history.html.twig') }}
+                        <div class="history-content"></div>
                     </div>
                     {% if shipping.canHasReview() %}
                         <div class="tab-pane {{ activeTab == 'review'? 'active': '' }}" id="tab-4">

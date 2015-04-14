@@ -1,37 +1,21 @@
-<div class="feed-activity-list">
-    {% for review in reviews %}
-        {% set profile = path('binidini_core_profile_show', {id: review.user.id}) %}
-        <div class="feed-element">
-            <a href="{{ profile }}" class="pull-left">
-                <img alt="image" class="img-circle" src="{{ review.user.imgPath|imagine_filter('photo38x38') }}">
-            </a>
-            <div class="media-body ">
-                <small class="pull-right">{{ review.createdAt | timeago }}</small>
-                <a href="{{ profile }}"><strong>{{ review.user.name }}</strong></a> оставил отзыв. <br>
-                <small class="text-muted">{{ review.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
-                <span id="raty-{{ review.id }}"></span>
-                <div class="well">
-                    {{ review.text | nl2br }}
-                </div>
+{% for review in reviews %}
+    {% set profile = path('binidini_core_profile_show', {id: review.user.id}) %}
+    <div class="feed-element">
+        <a href="{{ profile }}" class="pull-left">
+            <img alt="image" class="img-circle" src="{{ review.user.imgPath|imagine_filter('photo38x38') }}">
+        </a>
+        <div class="media-body ">
+            <small class="pull-right">{{ review.createdAt | timeago }}</small>
+            <a href="{{ profile }}"><strong>{{ review.user.name }}</strong></a> оставил отзыв. <br>
+            <small class="text-muted">{{ review.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
+            <span class="rating" data-rating-score="{{ review.rating }}"></span>
+            <div class="well">
+                {{ review.text | nl2br }}
             </div>
         </div>
-    {% else %}
-        <h3 class="text-center">
-            Никто не оставил отзывов о заказе
-        </h3>
-    {% endfor %}
-</div>
-
-<script type="text/javascript">
-    function ratyInitialize() {
-        {% for review in reviews %}
-        $('#raty-{{ review.id }}').raty({
-            readOnly: true,
-            starType: 'img',
-            starOn: '{{ asset('bundles/binidiniweb/img/raty/star-on.png') }}',
-            starOff: '{{ asset('bundles/binidiniweb/img/raty/star-off.png') }}',
-            score:{{ review.rating }}
-        });
-        {% endfor %}
-    }
-</script>
+    </div>
+{% else %}
+    <h3 class="text-center">
+        Никто не оставил отзывов о заказе
+    </h3>
+{% endfor %}

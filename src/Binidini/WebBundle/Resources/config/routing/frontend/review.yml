@@ -18,6 +18,7 @@ binidini_core_user_to_review_index:
     defaults:
         _controller: binidini_core.controller.review:indexAction
         _sylius:
+            paginate: 50
             sortable: true
             sorting:
                 id: desc
@@ -32,7 +33,7 @@ binidini_core_shipping_review_index:
     defaults:
         _controller: binidini_core.controller.review:indexAction
         _sylius:
-            paginate: false
+            paginate: 50
             sortable: true
             sorting:
                 id: desc

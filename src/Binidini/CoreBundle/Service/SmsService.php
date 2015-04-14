@@ -13,7 +13,7 @@ namespace  Binidini\CoreBundle\Service;
 use Guzzle\Service\ClientInterface;
 use Psr\Log\LoggerInterface;
 
-class SendSmsService implements SendSmsInterface
+class SmsService
 {
     private $logger;
     private $smsc;

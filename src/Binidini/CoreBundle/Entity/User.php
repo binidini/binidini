@@ -31,6 +31,7 @@ class User extends BaseUser
     const BIT_CANCEL_BID = 2;
     const BIT_RECALL_BID = 3;
     const BIT_AGREE_BID  = 4;
+    const BIT_CREATE_BID = 5;
 
     const BIT_CREATE_SHIPPING   = 10;
     const BIT_ACCEPT_SHIPPING   = 11;
@@ -765,6 +766,22 @@ class User extends BaseUser
     /**
      * @return bool
      */
+    public function getSmsBidCreateNotification()
+    {
+        return $this->getSmsN(self::BIT_CREATE_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setSmsBidCreateNotification($flag)
+    {
+        $this->setSmsN(self::BIT_CREATE_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
     public function getSmsBidAcceptNotification()
     {
         return $this->getSmsN(self::BIT_ACCEPT_BID);
@@ -924,6 +941,22 @@ class User extends BaseUser
 
     /**
      * @return bool
+     */
+    public function getEmailBidCreateNotification()
+    {
+        return $this->getEmailN(self::BIT_CREATE_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailBidCreateNotification($flag)
+    {
+        $this->setEmailN(self::BIT_CREATE_BID, $flag);
+    }
+
+    /**
+    * @return bool
      */
     public function getEmailBidAcceptNotification()
     {

@@ -32,14 +32,20 @@ services:
         tags:
             - { name: kernel.event_listener, event: binidini_core.shipping.post_create, method: onShippingPostCreate }
 
+    binidini.listener.bid:
+        class: Binidini\CoreBundle\EventListener\BidListener
+        arguments: [@binidini.notification.service]
+        tags:
+            - { name: kernel.event_listener, event: binidini_core.bid.post_create, method: onBidPostCreate }
+
     smsc.client:
         class: %guzzle.client.class%
         arguments: ['https://smsc.ru/']
         tags:
             - { name: guzzle.client }
 
-    binidini.send_sms_service:
-        class: Binidini\CoreBundle\Service\SendSmsService
+    binidini.sms_service:
+        class: Binidini\CoreBundle\Service\SmsService
         arguments:
             - @logger
             - @smsc.client
@@ -49,11 +55,11 @@ services:
         tags:
               - { name: monolog.logger, channel: sms }
 
-    binidini.sms_service:
+    binidini.sms_worker:
         class: Binidini\CoreBundle\Worker\SmsWorker
-        arguments: [@binidini.send_sms_service]
+        arguments: [@binidini.sms_service]
 
-    binidini.email_service:
+    binidini.email_worker:
         class: Binidini\CoreBundle\Worker\EmailWorker
         arguments: [@mailer]
 

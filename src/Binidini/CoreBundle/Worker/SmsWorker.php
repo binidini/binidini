@@ -18,7 +18,7 @@
 
 namespace Binidini\CoreBundle\Worker;
 
-use Binidini\CoreBundle\Service\SendSmsInterface;
+use Binidini\CoreBundle\Service\SmsService;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
@@ -26,7 +26,7 @@ class SmsWorker implements ConsumerInterface
 {
     private $sender;
 
-    public function __construct(SendSmsInterface $sender)
+    public function __construct(SmsService $sender)
     {
         $this->sender = $sender;
     }

@@ -1,9 +1,0 @@
-{% extends 'BinidiniWebBundle::EmailTemplates/layout.html.twig' %}
-
-{% block alert %}
-    Титимити - уведомление - заявка принята
-{% endblock %}
-
-{% block content %}
-    Ваша заявка на перевозку '{{ resource.shipping.name }}' за {{ resource.price }} руб. принята.
-{% endblock %}

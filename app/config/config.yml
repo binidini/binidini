@@ -97,9 +97,7 @@ swiftmailer:
     encryption: %mailer_encryption%
     auth_mode:  %mailer_auth_mode%
     password:  %mailer_password%
-    spool:
-        type: file
-        path: "%kernel.root_dir%/../spool"
+
 
 services:
     twig.extension.intl:
@@ -165,28 +163,20 @@ old_sound_rabbit_mq:
             vhost:    '/'
             lazy:     true
     producers:
-        binidini_registration:
+        binidini_sms:
             connection: default
-            exchange_options: {name: 'binidini-registration', type: direct}
-        binidini_sms_notification:
-            connection: default
-            exchange_options: {name: 'binidini-sms-notification', type: direct}
-        binidini_email_notification:
+            exchange_options: {name: 'binidini-sms', type: direct}
+        binidini_email:
              connection: default
-             exchange_options: {name: 'binidini-email-notification', type: direct}
+             exchange_options: {name: 'binidini-email', type: direct}
     consumers:
-        binidini_registration:
+        binidini_sms:
             connection:       default
-            exchange_options: {name: 'binidini-registration', type: direct}
-            queue_options:    {name: 'binidini-registration'}
-            callback:         binidini.registration_sms_service
-        binidini_sms_notification:
+            exchange_options: {name: 'binidini-sms', type: direct}
+            queue_options:    {name: 'binidini-sms'}
+            callback:         binidini.sms_service
+        binidini_email:
             connection:       default
-            exchange_options: {name: 'binidini-sms-notification', type: direct}
-            queue_options:    {name: 'binidini-sms-notification'}
-            callback:         binidini.notification_sms_service
-        binidini_email_notification:
-            connection:       default
-            exchange_options: {name: 'binidini-email-notification', type: direct}
-            queue_options:    {name: 'binidini-email-notification'}
-            callback:         binidini.notification_email_service
+            exchange_options: {name: 'binidini-email', type: direct}
+            queue_options:    {name: 'binidini-email'}
+            callback:         binidini.email_service

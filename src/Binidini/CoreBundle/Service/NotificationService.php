@@ -53,17 +53,19 @@ class NotificationService
         $bitN = constant('Binidini\CoreBundle\Entity\User::BIT_'.strtoupper($event));
 
         if ($user->getSmsN($bitN)) {
-            $sms = $this->twig->render('BinidiniWebBundle::SmsTemplates/'.$event.'.html.twig', ['resource' => $resource]);
+            $sms = $this->twig->render('BinidiniWebBundle::Template/Sms/'.$event.'.txt.twig', ['resource' => $resource]);
             $msg = array('mobile' => $user->getUsername(), 'sms' => $sms);
             $this->smsRabbitMqProducer->publish(serialize($msg));
         }
 
         if ($user->getEmailVerified() && $user->getEmailN($bitN))
         {
-            $emailBody = $this->twig->render('BinidiniWebBundle::EmailTemplates/'.$event.'.html.twig', ['resource' => $resource]);
-            $subject = 'Уведомление Титимити';
+            $emailBody = $this->twig->render('BinidiniWebBundle::Template/Email/'.$event.'.txt.twig', ['resource' => $resource]);
+            $subject = $this->twig->render('BinidiniWebBundle::Template/Sms/'.$event.'.txt.twig', ['resource' => $resource]);
+            $from = array('info@tytymyty.ru' => 'Титимити');
 
-            $msg = array('to' => $user->getEmail(), 'from' =>'noreply@tytymyty.ru', 'subject' => $subject, 'body' => $emailBody);
+
+            $msg = array('to' => $user->getEmailCanonical(), 'from' =>$from, 'subject' => $subject, 'body' => $emailBody);
             $this->emailRabbitMqProducer->publish(serialize($msg));
         }
     }

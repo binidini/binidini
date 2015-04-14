@@ -17,7 +17,7 @@ class DefaultController extends Controller
 
         $msg = $mailer->createMessage()
             ->setSubject('subject')
-            ->setFrom('noreply@tytymyty.ru')
+            ->setFrom('info@tytymyty.ru')
             ->setTo('manilo@mail.ru')
             ->setBody('body', 'text/html');
 

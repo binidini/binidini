@@ -18,22 +18,28 @@
 
 namespace Binidini\CoreBundle\Worker;
 
-use Binidini\CoreBundle\Service\SendSmsInterface;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class SmsNotificationWorker implements ConsumerInterface
+class EmailWorker implements ConsumerInterface
 {
-    private $sender;
+    private $mailer;
 
-    public function __construct(SendSmsInterface $sender)
+    public function __construct(\Swift_Mailer $mailer)
     {
-        $this->sender = $sender;
+        $this->mailer = $mailer;
     }
 
     public function execute(AMQPMessage $msg)
     {
         $data = unserialize($msg->body);
-        $this->sender->send($data['mobile'], $data['sms']);
+
+        $message = $this->mailer->createMessage()
+            ->setSubject($data['subject'])
+            ->setFrom($data['from'])
+            ->setTo($data['to'])
+            ->setBody($data['body'], 'text/plain');
+
+        $this->mailer->send($message);
     }
 }

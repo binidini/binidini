@@ -4,7 +4,6 @@ namespace Binidini\CoreBundle\Entity;
 
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\UserInterface;
 
 /**
  * @ORM\Entity

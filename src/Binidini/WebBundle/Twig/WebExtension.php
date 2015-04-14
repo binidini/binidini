@@ -20,6 +20,7 @@ class WebExtension extends \Twig_Extension
             new \Twig_SimpleFilter('price', array($this, 'priceFilter')),
             new \Twig_SimpleFilter('weight', array($this, 'weightFilter')),
             new \Twig_SimpleFilter('timeago', array($this, 'timeagoFilter')),
+            new \Twig_SimpleFilter('cell', array($this, 'cellFilter')),
         );
     }
 
@@ -54,6 +55,11 @@ class WebExtension extends \Twig_Extension
             return ($val == 'сек') ? 'только что' :
                 $numberOfUnits .$val . ' назад';
         }
+    }
+
+    public function cellFilter($username)
+    {
+        return '+7('. substr($username, 0, 3) . ')' . substr($username, 3);
     }
 
     public function getName()

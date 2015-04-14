@@ -13,7 +13,7 @@ services:
 
     binidini.subscriber.user_registration:
         class: Binidini\CoreBundle\EventListener\RegistrationListener
-        arguments: [@old_sound_rabbit_mq.binidini_registration_producer]
+        arguments: [@old_sound_rabbit_mq.binidini_sms_producer]
         tags:
             - { name: kernel.event_subscriber }
 
@@ -49,9 +49,13 @@ services:
         tags:
               - { name: monolog.logger, channel: sms }
 
-    binidini.registration_sms_service:
-        class: Binidini\CoreBundle\Worker\SendRegistrationSmsWorker
+    binidini.sms_service:
+        class: Binidini\CoreBundle\Worker\SmsWorker
         arguments: [@binidini.send_sms_service]
+
+    binidini.email_service:
+        class: Binidini\CoreBundle\Worker\EmailWorker
+        arguments: [@mailer]
 
     binidini.form.type.shipping:
         class: Binidini\CoreBundle\Form\Type\ShippingType
@@ -78,16 +82,23 @@ services:
         arguments:
             - @security.context
 
+    binidini.notification.service:
+        class: Binidini\CoreBundle\Service\NotificationService
+        arguments:
+            - @old_sound_rabbit_mq.binidini_sms_producer
+            - @old_sound_rabbit_mq.binidini_email_producer
+            - @twig
+
     binidini.shipping.logic.service:
         class: Binidini\CoreBundle\Service\ShippingLogicService
         arguments:
-            - @security.context
+            - @binidini.security.service
             - @doctrine.odm.mongodb.document_manager
 
     binidini.bid.logic.service:
         class: Binidini\CoreBundle\Service\BidLogicService
         arguments:
-            - @security.context
+            - @binidini.security.service
             - @binidini.shipping.logic.service
             - @doctrine.orm.entity_manager
             - @sm.factory

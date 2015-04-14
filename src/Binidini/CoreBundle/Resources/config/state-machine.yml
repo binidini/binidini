@@ -80,7 +80,13 @@ winzou_state_machine:
                 check_debate:   { on: 'debate',   do: [@binidini.security.service, 'checkCarrier'],   args: ['object'] }
                 check_resolve:  { on: 'resolve',  do: [@binidini.security.service, 'checkResolver'],  args: ['object'] }
             after:
-                after_cancel:   { on: 'cancel',   do: [@binidini.shipping.logic.service, 'removeShipment'], args: ['object'] }
+                after_cancel:   { on: 'cancel',     do: [@binidini.shipping.logic.service, 'removeShipment'], args: ['object'] }
+                after_complete: { on: 'complete',   do: [@binidini.notification.service, 'notifySender'],   args: ['object', '"complete_shipping"'] }
+                after_debate:   { on: 'debate',     do: [@binidini.notification.service, 'notifySender'],   args: ['object', '"debate_shipping"'] }
+                after_deliver:  { on: 'deliver',    do: [@binidini.notification.service, 'notifySender'],   args: ['object', '"deliver_shipping"'] }
+                after_dispute:  { on: 'dispute',    do: [@binidini.notification.service, 'notifyCarrier'],  args: ['object', '"dispute_shipping"'] }
+                after_pay:      { on: 'pay',        do: [@binidini.notification.service, 'notifyCarrier'],  args: ['object', '"pay_shipping"'] }
+                after_refuse:   { on: 'refuse',     do: [@binidini.notification.service, 'notifyCarrier'],  args: ['object', '"refuse_shipping"'] }
 
 
     binidini_core_bid:
@@ -89,12 +95,16 @@ winzou_state_machine:
         graph: simple
         state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
+            - init
             - new
             - accepted  #by sender
             - agreed    #by carrier
             - rejected  #by sender
             - canceled  #by carrier
         transitions:
+            create: #by carrier
+                from: [init]
+                to: new
             accept: #by sender
                 from: [new]
                 to: accepted
@@ -112,8 +122,13 @@ winzou_state_machine:
                 to: agreed
         callbacks:
             before:
-                accept: { on: 'accept', do: [@binidini.security.service, 'checkSender'],     args: ['object'] }
-                reject: { on: 'reject', do: [@binidini.security.service, 'checkSender'],     args: ['object'] }
-                cancel: { on: 'cancel', do: [@binidini.security.service, 'checkCarrier'],    args: ['object'] }
-                recall: { on: 'recall', do: [@binidini.security.service, 'checkCarrier'],    args: ['object'] }
-                agree:  { on: 'agree',  do: [@binidini.bid.logic.service, 'agreeTransition'], args: ['object'] }
+                before_accept: { on: 'accept', do: [@binidini.security.service, 'checkSender'],     args: ['object'] }
+                before_reject: { on: 'reject', do: [@binidini.security.service, 'checkSender'],     args: ['object'] }
+                before_cancel: { on: 'cancel', do: [@binidini.security.service, 'checkCarrier'],    args: ['object'] }
+                before_recall: { on: 'recall', do: [@binidini.security.service, 'checkCarrier'],    args: ['object'] }
+                before_agree:  { on: 'agree',  do: [@binidini.bid.logic.service, 'agreeTransition'], args: ['object'] }
+            after:
+                after_accept: { on: 'accept', do: [@binidini.notification.service, 'notifyCarrier'], args: ['object', '"accept_bid"']}
+                after_reject: { on: 'reject', do: [@binidini.notification.service, 'notifyCarrier'], args: ['object', '"reject_bid"']}
+                after_agreet: { on: 'agree',  do: [@binidini.notification.service, 'notifySender'],  args: ['object', '"agree_bid"']}
+                after_recall: { on: 'recall', do: [@binidini.notification.service, 'notifySender'],  args: ['object', '"recall_bid"']}

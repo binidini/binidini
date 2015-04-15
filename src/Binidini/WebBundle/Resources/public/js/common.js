@@ -9,12 +9,15 @@ var loader = {
 
 var tabAjax = {
     reloadTab: {},
-    initTab: function (callBackOnSuccess) {
+    initTab: function (callBackOnSuccess, preLoadCallback) {
         $("a[data-toggle='tab']").each(function (key, obj) {
             var href = $(obj).attr('href');
             tabAjax.reloadTab[href] = tabAjax.reloadTab[href] == undefined;
             $(obj).click(function () {
                 if (tabAjax.reloadTab[href]) {
+                    if (preLoadCallback != undefined) {
+                        preLoadCallback(this);
+                    }
                     var $contentTab = $($(this).attr('data-content'));
                     var $url = $(this).attr('data-url');
                     loader.show($contentTab);
@@ -22,25 +25,32 @@ var tabAjax = {
                         $contentTab.html(data);
                         loader.hide($contentTab);
                         tabAjax.reloadTab[href] = false;
-                        callBackOnSuccess(href);
+                        if (callBackOnSuccess != undefined) {
+                            callBackOnSuccess(href);
+                        }
                     })
                 }
             });
         })
     },
-    reloadActiveTab: function (callBackOnSuccess) {
+    reloadActiveTab: function (callBackOnSuccess, preLoadCallback) {
         var $activeTab = $('ul.nav-tabs li.active a[data-toggle="tab"]');
         var $contentTab = $($activeTab.attr('data-content'));
         var $url = $activeTab.attr('data-url');
         var href = $activeTab.attr('href');
         loader.show($contentTab);
         tabAjax.reloadTab[href] = true;
+        if (preLoadCallback != undefined) {
+            preLoadCallback($activeTab);
+        }
         $.get($url, function (data) {
             $contentTab.html(data);
             loader.hide($contentTab);
             tabAjax.reloadTab[href] = false;
             review.setReadonlyRating('.rating');
-            callBackOnSuccess(href);
+            if (callBackOnSuccess != undefined) {
+                callBackOnSuccess(href);
+            }
         })
     }
 };

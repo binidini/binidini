@@ -69,7 +69,6 @@ doctrine:
 
 parameters:
     stof_doctrine_extensions.event_listener.logger.class: Binidini\CoreBundle\EventListener\LoggerListener
-    confirmation_email_from: %mailer_user%
 
 stof_doctrine_extensions:
     uploadable:

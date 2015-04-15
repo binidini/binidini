@@ -20,14 +20,17 @@ namespace Binidini\CoreBundle\Worker;
 
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
+use Psr\Log\LoggerInterface;
 
 class EmailWorker implements ConsumerInterface
 {
     private $mailer;
+    private $logger;
 
-    public function __construct(\Swift_Mailer $mailer)
+    public function __construct(\Swift_Mailer $mailer, LoggerInterface $loggerInterface)
     {
         $this->mailer = $mailer;
+        $this->logger = $loggerInterface;
     }
 
     public function execute(AMQPMessage $msg)
@@ -40,6 +43,12 @@ class EmailWorker implements ConsumerInterface
             ->setTo($data['to'])
             ->setBody($data['body'], 'text/plain');
 
-        $this->mailer->send($message);
+        try {
+            $result = $this->mailer->send($message);
+            $this->logger->info("result: {$result}, from: " . implode(" ", $data['from']). ", to: {$data['to']}, subject: {$data['subject']}");
+        } catch ( \Exception $ex) {
+            $this->logger->error("error: {$ex->getMessage()}, from: {$data['from']}, to: {$data['to']}, subject: {$data['subject']}");
+        }
+
     }
 }

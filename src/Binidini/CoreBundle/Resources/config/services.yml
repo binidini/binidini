@@ -28,7 +28,9 @@ services:
 
     binidini.listener.shipping:
         class: Binidini\CoreBundle\EventListener\ShippingListener
-        arguments: [@doctrine.odm.mongodb.document_manager]
+        arguments:
+            - @doctrine.odm.mongodb.document_manager
+            - @old_sound_rabbit_mq.binidini_geocode_producer
         tags:
             - { name: kernel.event_listener, event: binidini_core.shipping.post_create, method: onShippingPostCreate }
 
@@ -38,7 +40,13 @@ services:
         tags:
             - { name: kernel.event_listener, event: binidini_core.bid.post_create, method: onBidPostCreate }
 
-    smsc.client:
+    binidini.geocode.yandex.client:
+        class: %guzzle.client.class%
+        arguments: ['http://geocode-maps.yandex.ru/1.x/']
+        tags:
+            - { name: guzzle.client }
+
+    binidini.smsc.client:
         class: %guzzle.client.class%
         arguments: ['https://smsc.ru/']
         tags:
@@ -48,12 +56,19 @@ services:
         class: Binidini\CoreBundle\Service\SmsService
         arguments:
             - @logger
-            - @smsc.client
+            - @binidini.smsc.client
             - %smsc_login%
             - %smsc_password%
             - %smsc_sender%
         tags:
               - { name: monolog.logger, channel: sms }
+
+    binidini.geocode_worker:
+        class: Binidini\CoreBundle\Worker\GeocodeWorker
+        arguments:
+            - @binidini.geocode.yandex.client
+            - @doctrine.orm.entity_manager
+            - @doctrine.odm.mongodb.document_manager
 
     binidini.sms_worker:
         class: Binidini\CoreBundle\Worker\SmsWorker

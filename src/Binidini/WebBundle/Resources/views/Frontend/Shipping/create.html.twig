@@ -22,7 +22,7 @@
 
                             <div class="ibox-content">
 
-                                {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+                                {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'id': 'shippingForm'} }) }}
                                 {{ form_errors(form) }}
 
                                 <div class="form-group">
@@ -40,6 +40,10 @@
                                     <div class="col-lg-10">
                                         {{ form_errors(form.pickupAddress) }}
                                         {{ form_widget(form.pickupAddress, {'id': 'pickup-address', 'attr': {'class': 'form-control', 'placeholder': 'Адрес отправки'}}) }}
+                                        {{ form_errors(form.pickupLongitude) }}
+                                        {{ form_widget(form.pickupLongitude, {'id': 'pickup-longitude'}) }}
+                                        {{ form_errors(form.pickupLatitude) }}
+                                        {{ form_widget(form.pickupLatitude, {'id': 'pickup-latitude'}) }}
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -61,6 +65,10 @@
                                     <div class="col-lg-10">
                                         {{ form_errors(form.deliveryAddress) }}
                                         {{ form_widget(form.deliveryAddress, {'id': 'delivery-address', 'attr': {'class': 'form-control', 'placeholder': 'Адрес назначения'}}) }}
+                                        {{ form_errors(form.deliveryLongitude) }}
+                                        {{ form_widget(form.deliveryLongitude, {'id': 'delivery-longitude'}) }}
+                                        {{ form_errors(form.deliveryLatitude) }}
+                                        {{ form_widget(form.deliveryLatitude, {'id': 'delivery-latitude'}) }}
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -200,9 +208,8 @@
     <script src="{{ asset('bundles/binidiniweb/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
     <script src="{{ asset('bundles/binidiniweb/js/plugins/iCheck/icheck.min.js') }}"></script>
 
-
     <!-- iCheck -->
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
@@ -211,19 +218,14 @@
 
 
         });
-    </script>
-
-
-    <script type="text/javascript">
+         //Yandex map
         ymaps.ready(init);
 
-
         function init(){
-            var suggestView = new ymaps.SuggestView('pickup-address');
-            var suggestView = new ymaps.SuggestView('delivery-address');
-
-
+            var suggestView1 = new ymaps.SuggestView('pickup-address');
+            var suggestView2 = new ymaps.SuggestView('delivery-address');
         }
+
     </script>
 
 {% endblock %}

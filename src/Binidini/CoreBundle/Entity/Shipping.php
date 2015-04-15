@@ -140,6 +140,20 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     private $pickupAddress;
 
     /**
+     * @var double
+     *
+     * @ORM\Column(name="pickup_longitude", type="decimal", precision=12, scale=8, nullable=true )
+     */
+    private $pickupLongitude;
+
+    /**
+     * @var double
+     *
+     * @ORM\Column(name="pickup_latitude", type="decimal", precision=12, scale=8, nullable=true)
+     */
+    private $pickupLatitude;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="delivery_address", type="string", length=255)
@@ -148,6 +162,20 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      */
     private $deliveryAddress;
 
+    /**
+     * @var double
+     *
+     * @ORM\Column(name="delivery_longitude", type="decimal", precision=12, scale=8, nullable=true)
+     */
+    private $deliveryLongitude;
+
+    /**
+     * @var double
+     *
+     * @ORM\Column(name="delivery_latitude", type="decimal", precision=12, scale=8, nullable=true)
+     */
+    private $deliveryLatitude;
+    
     /**
      * @var \DateTime
      *
@@ -886,5 +914,97 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     public function getHasCarrierReview()
     {
         return $this->hasCarrierReview;
+    }
+
+    /**
+     * Set pickupLongitude
+     *
+     * @param string $pickupLongitude
+     * @return Shipping
+     */
+    public function setPickupLongitude($pickupLongitude)
+    {
+        $this->pickupLongitude = $pickupLongitude;
+
+        return $this;
+    }
+
+    /**
+     * Get pickupLongitude
+     *
+     * @return string 
+     */
+    public function getPickupLongitude()
+    {
+        return $this->pickupLongitude;
+    }
+
+    /**
+     * Set pickupLatitude
+     *
+     * @param string $pickupLatitude
+     * @return Shipping
+     */
+    public function setPickupLatitude($pickupLatitude)
+    {
+        $this->pickupLatitude = $pickupLatitude;
+
+        return $this;
+    }
+
+    /**
+     * Get pickupLatitude
+     *
+     * @return string 
+     */
+    public function getPickupLatitude()
+    {
+        return $this->pickupLatitude;
+    }
+
+    /**
+     * Set deliveryLongitude
+     *
+     * @param string $deliveryLongitude
+     * @return Shipping
+     */
+    public function setDeliveryLongitude($deliveryLongitude)
+    {
+        $this->deliveryLongitude = $deliveryLongitude;
+
+        return $this;
+    }
+
+    /**
+     * Get deliveryLongitude
+     *
+     * @return string 
+     */
+    public function getDeliveryLongitude()
+    {
+        return $this->deliveryLongitude;
+    }
+
+    /**
+     * Set deliveryLatitude
+     *
+     * @param string $deliveryLatitude
+     * @return Shipping
+     */
+    public function setDeliveryLatitude($deliveryLatitude)
+    {
+        $this->deliveryLatitude = $deliveryLatitude;
+
+        return $this;
+    }
+
+    /**
+     * Get deliveryLatitude
+     *
+     * @return string 
+     */
+    public function getDeliveryLatitude()
+    {
+        return $this->deliveryLatitude;
     }
 }

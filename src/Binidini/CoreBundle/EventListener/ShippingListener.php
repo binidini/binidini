@@ -12,9 +12,8 @@ namespace Binidini\CoreBundle\EventListener;
 use Binidini\SearchBundle\Document\Shipment;
 use Binidini\SearchBundle\Document\ShipmentItem;
 use Doctrine\ODM\MongoDB\DocumentManager;
+use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use Sylius\Component\Resource\Event\ResourceEvent;
-use Symfony\Component\Config\Definition\Exception\Exception;
-
 
 /**
  * Listener responsible to copy shipping object into mongodb
@@ -22,12 +21,13 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 class ShippingListener
 {
     private $dm;
+    private $geocodeProducer;
 
-    public function __construct(DocumentManager $documentManager)
+    public function __construct(DocumentManager $documentManager, Producer $geocodeProducer)
     {
         $this->dm = $documentManager;
+        $this->geocodeProducer = $geocodeProducer;
     }
-
 
     /**
      * Copy shipping into mongodb
@@ -58,6 +58,9 @@ class ShippingListener
 
         $this->dm->persist($shipment);
         $this->dm->flush();
+
+        $msg = array('id' => $shipping->getId());
+        $this->geocodeProducer->publish(serialize($msg));
     }
 
 }

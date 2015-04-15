@@ -65,11 +65,39 @@ class Shipment
     private $pickupAddress;
 
     /**
+     * @var double
+     *
+     * @MongoDB\Field(name="pickup_longitude", type="float")
+     */
+    private $pickupLongitude;
+
+    /**
+     * @var double
+     *
+     * @MongoDB\Field(name="pickup_latitude", type="float")
+     */
+    private $pickupLatitude;
+
+    /**
      * @var string
      *
      * @MongoDB\Field(name="delivery_address", type="string")
      */
     private $deliveryAddress;
+
+    /**
+     * @var double
+     *
+     * @MongoDB\Field(name="delivery_longitude", type="float")
+     */
+    private $deliveryLongitude;
+
+    /**
+     * @var double
+     *
+     * @MongoDB\Field(name="delivery_latitude", type="float")
+     */
+    private $deliveryLatitude;
 
     /**
      * @var \DateTime
@@ -84,7 +112,6 @@ class Shipment
      * @MongoDB\Field(name="delivery_datetime", type="date")
      */
     private $deliveryDatetime;
-
 
     /**
      * @var integer
@@ -430,5 +457,94 @@ class Shipment
     public function getInsurance()
     {
         return $this->insurance;
+    }
+
+
+    /**
+     * Set pickupLongitude
+     *
+     * @param float $pickupLongitude
+     * @return self
+     */
+    public function setPickupLongitude($pickupLongitude)
+    {
+        $this->pickupLongitude = $pickupLongitude;
+        return $this;
+    }
+
+    /**
+     * Get pickupLongitude
+     *
+     * @return float $pickupLongitude
+     */
+    public function getPickupLongitude()
+    {
+        return $this->pickupLongitude;
+    }
+
+    /**
+     * Set pickupLatitude
+     *
+     * @param float $pickupLatitude
+     * @return self
+     */
+    public function setPickupLatitude($pickupLatitude)
+    {
+        $this->pickupLatitude = $pickupLatitude;
+        return $this;
+    }
+
+    /**
+     * Get pickupLatitude
+     *
+     * @return float $pickupLatitude
+     */
+    public function getPickupLatitude()
+    {
+        return $this->pickupLatitude;
+    }
+
+    /**
+     * Set deliveryLongitude
+     *
+     * @param float $deliveryLongitude
+     * @return self
+     */
+    public function setDeliveryLongitude($deliveryLongitude)
+    {
+        $this->deliveryLongitude = $deliveryLongitude;
+        return $this;
+    }
+
+    /**
+     * Get deliveryLongitude
+     *
+     * @return float $deliveryLongitude
+     */
+    public function getDeliveryLongitude()
+    {
+        return $this->deliveryLongitude;
+    }
+
+    /**
+     * Set deliveryLatitude
+     *
+     * @param float $deliveryLatitude
+     * @return self
+     */
+    public function setDeliveryLatitude($deliveryLatitude)
+    {
+        $this->deliveryLatitude = $deliveryLatitude;
+        return $this;
+    }
+
+    /**
+     * Get deliveryLatitude
+     *
+     * @return float $deliveryLatitude
+     */
+    public function getDeliveryLatitude()
+    {
+        return $this->deliveryLatitude;
     }
 }

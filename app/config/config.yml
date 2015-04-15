@@ -169,6 +169,10 @@ old_sound_rabbit_mq:
         binidini_email:
              connection: default
              exchange_options: {name: 'binidini-email', type: direct}
+        binidini_geocode:
+             connection: default
+             exchange_options: {name: 'binidini-geocode', type: direct}
+
     consumers:
         binidini_sms:
             connection:       default
@@ -180,3 +184,8 @@ old_sound_rabbit_mq:
             exchange_options: {name: 'binidini-email', type: direct}
             queue_options:    {name: 'binidini-email'}
             callback:         binidini.email_worker
+        binidini_geocode:
+            connection:       default
+            exchange_options: {name: 'binidini-geocode', type: direct}
+            queue_options:    {name: 'binidini-geocode'}
+            callback:         binidini.geocode_worker

@@ -61,7 +61,11 @@ services:
 
     binidini.email_worker:
         class: Binidini\CoreBundle\Worker\EmailWorker
-        arguments: [@mailer]
+        arguments:
+            - @mailer
+            - @logger
+        tags:
+              - { name: monolog.logger, channel: email }
 
     binidini.form.type.shipping:
         class: Binidini\CoreBundle\Form\Type\ShippingType

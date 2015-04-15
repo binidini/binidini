@@ -4,6 +4,7 @@ namespace Binidini\CoreBundle\Entity;
 
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -48,6 +49,7 @@ class Review implements UserAwareInterface
      * @var integer
      *
      * @ORM\Column(name="rating", type="integer", nullable=false, options={"default" = 0})
+     * @Assert\Range(min=1, max=5)
      */
     private $rating;
 

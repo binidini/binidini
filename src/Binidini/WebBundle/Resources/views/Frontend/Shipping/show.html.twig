@@ -185,13 +185,13 @@
         <script src="{{ asset('bundles/binidiniweb/js/review.js') }}"></script>
     {% endif %}
     <script type="text/javascript">
-        var successCallback = function () {
+        var successCallback = function (href) {
             if (href == '#tab-4') {
                 review.setReadonlyRating('.rating');
             }
         };
         var preLoadCallback = function (obj) {
-            if (obj.attr('href') == '#tab-4') {
+            if ($(obj).attr('href') == '#tab-4') {
                 review.setRatingControl('#raty', function (number) {
                     $('#input-rating').val(number);
                 });

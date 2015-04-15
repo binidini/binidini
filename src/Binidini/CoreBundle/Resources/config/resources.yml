@@ -37,6 +37,6 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Binidini\CoreBundle\Entity\Review
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                controller: Binidini\CoreBundle\Controller\ReviewController
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
 

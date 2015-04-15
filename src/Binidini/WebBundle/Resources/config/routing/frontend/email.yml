@@ -1,0 +1,12 @@
+binidini_email_confirm_send:
+    path: /email/confirm/send
+    methods: [GET]
+    defaults:
+        _controller: BinidiniCoreBundle:Email:sendConfirmEmail
+
+binidini_email_confirm:
+    path: /email/confirm/{token}
+    methods: [GET]
+    defaults:
+        _controller: BinidiniCoreBundle:Email:confirm
+

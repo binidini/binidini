@@ -7,14 +7,8 @@
 
 {% set isItMe = user.id == app.user.id %}
 {% set isItCompany = user.type == 2 %}
-{% block pagetitle %}
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-sm-4">
-            <h2>Профиль</h2>
-        </div>
-    </div>
-{% endblock %}
 
+{% block pageheader %} Профиль {% endblock %}
 {% block content %}
     <div class="wrapper wrapper-content">
         <div class="row animated fadeInRight">
@@ -39,7 +33,16 @@
                             {% endif %}
                             {% if user.email %}
                                 <p><i class="fa fa-envelope"></i> <a
-                                            href="mailto:{{ user.email }}"> {{ user.email }}</a></p>
+                                            href="mailto:{{ user.email }}"> {{ user.email }}</a>
+
+                                    {% if isItMe and not user.emailVerified %}
+                                        <a href="{{ path('binidini_email_confirm_send') }}" id="confirm-email">
+                                            <small style="font-size: 70%">Подтвердить</small>
+                                        </a>
+                                        <small id="confirm-email-sended" style="font-size: 70%" class="hide">Отправлено</small>
+                                    {% endif %}
+                                </p>
+
                             {% endif %}
                             <p><i class="fa fa-phone-square"></i><a href="tel:+7{{ user.username }} ">
                                     +7 {{ user.username }}</a>
@@ -95,10 +98,14 @@
                                         <div class="panel-options">
                                             <ul class="nav nav-tabs">
                                                 <li class="active">
-                                                    <a href="#tab-1" data-url="{{ path('binidini_core_user_to_review_index', {'user_id': user.id}) }}" data-content="#tab-1" data-toggle="tab">О пользователе</a>
+                                                    <a href="#tab-1"
+                                                       data-url="{{ path('binidini_core_user_to_review_index', {'user_id': user.id}) }}"
+                                                       data-content="#tab-1" data-toggle="tab">О пользователе</a>
                                                 </li>
                                                 <li class="">
-                                                    <a href="#tab-2" data-url="{{ path('binidini_core_user_from_review_index', {'user_id': user.id}) }}" data-content="#tab-2" data-toggle="tab">От пользователя</a>
+                                                    <a href="#tab-2"
+                                                       data-url="{{ path('binidini_core_user_from_review_index', {'user_id': user.id}) }}"
+                                                       data-content="#tab-2" data-toggle="tab">От пользователя</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -130,7 +137,7 @@
     <script src="{{ asset('bundles/binidiniweb/js/review.js') }}"></script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             tabAjax.reloadActiveTab(function () {
                 review.setReadonlyRating('.rating');
             });
@@ -138,6 +145,21 @@
                 review.setReadonlyRating('.rating');
             })
         });
+        var emailSended = false;
+        $('#confirm-email').click(function(){
+            if (!emailSended){
+                emailSended = true;
+                $.get($(this).attr('href'), function (data) {
+                    if (data.success) {
+                        $('#confirm-email').addClass('hide');
+                        $('#confirm-email-sended').removeClass('hide');
+                    } else {
+                        emailSended = false;
+                    }
+                });
+            }
+            return false;
+        })
 
     </script>
 {% endblock %}

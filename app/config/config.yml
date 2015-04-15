@@ -69,6 +69,7 @@ doctrine:
 
 parameters:
     stof_doctrine_extensions.event_listener.logger.class: Binidini\CoreBundle\EventListener\LoggerListener
+    confirmation_email_from: %mailer_user%
 
 stof_doctrine_extensions:
     uploadable:
@@ -116,10 +117,14 @@ fos_rest:
             - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: true }
             - { path: '^/' }
 
+
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Binidini\CoreBundle\Entity\User
+    from_email:
+        address: %mailer_user%
+        sender_name: Acme Demo Registration
     registration:
         form:
             type: binidini_user_registration

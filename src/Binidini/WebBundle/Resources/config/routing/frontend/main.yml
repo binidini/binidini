@@ -39,3 +39,7 @@ binidini_profile:
 binidini_review:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/review.yml
     prefix: /
+
+binidini_email:
+    resource: @BinidiniWebBundle/Resources/config/routing/frontend/email.yml
+    prefix: /

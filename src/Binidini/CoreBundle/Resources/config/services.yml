@@ -117,9 +117,11 @@ services:
 
     binidini.listener.edit_user_profile:
         class: Binidini\CoreBundle\EventListener\EditUserProfileListener
-        arguments: [@stof_doctrine_extensions.uploadable.manager, @doctrine.orm.entity_manager]
+        arguments: [@stof_doctrine_extensions.uploadable.manager, @doctrine.orm.entity_manager, @security.context]
         tags:
             - { name: kernel.event_listener, event: fos_user.profile.edit.completed }
+            - { name: kernel.event_listener, event: fos_user.profile.edit.success }
+            - { name: kernel.event_listener, event: fos_user.profile.edit.initialize }
 
     binidini.listener.review:
         class: Binidini\CoreBundle\EventListener\ReviewListener

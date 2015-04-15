@@ -69,4 +69,21 @@ class NotificationService
             $this->emailRabbitMqProducer->publish(serialize($msg));
         }
     }
+
+    public function sendConfirmationEmail(User $user, $url)
+    {
+        $emailBody = $this->twig->render(
+            'BinidiniWebBundle:Template:Email/confirmation.txt.twig',
+            ['user' => $user, 'url' => $url]
+        );
+        $subject = 'Титимити: подтверждение почты';
+        $from = array('info@tytymyty.ru' => 'Титимити');
+        $msg = [
+            'to' => $user->getEmailCanonical(),
+            'from' => $from,
+            'subject' => $subject,
+            'body' => $emailBody
+        ];
+        $this->emailRabbitMqProducer->publish(serialize($msg));
+    }
 }

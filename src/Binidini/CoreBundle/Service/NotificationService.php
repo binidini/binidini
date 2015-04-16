@@ -70,19 +70,20 @@ class NotificationService
         }
     }
 
-    public function sendConfirmationEmail(User $user, $url)
+    public function sendConfirmationEmail(User $user)
     {
         $emailBody = $this->twig->render(
-            'BinidiniWebBundle:Template:Email/confirmation.txt.twig',
-            ['user' => $user, 'url' => $url]
+            'BinidiniWebBundle:Template:Email/confirmation.html.twig',
+            ['user' => $user]
         );
         $subject = 'Титимити: подтверждение почты';
-        $from = array('info@tytymyty.ru' => 'Титимити');
+        $from = ['info@tytymyty.ru' => 'Титимити'];
         $msg = [
             'to' => $user->getEmailCanonical(),
             'from' => $from,
             'subject' => $subject,
-            'body' => $emailBody
+            'body' => $emailBody,
+            'mime' => 'text/html'
         ];
         $this->emailRabbitMqProducer->publish(serialize($msg));
     }

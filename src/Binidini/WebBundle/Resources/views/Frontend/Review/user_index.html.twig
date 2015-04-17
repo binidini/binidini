@@ -1,0 +1,30 @@
+<div class="feed-activity-list">
+    {% for review in reviews %}
+        {% set profile = path('binidini_core_profile_show', {id: review.user.id}) %}
+        <div class="feed-element">
+            <a href="{{ profile }}" class="pull-left">
+                <img alt="image" class="img-circle" src="{{ review.user.imgPath|imagine_filter('photo38x38') }}">
+            </a>
+
+            <div class="media-body ">
+                <small class="pull-right">{{ review.createdAt | timeago }}</small>
+                <a href="{{ profile }}"><strong>{{ review.user.name }}</strong></a> оставил отзыв о
+                {% if review.userTo.isIndividual %}
+                    пользователе {{ review.userTo.name }}
+                {% else %}
+                    компании "{{ review.userTo.name }}"
+                {% endif %}
+                . <br>
+                <small class="text-muted">{{ review.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
+                <span class="rating" data-rating-score="{{ review.rating }}"></span>
+                <div class="well">
+                    {{ review.text | nl2br }}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h3 class="text-center">
+            От пользователя нет отзывов
+        </h3>
+    {% endfor %}
+</div>

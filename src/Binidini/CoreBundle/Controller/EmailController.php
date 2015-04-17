@@ -31,14 +31,9 @@ class EmailController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            $url = $this->generateUrl(
-                'binidini_email_confirm',
-                ['token' => $user->getConfirmationToken()],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            );
             /** @var NotificationService $notificationService */
             $notificationService = $this->get('binidini.notification.service');
-            $notificationService->sendConfirmationEmail($user, $url);
+            $notificationService->sendConfirmationEmail($user);
             $status = 1;
         }
 

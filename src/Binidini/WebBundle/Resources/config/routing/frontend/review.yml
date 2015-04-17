@@ -10,7 +10,7 @@ binidini_core_user_from_review_index:
             filterable: true
             criteria:
                 user: $user_id
-            template: BinidiniWebBundle:Frontend/Review:user-index.html.twig
+            template: BinidiniWebBundle:Frontend/Review:user_index.html.twig
 
 binidini_core_user_to_review_index:
     path: /user/{user_id}/reviews/to/
@@ -25,7 +25,7 @@ binidini_core_user_to_review_index:
             filterable: true
             criteria:
                 userTo: $user_id
-            template: BinidiniWebBundle:Frontend/Review:user-index.html.twig
+            template: BinidiniWebBundle:Frontend/Review:user_to_index.html.twig
 
 binidini_core_shipping_review_index:
     path: /shipping/{shipping_id}/reviews/
@@ -40,7 +40,7 @@ binidini_core_shipping_review_index:
             filterable: true
             criteria:
                 shipping: $shipping_id
-            template: BinidiniWebBundle:Frontend/Review:shipping-index.html.twig
+            template: BinidiniWebBundle:Frontend/Review:shipping_index.html.twig
 
 binidini_core_review_new:
     path: shipping/{shipping_id}/reviews/new

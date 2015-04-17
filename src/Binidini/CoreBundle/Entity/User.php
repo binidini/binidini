@@ -266,14 +266,20 @@ class User extends BaseUser
         $this->balance += $amount;
     }
 
-    public function getMobileMask()
+
+    public function getEmailXXX()
+    {
+        return preg_replace('/(.*)@(.*)/', 'xxxxxx@${2}', $this->getEmailCanonical());
+    }
+
+    public function getMobileXXX()
     {
         return preg_replace('/(\d{3})\d{3}(\d{4})/', '+7 (${1}) xxx${2}', $this->getUsername());
     }
 
     public function getMobilePhone()
     {
-        return sprintf('+7%1$s', $this->getUsername());
+        return preg_replace('/(\d{3})(\d{7})/', '+7 (${1}) ${2}', $this->getUsername());
     }
 
     /**

@@ -59,7 +59,7 @@ class WebExtension extends \Twig_Extension
 
     public function cellFilter($username)
     {
-        return '+7('. substr($username, 0, 3) . ')' . substr($username, 3);
+        return '+7 ('. substr($username, 0, 3) . ') ' . substr($username, 3);
     }
 
     public function getName()

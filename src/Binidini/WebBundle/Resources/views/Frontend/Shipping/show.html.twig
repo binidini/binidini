@@ -92,14 +92,20 @@
                                     <dt>Куда:</dt>
                                     <dd>{{ shipping.deliveryAddress }}</dd>
                                     <dt>Отправитель:</dt>
-                                    <dd><a href="#">{{ shipping.user.name }}</a></dd>
+                                    <dd>
+                                        <a href="{{ path('binidini_core_profile_show', {'id': shipping.sender.id}) }}">{{ shipping.sender.name }}</a>
+                                        {% if (shipping.carrier is not empty) and (shipping.carrier.id == app.user.id) %}
+                                            {{ shipping.sender.mobilephone }}
+                                        {% endif %}
+                                    </dd>
                                     <dt>Перевозчик:</dt>
                                     <dd>
-                                        <a href="#">
-                                            {% if shipping.carrier is not empty %}
-                                                {{ shipping.carrier.name }}
+                                        {% if shipping.carrier is not empty %}
+                                                <a href="{{ path('binidini_core_profile_show', {'id': shipping.carrier.id} ) }}">{{ shipping.carrier.name }}</a>
+                                                {% if shipping.sender.id == app.user.id %}
+                                            {{ shipping.sender.mobilephone }}
+                                        {% endif %}
                                             {% endif %}
-                                        </a>
                                     </dd>
                                 </dl>
                             </div>

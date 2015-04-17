@@ -140,10 +140,14 @@ liip_imagine:
                 data_root: %kernel.root_dir%/../web/media/pic
 
     filter_sets:
-        photo590x400:
+        photo600x600:
             quality: 75
             filters:
-                thumbnail: { size: [590, 400]}
+                thumbnail: { size: [600, 600], mode: outbound}
+        photo400x400:
+            quality: 75
+            filters:
+                thumbnail: { size: [400, 400], mode: outbound}
         photo200x200:
             quality: 75
             filters:

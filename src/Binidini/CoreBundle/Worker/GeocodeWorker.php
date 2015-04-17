@@ -18,7 +18,8 @@
 
 namespace Binidini\CoreBundle\Worker;
 
-
+use Binidini\SearchBundle\Document\Coordinates;
+use Binidini\SearchBundle\Document\Shipment;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
 use Guzzle\Service\ClientInterface;
@@ -29,7 +30,7 @@ use Proxies\__CG__\Binidini\CoreBundle\Entity\Shipping;
 
 class GeocodeWorker implements ConsumerInterface
 {
-    private $ygeocode;
+    private $geocode;
     private $em;
     private $dm;
 
@@ -93,12 +94,16 @@ class GeocodeWorker implements ConsumerInterface
 
         $this->em->flush($shipping);
 
-        if ($shipment = $this->dm->find('\Binidini\SearchBundle\Document\Shipment', $shipping->getId())) {
+        /** @var  Shipment $shipment */
+        $shipment = $this->dm->find('\Binidini\SearchBundle\Document\Shipment', $shipping->getId());
 
-            $shipment->setPickupLongitude($pLong);
-            $shipment->setPickupLatitude($pLat);
-            $shipment->setDeliveryLongitude($dLong);
-            $shipment->setDeliveryLatitude($dLat);
+        if ($shipment) {
+
+            $pLoc = new Coordinates($pLong, $pLat);
+            $shipment->setPickupCoordinates($pLoc);
+
+            $dLoc = new Coordinates($dLong, $dLat);
+            $shipment->setDeliveryCoordinates($dLoc);
 
             $this->dm->flush($shipment);
         }

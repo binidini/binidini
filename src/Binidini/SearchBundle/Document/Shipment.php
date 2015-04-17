@@ -11,9 +11,11 @@ namespace Binidini\SearchBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Binidini\SearchBundle\Document\Coordinates;
 
 /**
  * @MongoDB\Document (collection = "shipment")
+ * @MongoDB\Index(keys={"pickupCoordinates"="2d"})
  */
 class Shipment
 {
@@ -65,18 +67,9 @@ class Shipment
     private $pickupAddress;
 
     /**
-     * @var double
-     *
-     * @MongoDB\Field(name="pickup_longitude", type="float")
+     * @MongoDB\EmbedOne(targetDocument="Coordinates")
      */
-    private $pickupLongitude;
-
-    /**
-     * @var double
-     *
-     * @MongoDB\Field(name="pickup_latitude", type="float")
-     */
-    private $pickupLatitude;
+    public $pickupCoordinates;
 
     /**
      * @var string
@@ -86,18 +79,9 @@ class Shipment
     private $deliveryAddress;
 
     /**
-     * @var double
-     *
-     * @MongoDB\Field(name="delivery_longitude", type="float")
+     * @MongoDB\EmbedOne(targetDocument="Coordinates")
      */
-    private $deliveryLongitude;
-
-    /**
-     * @var double
-     *
-     * @MongoDB\Field(name="delivery_latitude", type="float")
-     */
-    private $deliveryLatitude;
+    public $deliveryCoordinates;
 
     /**
      * @var \DateTime
@@ -460,91 +444,48 @@ class Shipment
     }
 
 
+
     /**
-     * Set pickupLongitude
+     * Set pickupCoordinates
      *
-     * @param float $pickupLongitude
+     * @param Coordinates $pickupCoordinates
      * @return self
      */
-    public function setPickupLongitude($pickupLongitude)
+    public function setPickupCoordinates(Coordinates $pickupCoordinates)
     {
-        $this->pickupLongitude = $pickupLongitude;
+        $this->pickupCoordinates = $pickupCoordinates;
         return $this;
     }
 
     /**
-     * Get pickupLongitude
+     * Get pickupCoordinates
      *
-     * @return float $pickupLongitude
+     * @return Coordinates $pickupCoordinates
      */
-    public function getPickupLongitude()
+    public function getPickupCoordinates()
     {
-        return $this->pickupLongitude;
+        return $this->pickupCoordinates;
     }
 
     /**
-     * Set pickupLatitude
+     * Set deliveryCoordinates
      *
-     * @param float $pickupLatitude
+     * @param Coordinates $deliveryCoordinates
      * @return self
      */
-    public function setPickupLatitude($pickupLatitude)
+    public function setDeliveryCoordinates(Coordinates $deliveryCoordinates)
     {
-        $this->pickupLatitude = $pickupLatitude;
+        $this->deliveryCoordinates = $deliveryCoordinates;
         return $this;
     }
 
     /**
-     * Get pickupLatitude
+     * Get deliveryCoordinates
      *
-     * @return float $pickupLatitude
+     * @return Coordinates $deliveryCoordinates
      */
-    public function getPickupLatitude()
+    public function getDeliveryCoordinates()
     {
-        return $this->pickupLatitude;
-    }
-
-    /**
-     * Set deliveryLongitude
-     *
-     * @param float $deliveryLongitude
-     * @return self
-     */
-    public function setDeliveryLongitude($deliveryLongitude)
-    {
-        $this->deliveryLongitude = $deliveryLongitude;
-        return $this;
-    }
-
-    /**
-     * Get deliveryLongitude
-     *
-     * @return float $deliveryLongitude
-     */
-    public function getDeliveryLongitude()
-    {
-        return $this->deliveryLongitude;
-    }
-
-    /**
-     * Set deliveryLatitude
-     *
-     * @param float $deliveryLatitude
-     * @return self
-     */
-    public function setDeliveryLatitude($deliveryLatitude)
-    {
-        $this->deliveryLatitude = $deliveryLatitude;
-        return $this;
-    }
-
-    /**
-     * Get deliveryLatitude
-     *
-     * @return float $deliveryLatitude
-     */
-    public function getDeliveryLatitude()
-    {
-        return $this->deliveryLatitude;
+        return $this->deliveryCoordinates;
     }
 }

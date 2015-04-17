@@ -19,8 +19,8 @@ sylius_resource:
             driver: doctrine/mongodb-odm
             classes:
                 model: Binidini\SearchBundle\Document\Shipment
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository
+                controller: Binidini\SearchBundle\Controller\ShipmentController
+                repository: Binidini\SearchBundle\Document\ShipmentRepository
         binidini_core.message:
             driver: doctrine/orm
             classes:

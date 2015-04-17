@@ -270,6 +270,8 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 
         $this->hasCarrierReview = false;
         $this->hasUserReview = false;
+
+        $this->insurance = 0;
     }
 
     public function hold()

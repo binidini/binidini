@@ -121,9 +121,6 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Binidini\CoreBundle\Entity\User
-    from_email:
-        address: %mailer_user%
-        sender_name: Acme Demo Registration
     registration:
         form:
             type: binidini_user_registration

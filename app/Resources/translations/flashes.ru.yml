@@ -4,4 +4,4 @@ binidini_core.message.create: Сообщение отправлено.
 binidini_core.bid.create: Заявка на доставку успешно создана.
 binidini_core.bid.update: Заявка на успешно изменена.
 
-binidini_search.shipment.top_search: %address%
+binidini_search.shipment.top_search: по адресу: %address%

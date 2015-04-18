@@ -72,7 +72,7 @@ parameters:
 
 stof_doctrine_extensions:
     uploadable:
-        default_file_path:       %kernel.root_dir%/../web/media/pic
+        default_file_path:       %kernel.root_dir%/../web/media/img
     orm:
         default:
             loggable: true
@@ -137,21 +137,17 @@ liip_imagine:
     loaders:
         default:
             filesystem:
-                data_root: %kernel.root_dir%/../web/media/pic
+                data_root: %kernel.root_dir%/../web/media/img
 
     filter_sets:
         photo600x600:
             quality: 75
             filters:
-                thumbnail: { size: [600, 600], mode: outbound}
+                thumbnail: { size: [600, 600], mode: inset}
         photo400x400:
             quality: 75
             filters:
-                thumbnail: { size: [400, 400], mode: outbound}
-        photo200x200:
-            quality: 75
-            filters:
-                thumbnail: { size: [200, 200], mode: outbound }
+                thumbnail: { size: [400, 400], mode: inset }
         photo48x48:
             quality: 75
             filters:

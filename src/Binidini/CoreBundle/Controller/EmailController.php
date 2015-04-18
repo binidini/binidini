@@ -51,7 +51,7 @@ class EmailController extends Controller
             $userManager->updateUser($user);
             /** @var $flashBack FlashBag */
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('alert','Ваша почта подтверждена');
+            $flashBag->add('success','Ваша почта подтверждена');
             return RedirectResponse::create($this->generateUrl('fos_user_profile_show'));
         } else {
             throw new NotFoundHttpException("Пользователь не найден");

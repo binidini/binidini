@@ -2,13 +2,13 @@
 
 namespace Binidini\CoreBundle\Entity;
 
-use Binidini\CoreBundle\Exception\AppException;
 use Binidini\CoreBundle\Exception\InsufficientFrozenAmount;
 use Binidini\CoreBundle\Exception\InsufficientUserBalance;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -18,7 +18,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(type="string", name="email_canonical", length=255, unique=false)),
  * })
  *
- * @Gedmo\Uploadable(allowOverwrite=true, filenameGenerator="SHA1")
+ * @Gedmo\Uploadable(
+ *      allowOverwrite=true,
+ *      filenameGenerator="SHA1",
+ *      allowedTypes="image/jpeg,image/pjpeg,image/png,image/x-png, image/gif",
+ *      maxSize = 32000000
+ * )
  *
  */
 class User extends BaseUser
@@ -245,6 +250,8 @@ class User extends BaseUser
 
         $this->smsMask = 0b1111111111111111111111111;
         $this->emailMask = 0b1111111111111111111111111;
+
+        $this->imgPath = 'profile/'.rand(1,40);
     }
 
     public function hold($amount)

@@ -144,10 +144,6 @@ liip_imagine:
             quality: 75
             filters:
                 thumbnail: { size: [600, 600], mode: inset}
-        photo400x400:
-            quality: 75
-            filters:
-                thumbnail: { size: [400, 400], mode: inset }
         photo48x48:
             quality: 75
             filters:

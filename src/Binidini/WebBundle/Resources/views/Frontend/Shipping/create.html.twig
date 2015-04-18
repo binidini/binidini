@@ -40,22 +40,6 @@
                                     <div class="col-lg-10">
                                         {{ form_errors(form.pickupAddress) }}
                                         {{ form_widget(form.pickupAddress, {'id': 'pickup-address', 'attr': {'class': 'form-control', 'placeholder': 'Адрес отправки'}}) }}
-                                        {{ form_errors(form.pickupLongitude) }}
-                                        {{ form_widget(form.pickupLongitude, {'id': 'pickup-longitude'}) }}
-                                        {{ form_errors(form.pickupLatitude) }}
-                                        {{ form_widget(form.pickupLatitude, {'id': 'pickup-latitude'}) }}
-                                    </div>
-                                </div>
-                                <div class="hr-line-dashed"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label">Отправление*</label>
-
-                                    <div class="col-lg-3">
-                                        {{ form_widget(form.pickupDatetime, {'attr': {'class': 'form-control', 'placeholder': 'дд.мм.гг чч:мм', 'data-mask': '99.99.99 99:99'}}) }}
-                                    </div>
-                                    <div class="col-lg-7">
-                                        {{ form_errors(form.pickupDatetime) }}
-                                        <span class="help-block m-b-none">Крайнее время отправления. Например, 23.11.15 02:45</span>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -65,18 +49,14 @@
                                     <div class="col-lg-10">
                                         {{ form_errors(form.deliveryAddress) }}
                                         {{ form_widget(form.deliveryAddress, {'id': 'delivery-address', 'attr': {'class': 'form-control', 'placeholder': 'Адрес назначения'}}) }}
-                                        {{ form_errors(form.deliveryLongitude) }}
-                                        {{ form_widget(form.deliveryLongitude, {'id': 'delivery-longitude'}) }}
-                                        {{ form_errors(form.deliveryLatitude) }}
-                                        {{ form_widget(form.deliveryLatitude, {'id': 'delivery-latitude'}) }}
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
-                                <div class="form-group">
+                                <div class="form-group date">
                                     <label class="col-lg-2 control-label">Прибытие*</label>
 
                                     <div class="col-lg-3">
-                                        {{ form_widget(form.deliveryDatetime, {'attr': {'class': 'form-control', 'placeholder': 'дд.мм.гг чч:мм', 'data-mask': '99.99.99 99:99'}}) }}
+                                        {{ form_widget(form.deliveryDatetime, {'id': 'datetimepicker1', 'attr': {'class': 'form-control', 'placeholder': 'дд.мм.гг чч:мм', 'data-mask': '99.99.99 99:99'}}) }}
                                     </div>
                                     <div class="col-lg-7">
                                         {{ form_errors(form.deliveryDatetime) }}
@@ -99,12 +79,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label">Гарантия</label>
                                     <div class="col-lg-2">
-                                        <label class="checkbox-inline i-checks">
-                                            <div class="icheckbox_square-green" style="position: relative;">
-                                                {{ form_widget(form.paymentGuarantee, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
-                                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                                            </div>
-                                        </label>
+                                        {{ form_widget(form.paymentGuarantee, {'attr': {'class': 'checkbox-inline i-checks', 'style': 'position: absolute; opacity: 0;'}}) }}
                                     </div>
                                     <div class="col-lg-8">
                                         {{ form_errors(form.paymentGuarantee) }}
@@ -180,6 +155,7 @@
                                     </div>
                                 </div>
 
+
                                 {{ form_rest(form) }}
 
                                 {{ form_end(form) }}
@@ -201,12 +177,15 @@
 {% block stylesheets %}
     {{  parent() }}
     <link href="{{ asset('bundles/binidiniweb/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/binidiniweb/css/plugins/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/binidiniweb/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
     <script src="{{ asset('bundles/binidiniweb/js/plugins/iCheck/icheck.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/moment/moment-with-locales.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
 
     <!-- iCheck -->
     <script type="text/javascript">
@@ -225,6 +204,11 @@
             var suggestView1 = new ymaps.SuggestView('pickup-address');
             var suggestView2 = new ymaps.SuggestView('delivery-address');
         }
+
+        $('#datetimepicker1').datetimepicker({
+            locale: 'ru',
+            format: 'DD.MM.YY HH:mm'
+        });
 
     </script>
 

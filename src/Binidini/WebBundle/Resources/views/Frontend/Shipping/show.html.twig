@@ -112,16 +112,17 @@
                             <div class="col-lg-5" id="cluster_info">
                                 <dl class="dl-horizontal">
 
-                                    <dt>Отправка:</dt>
-                                    <dd>{{ shipping.pickupDatetime | date('d.m.y H:i') }} крайнее время</dd>
                                     <dt>Прибытие:</dt>
                                     <dd>{{ shipping.deliveryDatetime | date('d.m.y H:i') }} крайнее время</dd>
+                                    <dt>Создан:</dt>
+                                    <dd>{{ shipping.createdAt | date('d.m.y H:i') }}</dd>
                                     <dt>Вес:</dt>
                                     <dd>{{ shipping.weight | default('~') | weight }}</dd>
                                     <dt>Габариты:</dt>
                                     <dd>{{ shipping.x | default(0) }}x{{ shipping.y | default(0) }}
                                         x{{ shipping.z | default(0) }} см
                                     </dd>
+
                                 </dl>
                             </div>
                         </div>

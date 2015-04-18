@@ -179,9 +179,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="pickup_datetime", type="datetime")
-     * @Assert\NotBlank()
-     * @Assert\DateTime()
+     * @ORM\Column(name="pickup_datetime", type="datetime", nullable=true   )
      */
     private $pickupDatetime;
 
@@ -272,6 +270,10 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         $this->hasUserReview = false;
 
         $this->insurance = 0;
+
+        $this->deliveryDatetime = new \DateTime();
+        $this->deliveryDatetime->modify('+3 hours');
+        $this->deliveryDatetime->setTimestamp(floor($this->deliveryDatetime->getTimestamp() / 3600) * 3600);
     }
 
     public function hold()

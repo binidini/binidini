@@ -47,7 +47,6 @@ class ShippingListener
             ->setDeliveryAddress($shipping->getDeliveryAddress())
             ->setDeliveryDatetime($shipping->getDeliveryDatetime())
             ->setPickupAddress($shipping->getPickupAddress())
-            ->setPickupDatetime($shipping->getPickupDatetime())
             ->setName($shipping->getName())
             ->setDescription($shipping->getDescription())
             ->setWeight($shipping->getWeight())

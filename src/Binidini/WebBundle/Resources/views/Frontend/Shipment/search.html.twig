@@ -63,7 +63,6 @@
                                         <th>Что</th>
                                         <th>Откуда</th>
                                         <th>Куда</th>
-                                        <th>{{ sylius_resource_sort('pickupDatetime', 'Отправка', 'desc') }}</th>
                                         <th>{{ sylius_resource_sort('deliveryDatetime', 'Доставка', 'desc') }}</th>
                                         <th class="text-right">{{ sylius_resource_sort('deliveryPrice', 'Цена', 'desc') }}</th>
                                     </tr>
@@ -77,7 +76,6 @@
                                             <td>{{ shipment.name[:24] }}</td>
                                             <td>{{ shipment.pickupAddress[:64] }}</td>
                                             <td>{{ shipment.deliveryAddress[:64] }}</td>
-                                            <td>{{ shipment.pickupDatetime | date('d.m H:i') }}</td>
                                             <td>{{ shipment.deliveryDatetime | date('d.m H:i') }}</td>
                                             <td class="text-right">{{ shipment.deliveryPrice | price }}</td>
                                         </tr>

@@ -3,21 +3,8 @@
 
 {% extends 'BinidiniWebBundle::layout.html.twig' %}
 
-{% block pagetitle %}
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-sm-12">
-            <h2>Мои перевозки</h2>
+{% block pageheader %}Мои перевозки{% endblock %}
 
-            {% for type, messages in app.session.flashbag.all() %}
-                {% for message in messages %}
-                    <div class="text-{{ type }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        </div>
-    </div>
-{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -79,7 +66,7 @@
                                         <th>Что</th>
                                         <th>Откуда</th>
                                         <th>Куда</th>
-                                        <th>{{ sylius_resource_sort('deliveryDatetime', 'Доставка', 'desc') }}</th>
+                                        <th>{{ sylius_resource_sort('deliveryDatetime', 'Прибытие', 'desc') }}</th>
                                         <th>Статус</th>
                                         <th class="text-right">Цена</th>
                                     </tr>

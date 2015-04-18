@@ -74,8 +74,6 @@
                                         {{ shipping.deliveryPrice | price }}
                                         {% if shipping.paymentGuarantee %}
                                             <span class="badge badge-primary"><i class="fa fa-thumbs-up"></i> гарантирована</span>
-                                        {% else %}
-                                            <span class="badge badge-warning"><i class="fa fa-exclamation-triangle"></i> без гарантий</span>
                                         {% endif %}
                                     </dd>
                                     <dt>Страховка:</dt>
@@ -119,8 +117,7 @@
                                     <dt>Вес:</dt>
                                     <dd>{{ shipping.weight | default('~') | weight }}</dd>
                                     <dt>Габариты:</dt>
-                                    <dd>{{ shipping.x | default(0) }}x{{ shipping.y | default(0) }}
-                                        x{{ shipping.z | default(0) }} см
+                                    <dd>{{ shipping.x | default(0) }}x{{ shipping.y | default(0) }}x{{ shipping.z | default(0) }} см
                                     </dd>
 
                                 </dl>

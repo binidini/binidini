@@ -125,7 +125,6 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @var integer
      *
      * @ORM\Column(name="insurance", type="integer", options={"default" = 0})
-     * @Assert\NotBlank()
      * @Assert\Range(min=0)
      */
     private $insurance;
@@ -268,8 +267,6 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 
         $this->hasCarrierReview = false;
         $this->hasUserReview = false;
-
-        $this->insurance = 0;
 
         $this->deliveryDatetime = new \DateTime();
         $this->deliveryDatetime->modify('+3 hours');

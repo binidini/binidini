@@ -3,7 +3,7 @@
 
 {% extends 'BinidiniWebBundle::layout.html.twig' %}
 
-{% block pageheader %}Детализация заказа{% endblock %}
+{% block pageheader %}Мои отправки{% endblock %}
 
 {% block actions %}
     <a href="{{ path('binidini_core_shipping_new') }}" class="btn btn-primary btn-outline"><i class="fa fa-plus-square"></i> Новый заказ</a>
@@ -69,7 +69,7 @@
                                         <th>Что</th>
                                         <th>Откуда</th>
                                         <th>Куда</th>
-                                        <th>{{ sylius_resource_sort('deliveryDatetime', 'Доставка', 'desc') }}</th>
+                                        <th>{{ sylius_resource_sort('deliveryDatetime', 'Прибытие', 'desc') }}</th>
                                         <th>Статус</th>
                                         <th class="text-right">Цена</th>
                                     </tr>

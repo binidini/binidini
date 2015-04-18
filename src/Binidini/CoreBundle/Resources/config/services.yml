@@ -33,6 +33,7 @@ services:
             - @old_sound_rabbit_mq.binidini_geocode_producer
         tags:
             - { name: kernel.event_listener, event: binidini_core.shipping.post_create, method: onShippingPostCreate }
+            - { name: kernel.event_listener, event: binidini_core.shipping.pre_create, method: onShippingPreCreate }
 
     binidini.listener.bid:
         class: Binidini\CoreBundle\EventListener\BidListener

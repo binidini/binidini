@@ -251,7 +251,7 @@ class User extends BaseUser
         $this->smsMask = 0b1111111111111111111111111;
         $this->emailMask = 0b1111111111111111111111111;
 
-        $this->imgPath = 'profile/'.rand(1,40);
+        $this->imgPath = 'profile/'.rand(1,40).'.jpg';
     }
 
     public function hold($amount)
@@ -309,7 +309,7 @@ class User extends BaseUser
         $name = trim($name);
 
         if (empty($name)) {
-            $name = $this->getMobileMask();
+            $name = $this->getMobileXXX();
         }
 
         return $name;

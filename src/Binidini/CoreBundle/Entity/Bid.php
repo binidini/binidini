@@ -90,7 +90,6 @@ class Bid implements UserAwareInterface, SenderCarrierAwareInterface
      */
     private $updatedAt;
 
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();

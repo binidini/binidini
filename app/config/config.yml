@@ -186,3 +186,9 @@ old_sound_rabbit_mq:
             exchange_options: {name: 'binidini-geocode', type: direct}
             queue_options:    {name: 'binidini-geocode'}
             callback:         binidini.geocode_worker
+
+doctrine_migrations:
+    dir_name: %kernel.root_dir%/DoctrineMigrations
+    namespace: Binidini\Migrations
+    table_name: migration_versions
+    name: Binidini Migrations

@@ -36,6 +36,7 @@ class EmailWorker implements ConsumerInterface
     public function execute(AMQPMessage $msg)
     {
         $data = unserialize($msg->body);
+        var_dump($data);
         $mime = isset($data['mime']) ? $data['mime'] : 'text/plain';
         $message = $this->mailer->createMessage()
             ->setSubject($data['subject'])

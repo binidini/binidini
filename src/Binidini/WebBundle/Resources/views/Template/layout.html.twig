@@ -1,56 +1,57 @@
 <head>
     <meta http-equiv="Content-Type" content=«text/html; charset=utf-8»>
 </head>
-<table class="body-wrap" style="background-color: #f6f6f6;">
+<table width="100%" align="center" style="background-color: #f6f6f6;">
     <tbody>
     <tr>
         <td></td>
         {% block container %}
-        <td class="container" width="600" style="display: block !important;max-width: 600px !important;margin: 0 auto !important;clear: both !important;">
-            {% block content %}
-                <div class="content" style="max-width: 600px;margin: 0 auto;display: block;padding: 20px 20px 0 20px;;">
-                {% block main %}
-                <table class="main" width="100%" cellpadding="0" cellspacing="0" style="background: #fff;border: 1px solid #e9e9e9;border-radius: 3px;">
-                    <tbody>
-                    <tr>
-                        {% block content_header %}
-
-                        {% endblock %}
-                    </tr>
-                    <tr>
-                        {% block content_wrap %}
-                        <td class="content-wrap" style="padding: 20px;">
-                            <table width="100%" cellpadding="0" cellspacing="0">
-                                <tbody>
-                                {% block content_body %}
+            <td width="600"
+                style="display: block !important;max-width: 600px !important;margin: 10px auto !important;clear: both !important;">
+                {% block content %}
+                    {% block main %}
+                        <table width="100%" align="100%" cellpadding="0" cellspacing="0"
+                               style="background: #fff;border: 1px solid #e9e9e9;border-radius: 3px;">
+                            <tbody>
+                            <tr>
+                                {% block content_header %}
 
                                 {% endblock %}
+                            </tr>
+                            <tr>
+                                {% block content_wrap %}
+                                    <td style="padding: 20px;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tbody>
+                                            {% block content_body %}
+
+                                            {% endblock %}
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                {% endblock %}
+                            </tr>
+                            </tbody>
+                        </table>
+                    {% endblock %}
+                    {% block footer %}
+                        <div style="width: 100%;clear: both;color: #999;padding: 20px; font-size: 12px;">
+                            <table width="100%">
+                                <tbody>
+                                {% block footer_content %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ url('fos_user_profile_edit') }}"
+                                           style="color: #999;">Настроить</a> уведомления.
+                                    </td>
+                                </tr>
                                 </tbody>
+                                {% endblock %}
                             </table>
-                        </td>
-                        {% endblock %}
-                    </tr>
-                    </tbody>
-                </table>
+                        </div>
+                    {% endblock %}
                 {% endblock %}
-                {% block footer %}
-                <div class="footer" style="width: 100%;clear: both;color: #999;padding: 20px; font-size: 12px;">
-                    <table width="100%">
-                        <tbody>
-                        {% block footer_content %}
-                        <tr>
-                            <td class="aligncenter content-block">
-                                <a href="{{ url('fos_user_profile_edit') }}" style="color: #999;">Настроить</a> уведомления.
-                            </td>
-                        </tr>
-                        </tbody>
-                        {% endblock %}
-                    </table>
-                </div>
-                {% endblock %}
-            </div>
-            {% endblock %}
-        </td>
+            </td>
         {% endblock %}
         <td></td>
     </tr>

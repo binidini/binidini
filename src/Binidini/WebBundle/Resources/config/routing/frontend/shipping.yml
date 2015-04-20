@@ -7,7 +7,7 @@ binidini_core_shipping_new:
             template: BinidiniWebBundle:Frontend/Shipping:create.html.twig
 
 binidini_core_shipping_index:
-    path: /shipping
+    path: /sender/shipping
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.shipping:indexAction
@@ -20,7 +20,7 @@ binidini_core_shipping_index:
             criteria:
                 user: ['expr:service("security.context").getToken().getUser().getId()']
                 state: $state
-            template: BinidiniWebBundle:Frontend/Shipping:index.html.twig
+            template: BinidiniWebBundle:Frontend/Shipping:sender_index.html.twig
 
 
 binidini_core_shipping_show:
@@ -33,7 +33,7 @@ binidini_core_shipping_show:
 
 
 binidini_core_carrier_index:
-    path: /transports
+    path: /carrier/shipping
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.shipping:indexAction
@@ -46,7 +46,7 @@ binidini_core_carrier_index:
             criteria:
                 carrier: ['expr:service("security.context").getToken().getUser().getId()']
                 state: $state
-            template: BinidiniWebBundle:Frontend/Shipping:transports.html.twig
+            template: BinidiniWebBundle:Frontend/Shipping:carrier_index.html.twig
 
 binidini_core_shipping_state_transition:
     path: /shipping/{id}/state/{transition}
@@ -60,4 +60,4 @@ binidini_core_shipping_history_index:
     defaults:
         _controller: binidini_core.controller.shipping:historyIndexAction
         _sylius:
-            template: BinidiniWebBundle:Frontend/Shipping:history-index.html.twig
+            template: BinidiniWebBundle:Frontend/Shipping:history_index.html.twig

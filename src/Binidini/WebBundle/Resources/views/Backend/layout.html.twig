@@ -1,0 +1,161 @@
+{% macro is_current_route(route) %}
+    {%- if app.request.attributes.get('_route') == route -%}
+        {{- 'class="active"' -}}
+    {%- endif -%}
+{% endmacro %}
+
+{% import _self as croute %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            Титимити - p2p сервис доставки
+        {% endblock %}
+    </title>
+
+    {% block stylesheets %}
+        <link href="{{ asset('bundles/binidiniweb/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/binidiniweb/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/binidiniweb/css/animate.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/binidiniweb/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/binidiniweb/css/main.css') }}" rel="stylesheet">
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<body class="skin-1">
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span>
+                            {% if app.user.imgPath %}
+                                <img alt="image" class="img-circle" src="{{ app.user.imgPath|imagine_filter('photo48x48') }}" />
+                            {% else %}
+                                <img alt="image" class="img-circle" src="{{ asset('bundles/binidiniweb/img/logo48x48.png') }}" />
+                            {% endif %}
+                        </span>
+                        <a href="">
+                            <span class="block m-t-xs"> <strong class="font-bold">{{ app.user.name }}</strong></span>
+                        </a>
+                    </div>
+
+
+                    <div class="logo-element">
+                        bd
+                    </div>
+                </li>
+                <li {{ croute.is_current_route('binidini_core_carrier_index') }}>
+                    <a href="#"><i class="fa fa-truck"></i> <span class="nav-label">Заказы</span></a>
+                </li>
+                <li {{ croute.is_current_route('binidini_core_shipping_index') }}>
+                    <a href="#"><i class="fa fa-delicious"></i> <span class="nav-label">Споры</span></a>
+                </li>
+                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
+                    <a href="#"><i class="fa fa-bar-chart"></i> <span class="nav-label">Отчеты</span> </a>
+                </li>
+                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
+                    <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">Настройки</span> </a>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" method="get" action="{{ path('binidini_search_shipment_search') }}">
+                        <div class="form-group">
+                            <input type="text" placeholder="Поиск заказа по адресу" class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">Титимити 24/7</span>
+                    </li>
+                    {% render path('binidini_user_bids_accepted') %}
+                    {% render path('binidini_sender_bids_new') %}
+                    <li>
+                        <a href="{{ path("fos_user_security_logout") }}">
+                            <i class="fa fa-sign-out"></i> Выход
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+
+        {% block pagetitle %}
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-6">
+                    <h2>{% block pageheader %}Заголовок{% endblock %}</h2>
+                    {% block flashes %}
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="text-{{ type }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endblock %}
+                </div>
+                <div class="col-sm-6">
+                    <div class="title-action">
+                        {% block actions %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block content %}{% endblock %}
+
+        <div class="footer">
+            <div class="pull-right">
+                <strong>Титимити</strong> - p2p сервис доставки.
+            </div>
+            <div>
+                <strong>Copyright</strong> Титимити &copy; 2015
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/binidiniweb/js/jquery-2.1.1.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+
+    <script src="{{ asset('bundles/binidiniweb/js/inspinia.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/common.js') }}"></script>
+    <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+
+    <script type="text/javascript">
+        ymaps.ready(init0);
+
+
+        function init0(){
+            var suggestView = new ymaps.SuggestView('top-search');
+        }
+    </script>
+{% endblock %}
+</body>
+</html>

@@ -1,6 +1,6 @@
 {% import 'BinidiniWebBundle:Frontend/Macros:page.html.twig' as page %}
 
-{% extends 'BinidiniWebBundle::layout.html.twig' %}
+{% extends 'BinidiniWebBundle::layout'~layout~'.html.twig' %}
 
 {% block pageheader %}Поиск заказа{% endblock %}
 
@@ -63,9 +63,8 @@
                                         <th>Что</th>
                                         <th>Откуда</th>
                                         <th>Куда</th>
-                                        <th>{{ sylius_resource_sort('pickupDatetime', 'Отправка', 'desc') }}</th>
-                                        <th>{{ sylius_resource_sort('deliveryDatetime', 'Доставка', 'desc') }}</th>
-                                        <th class="text-right">{{ sylius_resource_sort('deliveryPrice', 'Цена', 'desc') }}</th>
+                                        <th>{{ sylius_resource_sort('deliveryDatetime', 'Прибытие', 'desc') }}</th>
+                                        <th class="text-right text-center" colspan="2">{{ sylius_resource_sort('deliveryPrice', 'Цена/Страховка', 'desc') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -77,9 +76,17 @@
                                             <td>{{ shipment.name[:24] }}</td>
                                             <td>{{ shipment.pickupAddress[:64] }}</td>
                                             <td>{{ shipment.deliveryAddress[:64] }}</td>
-                                            <td>{{ shipment.pickupDatetime | date('d.m H:i') }}</td>
                                             <td>{{ shipment.deliveryDatetime | date('d.m H:i') }}</td>
-                                            <td class="text-right">{{ shipment.deliveryPrice | price }}</td>
+                                            <td>
+                                                <span class="{{ shipment.paymentGuarantee ? 'text-success' }} pull-right">
+                                                    {{ shipment.deliveryPrice | price }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                {% if shipment.insurance > 0 %}
+                                                    {{ shipment.insurance | price }}
+                                                {% endif %}
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

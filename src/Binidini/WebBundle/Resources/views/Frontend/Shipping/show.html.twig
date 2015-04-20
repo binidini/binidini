@@ -74,8 +74,6 @@
                                         {{ shipping.deliveryPrice | price }}
                                         {% if shipping.paymentGuarantee %}
                                             <span class="badge badge-primary"><i class="fa fa-thumbs-up"></i> гарантирована</span>
-                                        {% else %}
-                                            <span class="badge badge-warning"><i class="fa fa-exclamation-triangle"></i> без гарантий</span>
                                         {% endif %}
                                     </dd>
                                     <dt>Страховка:</dt>
@@ -92,30 +90,36 @@
                                     <dt>Куда:</dt>
                                     <dd>{{ shipping.deliveryAddress }}</dd>
                                     <dt>Отправитель:</dt>
-                                    <dd><a href="#">{{ shipping.user.name }}</a></dd>
+                                    <dd>
+                                        <a href="{{ path('binidini_core_profile_show', {'id': shipping.sender.id}) }}">{{ shipping.sender.name }}</a>
+                                        {% if (shipping.carrier is not empty) and (shipping.carrier.id == app.user.id) %}
+                                            {{ shipping.sender.mobilephone }}
+                                        {% endif %}
+                                    </dd>
                                     <dt>Перевозчик:</dt>
                                     <dd>
-                                        <a href="#">
-                                            {% if shipping.carrier is not empty %}
-                                                {{ shipping.carrier.name }}
+                                        {% if shipping.carrier is not empty %}
+                                                <a href="{{ path('binidini_core_profile_show', {'id': shipping.carrier.id} ) }}">{{ shipping.carrier.name }}</a>
+                                                {% if shipping.sender.id == app.user.id %}
+                                            {{ shipping.sender.mobilephone }}
+                                        {% endif %}
                                             {% endif %}
-                                        </a>
                                     </dd>
                                 </dl>
                             </div>
                             <div class="col-lg-5" id="cluster_info">
                                 <dl class="dl-horizontal">
 
-                                    <dt>Отправка:</dt>
-                                    <dd>{{ shipping.pickupDatetime | date('d.m.y H:i') }} крайнее время</dd>
                                     <dt>Прибытие:</dt>
                                     <dd>{{ shipping.deliveryDatetime | date('d.m.y H:i') }} крайнее время</dd>
+                                    <dt>Создан:</dt>
+                                    <dd>{{ shipping.createdAt | date('d.m.y H:i') }}</dd>
                                     <dt>Вес:</dt>
                                     <dd>{{ shipping.weight | default('~') | weight }}</dd>
                                     <dt>Габариты:</dt>
-                                    <dd>{{ shipping.x | default(0) }}x{{ shipping.y | default(0) }}
-                                        x{{ shipping.z | default(0) }} см
+                                    <dd>{{ shipping.x | default(0) }}x{{ shipping.y | default(0) }}x{{ shipping.z | default(0) }} см
                                     </dd>
+
                                 </dl>
                             </div>
                         </div>

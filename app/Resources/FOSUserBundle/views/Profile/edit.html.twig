@@ -40,19 +40,24 @@
                                             <div class="tab-pane active" id="tab-1">
                                                 <div class="row">
                                                     <div class="col-md-4 ">
-                                                        <a href="#" class="thumbnail" style="width: 208px;height: 208px">
-                                                            <div id="thumbnail" class="preview" style="background-image: url('{{ user.imgPath | imagine_filter('photo200x200') }}')"></div>
-                                                        </a>
-                                                        <span class="btn btn-default btn-file">{{ user.imgPath? 'Изменить фотографию': 'Загрузить фотографию' }} {{ form_widget(form.imgPath,{'id':'imgUpload', 'data': user.imgPath}) }}</span>
+                                                        {{ form_errors(form.imgPath) }}
+                                                        <img alt="image" class="img-responsive" id="photo"
+                                                             src="{{ user.imgPath | imagine_filter('photo600x600') }}">
+                                                        <a class="btn-file">{{ user.imgPath? 'Изменить фотографию': 'Загрузить фотографию' }} {{ form_widget(form.imgPath,{'id':'imgUpload', 'data': user.imgPath}) }}</a>
+                                                        <div class="help-block">
+                                                            Вы можете загрузить изображение в формате JPG, GIF или PNG.
+                                                            Если у Вас возникают проблемы с загрузкой, попробуйте выбрать фотографию меньшего размера.
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">
-                                                                Тип аккаунта:
+                                                                Вы:
                                                             </label>
 
                                                             <div class="col-sm-5 profile-type">
                                                                 {{ form_widget(form.type, {'attr':{'class':'radio i-checks'}}) }}
+                                                                {{ form_errors(form.type) }}
                                                             </div>
 
                                                         </div>
@@ -61,6 +66,7 @@
 
                                                             <div class="col-sm-5 no-padding">
                                                                 {{ form_widget(form.companyName, {'attr': {'class': 'form-control', 'placeholder': 'Название компании'}, 'data':user.companyName}) }}
+                                                                {{ form_errors(form.companyName) }}
                                                             </div>
                                                         </div>
                                                         <div class="form-group no-margins company-field {{ not isItCompany?'hide' }}">
@@ -76,6 +82,7 @@
                                                             <label class="col-sm-3 control-label">Фамилия:</label>
                                                             <div class="col-sm-5 no-padding">
                                                                 {{ form_widget(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Фамилия'}, 'data':user.lastname}) }}
+                                                                {{ form_errors(form.lastName) }}
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
@@ -83,8 +90,6 @@
 
                                                             <div class="col-sm-5 no-padding">
                                                                 {{ form_widget(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'Имя'}, 'data':user.firstname}) }}
-                                                            </div>
-                                                            <div class="col-sm-5 no-padding">
                                                                 {{ form_errors(form.firstName) }}
                                                             </div>
                                                         </div>
@@ -93,8 +98,6 @@
 
                                                             <div class="col-sm-5 no-padding">
                                                                 {{ form_widget(form.patronymic, {'attr': {'class': 'form-control', 'placeholder': 'Отчество'}, 'data':user.patronymic}) }}
-                                                            </div>
-                                                            <div class="col-sm-5 no-padding">
                                                                 {{ form_errors(form.patronymic) }}
                                                             </div>
                                                         </div>
@@ -106,8 +109,6 @@
 
                                                             <div class="col-sm-5 no-padding">
                                                                 {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}, 'data':user.email}) }}
-                                                            </div>
-                                                            <div class="col-sm-5 no-padding">
                                                                 {{ form_errors(form.email) }}
                                                             </div>
                                                         </div>
@@ -116,8 +117,6 @@
 
                                                             <div class="col-sm-5 no-padding">
                                                                 {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': 'Адрес'}, 'data':user.address}) }}
-                                                            </div>
-                                                            <div class="col-sm-5 no-padding">
                                                                 {{ form_errors(form.address) }}
                                                             </div>
                                                         </div>
@@ -128,8 +127,6 @@
                                                             <div class="col-sm-5 no-padding">
 
                                                                 {{ form_widget(form.aboutMe, {'attr': {'class': 'form-control', 'placeholder': 'О себе'}, 'data':user.aboutme}) }}
-                                                            </div>
-                                                            <div class="col-sm-5 no-padding">
                                                                 {{ form_errors(form.aboutMe) }}
                                                             </div>
                                                         </div>
@@ -250,22 +247,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-
                                                                 <td>2</td>
-                                                                <td>Заказ принят</td>
-                                                                <td>
-                                                                    <label class="checkbox-inline i-checks">
-                                                                        {{ form_widget(form.smsBidAgreeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
-                                                                    </label>
-                                                                </td>
-                                                                <td>
-                                                                    <label class="checkbox-inline i-checks">
-                                                                        {{ form_widget(form.emailBidAgreeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
-                                                                    </label>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
                                                                 <td>Заявка отозвана</td>
                                                                 <td>
                                                                     <label class="checkbox-inline i-checks">
@@ -275,6 +257,21 @@
                                                                 <td>
                                                                     <label class="checkbox-inline i-checks">
                                                                         {{ form_widget(form.emailBidRecallNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+
+                                                                <td>3</td>
+                                                                <td>Заказ принят</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.smsBidAgreeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.emailBidAgreeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
                                                             </tr>
@@ -370,7 +367,7 @@
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#thumbnail').css("background-image", "url(" + this.result + ")");
+                    $("#photo").attr("src",this.result);
                 };
                 reader.readAsDataURL(input.files[0]);
             }

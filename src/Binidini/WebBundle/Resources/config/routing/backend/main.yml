@@ -1,0 +1,5 @@
+binidini_admin_home:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Backend/index.html.twig

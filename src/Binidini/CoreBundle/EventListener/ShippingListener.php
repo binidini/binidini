@@ -29,6 +29,18 @@ class ShippingListener
         $this->geocodeProducer = $geocodeProducer;
     }
 
+    public function onShippingPreCreate(ResourceEvent $event)
+    {
+        /**
+         * @var \Binidini\CoreBundle\Entity\Shipping $shipping
+         */
+        $shipping = $event->getSubject();
+
+        if (is_null($shipping->getInsurance())) {
+            $shipping->setInsurance(0);
+        }
+    }
+
     /**
      * Copy shipping into mongodb
      */
@@ -47,7 +59,6 @@ class ShippingListener
             ->setDeliveryAddress($shipping->getDeliveryAddress())
             ->setDeliveryDatetime($shipping->getDeliveryDatetime())
             ->setPickupAddress($shipping->getPickupAddress())
-            ->setPickupDatetime($shipping->getPickupDatetime())
             ->setName($shipping->getName())
             ->setDescription($shipping->getDescription())
             ->setWeight($shipping->getWeight())

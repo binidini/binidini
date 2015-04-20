@@ -2,13 +2,13 @@
 
 namespace Binidini\CoreBundle\Entity;
 
-use Binidini\CoreBundle\Exception\AppException;
 use Binidini\CoreBundle\Exception\InsufficientFrozenAmount;
 use Binidini\CoreBundle\Exception\InsufficientUserBalance;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -18,7 +18,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(type="string", name="email_canonical", length=255, unique=false)),
  * })
  *
- * @Gedmo\Uploadable(allowOverwrite=true, filenameGenerator="SHA1")
+ * @Gedmo\Uploadable(
+ *      allowOverwrite=true,
+ *      filenameGenerator="SHA1",
+ *      allowedTypes="image/jpeg,image/pjpeg,image/png,image/x-png, image/gif",
+ *      maxSize = 32000000
+ * )
  *
  */
 class User extends BaseUser
@@ -245,6 +250,8 @@ class User extends BaseUser
 
         $this->smsMask = 0b1111111111111111111111111;
         $this->emailMask = 0b1111111111111111111111111;
+
+        $this->imgPath = 'profile/'.rand(1,40).'.jpg';
     }
 
     public function hold($amount)
@@ -266,14 +273,20 @@ class User extends BaseUser
         $this->balance += $amount;
     }
 
-    public function getMobileMask()
+
+    public function getEmailXXX()
+    {
+        return preg_replace('/(.*)@(.*)/', 'xxxxxx@${2}', $this->getEmailCanonical());
+    }
+
+    public function getMobileXXX()
     {
         return preg_replace('/(\d{3})\d{3}(\d{4})/', '+7 (${1}) xxx${2}', $this->getUsername());
     }
 
     public function getMobilePhone()
     {
-        return sprintf('+7%1$s', $this->getUsername());
+        return preg_replace('/(\d{3})(\d{7})/', '+7 (${1}) ${2}', $this->getUsername());
     }
 
     /**
@@ -296,7 +309,7 @@ class User extends BaseUser
         $name = trim($name);
 
         if (empty($name)) {
-            $name = $this->getMobileMask();
+            $name = $this->getMobileXXX();
         }
 
         return $name;

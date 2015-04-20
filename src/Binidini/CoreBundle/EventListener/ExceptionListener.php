@@ -10,6 +10,8 @@
 namespace Binidini\CoreBundle\EventListener;
 
 use Binidini\CoreBundle\Exception\AppException;
+use Gedmo\Exception\UploadableInvalidMimeTypeException;
+use Gedmo\Exception\UploadableMaxSizeException;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,9 +36,16 @@ class ExceptionListener
         $request = $event->getRequest();
 
         if ($exception instanceof AppException) {
-
             $this->session->getFlashBag()->add('error', $exception->getMessage());
+            $event->setResponse(new RedirectResponse($this->getRedirectReferer($request)));
+        }
+        if ($exception instanceof UploadableInvalidMimeTypeException) {
+            $this->session->getFlashBag()->add('error', 'Вы можете загрузить изображение в формате JPG, GIF или PNG');
+            $event->setResponse(new RedirectResponse($this->getRedirectReferer($request)));
+        }
 
+        if ($exception instanceof  UploadableMaxSizeException) {
+            $this->session->getFlashBag()->add('error', 'Файл с фотографией превышает допустимый размер.');
             $event->setResponse(new RedirectResponse($this->getRedirectReferer($request)));
         }
 

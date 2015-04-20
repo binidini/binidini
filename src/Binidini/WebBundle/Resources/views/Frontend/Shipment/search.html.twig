@@ -36,6 +36,7 @@
                                         <a href="{{ path('binidini_search_shipment_index', {'paginate': 50, 'state': app.request.get('state') } ) }}">по
                                             50 записей</a>
                                     </li>
+
                                     <li>
                                         <a href="{{ path('binidini_search_shipment_index', {'paginate': 100, 'state': app.request.get('state') } ) }}">по
                                             100 записей</a>
@@ -43,9 +44,7 @@
                                 </ul>
 
                             </div>
-                        {% else %}
-                            заказов нет
-                        {% endif %}
+                        {% else %}заказов нет{% endif %}
                     </div>
                     <div class="ibox-content">
                         <div class="row">

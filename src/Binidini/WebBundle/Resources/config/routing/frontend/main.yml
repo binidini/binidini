@@ -14,7 +14,7 @@ binidini_home:
             criteria:
                 user: ['expr:service("security.context").getToken().getUser().getId()']
                 state: $state
-            template: BinidiniWebBundle:Frontend/Shipping:index.html.twig
+            template: BinidiniWebBundle:Frontend/Shipping:sender_index.html.twig
 
 binidini_shipping:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/shipping.yml

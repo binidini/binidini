@@ -12,7 +12,7 @@
 {% block content %}
     <div class="wrapper wrapper-content">
         <div class="row animated fadeInRight">
-            <div class="col-md-4">
+            <div class="col-sm-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>О {{ isItCompany? 'компании': 'пользователе' }}</h5>
@@ -61,7 +61,7 @@
                             {% endif %}
                             {% if user.carrierRating or user.senderRating %}
                                 <div class="row m-t-lg">
-                                    <div class="col-md-12">
+                                    <div class="col-sm-12">
                                         {% if user.senderRating %}
                                             <div class="widget style1 navy-bg">
                                                 <div class="row vertical-align">
@@ -93,14 +93,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-sm-8">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Отзывы</h5>
                     </div>
                     <div class="ibox-content no-top-border">
                         <div class="row m-t-sm no-padding no-margins">
-                            <div class="col-lg-12 no-padding">
+                            <div class="col-sm-12 no-padding">
                                 <div class="panel blank-panel no-padding">
                                     <div class="panel-heading no-padding">
                                         <div class="panel-options">

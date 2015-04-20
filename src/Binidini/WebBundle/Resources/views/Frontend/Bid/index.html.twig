@@ -23,12 +23,12 @@
         </div>
         <div class="row">
             {% if bid.comment %}
-                <div class="well col-md-12">
+                <div class="well col-sm-12">
                     {{ bid.comment | nl2br }}
                 </div>
             {% endif %}
             {% if isShippingSender and bid.shipping.isNew() and bid.isNew() %}
-                <div class="col-md-12">
+                <div class="col-sm-12">
                     <span class="badge badge-{{ bid.state }} pull-right">{{ bid.price|price }}</span>
                         <span class="text-{{ bid.state }} pull-right">{{ ('binidini.bid.state.' ~ bid.state) | trans }}
                             &nbsp;&nbsp;</span>
@@ -38,7 +38,7 @@
                        class="btn btn-w-m btn-success ">Отказать</a>
                 </div>
             {% else %}
-                <div class="col-md-12">
+                <div class="col-sm-12">
                     <span class="badge badge-{{ bid.state }} pull-right">{{ bid.price|price }}</span>
                         <span class="text-{{ bid.state }} pull-right">{{ ('binidini.bid.state.' ~ bid.state) | trans }}
                             &nbsp;&nbsp;</span>

@@ -15,17 +15,17 @@
 
     <div class="wrapper wrapper-content">
         <div class="row animated fadeInRight">
-            <div class="col-md-12">
+            <div class="col-sm-12">
                 <div class="ibox">
                     <div class="ibox-content">
                         {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'id': 'profile_form'} }) }}
                         <div class="row m-t-sm">
-                            <div class="col-md-12">
+                            <div class="col-sm-12">
                                 {{ form_errors(form) }}
                             </div>
                         </div>
                         <div class="row m-t-sm">
-                            <div class="col-md-12">
+                            <div class="col-sm-12">
                                 <div class="panel blank-panel">
                                     <div class="panel-heading">
                                         <div class="panel-options">
@@ -39,7 +39,7 @@
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab-1">
                                                 <div class="row">
-                                                    <div class="col-md-4 ">
+                                                    <div class="col-sm-4 ">
                                                         {{ form_errors(form.imgPath) }}
                                                         <img alt="image" class="img-responsive" id="photo"
                                                              src="{{ user.imgPath | imagine_filter('photo600x600') }}">
@@ -49,7 +49,7 @@
                                                             Если у Вас возникают проблемы с загрузкой, попробуйте выбрать фотографию меньшего размера.
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-8">
+                                                    <div class="col-sm-8">
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">
                                                                 Вы:
@@ -136,7 +136,7 @@
                                             </div>
                                             <div class="tab-pane" id="tab-2">
                                                 <div class="row m-t-sm">
-                                                    <div class="col-md-6">
+                                                    <div class="col-sm-6">
                                                         <table class="table table-striped">
                                                             <thead>
                                                             <tr>
@@ -220,7 +220,7 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-sm-6">
                                                         <table class="table table-striped">
                                                             <thead>
                                                             <tr>
@@ -320,7 +320,7 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <div class="col-md-12">
+                                                    <div class="col-sm-12">
                                                         Отметьте те уведомления, которые Вы хотите получать по смс и электронной почте, в качестве отправителя и перевозчика.
                                                         Чтобы получать уведомления по электронной почте, Ваш email должен быть верифицирован.
                                                     </div>

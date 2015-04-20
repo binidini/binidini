@@ -8,10 +8,10 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-sm-12">
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-sm-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h5>Создание нового заказа</h5>
@@ -24,51 +24,51 @@
                                 {{ form_errors(form) }}
 
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Что*</label>
+                                    <label class="col-sm-2 control-label">Что*</label>
 
-                                    <div class="col-lg-10">
+                                    <div class="col-sm-10">
                                         {{ form_errors(form.name) }}
                                         {{ form_widget(form.name, {'id': 'what', 'attr': {'class': 'form-control', 'placeholder': 'Коротко, что нужно перевезти'}}) }}
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Откуда*</label>
+                                    <label class="col-sm-2 control-label">Откуда*</label>
 
-                                    <div class="col-lg-10">
+                                    <div class="col-sm-10">
                                         {{ form_errors(form.pickupAddress) }}
                                         {{ form_widget(form.pickupAddress, {'id': 'pickup-address', 'attr': {'class': 'form-control', 'placeholder': 'Адрес отправки'}}) }}
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Куда*</label>
+                                    <label class="col-sm-2 control-label">Куда*</label>
 
-                                    <div class="col-lg-10">
+                                    <div class="col-sm-10">
                                         {{ form_errors(form.deliveryAddress) }}
                                         {{ form_widget(form.deliveryAddress, {'id': 'delivery-address', 'attr': {'class': 'form-control', 'placeholder': 'Адрес назначения'}}) }}
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group date">
-                                    <label class="col-lg-2 control-label">Прибытие*</label>
+                                    <label class="col-sm-2 control-label">Прибытие*</label>
 
-                                    <div class="col-lg-5">
+                                    <div class="col-sm-5">
                                         {{ form_widget(form.deliveryDatetime, {'id': 'datetimepicker1', 'attr': {'class': 'form-control', 'placeholder': 'дд.мм.гг чч:мм', 'data-mask': '99.99.99 99:99'}}) }}
                                     </div>
-                                    <div class="col-lg-5">
+                                    <div class="col-sm-5">
                                         {{ form_errors(form.deliveryDatetime) }}
                                         <span class="help-block m-b-none">Крайнее время прибытия</span>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Цена*</label>
+                                    <label class="col-sm-2 control-label">Цена*</label>
 
-                                    <div class="col-lg-5">
+                                    <div class="col-sm-5">
                                         {{ form_widget(form.deliveryPrice, {'attr': {'class': 'form-control', 'placeholder': 'Стоимость доставки в рублях'}}) }}
                                     </div>
-                                    <div class="col-lg-5">
+                                    <div class="col-sm-5">
                                         {{ form_errors(form.deliveryPrice) }}
                                     </div>
                                 </div>
@@ -86,12 +86,12 @@
                                                 <div class="panel-body">
 
                                                     <div class="form-group">
-                                                        <label class="col-lg-2 control-label">Гарантия</label>
+                                                        <label class="col-sm-2 control-label">Гарантия</label>
 
-                                                        <div class="col-lg-2">
+                                                        <div class="col-sm-2">
                                                             {{ form_widget(form.paymentGuarantee, {'attr': {'class': 'checkbox-inline i-checks', 'style': 'position: absolute; opacity: 0;'}}) }}
                                                         </div>
-                                                        <div class="col-lg-8">
+                                                        <div class="col-sm-8">
                                                             {{ form_errors(form.paymentGuarantee) }}
                                                             <span class="help-block m-b-none">
                                                                 Гарантия оплаты перевозки.
@@ -102,12 +102,12 @@
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
                                                     <div class="form-group">
-                                                        <label class="col-lg-2 control-label">Страховка</label>
+                                                        <label class="col-sm-2 control-label">Страховка</label>
 
-                                                        <div class="col-lg-2">
+                                                        <div class="col-sm-2">
                                                             {{ form_widget(form.insurance, {'attr': {'class': 'form-control', 'placeholder': 'руб.'}}) }}
                                                         </div>
-                                                        <div class="col-lg-8">
+                                                        <div class="col-sm-8">
                                                             {{ form_errors(form.insurance) }}
                                                             <span class="help-block m-b-none">
                                                                 Депозит в рублях, требуемый от перевозчика в качестве страховки на случай утраты или порчи посылки.
@@ -120,30 +120,30 @@
 
 
                                                     <div class="form-group">
-                                                        <label class="col-lg-2 control-label">Вес</label>
+                                                        <label class="col-sm-2 control-label">Вес</label>
 
-                                                        <div class="col-lg-2">
+                                                        <div class="col-sm-2">
                                                             {{ form_widget(form.weight, {'attr': {'class': 'form-control', 'placeholder': 'кг'}}) }}
                                                         </div>
-                                                        <div class="col-lg-8">
+                                                        <div class="col-sm-8">
                                                             {{ form_errors(form.weight) }}
                                                             <span class="help-block m-b-none">Вес посылки</span>
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
                                                     <div class="form-group">
-                                                        <label class="col-lg-2 control-label">Размер</label>
+                                                        <label class="col-sm-2 control-label">Размер</label>
 
-                                                        <div class="col-lg-2">
+                                                        <div class="col-sm-2">
                                                             {{ form_widget(form.x, {'attr': {'class': 'form-control', 'placeholder': 'длина'}}) }}
                                                         </div>
-                                                        <div class="col-lg-2">
+                                                        <div class="col-sm-2">
                                                             {{ form_widget(form.y, {'attr': {'class': 'form-control', 'placeholder': 'ширина'}}) }}
                                                         </div>
-                                                        <div class="col-lg-2">
+                                                        <div class="col-sm-2">
                                                             {{ form_widget(form.z, {'attr': {'class': 'form-control', 'placeholder': 'высота'}}) }}
                                                         </div>
-                                                        <div class="col-lg-4">
+                                                        <div class="col-sm-4">
                                                             {{ form_errors(form.x) }}
                                                             {{ form_errors(form.y) }}
                                                             {{ form_errors(form.z) }}
@@ -152,15 +152,15 @@
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
                                                     <div class="form-group">
-                                                        <label class="col-lg-2 control-label">Дополнительно</label>
+                                                        <label class="col-sm-2 control-label">Дополнительно</label>
 
-                                                        <div class="col-lg-10">
+                                                        <div class="col-sm-10">
                                                             {{ form_errors(form.description) }}
                                                             {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'информация, необходимая перевозчику'}}) }}
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <div class="col-lg-12">
+                                                        <div class="col-sm-12">
                                                             <input type="submit" class="btn btn-primary pull-right" value="Сделать заказ"/>
                                                         </div>
                                                     </div>

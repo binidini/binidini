@@ -13,7 +13,7 @@ services:
 
     binidini.subscriber.user_registration:
         class: Binidini\CoreBundle\EventListener\RegistrationListener
-        arguments: [@old_sound_rabbit_mq.binidini_sms_producer]
+        arguments: [@old_sound_rabbit_mq.binidini_sms_producer, @router]
         tags:
             - { name: kernel.event_subscriber }
 

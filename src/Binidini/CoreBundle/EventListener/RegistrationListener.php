@@ -14,6 +14,7 @@ use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use OldSound\RabbitMqBundle\RabbitMq\Producer ;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
 /**
@@ -23,12 +24,13 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class RegistrationListener implements EventSubscriberInterface
 {
     private $rabbitMqProducer;
+    private $router;
     private $pwd;
 
-    public function __construct(Producer $rabbitMqProducer)
+    public function __construct(Producer $rabbitMqProducer, UrlGeneratorInterface $router)
     {
         $this->rabbitMqProducer = $rabbitMqProducer;
-
+        $this->router = $router;
     }
 
     /**
@@ -38,7 +40,8 @@ class RegistrationListener implements EventSubscriberInterface
     {
         return array(
             FOSUserEvents::REGISTRATION_INITIALIZE => 'onRegistrationInitialize',
-            FOSUserEvents::REGISTRATION_COMPLETED => 'onRegistrationCompleted'
+            FOSUserEvents::REGISTRATION_COMPLETED => 'onRegistrationCompleted',
+            FOSUserEvents::REGISTRATION_CONFIRM => 'onRegistrationConfirm'
         );
     }
 
@@ -64,5 +67,12 @@ class RegistrationListener implements EventSubscriberInterface
         $msg = array('mobile' => $user->getUsername(), 'sms' => "Ваш пароль: {$this->pwd}");
         $this->rabbitMqProducer->publish(serialize($msg));
 
+    }
+
+    public function onRegistrationConfirm(GetResponseUserEvent $event)
+    {
+        $url = $this->router->generate('binidini_home');
+
+        $event->setResponse(new RedirectResponse($url));
     }
 }

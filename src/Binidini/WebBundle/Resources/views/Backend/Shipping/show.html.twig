@@ -1,0 +1,207 @@
+{% extends 'BinidiniWebBundle::Backend/layout.html.twig' %}
+
+{% if shipping.canHasReview() %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link href="{{ asset('bundles/binidiniweb/css/plugins/raty/jquery.raty.css') }}" rel="stylesheet">
+    {% endblock %}
+{% endif %}
+
+{% block pageheader %}Детализация заказа{% endblock %}
+{% block actions %}
+    {% if app.user.id == shipping.user.id and shipping.state == 'new' %} <a
+            href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}"
+            class="btn btn-primary">Отменить</a> {% endif %}
+    {% if app.user.id == shipping.user.id and shipping.state in ['accepted','dispatched', 'on_way', 'delivered', 'paid'] %}
+        {% if shipping.insurance > 0 %}
+            <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'dispute'}) }}"
+               class="btn btn-danger btn-outline">Востребовать страховку</a>
+        {% endif %}
+        <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'refuse'}) }}"
+           class="btn btn-primary">Отменить</a>
+    {% endif %}
+    {% if app.user.id == shipping.user.id and shipping.state == 'accepted' %}
+        <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'dispatch'}) }}"
+           class="btn btn-primary">Выдан</a>
+    {% endif %}
+    {% if app.user.id == shipping.user.id and shipping.state == 'delivered' %} <a
+            href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'pay'}) }}"
+            class="btn btn-primary">Оплачен</a> {% endif %}
+    {% if app.user.id == shipping.user.id and shipping.state == 'rejected' %}
+        {% if shipping.insurance > 0 %}
+            <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'dispute'}) }}"
+               class="btn btn-danger btn-outline">Востребовать гарантию</a>
+        {% endif %}
+        <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}"
+           class="btn btn-primary">Аннулировать</a>
+    {% endif %}
+
+    {% if shipping.carrier is not null %}
+        {% if app.user.id == shipping.carrier.id and shipping.state == 'dispatched' %} <a
+                href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'load'}) }}"
+                class="btn btn-primary">Получен</a> {% endif %}
+        {% if app.user.id == shipping.carrier.id and shipping.state == 'on_way' %} <a
+                href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'deliver'}) }}"
+                class="btn btn-primary">Доставлен</a> {% endif %}
+        {% if app.user.id == shipping.carrier.id and shipping.state == 'paid' %} <a
+                href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'complete'}) }}"
+                class="btn btn-primary">Оплачен</a> {% endif %}
+        {% if app.user.id == shipping.carrier.id and shipping.state == 'refused' %}
+            <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'debate'}) }}"
+               class="btn btn-danger btn-outline">Потребовать оплату</a>
+            <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'annul'}) }}"
+               class="btn btn-primary">Аннулировать</a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="wrapper wrapper-content animated fadeInUp">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="m-b-md">
+                                    <span class="badge badge-{{ shipping.state }} pull-right"> {{ ('binidini.shipping.state.' ~ shipping.state) | trans }}</span>
+
+                                    <h2>{{ shipping.name }}</h2>
+                                </div>
+                                <dl class="dl-horizontal">
+                                    <dt>Оплата:</dt>
+                                    <dd>
+                                        {{ shipping.deliveryPrice | price }}
+                                        {% if shipping.paymentGuarantee %}
+                                            <span class="badge badge-primary"><i class="fa fa-thumbs-up"></i> гарантирована</span>
+                                        {% endif %}
+                                    </dd>
+                                    <dt>Страховка:</dt>
+                                    <dd>{{ shipping.insurance | price }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <dl class="dl-horizontal">
+
+                                    <dt>Откуда:</dt>
+                                    <dd>{{ shipping.pickupAddress }}</dd>
+                                    <dt>Куда:</dt>
+                                    <dd>{{ shipping.deliveryAddress }}</dd>
+                                    <dt>Отправитель:</dt>
+                                    <dd>
+                                        <a href="{{ path('binidini_core_profile_show', {'id': shipping.sender.id}) }}">{{ shipping.sender.name }}</a>
+                                        {% if (shipping.carrier is not empty) and (shipping.carrier.id == app.user.id) %}
+                                            {{ shipping.sender.mobilephone }}
+                                        {% endif %}
+                                    </dd>
+                                    <dt>Перевозчик:</dt>
+                                    <dd>
+                                        {% if shipping.carrier is not empty %}
+                                                <a href="{{ path('binidini_core_profile_show', {'id': shipping.carrier.id} ) }}">{{ shipping.carrier.name }}</a>
+                                                {% if shipping.sender.id == app.user.id %}
+                                            {{ shipping.sender.mobilephone }}
+                                        {% endif %}
+                                            {% endif %}
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-5" id="cluster_info">
+                                <dl class="dl-horizontal">
+
+                                    <dt>Прибытие:</dt>
+                                    <dd>{{ shipping.deliveryDatetime | date('d.m.y H:i') }} крайнее время</dd>
+                                    <dt>Создан:</dt>
+                                    <dd>{{ shipping.createdAt | date('d.m.y H:i') }}</dd>
+                                    <dt>Вес:</dt>
+                                    <dd>{{ shipping.weight | default('~') | weight }}</dd>
+                                    <dt>Габариты:</dt>
+                                    <dd>{{ shipping.x | default(0) }}x{{ shipping.y | default(0) }}x{{ shipping.z | default(0) }} см
+                                    </dd>
+
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <dl class="dl-horizontal">
+                                    <dt>Дополнительно:</dt>
+                                    <dd>{{ shipping.description |nl2br }}</span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        {% if shipping.state in ['new', 'accepted', 'dispatched', 'on_way', 'delivered', 'paid', 'completed'] %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <dl class="dl-horizontal">
+                                        <dt>Прогресс:</dt>
+                                        <dd>
+                                            <div class="progress progress-striped active">
+                                                <div style="width: 14%"
+                                                     class="progress-bar {{ (shipping.state == 'new') ? 'progress-bar-success' : '' }}">
+                                                    <span>новый</span>
+                                                </div>
+                                                <div style="width: 14%"
+                                                     class="progress-bar {{ (shipping.state == 'accepted') ? 'progress-bar-success' : '' }}">
+                                                    <span>принят</span>
+                                                </div>
+                                                <div style="width: 14%"
+                                                     class="progress-bar {{ (shipping.state == 'dispatched') ? 'progress-bar-success' : '' }}">
+                                                    <span>выдан</span>
+                                                </div>
+                                                <div style="width: 14%"
+                                                     class="progress-bar {{ (shipping.state == 'on_way') ? 'progress-bar-success' : '' }}">
+                                                    <span>в пути</span>
+                                                </div>
+                                                <div style="width: 14%"
+                                                     class="progress-bar {{ (shipping.state == 'delivered') ? 'progress-bar-success' : '' }}">
+                                                    <span>доставлен</span>
+                                                </div>
+                                                <div style="width: 14%"
+                                                     class="progress-bar {{ (shipping.state == 'paid') ? 'progress-bar-success' : '' }}">
+                                                    <span>оплачен</span>
+                                                </div>
+                                                <div style="width: 16%"
+                                                     class="progress-bar {{ (shipping.state == 'completed') ? 'progress-bar-success' : '' }}">
+                                                    <span>завершен</span>
+                                                </div>
+                                            </div>
+
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {{ include('BinidiniWebBundle::Frontend/Shipping/show/tabs.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% if shipping.canHasReview() %}
+        <script src="{{ asset('bundles/binidiniweb/js/plugins/raty/jquery.raty.js') }}"></script>
+        <script src="{{ asset('bundles/binidiniweb/js/review.js') }}"></script>
+    {% endif %}
+    <script type="text/javascript">
+        var successCallback = function (href) {
+            if (href == '#tab-4') {
+                review.setReadonlyRating('.rating');
+            }
+        };
+        var preLoadCallback = function (obj) {
+            if ($(obj).attr('href') == '#tab-4') {
+                review.setRatingControl('#raty', function (number) {
+                    $('#input-rating').val(number);
+                });
+            }
+        };
+        tabAjax.reloadActiveTab (successCallback, preLoadCallback);
+        tabAjax.initTab (successCallback, preLoadCallback);
+    </script>
+{% endblock %}

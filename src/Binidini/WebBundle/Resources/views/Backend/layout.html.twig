@@ -55,14 +55,17 @@
                         bd
                     </div>
                 </li>
-                <li {{ croute.is_current_route('binidini_core_carrier_index') }}>
-                    <a href="#"><i class="fa fa-truck"></i> <span class="nav-label">Заказы</span></a>
+                <li {{ croute.is_current_route('binidini_admin_index') }}>
+                    <a href="{{ path('binidini_admin_shipping') }}"><i class="fa fa-truck"></i> <span class="nav-label">Заказы</span></a>
                 </li>
                 <li {{ croute.is_current_route('binidini_core_shipping_index') }}>
                     <a href="#"><i class="fa fa-delicious"></i> <span class="nav-label">Споры</span></a>
                 </li>
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
                     <a href="#"><i class="fa fa-bar-chart"></i> <span class="nav-label">Отчеты</span> </a>
+                </li>
+                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
+                    <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Пользователи</span> </a>
                 </li>
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
                     <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">Настройки</span> </a>
@@ -79,11 +82,6 @@
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="get" action="{{ path('binidini_search_shipment_search') }}">
-                        <div class="form-group">
-                            <input type="text" placeholder="Поиск заказа по адресу" class="form-control" name="top-search" id="top-search">
-                        </div>
-                    </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
@@ -148,14 +146,6 @@
     <script src="{{ asset('bundles/binidiniweb/js/common.js') }}"></script>
     <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 
-    <script type="text/javascript">
-        ymaps.ready(init0);
-
-
-        function init0(){
-            var suggestView = new ymaps.SuggestView('top-search');
-        }
-    </script>
 {% endblock %}
 </body>
 </html>

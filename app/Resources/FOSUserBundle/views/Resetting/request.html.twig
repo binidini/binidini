@@ -11,16 +11,48 @@
         <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
     {% endif %}
 
-    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="m-t">
+    <form action="{{ path('binidini_core_reset_password') }}" method="POST" class="m-t" id="reseting_form">
 
         <div class="form-group input-group ">
             <span class="input-group-addon">+7</span>
-            <input type="text" id="username" name="_username" class="form-control" placeholder="Номер телефона" required="required"  maxlength="10" pattern=".*\d{10}.*">
+            <input type="text" id="username" name="_username" class="form-control" placeholder="Номер телефона"
+                   required="required" maxlength="10" pattern=".*\d{10}.*">
             <span class="input-group-addon">10 цифр</span>
         </div>
+        <div id="notification">
 
-        <button type="submit" id="_submit" name="_submit" class="btn btn-primary block full-width m-b" >Выслать новый пароль</button>
+            <p class="text-danger hide" id="error_text">Ошибка</p>
 
+            <p class="text-info hide" id="info_sms">SMS отправлена</p>
+        </div>
+        <button type="submit" id="_submit" name="_submit"
+                class="btn btn-primary block full-width m-b">Выслать новый пароль
+        </button>
     </form>
 
 {% endblock fos_user_content %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var clicked = false;
+        $('#reseting_form').submit(function(){
+            if (!clicked){
+                clicked = true;
+                $('#_submit').hide();
+                loader.show('#notification');
+                $.post($(this).attr('action'), {username: $('#username').val()}, function (data) {
+                    loader.hide('#notification');
+                    $('#info_sms').removeClass('hide');
+                    setTimeout(redirectTo(data.redirect), 2000);
+                }).fail(function(xhr){
+                    $('#error_text').text(xhr.responseText).removeClass('hide');
+                    $('#_submit').show();
+                });
+            }
+            return false;
+        });
+        function redirectTo(href) {
+            document.location.href = href;
+        }
+    </script>
+{% endblock %}

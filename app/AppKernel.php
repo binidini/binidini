@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new \Lsw\MemcacheBundle\LswMemcacheBundle(),
 
             new Binidini\CoreBundle\BinidiniCoreBundle(),
             new Binidini\WebBundle\BinidiniWebBundle(),

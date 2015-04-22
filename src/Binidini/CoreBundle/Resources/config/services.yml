@@ -148,3 +148,16 @@ services:
         arguments: [@doctrine.orm.entity_manager]
         tags:
             - { name: kernel.event_listener, event: binidini_core.review.post_create, method: onReviewPostCreate }
+
+    binidini.handler.authentication.failure:
+        class: Binidini\CoreBundle\Handler\AuthenticationFailureHandler
+        arguments:
+            - @fos_user.security.login_manager
+            - %fos_user.firewall_name%
+            - @memcache.default
+            - @fos_user.user_manager
+            - @router
+            - @http_kernel
+            - @security.http_utils
+            - collection
+            - @logger

@@ -87,4 +87,13 @@ class NotificationService
         ];
         $this->emailRabbitMqProducer->publish(serialize($msg));
     }
+
+    public function setRecoverPasswordSms($phone, $password){
+        $sms = $this->twig->render(
+            'BinidiniWebBundle:Template:Sms/recover_password.txt.twig',
+            ['password' => $password]
+        );
+        $msg = array('mobile' => $phone, 'sms' => $sms);
+        $this->smsRabbitMqProducer->publish(serialize($msg));
+    }
 }

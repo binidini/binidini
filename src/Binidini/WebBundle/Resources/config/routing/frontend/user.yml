@@ -6,3 +6,8 @@ binidini_core_profile_show:
         _sylius:
             template: FOSUserBundle:Profile:show.html.twig
 
+binidini_core_reset_password:
+    path: /resetting/password
+    methods: [POST, GET]
+    defaults:
+        _controller: BinidiniCoreBundle:User:resetPassword

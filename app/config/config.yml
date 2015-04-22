@@ -192,3 +192,9 @@ doctrine_migrations:
     namespace: Binidini\Migrations
     table_name: migration_versions
     name: Binidini Migrations
+
+lsw_memcache:
+    clients:
+        default:
+            hosts:
+                - { dsn: localhost, port: 11211, weight: 15 }

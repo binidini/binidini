@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
     sudo apt-get update
     sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
     sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
-    sudo apt-get -y install mysql-server mysql-client nginx php5-cli php5-mysql php5-mongo php5-fpm mongodb php5-curl php-apc rabbitmq-server php5-intl php5-gd
+    sudo apt-get -y install mysql-server mysql-client nginx php5-cli php5-mysql php5-mongo php5-fpm mongodb php5-curl php-apc rabbitmq-server php5-intl php5-gd memcached php5-memcached
 
     curl -sS https://getcomposer.org/installer | php
     sudo mv composer.phar /usr/local/bin/composer

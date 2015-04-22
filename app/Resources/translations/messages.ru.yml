@@ -1,3 +1,9 @@
+binidini.site.name: Титимити
+binidini.site.domain: tytymyty.ru
+
+resetting.password.max.attempts: Превышено количество запросов восстановления пароля
+resetting.password.max.nousername: Пользователь не найден
+
 binidini.shipping.state.init: начальный
 binidini.shipping.state.new: новый
 binidini.shipping.state.dispatched: выдан

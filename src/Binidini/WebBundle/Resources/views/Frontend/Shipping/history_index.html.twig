@@ -4,7 +4,7 @@
         <tr>
             <th class="col-sm-3">Время</th>
             <th>Пользователь</th>
-            <th>Описание</th>
+            <th>Изменение</th>
         </tr>
         </thead>
         <tbody>
@@ -21,7 +21,7 @@
                         </a>
                     </td>
                     <td>
-                        Новая цена: <strong>{{ entry.data.deliveryPrice | price }}</strong>
+                        цена: <strong>{{ entry.data.deliveryPrice | price }}</strong>
                     </td>
                 </tr>
             {% endif %}
@@ -36,7 +36,7 @@
 
                 </td>
                 <td>
-                    Новый статус: <span class="badge badge-{{ entry.data.state }}">{{ ('binidini.shipping.state.'~entry.data.state)|trans }}</span>
+                    статус: <span class="badge badge-{{ entry.data.state }}">{{ ('binidini.shipping.state.'~entry.data.state)|trans }}</span>
                 </td>
             </tr>
         {% endfor %}

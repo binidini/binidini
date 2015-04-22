@@ -18,7 +18,6 @@ Vagrant.configure(2) do |config|
 
     config.vm.synced_folder "app/cache", "/vagrant/app/cache", :mount_options => ["dmode=777","fmode=777"]
     config.vm.synced_folder "app/logs", "/vagrant/app/logs", :mount_options => ["dmode=777","fmode=777"]
-    config.vm.synced_folder "web/uploads/", "/vagrant/web/uploads", :mount_options => ["dmode=777","fmode=777"]
     config.vm.synced_folder "web/media/", "/vagrant/web/media", :mount_options => ["dmode=777","fmode=777"]
 
   # Enable provisioning with a shell script. Additional provisioners such as

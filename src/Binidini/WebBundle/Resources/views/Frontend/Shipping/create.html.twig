@@ -3,7 +3,7 @@
 {% block pageheader %}Новый заказ{% endblock %}
 
 {% block actions %}
-    <a href="#" onclick="shipping_form.submit()" class="btn btn-primary">Cделать заказ</a>
+    <a href="#" onclick="submit_button.click()" class="btn btn-primary">Cделать заказ</a>
 {% endblock %}
 
 {% block content %}
@@ -112,7 +112,7 @@
                                                             <span class="help-block m-b-none">
                                                                 Депозит в рублях, требуемый от перевозчика в качестве страховки на случай утраты или порчи посылки.
                                                                 Сумма, равная страховке, замораживается со счета перевозчика и возвращается после подтверждения отправителем доставки.
-                                                                Установите страховку 0 руб., если страховка не требуется или осуществляется вне системы Титимити.
+                                                                Не устанавливайте страховку, если она не требуется или осуществляется вне системы Титимити.
                                                             </span>
                                                         </div>
                                                     </div>
@@ -161,7 +161,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
-                                                            <input type="submit" class="btn btn-primary pull-right" value="Сделать заказ"/>
+                                                            <input type="submit" id="submit_button" class="btn btn-primary pull-right" value="Сделать заказ"/>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -39,12 +39,15 @@
             if (!clicked){
                 clicked = true;
                 $('#_submit').hide();
+                $('#error_text').addClass('hide');
                 loader.show('#notification');
                 $.post($(this).attr('action'), {username: $('#username').val()}, function (data) {
                     loader.hide('#notification');
                     $('#info_sms').removeClass('hide');
                     setTimeout(redirectTo(data.redirect), 2000);
                 }).fail(function(xhr){
+                    loader.hide('#notification');
+                    clicked = false;
                     $('#error_text').text(xhr.responseText).removeClass('hide');
                     $('#_submit').show();
                 });

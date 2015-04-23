@@ -3,6 +3,7 @@ binidini.site.domain: tytymyty.ru
 
 resetting.password.max.attempts: Превышено количество запросов восстановления пароля
 resetting.password.max.nousername: Пользователь не найден
+resetting.password.success.send: Ваш новый пароль выслан по смс
 
 binidini.shipping.state.init: начальный
 binidini.shipping.state.new: новый

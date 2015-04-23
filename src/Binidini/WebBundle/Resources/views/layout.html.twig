@@ -111,8 +111,8 @@
         </div>
 
         {% block pagetitle %}
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-sm-6">
+            <div class="row wrapper border-bottom white-bg page-heading" >
+                <div class="col-sm-6" id="flashback">
                     <h2>{% block pageheader %}{% endblock %}</h2>
                     {% block flashes %}
                         {% for type, messages in app.session.flashbag.all() %}

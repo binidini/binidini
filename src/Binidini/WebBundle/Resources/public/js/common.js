@@ -54,3 +54,15 @@ var tabAjax = {
         })
     }
 };
+
+var flashback = {
+    container: '#flashback',
+    add: function (type, text) {
+        $(flashback.container).append(
+            '<div class="text-' + type + '">' + text + '</div>'
+        );
+
+    }
+};
+
+

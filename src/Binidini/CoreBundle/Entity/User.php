@@ -54,6 +54,12 @@ class User extends BaseUser
     const BIT_DEBATE_SHIPPING   = 23;
     const BIT_RESOLVE_SHIPPING  = 24;
 
+    const PASSWORD_RECOVER_TTL = 259200;
+    const PASSWORD_RECOVER_PREFIX = 'password_recover:';
+    const PASSWORD_RECOVER_ATTEMPTS = 3;
+    const PASSWORD_RECOVER_ATTEMPT_PREFIX = 'password_recover_attempts:';
+    const PASSWORD_RECOVER_ATTEMPTS_TTL = 3600;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -217,6 +223,23 @@ class User extends BaseUser
      */
     private $carrierRatingCount;
 
+    /**
+     * Second password for recover
+     *
+     * @var string
+     *
+     * @ORM\Column(name="recover_password", type="string", length=255, nullable=true)
+     */
+    protected $recoverPassword;
+
+    /**
+     * The salt for recover password
+     *
+     * @var string
+     *
+     * @ORM\Column(name="recover_salt", type="string", length=255, nullable=true)
+     */
+    protected $recoverSalt;
 
     public function __construct()
     {
@@ -1303,5 +1326,51 @@ class User extends BaseUser
     public function getCarrierRatingAmount()
     {
         return $this->carrierRatingAmount;
+    }
+
+    /**
+     * Set recoverPassword
+     *
+     * @param string $recoverPassword
+     * @return User
+     */
+    public function setRecoverPassword($recoverPassword)
+    {
+        $this->recoverPassword = $recoverPassword;
+
+        return $this;
+    }
+
+    /**
+     * Get recoverPassword
+     *
+     * @return string 
+     */
+    public function getRecoverPassword()
+    {
+        return $this->recoverPassword;
+    }
+
+    /**
+     * Set recoverSalt
+     *
+     * @param string $recoverSalt
+     * @return User
+     */
+    public function setRecoverSalt($recoverSalt)
+    {
+        $this->recoverSalt = $recoverSalt;
+
+        return $this;
+    }
+
+    /**
+     * Get recoverSalt
+     *
+     * @return string 
+     */
+    public function getRecoverSalt()
+    {
+        return $this->recoverSalt;
     }
 }

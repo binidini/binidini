@@ -3,5 +3,7 @@ binidini_core.shipping.update: Заказ успешно изменен.
 binidini_core.message.create: Сообщение отправлено.
 binidini_core.bid.create: Заявка на доставку успешно создана.
 binidini_core.bid.update: Заявка на успешно изменена.
+binidini_core.bid.create.error: Ошибка при создании заявки: %error%
+binidini_core.bid.review.error: Ошибка при создании отзыва: %error%
 
 binidini_search.shipment.top_search: по адресу: %address%

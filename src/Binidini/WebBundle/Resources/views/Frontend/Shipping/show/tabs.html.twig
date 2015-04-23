@@ -1,6 +1,6 @@
 {% if app.request.get('tab') in ['message','bid', 'history', 'review'] %}
     {% set activeTab = app.request.get('tab') %}
-{% elseif shipping.isNew() %}
+{% elseif shipping.canAcceptBid() %}
     {% set activeTab = 'bid' %}
 {% elseif (shipping.canHasReview()) %}
     {% set activeTab = 'review' %}

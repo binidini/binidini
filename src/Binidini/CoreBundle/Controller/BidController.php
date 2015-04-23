@@ -54,13 +54,9 @@ class BidController extends ResourceController
             return $this->handleView($this->view($form));
         }
         $errors = $this->getErrorMessages($form);
-        /**
-         * @var $flashBack FlashBag
-         */
-        $flashBack = $this->get('session')->getFlashBag();
         foreach ($errors as $error) {
-            foreach($error as $message){
-                $flashBack->add('danger', $message);
+            foreach ($error as $message) {
+                $this->flashHelper->setFlash('danger', 'create.error', ['%error%' => $message]);
             }
         }
         return $this->redirectHandler->redirectTo($resource);

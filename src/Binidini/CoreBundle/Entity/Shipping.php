@@ -816,6 +816,16 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     }
 
     /**
+     * Checking can accept bid
+     * @return bool
+     */
+    public function canAcceptBid()
+    {
+        return $this->state === self::STATE_NEW;
+    }
+
+
+    /**
      * Set paymentGuarantee
      *
      * @param boolean $paymentGuarantee

@@ -55,4 +55,9 @@ class SecurityService
             return $this->securityContext->getToken()->getUser();
         }
     }
+
+    public static function generatePassword()
+    {
+        return sprintf('%d', rand(100000, 999999));
+    }
 }

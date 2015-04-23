@@ -55,22 +55,28 @@
                         bd
                     </div>
                 </li>
-                <li {{ croute.is_current_route('binidini_admin_index') }}>
+                <li {{ croute.is_current_route('binidini_admin_shipping') }}>
                     <a href="{{ path('binidini_admin_shipping') }}"><i class="fa fa-truck"></i> <span class="nav-label">Заказы</span></a>
+                </li>
+                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
+                    <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Пользователи</span> </a>
+                </li>
+                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
+                    <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">Сообшения</span> </a>
                 </li>
                 <li {{ croute.is_current_route('binidini_core_shipping_index') }}>
                     <a href="#"><i class="fa fa-delicious"></i> <span class="nav-label">Споры</span></a>
                 </li>
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
                     <a href="#"><i class="fa fa-bar-chart"></i> <span class="nav-label">Отчеты</span> </a>
-                </li>
-                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
-                    <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Пользователи</span> </a>
+                    <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                        <li><a href="#">По заказам</a></li>
+                        <li><a href="#">По пользователям</a></li>
+                    </ul>
                 </li>
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
                     <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">Настройки</span> </a>
                 </li>
-
 
             </ul>
 

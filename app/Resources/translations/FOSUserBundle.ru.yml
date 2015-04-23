@@ -27,7 +27,7 @@ profile:
     edit:
         submit: Обновить
     flash:
-        updated: Профиль пользователя обновлен
+        updated: Страница пользователя обновлена
 
 # Password change
 change_password:

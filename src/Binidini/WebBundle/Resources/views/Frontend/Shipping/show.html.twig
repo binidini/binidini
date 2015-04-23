@@ -88,7 +88,9 @@
                                     <dt>Откуда:</dt>
                                     <dd>{{ shipping.pickupAddress }}</dd>
                                     <dt>Куда:</dt>
-                                    <dd>{{ shipping.deliveryAddress }}</dd>
+                                    <dd>{{ shipping.deliveryAddress }} &nbsp;
+                                        <button class="no-padding btn-link blue-bg btn-sm small" id="show-map-btn" data-map-pickup="{{ shipping.pickupGeoPoint }}" data-map-delivery="{{ shipping.deliveryGeoPoint }}">Показать маршрут</button>
+                                    </dd>
                                     <dt>Отправитель:</dt>
                                     <dd>
                                         <a href="{{ path('binidini_core_profile_show', {'id': shipping.sender.id}) }}">{{ shipping.sender.name }}</a>
@@ -179,7 +181,7 @@
             </div>
         </div>
     </div>
-
+    {{ include('BinidiniWebBundle::Frontend/Shipping/show/modal_map.html.twig') }}
 {% endblock %}
 
 {% block javascripts %}
@@ -203,5 +205,42 @@
         };
         tabAjax.reloadActiveTab (successCallback, preLoadCallback);
         tabAjax.initTab (successCallback, preLoadCallback);
+        var mapObject;
+        var $showMapBtn = $('#show-map-btn');
+        $($showMapBtn).click(function (e) {
+            $('#map-modal').modal('show');
+            if (mapObject == undefined) {
+                var pickupPoint = 0;
+                var deliveryPoint = 0;
+
+                {% if shipping.pickupGeoPointType =='address' %}
+                pickupPoint = $($showMapBtn).attr('data-map-pickup');
+                deliveryPoint = $($showMapBtn).attr('data-map-delivery');
+                {% else %}
+                pickupPoint = {{shipping.pickupGeoPoint}};
+                deliveryPoint = {{ shipping.deliveryGeoPoint}};
+                {% endif %}
+
+                ymaps.geocode(pickupPoint).then(function (res) {
+                    mapObject = new ymaps.Map('map', {
+                        center: res.geoObjects.get(0).geometry.getCoordinates(),
+                        zoom: 13
+                    });
+                    ymaps.route([
+                        pickupPoint,
+                        deliveryPoint
+                    ]).then(
+                            function (route) {
+                                mapObject.geoObjects.add(route);
+                            },
+                            function (error) {
+                                console.log('Error while rendering route: ' + error.message);
+                            }
+                    );
+                });
+
+
+            }
+        });
     </script>
 {% endblock %}

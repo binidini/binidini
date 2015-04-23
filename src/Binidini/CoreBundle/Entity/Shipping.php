@@ -45,6 +45,8 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 
     //время в минутах, втечение которого перевозчик может отозвать заявку после принятия ее отправителем
     const CARRIER_RECALL_TIME = 10;
+    const GEOPOINT_TYPE_COORDINATION = 'coordination';
+    const GEOPOINT_TYPE_ADDRESS = 'address';
 
     /**
      * @var integer
@@ -1017,5 +1019,40 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     public function getDeliveryLatitude()
     {
         return $this->deliveryLatitude;
+    }
+
+    public function getPickupGeoPoint()
+    {
+        if ($this->getPickupGeoPointType() == self::GEOPOINT_TYPE_COORDINATION) {
+            return sprintf("[%f, %f]", $this->pickupLatitude, $this->pickupLongitude);
+        } else {
+            return sprintf("%s", $this->pickupAddress);
+        }
+    }
+
+    public function  getPickupGeoPointType(){
+        if ($this->pickupLongitude && $this->pickupLatitude){
+            return self::GEOPOINT_TYPE_COORDINATION;
+        } else {
+            return self::GEOPOINT_TYPE_ADDRESS;
+        }
+    }
+
+    public function getDeliveryGeoPoint()
+    {
+        if ($this->getDeliveryGeoPointType() == self::GEOPOINT_TYPE_COORDINATION) {
+            return sprintf("[%f, %f]", $this->deliveryLatitude, $this->deliveryLongitude);
+        } else {
+            return sprintf("%s", $this->deliveryAddress);
+        }
+    }
+
+    public function  getDeliveryGeoPointType(){
+
+        if ($this->deliveryLongitude && $this->deliveryLatitude){
+            return self::GEOPOINT_TYPE_COORDINATION;
+        } else {
+            return self::GEOPOINT_TYPE_ADDRESS;
+        }
     }
 }

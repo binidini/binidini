@@ -64,7 +64,7 @@ class UserController extends Controller
         $user = $userManager->findUserByUsernameOrEmail($username);
         if (!$user) {
             return new Response(
-                $this->get('translator')->trans('resetting.password.max.nousername'), 400
+                $this->get('translator')->trans('resetting.password.max.nousername'), 404
             );
         }
         /** @var \Memcached $memcached */
@@ -75,7 +75,7 @@ class UserController extends Controller
 
         if ($attemptCounter && $attemptCounter > User::PASSWORD_RECOVER_ATTEMPTS) {
             return new Response(
-                $this->get('translator')->trans('resetting.password.max.attempts'), 400
+                $this->get('translator')->trans('resetting.password.max.attempts'), 403
             );
         }
 

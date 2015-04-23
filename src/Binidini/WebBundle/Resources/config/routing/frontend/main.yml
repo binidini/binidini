@@ -16,6 +16,12 @@ binidini_home:
                 state: $state
             template: BinidiniWebBundle:Frontend/Shipping:sender_index.html.twig
 
+binidini_landing_page:
+    path: /landing
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/landing.html.twig
+
 binidini_shipping:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/shipping.yml
     prefix: /

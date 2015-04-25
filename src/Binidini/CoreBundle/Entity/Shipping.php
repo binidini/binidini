@@ -1,12 +1,5 @@
 <?php
-/*
- * This file is part of the Binidini project.
- *
- * (c) Denis Manilo
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+
 namespace Binidini\CoreBundle\Entity;
 
 use Binidini\CoreBundle\Exception\InsufficientFrozenAmount;
@@ -298,21 +291,51 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 
     public function release()
     {
-        if ($this->insurance > 0) {
-            try {
-                $this->carrier->release($this->insurance);
-            } catch (InsufficientFrozenAmount $ex) {
-                throw new InsufficientFrozenAmount("У перевозчика недостаточно средств для разморозки.");
-            }
-        }
+        $this->releaseCarrier();
+        $this->releaseSender();
+    }
 
+    public function releaseSender()
+    {
         if ($this->paymentGuarantee && $this->deliveryPrice > 0) {
             try {
                 $this->user->release($this->deliveryPrice);
             } catch (InsufficientFrozenAmount $ex) {
-                //заморозим обратно деньги перевозчика
-                $this->carrier->hold($this->insurance);
-                throw new InsufficientFrozenAmount("У отправителя недостаточно средств для разморозки.");
+                throw new InsufficientFrozenAmount("На холде не достаточно средств");
+            }
+        }
+    }
+
+    public function releaseCarrier()
+    {
+        if ($this->insurance > 0) {
+            try {
+                $this->carrier->release($this->insurance);
+            } catch (InsufficientFrozenAmount $ex) {
+                throw new InsufficientFrozenAmount("На холде не достаточно средств");
+            }
+        }
+    }
+
+    public function payInsurance()
+    {
+        if ($this->insurance > 0) {
+            try {
+                $this->carrier->decreaseHoldBalance($this->insurance);
+                $this->user->addBalance($this->insurance);
+            } catch (InsufficientFrozenAmount $ex) {
+                throw new InsufficientFrozenAmount("На холде не достаточно средств");
+            }
+        }
+    }
+
+    public function payPayment(){
+        if ($this->paymentGuarantee && $this->deliveryPrice > 0) {
+            try {
+                $this->user->decreaseHoldBalance($this->insurance);
+                $this->carrier->addBalance($this->insurance);
+            } catch (InsufficientFrozenAmount $ex) {
+                throw new InsufficientFrozenAmount("На холде не достаточно средств");
             }
         }
     }

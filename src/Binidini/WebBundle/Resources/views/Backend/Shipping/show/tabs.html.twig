@@ -1,0 +1,62 @@
+{% if app.request.get('tab') in ['message','bid', 'history', 'review'] %}
+    {% set activeTab = app.request.get('tab') %}
+{% elseif shipping.canAcceptBid() %}
+    {% set activeTab = 'bid' %}
+{% elseif (shipping.canHasReview()) %}
+    {% set activeTab = 'review' %}
+{% else %}
+    {% set activeTab = 'message' %}
+{% endif %}
+
+<div class="row m-t-sm">
+    <div class="col-sm-12">
+        <div class="panel blank-panel">
+            <div class="panel-heading">
+                <div class="panel-options">
+                    <ul class="nav nav-tabs">
+                        <li class="{{ activeTab == 'message'? 'active': '' }}">
+                            <a href="#tab-1"
+                               data-url="{{ path('binidini_core_shipping_message_index', {'shipping_id':shipping.id}) }}"
+                               data-content="#tab-1 .feed-activity-list"
+                               data-toggle="tab">Сообщения</a>
+                        </li>
+                        <li class="{{ activeTab == 'bid'? 'active': '' }}">
+                            <a href="#tab-2"
+                               data-url="{{ path('binidini_core_bid_index', {'shipping_id':shipping.id}) }}"
+                               data-content="#tab-2 .feed-activity-list"
+                               data-toggle="tab">Заявки</a>
+                        </li>
+                        <li class="{{ activeTab == 'history'? 'active': '' }}">
+                            <a href="#tab-3"
+                               data-url="{{ path('binidini_core_shipping_history_index', {'id':shipping.id}) }}"
+                               data-content="#tab-3 .history-content"
+                               data-toggle="tab">История</a>
+                        </li>
+                        <li class="{{ activeTab == 'review'? 'active': '' }}">
+                            <a href="#tab-4"
+                               data-content="#tab-4 .feed-activity-list"
+                               data-url="{{ path('binidini_core_shipping_review_index', {'shipping_id':shipping.id}) }}"
+                               data-toggle="tab">Отзывы</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane {{ activeTab == 'message'? 'active': '' }}" id="tab-1">
+                        {{ include('BinidiniWebBundle::Backend/Shipping/show/tab_message.html.twig') }}
+                    </div>
+                    <div class="tab-pane {{ activeTab == 'bid'? 'active': '' }}" id="tab-2">
+                        {{ include('BinidiniWebBundle::Backend/Shipping/show/tab_bid.html.twig') }}
+                    </div>
+                    <div class="tab-pane {{ activeTab == 'history'? 'active': '' }}" id="tab-3">
+                        <div class="history-content"></div>
+                    </div>
+                    <div class="tab-pane {{ activeTab == 'review'? 'active': '' }}" id="tab-4">
+                        {{ include('BinidiniWebBundle::Backend/Shipping/show/tab_review.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

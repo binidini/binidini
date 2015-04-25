@@ -4,7 +4,7 @@ var review = {
     setReadonlyRating: function (objName) {
         $(objName).each(function (e, obj) {
             $(obj).raty({
-                readOnly: false,
+                readOnly: true,
                 starOn: review.starOn,
                 starOff: review.starOff,
                 score: $(this).attr('data-rating-score')

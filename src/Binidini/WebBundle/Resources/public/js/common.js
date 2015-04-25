@@ -47,7 +47,6 @@ var tabAjax = {
             $contentTab.html(data);
             loader.hide($contentTab);
             tabAjax.reloadTab[href] = false;
-            review.setReadonlyRating('.rating');
             if (callBackOnSuccess != undefined) {
                 callBackOnSuccess(href);
             }

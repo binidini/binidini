@@ -1,5 +1,6 @@
 {% extends "BinidiniWebBundle::layout.html.twig" %}
 
+{% set activeTab = app.request.get('tab', 'main')%}
 {% set user = app.user %}
 {% set isItMe = true %}
 {% set isItCompany = user.type == 2 %}
@@ -9,7 +10,7 @@
 {% endblock %}
 
 {% block actions %}
-    <a href="#" onclick="profile_form.submit()" class="btn btn-primary">Сохранить</a>
+    <a href="" onclick="profile_form.submit();" class="btn btn-primary">Сохранить</a>
 {% endblock %}
 {% block content %}
 
@@ -30,14 +31,14 @@
                                     <div class="panel-heading">
                                         <div class="panel-options">
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#tab-1" data-toggle="tab">Профиль</a></li>
-                                                <li><a href="#tab-2" data-toggle="tab">Оповещения</a></li>
+                                                <li class="{{activeTab!='notification'?'active'}}"><a href="#tab-1" data-toggle="tab" data-name="">Профиль</a></li>
+                                                <li class="{{activeTab=='notification'?'active':''}}" ><a href="#tab-2" data-toggle="tab" data-name="notification">Оповещения</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="panel-body">
                                         <div class="tab-content">
-                                            <div class="tab-pane active" id="tab-1">
+                                            <div class="tab-pane {{ activeTab!='notification'?'active':'' }}" id="tab-1">
                                                 <div class="row">
                                                     <div class="col-sm-4 ">
                                                         {{ form_errors(form.imgPath) }}
@@ -130,6 +131,7 @@
                                                                 {{ form_errors(form.aboutMe) }}
                                                             </div>
                                                         </div>
+                                                        <input type="hidden" name="tab-switch" value="{{ activeTab }}">
                                                         <div class="form-group">
                                                             <div class="col-sm-4">
                                                                 <button type="button" class="btn btn-link"
@@ -141,7 +143,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane" id="tab-2">
+                                            <div class="tab-pane {{ activeTab == 'notification'?'active':'' }}" id="tab-2">
                                                 <div class="row m-t-sm">
                                                     <div class="col-sm-6">
                                                         <table class="table table-striped">
@@ -470,8 +472,9 @@
                         })
             }
         });
-
-
+        $('a[data-toggle=tab]').click(function (e) {
+            $('input[name=tab-switch]').val($(this).attr('data-name'));
+        });
     </script>
 
 {% endblock %}

@@ -9,29 +9,25 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class EditUserProfileListener implements EventSubscriberInterface
 {
 
-    /**
-     * @var UploadableManager
-     */
     private $uploadableManager;
-    /**
-     * @var EntityManager
-     */
     private $doctrineManager;
-
     private $email;
-
     private $security;
+    private $route;
 
-    public function __construct(UploadableManager $uploadableManager, EntityManager $doctrine, SecurityContextInterface $security)
+    public function __construct(UploadableManager $uploadableManager, EntityManager $doctrine, SecurityContextInterface $security, RouterInterface $route)
     {
         $this->uploadableManager = $uploadableManager;
         $this->doctrineManager = $doctrine;
         $this->security = $security;
+        $this->route = $route;
     }
 
     public static function getSubscribedEvents()
@@ -51,6 +47,11 @@ class EditUserProfileListener implements EventSubscriberInterface
         if ($user->getEmail() !== $this->email) {
             $user->setEmailVerified(false);
         }
+
+        $tab = $event->getRequest()->get('tab-switch', '');
+        $event->setResponse(
+            new RedirectResponse($this->route->generate('fos_user_profile_edit', $tab ? ['tab' => $tab] : []))
+        );
     }
 
     public function onFosuserProfileEditCompleted(FilterUserResponseEvent $event){

@@ -10,7 +10,8 @@
 {% endblock %}
 
 {% block actions %}
-    <a href="" onclick="profile_form.submit();" class="btn btn-primary">Сохранить</a>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#myModal">Сменить пароль</a>
+    <a href="#" onclick="profile_form.submit()" class="btn btn-primary">Сохранить</a>
 {% endblock %}
 {% block content %}
 
@@ -350,17 +351,17 @@
         <div class="modal-dialog">
             <form action="{{ path('binidini_core_change_password') }}" method="POST"
                   class="fos_user_change_password form-horizontal" id="password-reset">
-                <div class="modal-content">
+                <div class="modal-content animated bounceInRight">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
                                     class="sr-only">Закрыть</span></button>
-                        <h4 class="modal-title">Сменить пароль</h4>
+                        <h4 class="modal-title"><i class="fa fa-hand-o-down modal-icon"></i>Сменить пароль</h4>
 
                     </div>
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Текущий пароль:</label>
+                            <label class="col-sm-4 control-label">Текущий&nbsp;пароль:</label>
 
                             <div class="col-sm-8">
                                 <input type="password" class="form-control" name="current_password"/>
@@ -368,14 +369,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Новый пароль:</label>
+                            <label class="col-sm-4 control-label">Новый&nbsp;пароль:</label>
 
                             <div class="col-sm-8">
                                 <input type="password" class="form-control" name="new_password"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Повторите пароль:</label>
+                            <label class="col-sm-4 control-label">Повторите&nbsp;пароль:</label>
 
                             <div class="col-sm-8">
                                 <input type="password" class="form-control" name="new_password_confirm"/>

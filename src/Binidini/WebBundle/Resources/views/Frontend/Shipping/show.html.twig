@@ -64,8 +64,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="m-b-md">
-                                    <span class="badge badge-{{ shipping.state }} pull-right"> {{ ('binidini.shipping.state.' ~ shipping.state) | trans }}</span>
-
+                                    <span class="badge badge-{{ shipping.state }} pull-right">
+                                        {{ ('binidini.shipping.state.' ~ shipping.state) | trans }}
+                                    </span>
                                     <h2>{{ shipping.name }}</h2>
                                 </div>
                                 <dl class="dl-horizontal">
@@ -86,11 +87,9 @@
                                 <dl class="dl-horizontal">
 
                                     <dt>Откуда:</dt>
-                                    <dd>{{ shipping.pickupAddress }}</dd>
+                                    <dd><a id="show-map-btn" data-map-pickup="{{ shipping.pickupGeoPoint }}" data-map-delivery="{{ shipping.deliveryGeoPoint }}">{{ shipping.pickupAddress }}</a></dd>
                                     <dt>Куда:</dt>
-                                    <dd>{{ shipping.deliveryAddress }} &nbsp;
-                                        <button class="no-padding btn-link blue-bg btn-sm small" id="show-map-btn" data-map-pickup="{{ shipping.pickupGeoPoint }}" data-map-delivery="{{ shipping.deliveryGeoPoint }}">Показать маршрут</button>
-                                    </dd>
+                                    <dd><a href="#" onclick=" $('#show-map-btn').click()">{{ shipping.deliveryAddress }}</a></dd>
                                     <dt>Отправитель:</dt>
                                     <dd>
                                         <a href="{{ path('binidini_core_profile_show', {'id': shipping.sender.id}) }}">{{ shipping.sender.name }}</a>

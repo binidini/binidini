@@ -1,20 +1,10 @@
 # This file is part of the Binidini package.
 # (c) Denis MAnilo
+
 binidini_home:
     path: /
-    methods: [GET]
     defaults:
-        _controller: binidini_core.controller.shipping:indexAction
-        _sylius:
-            paginate: $paginate
-            sortable: true
-            sorting:
-                id: desc
-            filterable: true
-            criteria:
-                user: ['expr:service("security.context").getToken().getUser().getId()']
-                state: $state
-            template: BinidiniWebBundle:Frontend/Shipping:sender_index.html.twig
+        _controller: BinidiniWebBundle:Default:index
 
 binidini_landing_page:
     path: /landing

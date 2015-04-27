@@ -9,7 +9,15 @@ binidini_admin_shipping:
             sorting:
                 id: desc
             filterable: true
+            criteria:
+                state: conflict
             template: BinidiniWebBundle::Backend/Shipping/index.html.twig
+
+binidini_admin_shipping_resolve:
+    path: /shipping/{id}/resolve
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:resolveAction
 
 binidini_admin_shipping_show:
     path: /shipping/{id}

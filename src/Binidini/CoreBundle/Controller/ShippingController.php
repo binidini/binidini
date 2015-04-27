@@ -10,6 +10,7 @@ use FOS\UserBundle\Doctrine\UserManager;
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ShippingController extends ResourceController
 {
@@ -67,4 +68,41 @@ class ShippingController extends ResourceController
 
     }
 
+    public function resolveAction(Request $request)
+    {
+        /** @var Shipping $resource */
+        $resource = $this->findOr404($request);
+        $graph = $this->stateMachineGraph;
+        $stateMachine = $this->get('sm.factory')->get($resource, $graph);
+        $transition = 'resolve';
+        if (!$stateMachine->can($transition)) {
+            throw new NotFoundHttpException(
+                sprintf(
+                    'The requested transition %s cannot be applied on the given %s with graph %s.',
+                    $transition,
+                    $this->config->getResourceName(),
+                    $this->stateMachineGraph
+                )
+            );
+        }
+        $stateMachine->apply($transition);
+
+        $payment = $request->get('payment');
+        $insurance = $request->get('insurance');
+
+        if ($payment == 'sender') {
+            $resource->releaseSender();
+        } elseif ($payment == 'carrier') {
+            $resource->payPayment();
+        }
+
+        if ($insurance == 'carrier') {
+            $resource->releaseCarrier();
+        } elseif ($insurance == 'sender') {
+            $resource->payInsurance();
+        }
+        $this->domainManager->update($resource);
+
+        return $this->redirectHandler->redirectToReferer();
+    }
 }

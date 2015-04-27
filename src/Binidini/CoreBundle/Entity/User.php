@@ -60,6 +60,8 @@ class User extends BaseUser
     const PASSWORD_RECOVER_ATTEMPT_PREFIX = 'password_recover_attempts:';
     const PASSWORD_RECOVER_ATTEMPTS_TTL = 3600;
 
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -296,6 +298,18 @@ class User extends BaseUser
         $this->balance += $amount;
     }
 
+    public function addBalance($amount)
+    {
+        $this->balance += $amount;
+    }
+
+    public function decreaseHoldBalance ($amount)
+    {
+        if ($amount > $this->holdAmount) {
+            throw new InsufficientFrozenAmount("Нет средств для разморозки.");
+        }
+        $this->holdAmount -= $amount;
+    }
 
     public function getEmailXXX()
     {

@@ -3,6 +3,7 @@
 namespace Binidini\CoreBundle\Controller;
 
 use Binidini\CoreBundle\Entity\Shipping;
+use Binidini\CoreBundle\Exception\TransitionCannotBeApplied;
 use Binidini\CoreBundle\Form\Type\BidType;
 use Binidini\CoreBundle\Form\Type\MessageType;
 use Binidini\CoreBundle\Form\Type\ReviewType;
@@ -105,4 +106,5 @@ class ShippingController extends ResourceController
 
         return $this->redirectHandler->redirectToReferer();
     }
+
 }

@@ -10,6 +10,7 @@
 namespace Binidini\CoreBundle\EventListener;
 
 use Binidini\CoreBundle\Exception\AppException;
+use Binidini\CoreBundle\Exception\TransitionCannotBeApplied;
 use Gedmo\Exception\UploadableInvalidMimeTypeException;
 use Gedmo\Exception\UploadableMaxSizeException;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;

@@ -16,6 +16,7 @@ use Binidini\SearchBundle\Document\Coordinates;
 /**
  * @MongoDB\Document (collection = "shipment")
  * @MongoDB\Index(keys={"pickupCoordinates"="2d"})
+ * @MongoDB\Index(keys={"deliveryDatetime"=1},  options={"expireAfterSeconds"=0})
  */
 class Shipment
 {

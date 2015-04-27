@@ -9,7 +9,7 @@
 
 {% block pageheader %}Детализация заказа{% endblock %}
 {% block actions %}
-    {% if app.user.id == shipping.user.id and shipping.state == 'conflict' %}
+    {% if shipping.state == 'conflict' %}
         <a href="{{ path('binidini_admin_shipping_resolve', {'id': shipping.id }) }}"
             class="btn btn-warning" id="resolve">Разрешить</a>
     {% endif %}

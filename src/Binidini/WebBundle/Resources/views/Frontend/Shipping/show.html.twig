@@ -230,6 +230,9 @@
                                     zoom: 13
                                 });
                                 mapObject.geoObjects.add(route);
+                                $('#route-destination').html(route.getHumanLength());
+                                $('#route-time').html(route.getHumanTime());
+                                $('#route-information').toggleClass('hide');
                             });
                         },
                         function (error) {

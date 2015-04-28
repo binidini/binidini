@@ -219,26 +219,23 @@
                 pickupPoint = {{shipping.pickupGeoPoint}};
                 deliveryPoint = {{ shipping.deliveryGeoPoint}};
                 {% endif %}
-
-                ymaps.geocode(pickupPoint).then(function (res) {
-                    mapObject = new ymaps.Map('map', {
-                        center: res.geoObjects.get(0).geometry.getCoordinates(),
-                        zoom: 13
-                    });
-                    ymaps.route([
-                        pickupPoint,
-                        deliveryPoint
-                    ]).then(
-                            function (route) {
+                ymaps.route([
+                    pickupPoint,
+                    deliveryPoint
+                ],{mapStateAutoApply: true}).then(
+                        function (route) {
+                            ymaps.geocode(pickupPoint).then(function (res) {
+                                mapObject = new ymaps.Map('map', {
+                                    center: res.geoObjects.get(0).geometry.getCoordinates(),
+                                    zoom: 13
+                                });
                                 mapObject.geoObjects.add(route);
-                            },
-                            function (error) {
-                                console.log('Error while rendering route: ' + error.message);
-                            }
-                    );
-                });
-
-
+                            });
+                        },
+                        function (error) {
+                            console.log('Error while rendering route: ' + error.message);
+                        }
+                );
             }
         });
     </script>

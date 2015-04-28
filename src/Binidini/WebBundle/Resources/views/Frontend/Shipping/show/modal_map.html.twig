@@ -6,7 +6,19 @@
                     <span aria-hidden="true">×</span>
                     <span class="sr-only">Закрыть</span>
                 </button>
-                <h4 class="modal-title"><i class="fa fa-map-marker modal-icon"></i>Карта маршрута</h4>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3 class="modal-title"><i class="fa fa-map-marker modal-icon"></i>Карта маршрута</h3>
+                    </div>
+                    <div id="route-information" class="col-sm-6 hide">
+                        <h4>
+                            Расстояние: <span id="route-destination"></span>
+                        </h4>
+                        <h4>
+                            Время в пути: <span id="route-time"></span>
+                        </h4>
+                    </div>
+                </div>
             </div>
             <div class="modal-body no-padding" style="height: 500px" id="map">
 

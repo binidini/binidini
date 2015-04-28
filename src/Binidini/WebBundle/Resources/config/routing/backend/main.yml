@@ -1,3 +1,11 @@
+binidini_admin_home:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: binidini_admin_shipping
+        permanent: true
+
 binidini_admin_shipping:
     path: /shipping
     methods: [GET]
@@ -8,9 +16,6 @@ binidini_admin_shipping:
             sortable: true
             sorting:
                 id: desc
-            filterable: true
-            criteria:
-                state: conflict
             template: BinidiniWebBundle::Backend/Shipping/index.html.twig
 
 binidini_admin_shipping_resolve:
@@ -26,3 +31,18 @@ binidini_admin_shipping_show:
         _controller: binidini_core.controller.shipping:showAction
         _sylius:
             template: BinidiniWebBundle:Backend/Shipping:show.html.twig
+
+binidini_admin_shipping_conflict:
+    path: /shippings/conflict
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                state: conflict
+            template: BinidiniWebBundle::Backend/Shipping/index.html.twig

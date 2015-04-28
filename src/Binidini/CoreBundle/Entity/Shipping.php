@@ -846,7 +846,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      */
     public function canAcceptBid()
     {
-        return $this->state === self::STATE_NEW;
+        return in_array($this->state, [self::STATE_NEW, self::STATE_CANCELED, self::STATE_ACCEPTED]);
     }
 
 

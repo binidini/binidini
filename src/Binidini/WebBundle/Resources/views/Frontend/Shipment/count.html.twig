@@ -1,1 +1,5 @@
-{{ shipments.nbresults }}
+{% if shipments.nbresults > 0 %}
+    <span class="label label-danger">
+        {{ shipments.nbresults }}
+    </span>
+{% endif %}

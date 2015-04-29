@@ -95,7 +95,12 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">Титимити 24/7</span>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('binidini_admin_shipping') }}">Администрирование</a>
+                        {% else %}
+                            <span class="m-r-sm text-muted welcome-message">Титимити 24/7</span>
+                        {% endif %}
+
                     </li>
                     {% render path('binidini_user_bids_accepted') %}
                     {% render path('binidini_sender_bids_new') %}

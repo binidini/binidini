@@ -64,6 +64,7 @@
                                         <th>Телефон</th>
                                         <th>Название</th>
                                         <th>email</th>
+                                        <th>Был</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -75,6 +76,7 @@
                                             <td>{{ user.username }}</td>
                                             <td> {{ user.name }}</td>
                                             <td>{{ user.email }}</td>
+                                            <td>{{ user.lastlogin | date('d.m H:i') }}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

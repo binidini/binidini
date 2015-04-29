@@ -16,6 +16,22 @@ binidini_admin_shipping:
             sortable: true
             sorting:
                 id: desc
+            filterable: true
+            template: BinidiniWebBundle::Backend/Shipping/index.html.twig
+
+binidini_admin_shipping_conflict:
+    path: /conflicts
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                state: conflict
             template: BinidiniWebBundle::Backend/Shipping/index.html.twig
 
 binidini_admin_shipping_resolve:
@@ -32,17 +48,15 @@ binidini_admin_shipping_show:
         _sylius:
             template: BinidiniWebBundle:Backend/Shipping:show.html.twig
 
-binidini_admin_shipping_conflict:
-    path: /shippings/conflict
+binidini_admin_user_index:
+    path: /users
     methods: [GET]
     defaults:
-        _controller: binidini_core.controller.shipping:indexAction
+        _controller: binidini_core.controller.user:indexAction
         _sylius:
             paginate: $paginate
             sortable: true
             sorting:
                 id: desc
             filterable: true
-            criteria:
-                state: conflict
-            template: BinidiniWebBundle::Backend/Shipping/index.html.twig
+            template: BinidiniWebBundle::Backend/User/index.html.twig

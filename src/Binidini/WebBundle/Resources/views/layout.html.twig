@@ -62,10 +62,9 @@
                 <li {{ croute.is_current_route('binidini_search_shipment_index') }}>
                     <a class="count-info" href="{{ path('binidini_search_shipment_index') }}">
                         <i class="fa fa-rub"></i>
-                        <span class="nav-label">Заказы
-                            <span class="label label-danger">
-                                {% render path('binidini_search_shipment_count') %}
-                            </span>
+                        <span class="nav-label">
+                            Заказы
+                            {% render path('binidini_search_shipment_count') %}
                         </span>
                     </a>
                 </li>
@@ -96,7 +95,12 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">Титимити 24/7</span>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('binidini_admin_shipping') }}">Администрирование</a>
+                        {% else %}
+                            <span class="m-r-sm text-muted welcome-message">Титимити 24/7</span>
+                        {% endif %}
+
                     </li>
                     {% render path('binidini_user_bids_accepted') %}
                     {% render path('binidini_sender_bids_new') %}

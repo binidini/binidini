@@ -58,13 +58,13 @@
                 <li {{ croute.is_current_route('binidini_admin_shipping') }}>
                     <a href="{{ path('binidini_admin_shipping') }}"><i class="fa fa-truck"></i> <span class="nav-label">Заказы</span></a>
                 </li>
-                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
-                    <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Пользователи</span> </a>
+                <li {{ croute.is_current_route('binidini_admin_user_index') }}>
+                    <a href="{{ path('binidini_admin_user_index') }}"><i class="fa fa-users"></i> <span class="nav-label">Пользователи</span> </a>
                 </li>
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
                     <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">Сообшения</span> </a>
                 </li>
-                <li {{ croute.is_current_route('binidini_core_shipping_index') }}>
+                <li {{ croute.is_current_route('binidini_admin_shipping_conflict') }}>
                     <a href="{{ path('binidini_admin_shipping_conflict') }}"><i class="fa fa-delicious"></i> <span class="nav-label">Споры</span></a>
                 </li>
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
@@ -73,9 +73,6 @@
                         <li><a href="#">По заказам</a></li>
                         <li><a href="#">По пользователям</a></li>
                     </ul>
-                </li>
-                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
-                    <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">Настройки</span> </a>
                 </li>
 
             </ul>
@@ -91,7 +88,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">Титимити 24/7</span>
+                        <a href="{{ path('binidini_home') }}">Титимити 24/7</a>
                     </li>
                     {% render path('binidini_user_bids_accepted') %}
                     {% render path('binidini_sender_bids_new') %}

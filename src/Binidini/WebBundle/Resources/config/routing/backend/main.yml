@@ -12,6 +12,8 @@ binidini_admin_shipping:
     defaults:
         _controller: binidini_core.controller.shipping:indexAction
         _sylius:
+            method: findByArguments
+            arguments: [$id, $state, $deliveryPriceFrom, $deliveryPriceTo, $insurancePriceFrom, $insurancePriceTo, $deliveryTimeFrom, $deliveryTimeTo]
             paginate: $paginate
             sortable: true
             sorting:

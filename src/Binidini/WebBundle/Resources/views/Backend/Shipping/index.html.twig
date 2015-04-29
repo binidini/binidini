@@ -1,9 +1,17 @@
 {% import 'BinidiniWebBundle:Frontend/Macros:page.html.twig' as page %}
 
-
 {% extends 'BinidiniWebBundle::Backend/layout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/binidiniweb/css/plugins/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block pageheader %}Все заказы{% endblock %}
+
+{% block actions %}
+        <a href="#" id="search-form-submit" class="btn btn-info">Обновить</a>
+{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -45,11 +53,11 @@
                         {% endif %}
                     </div>
                     <div class="ibox-content">
-
                             <div class="row">
-                                <div class="col-sm-6 pagination">
+                                <div class="col-sm-8">
+                                   {% include 'BinidiniWebBundle::Backend/Shipping/index/search_form.html.twig' %}
                                 </div>
-                                <div class="col-sm-6 text-right">
+                                <div class="col-sm-4 text-right">
                                     {{ page.pagination(shippings) }}
                                 </div>
                             </div>
@@ -104,4 +112,16 @@
     </div>
 
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/moment/moment-with-locales.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+    <script type="text/javascript">
+        $('#search-form-submit').click(function(e){
+            var $searchForm = $('#search-form');
+            document.location.href = $searchForm.attr('action') + '?' + $searchForm.serialize();
+        });
+        $('.input-daterange input').datetimepicker({locale: 'ru', sideBySide: true, format: 'YYYY-MM-DD HH:mm:ss'});
+    </script>
+{% endblock %}

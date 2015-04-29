@@ -15,7 +15,7 @@ sylius_resource:
             classes:
                 model: Binidini\CoreBundle\Entity\Shipping
                 controller: Binidini\CoreBundle\Controller\ShippingController
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+                repository: Binidini\CoreBundle\Entity\ShippingRepository
         binidini_search.shipment:
             driver: doctrine/mongodb-odm
             classes:

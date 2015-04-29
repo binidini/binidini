@@ -69,7 +69,7 @@
                                                         <h4>Рейтинг заказчика:</h4>
                                                     </div>
                                                     <div class="col-xs-9 text-right">
-                                                        <h2 class="font-bold">{{ user.senderRating }}</h2>
+                                                        <h2 class="font-bold">{{ user.senderRating|round(2) }}</h2>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +81,7 @@
                                                         <h4>Курьерский рейтинг:</h4>
                                                     </div>
                                                     <div class="col-xs-9 text-right">
-                                                        <h2 class="font-bold">{{ user.carrierRating }}</h2>
+                                                        <h2 class="font-bold">{{ user.carrierRating|round(2) }}</h2>
                                                     </div>
                                                 </div>
                                             </div>

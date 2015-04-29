@@ -58,14 +58,14 @@
                 <li {{ croute.is_current_route('binidini_admin_shipping') }}>
                     <a href="{{ path('binidini_admin_shipping') }}"><i class="fa fa-truck"></i> <span class="nav-label">Заказы</span></a>
                 </li>
-                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
-                    <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Пользователи</span> </a>
+                <li {{ croute.is_current_route('binidini_admin_user_index') }}>
+                    <a href="{{ path('binidini_admin_user_index') }}"><i class="fa fa-users"></i> <span class="nav-label">Пользователи</span> </a>
                 </li>
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
                     <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">Сообшения</span> </a>
                 </li>
-                <li {{ croute.is_current_route('binidini_core_shipping_index') }}>
-                    <a href="#"><i class="fa fa-delicious"></i> <span class="nav-label">Споры</span></a>
+                <li {{ croute.is_current_route('binidini_admin_shipping_conflict') }}>
+                    <a href="{{ path('binidini_admin_shipping_conflict') }}"><i class="fa fa-delicious"></i> <span class="nav-label">Споры</span></a>
                 </li>
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
                     <a href="#"><i class="fa fa-bar-chart"></i> <span class="nav-label">Отчеты</span> </a>

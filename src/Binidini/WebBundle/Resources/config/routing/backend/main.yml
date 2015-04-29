@@ -1,9 +1,19 @@
-binidini_admin_shipping:
+binidini_admin_home:
     path: /
+    methods: [GET]
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: binidini_admin_shipping
+        permanent: true
+
+binidini_admin_shipping:
+    path: /shipping
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.shipping:indexAction
         _sylius:
+            method: findByArguments
+            arguments: [$id, $state, $deliveryPriceFrom, $deliveryPriceTo, $insurancePriceFrom, $insurancePriceTo, $deliveryTimeFrom, $deliveryTimeTo]
             paginate: $paginate
             sortable: true
             sorting:

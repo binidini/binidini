@@ -77,6 +77,7 @@ stof_doctrine_extensions:
         default:
             loggable: true
             uploadable: true
+            timestampable: true
 
 doctrine_mongodb:
     connections:

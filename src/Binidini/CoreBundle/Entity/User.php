@@ -243,6 +243,14 @@ class User extends BaseUser
      */
     protected $recoverSalt;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    protected $createdAt;
+
     public function __construct()
     {
         parent::__construct();
@@ -1386,5 +1394,28 @@ class User extends BaseUser
     public function getRecoverSalt()
     {
         return $this->recoverSalt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return User
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

@@ -5,6 +5,16 @@
 
 {% block pageheader %}Пользователи{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/binidiniweb/css/plugins/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/binidiniweb/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block actions %}
+    <a href="#" id="search-form-submit" class="btn btn-info">Обновить</a>
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
@@ -47,9 +57,10 @@
                     <div class="ibox-content">
 
                             <div class="row">
-                                <div class="col-sm-6 pagination">
+                                <div class="col-sm-8">
+                                    {% include 'BinidiniWebBundle::Backend/User/index/search_form.html.twig' %}
                                 </div>
-                                <div class="col-sm-6 text-right">
+                                <div class="col-sm-4 text-right">
                                     {{ page.pagination(users) }}
                                 </div>
                             </div>
@@ -65,18 +76,27 @@
                                         <th>Название</th>
                                         <th>email</th>
                                         <th>Был</th>
+                                        <th>Дата регистрации</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for user in users %}
                                         <tr>
                                             <td>
-                                                <a href="#">{{ user.id }}</a>
+                                                <a href="{{ path('binidini_admin_user_show', {id: user.id}) }}">{{ user.id }}</a>
                                             </td>
                                             <td>{{ user.username }}</td>
-                                            <td> {{ user.name }}</td>
+                                            <td>{{ user.name }}
+                                                {% if not user.enabled %}
+                                                <span class="badge badge-info">Не активирован</span>
+                                            {% endif %}
+                                            {% if user.locked %}
+                                                <span class="badge badge-danger">Заблокирован</span>
+                                            {% endif %}
+                                            </td>
                                             <td>{{ user.email }}</td>
                                             <td>{{ user.lastlogin | date('d.m H:i') }}</td>
+                                            <td>{{ user.createdAt | date('d.m H:i') }}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -99,3 +119,24 @@
 
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/moment/moment-with-locales.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/iCheck/icheck.min.js') }}"></script>
+    <script type="text/javascript">
+        $('#search-form-submit').click(function(e){
+            var $searchForm = $('#search-form');
+            document.location.href = $searchForm.attr('action') + '?' + $searchForm.serialize();
+        });
+        $('.input-daterange input').datetimepicker({locale: 'ru', sideBySide: true, format: 'YYYY-MM-DD HH:mm:ss'});
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+            });
+
+
+        });
+    </script>
+{% endblock %}

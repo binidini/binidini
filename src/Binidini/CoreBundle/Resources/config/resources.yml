@@ -9,7 +9,7 @@ sylius_resource:
             classes:
                 model: Binidini\CoreBundle\Entity\User
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+                repository: Binidini\CoreBundle\Entity\UserRepository
         binidini_core.shipping:
             driver: doctrine/orm
             classes:

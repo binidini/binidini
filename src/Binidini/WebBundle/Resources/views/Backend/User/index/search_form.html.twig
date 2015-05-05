@@ -1,0 +1,97 @@
+<div class="panel-body">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h5 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="">
+                        <i class="fa fa-search"></i>&nbsp;Форма для поиска</a>
+                </h5>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false">
+                <div class="panel-body">
+                    <form method="GET" action="{{ path('binidini_admin_user_index') }}" id="search-form" name="search-form" class="form-horizontal small">
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <input data-valid='number' type="text" class="form-control" name="phone" placeholder="Телефон"
+                                       value="{{ app.request.get('phone')?:'' }}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <input data-valid='number' type="text" class="form-control" name="lastName" placeholder="Фамилия"
+                                       value="{{ app.request.get('lastName')?:'' }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <input data-valid='number' type="text" class="form-control" name="firstName" placeholder="Имя"
+                                       value="{{ app.request.get('firstName')?:'' }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <input data-valid='number' type="text" class="form-control" name="parentName" placeholder="Отчество"
+                                       value="{{ app.request.get('parentName')?:'' }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <input data-valid='number' type="text" class="form-control" name="email" placeholder="Email"
+                                       value="{{ app.request.get('email')?:'' }}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="input-daterange input-group col-sm-offset-1 col-sm-10">
+                                <span class="input-group-addon">Регистрация от:</span>
+                                <input type="text" value="{{ app.request.get('registrationFrom')?:'' }}" class="form-control" name="registrationFrom">
+                                <span class="input-group-addon">до</span>
+                                <input type="text" value="{{ app.request.get('registrationTo')?:'' }}" class="form-control" name="registrationTo">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <input data-valid='number' type="text" class="form-control" name="countOfCarriers" placeholder="Количество перевозок"
+                                       value="{{ app.request.get('countOfCarriers')?:'' }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <input data-valid='number' type="text" class="form-control" name="countOfSenders" placeholder="Количество отправок"
+                                       value="{{ app.request.get('countOfSenders')?:'' }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <div class="checkbox i-checks">
+                                    <label class="">
+                                        <div class="icheckbox_square-green" style="position: relative;">
+                                            <input type="checkbox" name="blocked" {{ app.request.get('blocked')=='on'?'checked':'' }} style="position: absolute; opacity: 0;">
+                                            <ins class="iCheck-helper"
+                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                        </div>
+                                        Заблокирован</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <div class="checkbox i-checks">
+                                    <label class="">
+                                        <div class="icheckbox_square-green" style="position: relative;">
+                                            <input type="checkbox" name="enabled" {{ app.request.get('enabled')=='on'?'checked':'' }} style="position: absolute; opacity: 0;">
+                                            <ins class="iCheck-helper"
+                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                        </div>
+                                        Активен</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

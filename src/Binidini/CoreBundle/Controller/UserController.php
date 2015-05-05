@@ -8,9 +8,12 @@ use Binidini\CoreBundle\Service\SecurityService;
 use FOS\UserBundle\Model\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\Pbkdf2PasswordEncoder;
 use FOS\UserBundle\Model\UserInterface;
@@ -100,5 +103,48 @@ class UserController extends Controller
         $flashBag->add('success',$this->get('translator')->trans('resetting.password.success.send'));
 
         return new JsonResponse(['redirect' => $this->generateUrl('fos_user_security_login')]);
+    }
+
+    public function lockAction(Request $request)
+    {
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+        $userId = $request->get('id');
+        if ($userId) {
+            /** @var User $user */
+            $user = $userManager->findUserBy(['id' => $userId]);
+            if (!$user) {
+                throw new NotFoundHttpException('Пользователь не найден');
+            }
+            if (!$user->isLocked()) {
+                $user->setLocked(true);
+                $userManager->updateUser($user);
+            }
+        } else {
+            throw new InvalidParameterException('Id пользователя не передано');
+        }
+
+        return new RedirectResponse($this->generateUrl('binidini_admin_user_show', ['id' => $user->getId()]));
+    }
+
+    public function unlockAction(Request $request)
+    {
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+        $userId = $request->get('id');
+        if ($userId) {
+            /** @var User $user */
+            $user = $userManager->findUserBy(['id' => $userId]);
+            if (!$user) {
+                throw new NotFoundHttpException('Пользователь не найден');
+            }
+            if ($user->isLocked()) {
+                $user->setLocked(false);
+                $userManager->updateUser($user);
+            }
+        } else {
+            throw new InvalidParameterException('Id пользователя не передано');
+        }
+        return new RedirectResponse($this->generateUrl('binidini_admin_user_show', ['id' => $user->getId()]));
     }
 }

@@ -56,9 +56,31 @@ binidini_admin_user_index:
     defaults:
         _controller: binidini_core.controller.user:indexAction
         _sylius:
+            method: findByArguments
+            arguments: [$phone, $lastName, $firstName, $parentName, $email, $registrationFrom, $registrationTo, $countOfCarriers, $countOfSenders, $blocked, $enabled]
             paginate: $paginate
             sortable: true
             sorting:
                 id: desc
             filterable: true
             template: BinidiniWebBundle::Backend/User/index.html.twig
+
+binidini_admin_user_show:
+    path: /user/{id}
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.user:showAction
+        _sylius:
+            template: FOSUserBundle:Profile:show_admin.html.twig
+
+binidini_admin_user_lock:
+    path: /user/{id}/lock
+    methods: [GET]
+    defaults:
+        _controller: BinidiniCoreBundle:User:lock
+
+binidini_admin_user_unlock:
+    path: /user/{id}/unlock
+    methods: [GET]
+    defaults:
+        _controller: BinidiniCoreBundle:User:unlock

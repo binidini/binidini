@@ -52,6 +52,8 @@ class ShippingLogicService
     {
         $this->security->checkCarrier($shipping);
         $shipping->release();
+        $shipping->getCarrier()->incrementCarrierCount();
+        $shipping->getSender()->incrementSenderCount();
     }
 
 }

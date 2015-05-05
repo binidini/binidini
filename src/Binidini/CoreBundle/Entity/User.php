@@ -251,6 +251,20 @@ class User extends BaseUser
      */
     protected $createdAt;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sender_count", type="integer", options={"default"=0})
+     */
+    private $senderCount;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="carrier_count", type="integer", options={"default"=0})
+     */
+    private $carrierCount;
+
     public function __construct()
     {
         parent::__construct();
@@ -266,6 +280,9 @@ class User extends BaseUser
         $this->carrierRating = 0;
         $this->carrierRatingAmount = 0;
         $this->carrierRatingCount = 0;
+
+        $this->senderCount = 0;
+        $this->carrierCount = 0;
 
         $this->balance = 0;
         $this->holdAmount = 0;
@@ -1417,5 +1434,65 @@ class User extends BaseUser
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set senderCount
+     *
+     * @param integer $senderCount
+     * @return User
+     */
+    public function setSenderCount($senderCount)
+    {
+        $this->senderCount = $senderCount;
+
+        return $this;
+    }
+
+    /**
+     * Get senderCount
+     *
+     * @return integer 
+     */
+    public function getSenderCount()
+    {
+        return $this->senderCount;
+    }
+
+    /**
+     * Set carrierCount
+     *
+     * @param integer $carrierCount
+     * @return User
+     */
+    public function setCarrierCount($carrierCount)
+    {
+        $this->carrierCount = $carrierCount;
+
+        return $this;
+    }
+
+    /**
+     * Get carrierCount
+     *
+     * @return integer 
+     */
+    public function getCarrierCount()
+    {
+        return $this->carrierCount;
+    }
+
+    public function incrementCarrierCount($count = 1)
+    {
+        $this->carrierCount += $count;
+
+        return $this;
+    }
+
+    public function incrementSenderCount($count = 1)
+    {
+        $this->senderCount += $count;
+
+        return $this;
     }
 }

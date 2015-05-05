@@ -32,15 +32,14 @@ class UserRepository extends EntityRepository
             $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('email'), ':em'))
                 ->setParameter(':em', $email);
         }
-        /*if ($registrationFrom) {
-            $queryBuilder->andWhere($queryBuilder->expr()->lte($this->getPropertyName('registrationFrom'), ':rgf'))
+        if ($registrationFrom) {
+            $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName('createdAt'), ':rgf'))
                 ->setParameter(':rgf', $registrationFrom);
         }
         if ($registrationTo) {
-            $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName('registrationTo'), ':rgt'))
+            $queryBuilder->andWhere($queryBuilder->expr()->lte($this->getPropertyName('createdAt'), ':rgt'))
                 ->setParameter(':rgt', $registrationTo);
-        }*/
-
+        }
         /*if ($countOfCarriers) {
             $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('deliveryDatetime'), ':dtt'))
                 ->setParameter(':dtt', $countOfCarriers);

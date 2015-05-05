@@ -7,7 +7,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 class UserRepository extends EntityRepository
 {
 
-    public function findByArguments($phone, $lastName, $firstName, $parentName, $email, $registrationFrom, $registrationTo, $countOfCarriers, $countOfSenders)
+    public function findByArguments($phone, $lastName, $firstName, $parentName, $email, $registrationFrom, $registrationTo, $countOfCarriers, $countOfSenders, $blocked, $enabled)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -47,6 +47,14 @@ class UserRepository extends EntityRepository
         if ($countOfSenders) {
             $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('senderCount'), ':sc'))
                 ->setParameter(':sc', $countOfSenders);
+        }
+        if ($blocked && $blocked == 'on') {
+            $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('enabled'), ':en'))
+                ->setParameter(':en', 0);
+        }
+        if ($enabled && $enabled == 'on') {
+            $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('enabled'), ':enab'))
+                ->setParameter(':enab', 1);
         }
         return $this->getPaginator($queryBuilder);
     }

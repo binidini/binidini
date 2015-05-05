@@ -57,7 +57,7 @@ binidini_admin_user_index:
         _controller: binidini_core.controller.user:indexAction
         _sylius:
             method: findByArguments
-            arguments: [$phone, $lastName, $firstName, $parentName, $email, $registrationFrom, $registrationTo, $countOfCarriers, $countOfSenders]
+            arguments: [$phone, $lastName, $firstName, $parentName, $email, $registrationFrom, $registrationTo, $countOfCarriers, $countOfSenders, $blocked, $enabled]
             paginate: $paginate
             sortable: true
             sorting:

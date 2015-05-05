@@ -63,6 +63,32 @@
                                        value="{{ app.request.get('countOfSenders')?:'' }}">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <div class="checkbox i-checks">
+                                    <label class="">
+                                        <div class="icheckbox_square-green" style="position: relative;">
+                                            <input type="checkbox" name="blocked" {{ app.request.get('blocked')=='on'?'checked':'' }} style="position: absolute; opacity: 0;">
+                                            <ins class="iCheck-helper"
+                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                        </div>
+                                        Заблокирован</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-offset-1 col-sm-10">
+                                <div class="checkbox i-checks">
+                                    <label class="">
+                                        <div class="icheckbox_square-green" style="position: relative;">
+                                            <input type="checkbox" name="enabled" {{ app.request.get('enabled')=='on'?'checked':'' }} style="position: absolute; opacity: 0;">
+                                            <ins class="iCheck-helper"
+                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                        </div>
+                                        Активен</label>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -31,7 +31,7 @@ class SecurityService
 
     public function checkResolver()
     {
-        if (!$this->getUser()->hasRole(User::ROLE_ADMIN)){
+        if (!$this->getUser()->isAdmin()){
             throw new AccessDeniedHttpException("Данная операция не реализована.");
         }
     }

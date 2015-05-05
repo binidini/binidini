@@ -7,7 +7,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 class UserRepository extends EntityRepository
 {
 
-    public function findByArguments($phone, $lastName, $firstName, $parentName, $email, $registrationFrom, $registrationTo, $countOfCarriers, $countOfSenders, $blocked, $enabled)
+    public function findByArguments($phone, $lastName, $firstName, $parentName, $email, $registrationFrom, $registrationTo, $countOfCarriers, $countOfSenders, $blocked, $unBlocked)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -48,13 +48,21 @@ class UserRepository extends EntityRepository
             $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('senderCount'), ':sc'))
                 ->setParameter(':sc', $countOfSenders);
         }
-        if ($blocked && $blocked == 'on') {
-            $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('enabled'), ':en'))
-                ->setParameter(':en', 0);
-        }
-        if ($enabled && $enabled == 'on') {
-            $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('enabled'), ':enab'))
-                ->setParameter(':enab', 1);
+        if ($blocked || $unBlocked) {
+            $getBlocked = $blocked == 'on';
+            $getUnblocked = $unBlocked == 'on';
+            if ($getBlocked && $getUnblocked) {
+                //Выбираем все возможные статусы блокировки
+            } else {
+                if ($getBlocked) {
+                    $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('locked'), ':locked'))
+                        ->setParameter(':locked', 1);
+                } elseif ($getUnblocked) {
+                    $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('locked'), ':locked'))
+                        ->setParameter(':locked', 0);
+                }
+            }
+
         }
         return $this->getPaginator($queryBuilder);
     }

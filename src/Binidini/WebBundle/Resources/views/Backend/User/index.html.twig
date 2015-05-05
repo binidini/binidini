@@ -76,18 +76,27 @@
                                         <th>Название</th>
                                         <th>email</th>
                                         <th>Был</th>
+                                        <th>Дата регистрации</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for user in users %}
                                         <tr>
                                             <td>
-                                                <a href="#">{{ user.id }}</a>
+                                                <a href="{{ path('binidini_admin_user_show', {id: user.id}) }}">{{ user.id }}</a>
                                             </td>
                                             <td>{{ user.username }}</td>
-                                            <td> {{ user.name }}</td>
+                                            <td>{{ user.name }}
+                                                {% if not user.enabled %}
+                                                <span class="badge badge-info">Не активирован</span>
+                                            {% endif %}
+                                            {% if user.locked %}
+                                                <span class="badge badge-danger">Заблокирован</span>
+                                            {% endif %}
+                                            </td>
                                             <td>{{ user.email }}</td>
                                             <td>{{ user.lastlogin | date('d.m H:i') }}</td>
+                                            <td>{{ user.createdAt | date('d.m H:i') }}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

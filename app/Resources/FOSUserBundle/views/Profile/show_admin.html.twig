@@ -1,0 +1,187 @@
+{% extends "BinidiniWebBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/binidiniweb/css/plugins/raty/jquery.raty.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% set isItMe = user.id == app.user.id %}
+{% set isItCompany = user.type == 2 %}
+
+{% block actions %}
+    <a class="btn btn-primary"
+       href="{{ user.isLocked?path('binidini_admin_user_unlock', {id:user.id}):path('binidini_admin_user_lock',{id:user.id}) }}">
+        {{ user.isLocked? 'Разблокировать': 'Заблокировать'}}
+    </a>
+{% endblock %}
+
+{% block pageheader %} Страница пользователя {% endblock %}
+{% block content %}
+    <div class="wrapper wrapper-content">
+        <div class="row animated fadeInRight">
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>О {{ isItCompany? 'компании': 'пользователе' }}</h5>
+                        {%  if user.isLocked %}
+                            <span class="badge badge-danger">Заблокирован</span>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <div class="ibox-content border-left-right">
+                            <img alt="image" class="img-responsive"
+                                 src="{{ user.imgPath | imagine_filter('photo600x600') }}">
+                        </div>
+                        <div class="ibox-content profile-content">
+                            <h4><strong>{{ isItCompany? user.name: user.Fio }}</strong></h4>
+                            {% if user.address %}
+                                <p><i class="fa fa-map-marker"></i> {{ user.address }}</p>
+                            {% endif %}
+
+                            {% if isItCompany %}
+                                <h5>Контактное лицо</h5>
+                                <h5><strong>{{ user.Fio }}</strong></h5>
+                            {% endif %}
+
+                            <p><i class="fa fa-phone-square"></i> {{ user.mobilexxx }} <i class="fa fa-check-square-o text-navy"></i>
+
+                            {% if user.email %}
+
+                            <p><i class="fa fa-envelope"></i> {{ user.emailxxx }}
+                                {% if user.emailVerified %}
+                                    <i class="fa fa-check-square-o text-navy"></i>
+                                {% else %}
+                                    <i class="fa fa-minus-square-o text-danger"></i>
+                                    {% if isItMe %}
+                                        <a href="{{ path('binidini_email_confirm_send') }}" id="confirm-email">
+                                            Подтвердить
+                                        </a>
+                                        <small id="confirm-email-sended" class="hide">Письмо отправлено</small>
+                                    {% endif %}
+                                {% endif %}
+                            </p>
+
+                            {% endif %}
+
+                            {% if user.aboutMe %}
+
+                                <h5>О {{ isItCompany? 'компании': 'себе' }}</h5>
+                                <p>{{ user.aboutMe | nl2br }}</p>
+
+                            {% endif %}
+
+                            {% if user.carrierRating or user.senderRating %}
+
+                                <div class="row m-t-lg">
+                                    <div class="col-sm-12">
+                                        {% if user.senderRating %}
+                                            <div class="widget style1 navy-bg">
+                                                <div class="row vertical-align">
+                                                    <div class="col-xs-3 text-left">
+                                                        <h4>Рейтинг заказчика:</h4>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        <h2 class="font-bold">{{ user.senderRating|round(2) }}</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        {% if user.carrierRating %}
+                                            <div class="widget style1 navy-bg">
+                                                <div class="row vertical-align">
+                                                    <div class="col-xs-3 text-left">
+                                                        <h4>Курьерский рейтинг:</h4>
+                                                    </div>
+                                                    <div class="col-xs-9 text-right">
+                                                        <h2 class="font-bold">{{ user.carrierRating|round(2) }}</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Отзывы</h5>
+                    </div>
+                    <div class="ibox-content no-top-border">
+                        <div class="row m-t-sm no-padding no-margins">
+                            <div class="col-sm-12 no-padding">
+                                <div class="panel blank-panel no-padding">
+                                    <div class="panel-heading no-padding">
+                                        <div class="panel-options">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active">
+                                                    <a href="#tab-1"
+                                                       data-url="{{ path('binidini_core_user_to_review_index', {'user_id': user.id}) }}"
+                                                       data-content="#tab-1" data-toggle="tab">О пользователе</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#tab-2"
+                                                       data-url="{{ path('binidini_core_user_from_review_index', {'user_id': user.id}) }}"
+                                                       data-content="#tab-2" data-toggle="tab">От пользователя</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-1">
+
+                                            </div>
+                                            <div class="tab-pane" id="tab-2">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/raty/jquery.raty.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/review.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            tabAjax.reloadActiveTab(function () {
+                review.setReadonlyRating('.rating');
+            });
+            tabAjax.initTab(function () {
+                review.setReadonlyRating('.rating');
+            })
+        });
+        var emailSended = false;
+        $('#confirm-email').click(function(){
+            if (!emailSended){
+                emailSended = true;
+                $.get($(this).attr('href'), function (data) {
+                    if (data.success) {
+                        $('#confirm-email').addClass('hide');
+                        $('#confirm-email-sended').removeClass('hide');
+                    } else {
+                        emailSended = false;
+                    }
+
+                });
+            }
+            return false;
+        })
+
+    </script>
+{% endblock %}

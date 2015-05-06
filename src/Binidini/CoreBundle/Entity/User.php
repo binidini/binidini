@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Gedmo\Uploadable(
  *      allowOverwrite=true,
  *      filenameGenerator="SHA1",
- *      allowedTypes="image/jpeg,image/pjpeg,image/png,image/x-png, image/gif",
+ *      allowedTypes="image/jpeg,image/pjpeg,image/png,image/x-png,image/gif",
  *      maxSize = 32000000
  * )
  *
@@ -401,10 +401,10 @@ class User extends BaseUser
     /**
      * Add parcels
      *
-     * @param \Binidini\CoreBundle\Entity\Shipping $parcels
+     * @param Shipping $parcels
      * @return User
      */
-    public function addParcel(\Binidini\CoreBundle\Entity\Shipping $parcels)
+    public function addParcel(Shipping $parcels)
     {
         $this->parcels[] = $parcels;
 
@@ -414,9 +414,9 @@ class User extends BaseUser
     /**
      * Remove parcels
      *
-     * @param \Binidini\CoreBundle\Entity\Shipping $parcels
+     * @param Shipping $parcels
      */
-    public function removeParcel(\Binidini\CoreBundle\Entity\Shipping $parcels)
+    public function removeParcel(Shipping $parcels)
     {
         $this->parcels->removeElement($parcels);
     }
@@ -434,10 +434,10 @@ class User extends BaseUser
     /**
      * Add shipments
      *
-     * @param \Binidini\CoreBundle\Entity\Shipping $shipments
+     * @param Shipping $shipments
      * @return User
      */
-    public function addShipment(\Binidini\CoreBundle\Entity\Shipping $shipments)
+    public function addShipment(Shipping $shipments)
     {
         $this->shipments[] = $shipments;
 
@@ -447,9 +447,9 @@ class User extends BaseUser
     /**
      * Remove shipments
      *
-     * @param \Binidini\CoreBundle\Entity\Shipping $shipments
+     * @param Shipping $shipments
      */
-    public function removeShipment(\Binidini\CoreBundle\Entity\Shipping $shipments)
+    public function removeShipment(Shipping $shipments)
     {
         $this->shipments->removeElement($shipments);
     }
@@ -467,10 +467,10 @@ class User extends BaseUser
     /**
      * Add bids
      *
-     * @param \Binidini\CoreBundle\Entity\Bid $bids
+     * @param Bid $bids
      * @return User
      */
-    public function addBid(\Binidini\CoreBundle\Entity\Bid $bids)
+    public function addBid(Bid $bids)
     {
         $this->bids[] = $bids;
 
@@ -480,9 +480,9 @@ class User extends BaseUser
     /**
      * Remove bids
      *
-     * @param \Binidini\CoreBundle\Entity\Bid $bids
+     * @param Bid $bids
      */
-    public function removeBid(\Binidini\CoreBundle\Entity\Bid $bids)
+    public function removeBid(Bid $bids)
     {
         $this->bids->removeElement($bids);
     }
@@ -500,10 +500,10 @@ class User extends BaseUser
     /**
      * Add payments
      *
-     * @param \Binidini\CoreBundle\Entity\Payment $payments
+     * @param Payment $payments
      * @return User
      */
-    public function addPayment(\Binidini\CoreBundle\Entity\Payment $payments)
+    public function addPayment(Payment $payments)
     {
         $this->payments[] = $payments;
 
@@ -513,9 +513,9 @@ class User extends BaseUser
     /**
      * Remove payments
      *
-     * @param \Binidini\CoreBundle\Entity\Payment $payments
+     * @param Payment $payments
      */
-    public function removePayment(\Binidini\CoreBundle\Entity\Payment $payments)
+    public function removePayment(Payment $payments)
     {
         $this->payments->removeElement($payments);
     }
@@ -740,11 +740,10 @@ class User extends BaseUser
      */
     public function setImgPath($imgPath)
     {
-        $this->imgIsChanged = (bool)$imgPath;
-        if ($this->imgIsChanged) {
+        if ((bool)$imgPath) {
+            $this->backImage = $this->imgPath;
             $this->imgPath = $imgPath;
         }
-
         return $this;
     }
 
@@ -755,18 +754,20 @@ class User extends BaseUser
      */
     public function getImgPath()
     {
-        if ($this->imgPath) {
-            return $this->imgPath;
-        } else {
-            return 'default.png';
-        }
+        return $this->imgPath;
     }
 
-    private $imgIsChanged = false;
+    private $backImage = '';
 
-    public function imgIsChanged()
+    public function getBackImage()
     {
-        return $this->imgIsChanged;
+        return $this->backImage;
+    }
+
+    public function revertImage()
+    {
+        $this->imgPath = $this->backImage;
+        return $this;
     }
 
     /**

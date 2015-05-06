@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
+use Gedmo\Exception\UploadableException;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -47,6 +48,13 @@ class EditUserProfileListener implements EventSubscriberInterface
         if ($user->getEmail() !== $this->email) {
             $user->setEmailVerified(false);
         }
+        try {
+            $fileInfo = $user->getImgPath();
+            $this->uploadableManager->markEntityToUpload($user, $fileInfo);
+            $this->doctrineManager->flush();
+        } catch (UploadableException $e) {
+            $user->revertImage();
+        }
 
         $tab = $event->getRequest()->get('tab-switch', '');
         $event->setResponse(
@@ -55,15 +63,6 @@ class EditUserProfileListener implements EventSubscriberInterface
     }
 
     public function onFosuserProfileEditCompleted(FilterUserResponseEvent $event){
-
-        /** @var User $user */
-        $user = $event->getUser();
-        $this->doctrineManager->persist($user);
-        if ($user->imgIsChanged()) {
-            $fileInfo = $user->getImgPath();
-            $this->uploadableManager->markEntityToUpload($user, $fileInfo);
-            $this->doctrineManager->flush();
-        }
 
     }
 }

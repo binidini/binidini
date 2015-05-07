@@ -199,3 +199,12 @@ lsw_memcache:
         default:
             hosts:
                 - { dsn: localhost, port: 11211, weight: 15 }
+
+fos_oauth_server:
+    db_driver: orm       # Driver availables: orm, mongodb, or propel
+    client_class:        Binidini\CoreBundle\Entity\OAuthClient
+    access_token_class:  Binidini\CoreBundle\Entity\OAuthAccessToken
+    refresh_token_class: Binidini\CoreBundle\Entity\OAuthRefreshToken
+    auth_code_class:     Binidini\CoreBundle\Entity\OAuthAuthCode
+    service:
+        user_provider: fos_user.user_manager

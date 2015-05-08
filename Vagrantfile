@@ -15,10 +15,7 @@ Vagrant.configure(2) do |config|
   # using a specific IP.
   config.vm.network "private_network", ip: "192.168.33.10"
   # config.vm.network "public_network"
-
-    config.vm.synced_folder "app/cache", "/vagrant/app/cache", :mount_options => ["dmode=777","fmode=777"]
-    config.vm.synced_folder "app/logs", "/vagrant/app/logs", :mount_options => ["dmode=777","fmode=777"]
-    config.vm.synced_folder "web/media/", "/vagrant/web/media", :mount_options => ["dmode=777","fmode=777"]
+ config.vm.synced_folder ".", "/vagrant", :type => "nfs"
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the

@@ -37,7 +37,7 @@
                             {% if user.address %}
                                 <p><i class="fa fa-map-marker"></i> {{ user.address }}</p>
                             {% endif %}
-
+                            <p><i class="fa fa-rouble"></i>&nbsp;<span class="text-success">{{ user.balance}}</span>/<span class="text-danger">{{ user.holdAmount }}</span>руб.</p>
                             {% if isItCompany %}
                                 <h5>Контактное лицо</h5>
                                 <h5><strong>{{ user.Fio }}</strong></h5>

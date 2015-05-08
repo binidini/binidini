@@ -149,7 +149,7 @@
                                             </div>
                                             <div class="tab-pane {{ activeTab == 'notification'?'active':'' }}" id="tab-2">
                                                 <div class="row m-t-sm">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-6 {{ user.isSender and not user.isCarrier ? 'hide' }}">
                                                         <table class="table table-striped">
                                                             <thead>
                                                             <tr>
@@ -233,7 +233,7 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-6 {{ user.isCarrier and not user.isSender? 'hide' }}">
                                                         <table class="table table-striped">
                                                             <thead>
                                                             <tr>

@@ -1536,4 +1536,14 @@ class User extends BaseUser
     {
         return $this->profileType;
     }
+
+    public function isCarrier()
+    {
+        return $this->profileType == self::PROFILE_TYPE_BOTH || $this->profileType == self::PROFILE_TYPE_CARRIER;
+    }
+
+    public function isSender()
+    {
+        return $this->profileType == self::PROFILE_TYPE_BOTH || $this->profileType == self::PROFILE_TYPE_SENDER;
+    }
 }

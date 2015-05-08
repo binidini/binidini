@@ -31,6 +31,18 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
                     'required' => true,
                 ]
             )
+            ->add('profileType', 'choice',
+                [
+                    'choices' => [
+                        User::PROFILE_TYPE_BOTH => 'Оба',
+                        User::PROFILE_TYPE_CARRIER => 'Курьер',
+                        User::PROFILE_TYPE_SENDER => 'Заказчик',
+                    ],
+                    'multiple' => false,
+                    'expanded' => true,
+                    'required' => true,
+                ]
+            )
             ->add('aboutMe', 'textarea', ['required' => false])
             ->add('imgPath', 'file', ['required' => false, 'data_class' => null, 'mapped' => true])
             // Блок настроек оповещения

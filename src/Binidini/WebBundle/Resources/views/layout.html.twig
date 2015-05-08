@@ -68,12 +68,16 @@
                         </span>
                     </a>
                 </li>
+                {% if app.user.profileType == 0 or app.user.profileType == 1 %}
                 <li {{ croute.is_current_route('binidini_core_carrier_index') }}>
                     <a href="{{ path('binidini_core_carrier_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-truck"></i> <span class="nav-label">Мои перевозки</span></a>
                 </li>
+                {% endif %}
+                {% if app.user.profileType == 0 or app.user.profileType == 2 %}
                 <li {{ croute.is_current_route('binidini_core_shipping_index') }}>
                     <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-archive"></i> <span class="nav-label">Мои отправки</span></a>
                 </li>
+                {% endif %}
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
                     <a href="{{ path('fos_user_profile_edit') }}"><i class="fa fa-gears"></i> <span class="nav-label">Мои настройки</span> </a>
                 </li>

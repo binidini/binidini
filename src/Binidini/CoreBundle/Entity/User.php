@@ -29,7 +29,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User extends BaseUser
 {
     const TYPE_INDIVIDUAL = 1;
-    const TYPE_BUSINESS   = 2;
+    const TYPE_BUSINESS = 2;
+
+    const PROFILE_TYPE_CARRIER = 1;
+    const PROFILE_TYPE_SENDER = 2;
+    const PROFILE_TYPE_BOTH = 0;
 
     const BIT_ACCEPT_BID = 0;
     const BIT_REJECT_BID = 1;
@@ -144,6 +148,13 @@ class User extends BaseUser
      * @ORM\Column(name="type", type="string", length=32, options={"default" = 1})
      */
     private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="profile_type", type="integer", options={"default" = 0})
+     */
+    private $profileType;
 
     /**
      * @var string
@@ -288,6 +299,8 @@ class User extends BaseUser
         $this->holdAmount = 0;
 
         $this->type = User::TYPE_INDIVIDUAL;
+        $this->profileType = USER::PROFILE_TYPE_BOTH;
+
         $this->emailVerified = false;
 
         $this->senderRating = 0;
@@ -1499,5 +1512,28 @@ class User extends BaseUser
 
     public function isAdmin(){
         return $this->hasRole(self::ROLE_ADMIN) || $this->isSuperAdmin();
+    }
+
+    /**
+     * Set profileType
+     *
+     * @param integer $profileType
+     * @return User
+     */
+    public function setProfileType($profileType)
+    {
+        $this->profileType = $profileType;
+
+        return $this;
+    }
+
+    /**
+     * Get profileType
+     *
+     * @return integer 
+     */
+    public function getProfileType()
+    {
+        return $this->profileType;
     }
 }

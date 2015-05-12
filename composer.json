@@ -32,7 +32,8 @@
         "doctrine/migrations": "1.0.*@dev",
         "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
         "leaseweb/memcache-bundle": "*",
-        "friendsofsymfony/oauth-server-bundle": "dev-master"
+        "friendsofsymfony/oauth-server-bundle": "dev-master",
+        "willdurand/hateoas-bundle": "0.5.*"
     },
     "scripts": {
         "post-install-cmd": [

@@ -6,6 +6,7 @@ use Binidini\CoreBundle\Entity\User;
 use Binidini\CoreBundle\Service\NotificationService;
 use Binidini\CoreBundle\Service\SecurityService;
 use FOS\UserBundle\Model\UserManager;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,7 +20,7 @@ use Symfony\Component\Security\Core\Encoder\Pbkdf2PasswordEncoder;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class UserController extends Controller
+class UserController extends ResourceController
 {
 
     public function changePasswordAction(Request $request)

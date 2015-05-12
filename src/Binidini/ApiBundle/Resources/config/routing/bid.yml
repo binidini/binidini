@@ -1,0 +1,18 @@
+# This file is part of the Binidini project.
+# (c) Denis Manilo
+
+binidini_api_bid_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.bid:indexAction
+        _sylius:
+            paginate:  $limit
+            sortable:  true
+
+
+binidini_api_bid_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.bid:showAction

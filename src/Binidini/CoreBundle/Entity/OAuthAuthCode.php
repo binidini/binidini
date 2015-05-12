@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * OAuthAuthCode
  * @ORM\Entity
+ * @ORM\Table(name="oauth_auth_code")
  */
 class OAuthAuthCode extends AuthCode
 {

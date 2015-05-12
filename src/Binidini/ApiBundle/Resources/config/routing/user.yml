@@ -7,8 +7,8 @@ binidini_api_user_index:
     defaults:
         _controller: binidini_core.controller.user:indexAction
         _sylius:
-            filterable: true
-            sortable: true
+            paginate:  $limit
+            sortable:  true
             sorting:
                 id: desc
 

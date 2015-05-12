@@ -1,10 +1,18 @@
 # This file is part of the Binidini project.
 # (c) Denis Manilo
 
-binidini_api_user:
+binidini_api_users:
     resource: @BinidiniApiBundle/Resources/config/routing/user.yml
     prefix: /users
 
-binidini_api_parcel:
-    resource: @BinidiniApiBundle/Resources/config/routing/parcel.yml
-    prefix: /parcels
+binidini_api_bids:
+    resource: @BinidiniApiBundle/Resources/config/routing/bid.yml
+    prefix: /bids
+
+binidini_api_shipments:
+    resource: @BinidiniApiBundle/Resources/config/routing/shipment.yml
+    prefix: /shipments
+
+binidini_api_shipping:
+    resource: @BinidiniApiBundle/Resources/config/routing/shipping.yml
+    prefix: /shipping

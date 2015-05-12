@@ -10,6 +10,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+
 
 
 /**
@@ -18,6 +21,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name = "shipping")
  * @ORM\Entity
  * @Gedmo\Loggable
+ * @ExclusionPolicy("all")
  */
 class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 {
@@ -56,6 +60,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @ORM\Column(name="name", type="string", length=127)
      * @Assert\NotBlank()
      * @Assert\Length(max=64)
+     * @Expose
      */
     private $name;
 

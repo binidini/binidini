@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * OAuthRefreshToken
  * @ORM\Entity
+ * @ORM\Table(name="oauth_refresh_token")
  */
 class OAuthRefreshToken extends RefreshToken
 {

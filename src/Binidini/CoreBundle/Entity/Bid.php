@@ -6,12 +6,14 @@ use Binidini\CoreBundle\Model\SenderCarrierAwareInterface;
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 /**
  * Bid
  *
  * @ORM\Table(name = "bid")
  * @ORM\Entity
+ * @ExclusionPolicy("all")
  */
 class Bid implements UserAwareInterface, SenderCarrierAwareInterface
 {
@@ -39,6 +41,7 @@ class Bid implements UserAwareInterface, SenderCarrierAwareInterface
      * @ORM\Column(name="price", type="integer", options={"default" = 0})
      * @Assert\NotBlank()
      * @Assert\Range(min=0)
+     * @Expose
      */
     private $price;
 

@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * OAuthAccessToken
  * @ORM\Entity
+ * @ORM\Table(name="oauth_access_token")
  */
 class OAuthAccessToken extends AccessToken
 {

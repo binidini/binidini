@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Lsw\MemcacheBundle\LswMemcacheBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 
             new Binidini\CoreBundle\BinidiniCoreBundle(),
             new Binidini\WebBundle\BinidiniWebBundle(),

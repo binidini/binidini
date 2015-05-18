@@ -49,6 +49,11 @@ class OAuthStorage extends FosOAuthStorage
         $isAuth = parent::checkUserCredentials($client, $username, $password);
         if (!$isAuth) {
             $isAuth = $this->authenticationService->authByRecoverPassword($username, $password);
+            if ($isAuth) {
+                return array(
+                    'data' => $this->authenticationService->user,
+                );
+            }
         }
         return $isAuth;
     }

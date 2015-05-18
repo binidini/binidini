@@ -102,7 +102,7 @@
                                         {% if shipping.carrier is not empty %}
                                                 <a href="{{ path('binidini_core_profile_show', {'id': shipping.carrier.id} ) }}">{{ shipping.carrier.name }}</a>
                                                 {% if shipping.sender.id == app.user.id %}
-                                            {{ shipping.sender.mobilephone }}
+                                            {{ shipping.carrier.mobilephone }}
                                         {% endif %}
                                             {% endif %}
                                     </dd>

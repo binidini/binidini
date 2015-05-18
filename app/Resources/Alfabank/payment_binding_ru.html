@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, user-scalable=yes"/>
+    <title>Альфа-Банк</title>
+    <link rel="stylesheet" href="css/all.css" type="text/css"/>
+    <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery.timers-1.2.js"></script>
+    <script type="text/javascript" src="../../js/jquery.url.js"></script>
+    <script type="text/javascript" src="../../js/jquery.payment_binding.js"></script>
+
+    <script type="text/javascript">
+        $(document).payment_binding({
+            visualValidationEnabled:true
+        });
+        $(document).ready(function () {
+            $(document).payment_binding("validate");
+            $(document).payment_binding("showError", "");
+        });
+        function togglePasswordField(id) {
+            if ($(id).get(0).type == 'password') {
+                $(id).get(0).type = 'text'
+            } else {
+                $(id).get(0).type = 'password'
+            }
+        }
+    </script>
+    <style type="text/css">
+        img.ruble-img { height: 1.5ex; }
+        span.dot { position:absolute; text-indent: -1000em; }
+    </style>
+</head>
+<body>
+<div class="payment-page">
+    <div class="payment-center">
+        <div class="user-logo"><img class="bg" src="images/bg-user-logo.png" width="294" height="103" alt=""/><img
+                class="bg-640" src="images/bg-user-logo-640.png" width="462" height="103" alt=""/></div>
+        <a href="#" class="logo"></a>
+
+        <div class="price-wrap">
+            <div class="row">
+                <div class="price user-price">
+				<span class="size24">
+					<div id="amount" style="float: left; margin-right: 8px;"></div>
+					<img src="images/ruble.gif" id="ruble-sign" class="ruble-img" style="display: none; float: right;"/>
+				</span>
+                </div>
+                <div class="name"><span>Сумма платежа</span></div>
+            </div>
+            <div class="green-border"></div>
+        </div>
+
+        <div id="errorBlock" style="color:red;"></div>
+        <div id="countdown"></div>
+        <div id="infoBlock"></div>
+        <div id="indicator" style="display:none;">загрузка</div>
+
+        <form action="" method="post" id="bindingPaymentForm" class="data-form">
+            <div class="border-card">
+                <div class="code-wrap">
+                    <div class="title">Код безопасности</div>
+                    <div class="tooltip-wrap">
+                        <a class="close" href="#"></a>
+                        Последние 3 цифры кода<br/>на полосе для подписи.
+                    </div>
+                    <div class="cvc-field">
+                        <input inputmode="numeric" pattern="[0-9]*" maxlength="3" class="code" type="password" name="$CVC" id="cvc" maxlength="3" type="password" autocomplete="off" />
+                    </div>
+                    <div class="opener-code">
+                        <a href="#" onclick="togglePasswordField('#cvc')" tabindex="-1">Показать код</a>
+                    </div>
+                    <div class="opener-tooltip">
+                        <a href="#" tabindex="-1">Что это?</a>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-row">
+                <input class="submit-btn" value="Оплатить" type="button" id="sendPayment" title="Оплатить"/>
+            </div>
+
+        </form>
+        <form id="acs" method="post" action="">
+            <input type="hidden" id="md" name="MD"/>
+            <input type="hidden" id="paReq" name="PaReq"/>
+            <input type="hidden" id="termUrl" name="TermUrl"/>
+        </form>
+        <div class="security-info">
+            <div class="title">Платеж безопасен</div>
+            <ul class="ico">
+                <li>
+                    <img class="bg" src="images/security-ico01.gif" width="113" height="19" alt=""/>
+                    <img class="bg-640" src="images/security-ico01-640.gif" width="136" height="24" alt=""/>
+                </li>
+                <li><img class="bg" src="images/security-ico02.gif" width="44" height="28" alt=""/>
+                    <img class="bg-640" src="images/security-ico02-640.gif" width="51" height="37" alt=""/>
+                </li>
+                <li>
+                    <img class="bg" src="images/security-ico03.gif" width="54" height="28" alt=""/>
+                    <img class="bg-640" src="images/security-ico03-640.gif" width="68" height="35" alt=""/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="load-wrapper">
+    <div class="bg"></div>
+    <div class="clock"><span class="hour"></span><span class="minute"></span></div>
+</div>
+</body>
+</html>

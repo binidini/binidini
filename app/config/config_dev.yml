@@ -17,7 +17,7 @@ monolog:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
-            channels: [!sms, !email]
+            channels: [!sms, !email, !alfabank]
         sms:
             type: stream
             path: %kernel.logs_dir%/%kernel.environment%.sms.log
@@ -28,6 +28,11 @@ monolog:
             path: %kernel.logs_dir%/%kernel.environment%.email.log
             level: info
             channels: [email]
+        alfabank:
+            type: stream
+            path: %kernel.logs_dir%/%kernel.environment%.alfabank.log
+            level: info
+            channels: [alfabank]
         firephp:
             type:  firephp
             level: info

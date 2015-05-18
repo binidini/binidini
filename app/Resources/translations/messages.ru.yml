@@ -37,3 +37,11 @@ binidini.bid.state.agreed: согласована
 binidini.bid.state.rejected: отказ
 binidini.bid.state.auto_rejected: отказ
 binidini.bid.state.canceled: отменена
+
+insurance: Страховой платеж
+guarantee: Гарантийная оплата
+deposit: Пополнение счета
+withdrawal: Снятие со счета
+
+alfabank: Альфа-банк онлайн
+internal: внутренний перевод

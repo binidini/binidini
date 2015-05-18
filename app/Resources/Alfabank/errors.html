@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, user-scalable=yes" />
+		<title>Альфа-Банк</title>
+		<link rel="stylesheet" href="css/all.css" type="text/css" />
+
+		<script type="text/javascript" src="../../js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.timers-1.2.js"></script>
+		<script type="text/javascript" src="../../js/jquery.url.js"></script>
+		<script type="text/javascript" src="../../js/error_page.js"></script>
+		<script type="text/javascript" src="../../js/localization.js"></script>
+
+		<script type="text/javascript">
+			var lang = "ru";
+			localizePage({
+//            "langLbl1":{"ru":"value1_ru","en":"value1_en","ua":"value1_ua"},
+//            "langLbl2":{"ru":"value2_ru","en":"value2_en","ua":"value2_ua"}
+			});
+		</script>
+		</head>
+	<body>
+		<div class="payment-page">
+			<div class="payment-center">
+				<div class="user-logo"><img class="bg" src="images/bg-user-logo.png" width="294" height="103" alt="" /><img class="bg-640" src="images/bg-user-logo-640.png" width="462" height="103" alt="" /></div>
+				<a href="#" class="logo"></a>
+				<form name="errorForm" action="#" method="post" id="errorForm">
+					<input type="hidden" id="language" value="ru" type="hidden">
+					<div id="errorBlock" ></div>
+				</form>
+<!--
+
+				<form name="errorForm" action="#" method="post" id="errorForm" class="data-form">
+					<fieldset>
+						
+						<div class="error-note active-error-note">
+							<input type="hidden" id="language" value="ru" type="hidden">
+							<div id="errorBlock" >Заказ уже обработан</div>
+						</div>
+					
+					</fieldset>
+				</form>
+-->
+<!--
+
+				<div class="security-info">
+					<div class="title">Платеж безопасен</div>
+						<ul class="ico">
+							<li><img class="bg" src="images/security-ico01.gif" width="113" height="19" alt="" /><img class="bg-640" src="images/security-ico01-640.gif" width="136" height="24" alt="" /></li>
+							<li><img class="bg" src="images/security-ico02.gif" width="44" height="28" alt="" /><img class="bg-640" src="images/security-ico02-640.gif" width="51" height="37" alt="" /></li>
+							<li><img class="bg" src="images/security-ico03.gif" width="54" height="28" alt="" /><img class="bg-640" src="images/security-ico03-640.gif" width="68" height="35" alt="" /></li>
+						</ul>
+					</div>
+					<div class="contect">
+						Интернет-магазин<br />ООО «Интернет-магазин», 123456, г. Москва, ул. Тверская, д. 1, корп. 1,<br />Наш телефон: +7 (495) 123-45-67
+					</div>
+				</div>
+-->
+			</div>
+		<div class="load-wrapper">
+			<div class="bg"></div>
+			<div class="clock"><span class="hour"></span><span class="minute"></span></div>
+		</div>
+	</body>
+</html>

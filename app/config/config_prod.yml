@@ -16,13 +16,22 @@ monolog:
         main:
             type:         fingers_crossed
             action_level: error
-            handler:      nested
-            channels: [!sms]
+            channels: [!sms, !email, !alfabank]
         sms:
             type: stream
             path: %kernel.logs_dir%/%kernel.environment%.sms.log
             level: info
             channels: [sms]
+        email:
+            type: stream
+            path: %kernel.logs_dir%/%kernel.environment%.email.log
+            level: info
+            channels: [email]
+        alfabank:
+            type: stream
+            path: %kernel.logs_dir%/%kernel.environment%.alfabank.log
+            level: info
+            channels: [alfabank]
         nested:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"

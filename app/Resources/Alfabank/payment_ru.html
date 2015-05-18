@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, user-scalable=yes"/>
+    <title>Альфа-Банк</title>
+    <link rel="stylesheet" href="css/all.css" type="text/css"/>
+    <script type="text/javascript" src="../../js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-ui-1.9.2.custom.min.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery.timers-1.2.js"></script>
+    <script type="text/javascript" src="../../js/jquery.url.js"></script>
+
+    <script type="text/javascript" src="../../js/maskedinput.js"></script>
+    <script type="text/javascript" src="../../js/jquery.main.js"></script>
+    <script type="text/javascript" src="../../js/select.js"></script>
+    <script type="text/javascript" src="../../js/localization.js"></script>
+    <script type="text/javascript" src="../../js/additional.js"></script>
+    <script type="text/javascript" src="../../js/jquery.payment_new.js"></script>
+
+    <script>
+        $(document).payment({
+            language: "ru",
+            messageAjaxError: "Сервис временно недоступен. Попробуйте позднее.",
+            messageTimeRemaining: "#MIN#:#SEC#",
+            visualValidationEnabled: true,
+            bindingCheckboxEnabled:true,
+            agreementCheckboxEnabled: false,
+            getFeeEnabled: true,
+            orderId:"orderNumber",
+            onReady: function () {
+                $(document).ready(function () {
+                    initBindings();
+                    initMain();
+                    initSelect();
+                    $("#buttonPayment").bind('click.payment', function(){
+                        updateErrors()
+                    });
+                    $("#buttonBindingPayment").bind('click.payment', function(){
+                        $("#year").removeClass("invalid");
+                        $("#month").removeClass("invalid");
+                        $("#iTEXT").removeClass("invalid");
+                        $("#iPAN").removeClass("invalid");
+                        updateErrors()
+                    });
+                });
+            }
+        });
+    </script>
+    <style type="text/css">
+        img.ruble-img { height: 1.5ex; }
+        span.dot { position:absolute; text-indent: -1000em; }
+    </style>
+</head>
+<body>
+<div class="payment-page">
+    <div class="payment-center">
+        <div class="user-logo"><img class="bg" src="images/bg-user-logo.png" width="294" height="103" alt=""/><img
+                class="bg-640" src="images/bg-user-logo-640.png" width="462" height="103" alt=""/></div>
+        <h1>Титимити - <small>народный сервис доставки</small></h1>
+        <a href="#" class="logo"></a>
+
+        <div class="price-wrap">
+            <div class="row">
+                <div class="price user-price">
+				<span class="size24">
+					<div id="amount" style="float: left; margin-right: 8px;"></div>
+					<img src="images/ruble.gif" id="ruble-sign" class="ruble-img" style="display: none; float: right;"/>
+				</span>
+                </div>
+                <div class="name"><span>Сумма платежа</span></div>
+            </div>
+            <div id="feeBlock" class="row" style="display: none;">
+                <div class="price">
+                    <span class="size24">
+						<div id="feeAmount" style="float: left; margin-right: 8px;">0.00</div>
+						<img src="images/ruble.gif" id="fee-ruble-sign" class="ruble-img" style="display: none; float: right;"/>
+					</span>
+                </div>
+                <div class="name"><span>Комиссия за платеж</span></div>
+            </div>
+            <div class="green-border"></div>
+            <div class="row">
+                <div class="price">
+                    <strong>
+                        <div id="orderNumber"></div>
+                    </strong>
+                </div>
+                <div class="name"><span>Номер заказа</span></div>
+            </div>
+            <h6>Описание платежа:</h6>
+
+            <p>
+
+            <div id="description"></div>
+            </p>
+        </div>
+
+        <form name="PaymentForm" action="#" method="post" id="formPayment" class="data-form">
+            <input type="hidden" id="expiry">
+            <input type="hidden" id="mdOrder">
+            <input type="hidden" id="location" value="/../">
+            <input type="hidden" id="language" value="<ru>">
+            <input type="hidden" id="iPAN" name="$PAN" maxlength="19"/>
+            <fieldset>
+                <div class="top-row">
+                    <h2>Ввод данных о карте</h2>
+
+                    <div class="time-wrap">До окончания сессии осталось <span class="time"><div
+                            id="numberCountdown"></div></span></div>
+                </div>
+
+                <div id="errorBlock"></div>
+                <div id="errorBlock1"></div>
+                <div id="infoBlock"></div>
+
+                <div class="border-card">
+                    <div class="number-selection">
+                        <span class="title">Введите номер карты</span>
+                        <select id="combobox" name="bindingId" type="tel">
+                        </select>
+                    </div>
+                    <div class="choice-date">
+                        <div class="title">Срок действия карты</div>
+                        <select class="select select-month" name="MM" id="month">
+                            <option value="01">Январь</option>
+                            <option value="02">Февраль</option>
+                            <option value="03">Март</option>
+                            <option value="04">Апрель</option>
+                            <option value="05">Май</option>
+                            <option value="06">Июнь</option>
+                            <option value="07">Июль</option>
+                            <option value="08">Август</option>
+                            <option value="09">Сентябрь</option>
+                            <option value="10">Октябрь</option>
+                            <option value="11">Ноябрь</option>
+                            <option value="12">Декабрь</option>
+                        </select>
+                        <select class="select select-year" name="YYYY" id="year">
+                        </select>
+                    </div>
+                    <div class="name-card">
+                        <div class="title">Владелец карты</div>
+                        <input type="text" name="TEXT" id="iTEXT" maxlength="90" type="text" autocomplete="off"/>
+                    </div>
+                    <div class="code-wrap">
+                        <div class="title">Код безопасности</div>
+                        <div class="tooltip-wrap">
+                            <a class="close" href="#"></a>
+                            Последние 3 цифры кода<br/>на полосе для подписи.
+                        </div>
+                        <div class="cvc-field">
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="3" class="code" type="password" name="$CVC" id="iCVC" maxlength="3" type="password" autocomplete="off" />
+                        </div>
+                        <div class="opener-code">
+                            <a href="#" onclick="togglePasswordField('#iCVC')" tabindex="-1">Показать код</a>
+                        </div>
+                        <div class="opener-tooltip">
+                            <a href="#" tabindex="-1">Что это?</a>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="mail-wrap">
+                    <label class="title">Эл. почта владельца карты</label>
+                    <input type="text" id="email"/>
+                </div>-->
+                <div class="bottom-row">
+                    <!--<a class="alfaclick-btn" id="buttonPaymentAlfa">-->
+                    <!--<strong><span>Можно оплатить<br/>через Альфа-Клик</span></strong>-->
+                    <!--</a>-->
+                    <a class="alfaclick-btn" id="buttonPaymentAlfa" style="display: none;">
+                        <strong><span>Можно оплатить<br />через Альфа-Клик</span></strong>
+                    </a>
+                    <div class="ch-col">
+                        <div id="bindingBlock" class="row">
+                            <label class="ch-wrap"><input type="checkbox" class="checkbox" id="createBinding"/>
+                                Запомнить данные этой карты</label>
+                        </div>
+                        <div class="row agreeBox" id="agreeBlock" style="display: none;">
+                            <label class="ch-wrap"><input type="checkbox" class="checkbox" id="agreeCheckbox"/> Я ознакомлен и принимаю условия<br/><a id='agreeHref' href="#">договора-оферты</a></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-row">
+                    <input class="submit-btn" value="Оплатить" type="button" id="buttonPayment" title="Оплатить">
+                    <input class="submit-btn" value="Оплатить" type="button" id="buttonBindingPayment2" title="Оплатить" style="display: none;">
+                </div>
+            </fieldset>
+        </form>
+        <form id="acs" method="post" action="">
+            <input type="hidden" id="MD" name="MD"/>
+            <input type="hidden" id="PaReq" name="PaReq"/>
+            <input type="hidden" id="TermUrl" name="TermUrl"/>
+        </form>
+        <form action="" id="formBinding" style="display: none;">
+            <select name="bindingId" id="bindingIdSelect">
+                <!--<option value="" selected="selected"/>-->
+            </select>
+            <input name="cvc" id="bindingCvc" type="password" value=" "/>
+            <input value="Оплатить" type="button" id="buttonBindingPayment"/>
+        </form>
+        <div class="security-info">
+            <div class="title">Платеж безопасен</div>
+            <ul class="ico">
+                <li>
+                    <img class="bg" src="images/security-ico01.gif" width="113" height="19" alt=""/>
+                    <img class="bg-640" src="images/security-ico01-640.gif" width="136" height="24" alt=""/>
+                </li>
+                <li><img class="bg" src="images/security-ico02.gif" width="44" height="28" alt=""/>
+                    <img class="bg-640" src="images/security-ico02-640.gif" width="51" height="37" alt=""/>
+                </li>
+                <li>
+                    <img class="bg" src="images/security-ico03.gif" width="54" height="28" alt=""/>
+                    <img class="bg-640" src="images/security-ico03-640.gif" width="68" height="35" alt=""/>
+                </li>
+            </ul>
+        </div>
+        
+                <div class="contect">
+                    Титимити - p2p сервис доставки<br/>ООО «РУДИВ», 196105, г. Санкт-Петербург,<br/> ул. Благодатная, д. 69, корп. 1, литер А<br/>Наш телефон: +7 (952) 246-23-08
+                </div>
+        
+    </div>
+</div>
+<div class="load-wrapper">
+    <div class="bg"></div>
+    <div class="clock"><span class="hour"></span><span class="minute"></span></div>
+</div>
+</body>
+</html>

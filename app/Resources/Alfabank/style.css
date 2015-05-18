@@ -1,0 +1,333 @@
+html {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	background-color: #FFFFFF;
+	font-family: Helvetica, Arial;
+	font-size: 11px;
+	color: #666666;
+	text-align: left;
+}
+
+form	{
+	margin: 0px;
+	padding: 0px;
+}
+	
+p {
+	display: block;
+	margin: 1em 0;
+}
+	
+a {
+	font-family: Helvetica, Arial;
+	font-size: 11px;
+	color: #0099FF;
+	text-decoration: none;
+	border: none;
+	outline: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+input {
+	font-family: Helvetica, Trebuchet MS;
+	font-size: 11px;
+	color: #000000;
+	background: #FFFFFF;
+	border: 0px;
+	border-top: 1px solid #999999;
+	margin: 0px;
+	padding: 2px 2px 2px 2px;
+}
+
+select {
+	font-family: Helvetica, Trebuchet MS;
+	font-size: 11px;
+	color: #666666;
+	background-color: #FFFFFF;
+	border: 1px solid #999999;
+	margin: 0px 0px 3px 0px;
+}
+
+table {
+	vertical-align: top;
+	padding: 0px;
+	margin: 0;
+	border-collapse: collapse;
+	border: 0px solid #FFFFFF;
+}
+
+tr {
+	vertical-align: top;
+}
+
+td {
+	color: #666666;
+	padding: 16px 0px 16px 51px;
+	font-family: Helvetica, Arial;
+	font-size: 11px;
+	border-collapse: collapse;
+	border-color: #FFFFFF;
+	border: 0px;
+	height: 27px;
+	line-height: 150%;
+}
+
+/* Структура */
+
+#body {
+	width: 740px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.clear {
+	clear: both;
+}
+
+.icon {
+	padding-left: 11px;
+}
+
+.icon.protected {
+	background: url(img/icon_protected.gif) left top no-repeat;
+}
+	
+#header {
+	height: 89px;
+	margin: 9px 0px 0px 0px;
+}
+#header .logo.left {
+	background: url(img/deliver.gif) right center no-repeat;
+	width: 125px;
+	height: 89px;
+}
+#header .logo.left a {
+	margin: 1px 0px 0px 2px;
+	width: 111px;
+	height: 70px;
+	display: block;
+}
+#header .info {
+	background: url(img/deliver.gif) right center no-repeat;
+	width: 440px;
+	height: 89px;
+}
+#header .info .box {
+	color: #000000;
+	padding: 13px 18px 18px 18px;
+	font-family: Trebuchet MS;
+	font-size: 17px;
+	font-weight: bold;
+}
+#header .logo.right {
+	width: 175px;
+	height: 89px;
+}
+#header .logo.right a {
+	background: url(img/logo_right.gif) center center no-repeat;
+	margin: 1px 0px 0px 18px;
+	width: 144px;
+	height: 43px;
+	display: block;
+}
+
+#main {
+	font-size: 12px;
+	margin: 4px 0px 0px 0px;
+	text-align: justify;
+	clear: both;
+}
+#main .column.left {
+	background: url(img/card_front.gif) center center no-repeat;
+	width: 361px;
+	height: 241px;
+}
+#main .column.left table {
+	vertical-align: top;
+	padding: 0px;
+	margin: 18px 18px 18px 16px;
+	border-collapse: collapse;
+	border: 0px solid #FFFFFF;
+}
+#main .column.left tr {
+	vertical-align: top;
+}
+#main .column.left td {
+	color: #000000;
+	padding: 0px 0px 15px 6px;
+	font-family: Helvetica, Arial;
+	font-size: 12px;
+	font-weight: bold;
+	border-collapse: collapse;
+	border-color: #FFFFFF;
+	border: 0px;
+	height: 27px;
+	width: 65px;
+	text-align: right;
+	line-height: 115%;
+}
+#main .column.left td.param_1, #main .column.left td.param_2, #main .column.left td.param_3, #main .column.left td.param_4, #main .column.left td.param_5{
+	text-align: left;
+	width: auto;
+}
+#main .column.left td.param_1 {
+	font-size: 12px;
+}
+#main .column.left td.param_1 input {
+	font-size: 12px;
+	font-weight: bold;
+	padding: 2px 2px 2px 1px;
+	margin-right: 3px;
+	height: 23px;
+	width: 67px;
+}
+#main .column.left td.param_2 input {
+	font-size: 12px;
+	margin-right: 7px;
+	width: 41px;
+	height: 17px;
+}
+#main .column.left td.param_3 {
+	font-size: 12px;
+	font-weight: normal;
+}
+#main .column.left td.param_3 select {
+	color: #000000;
+	font-size: 12px;
+}
+#main .column.left td.param_3 select option {
+	height: 12px;
+}
+#main .column.left td.param_4 input, #main .column.left td.param_5 input {
+	font-size: 12px;
+	width: 197px;
+	height: 17px;
+}
+#main .column.left td.param_4 .hint {
+	color: #666666;
+	font-size: 10px;
+	font-weight: normal;
+}
+#main .column.right {
+	background: url(img/card_back.gif) center center no-repeat;
+	width: 362px;
+	height: 241px;
+}
+#main .column.right table {
+	vertical-align: top;
+	padding: 0px;
+	margin: 75px 18px 0px 220px;
+	border-collapse: collapse;
+	border: 0px solid #FFFFFF;
+}
+#main .column.right tr {
+	vertical-align: top;
+}
+#main .column.right td {
+	color: #000000;
+	padding: 0px 0px 11px 6px;
+	font-family: Helvetica, Arial;
+	font-size: 12px;
+	font-weight: bold;
+	border-collapse: collapse;
+	border-color: #FFFFFF;
+	border: 0px;
+	height: 27px;
+	width: 35px;
+	text-align: right;
+	line-height: 115%;
+}
+#main .column.right td.param_1 {
+	font-size: 12px;
+	text-align: left;
+	width: auto;
+}
+#main .column.right td.param_1 input {
+	font-size: 16px;
+	width: 49px;
+	height: 17px;
+}
+#main .column.right .hint {
+	color: #000000;
+	border-bottom: 1px dashed #000000;
+	font-size: 10px;
+	font-weight: normal;
+	margin: 0px 23px 0px 214px;
+	text-decoration: none;
+	display: block;
+}
+#main .column.right .hint:hover {
+	border-bottom: 0px dashed #000000;
+	text-decoration: none;
+}
+#main a {
+	font-size: 12px;
+}
+
+#main div {
+	font-size: 12px;
+}
+
+#main p {
+	font-size: 12px;
+}
+
+#footer {
+	margin: 16px 0px 0px 0px;
+	width: 100%;
+}
+#footer .box {
+	border-bottom: 1px dotted #666666;
+	font-size: 10px;
+	padding: 0px 0px 5px 3px;
+}
+#footer .box p {
+	font-size: 10px;
+	margin: 0px 0px 0px 11px;
+}
+
+#footer input.alfaclick{
+	width: 233px;
+	height: 29px;
+	margin: 23px 0px 0px 0px;
+	border: 1px;
+	background: #CCC;
+}
+
+#footer input {
+	background: url(img/pay.gif) center center no-repeat;
+	width: 233px;
+	height: 29px;
+	margin: 23px 0px 0px 0px;
+}
+
+.valid{
+    border: 1px solid #088A08;
+    background-color: #CEF6CE;
+}
+
+.invalid{
+    border: 1px solid #8A0808;
+    background-color: #F6CECE;
+}
+
+/* /Структура */

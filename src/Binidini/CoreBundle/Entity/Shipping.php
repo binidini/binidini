@@ -40,8 +40,6 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     const STATE_CANCELED    = 'canceled';
     const STATE_CONFLICT    = 'conflict';
 
-    //время в минутах, втечение которого перевозчик может отозвать заявку после принятия ее отправителем
-    const CARRIER_RECALL_TIME = 10;
     const GEOPOINT_TYPE_COORDINATION = 'coordination';
     const GEOPOINT_TYPE_ADDRESS = 'address';
 

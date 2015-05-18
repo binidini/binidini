@@ -1,0 +1,182 @@
+{% import 'BinidiniWebBundle:Frontend/Macros:page.html.twig' as page %}
+
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
+
+{% block pageheader %}Мои финансы{% endblock %}
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li>
+        Счет: {{ app.user.balance | price}}
+    </li>
+    <li>
+        Блокировано: {{ app.user.holdAmount | price }}
+    </li>
+</ol>
+{% endblock %}
+{% block actions %}
+    <a class="btn btn-primary"  data-toggle="modal" data-target="#depositModal">Пополнить</a>
+    <a class="btn btn-primary"  data-toggle="modal" data-target="#withdrawalModal">Снять</a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        {% if payments.nbresults > 0 %}
+                            Платежи {{ page.paging(payments) }}
+
+                            <div class="ibox-tools">
+
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    по {{ payments.maxperpage() }} записей
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li>
+                                        <a href="{{ path('binidini_core_payment_index', {'paginate': 10} ) }}">по
+                                            10 записей</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('binidini_core_payment_index', {'paginate': 25} ) }}">по
+                                            25 записей</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('binidini_core_payment_index', {'paginate': 50} ) }}">по
+                                            50 записей</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ path('binidini_core_payment_index', {'paginate': 100} ) }}">по
+                                            100 записей</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        {% else %}платежей нет{% endif %}
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-12 text-right">
+                                {{ page.pagination(payments) }}
+                            </div>
+                        </div>
+
+                        {% if payments.nbresults > 0 %}
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>№</th>
+                                        <th>Тип</th>
+                                        <th>Метод</th>
+                                        <th>Детализация</th>
+                                        <th>Дата</th>
+                                        <th class="text-right">Cумма</th>
+                                        <th class="text-right">Баланс</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for payment in payments %}
+                                        <tr>
+                                            <td>{{ payment.id }}</td>
+                                            <td>{{ payment.type | trans}}</td>
+                                            <td>{{ payment.method | trans}}</td>
+                                            <td>{{ payment.details }}</td>
+                                            <td>{{ payment.createdAt | date('d.m.y H:i') }}</td>
+                                            <td>
+                                                <span class="pull-right">
+                                                    {{ payment.amount | price }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="pull-right">
+                                                    {{ payment.balance | price }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                </div>
+
+                                <div class="col-sm-6 text-right">
+                                    {{ page.pagination(payments) }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal" id="depositModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <form action="{{ path('binidini_core_payment_new') }}" method="POST" class="form-horizontal" id="deposit">
+                <div class="modal-content animated bounceInRight">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                    class="sr-only">Закрыть</span></button>
+                        <h4 class="modal-title">Пополнение счета</h4>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Сумма:</label>
+
+                            <div class="col-sm-3">
+                                <input type="number" min="100" step="1" class="form-control" name="amount" placeholder="руб"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="submit" class="btn btn-primary" value="Пополнить счет"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="modal inmodal" id="withdrawalModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <form action="{{ path('binidini_core_payment_withdrawal') }}" method="POST" class="form-horizontal" id="deposit">
+                <div class="modal-content animated bounceInRight">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                    class="sr-only">Закрыть</span></button>
+                        <h4 class="modal-title">Снятие со счета</h4>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Сумма:</label>
+
+                            <div class="col-sm-3">
+                                <input type="number" min="100" max={{ app.user.balance }} step="1" class="form-control" name="amount" placeholder="руб"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="submit" class="btn btn-primary" value="Снять"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
+

@@ -23,13 +23,16 @@
                                  src="{{ user.imgPath | imagine_filter('photo600x600') }}">
                         </div>
                         <div class="ibox-content profile-content">
-                            <h4><strong>{{ isItCompany? user.name: user.Fio }}</strong></h4>
+                                <h4><strong>{{ isItCompany? user.name: user.Fio }}</strong></h4>
+
+                            {% if isItMe %}
+                                <p><i class="fa fa-rouble"></i>&nbsp;<span class="text-success">{{ user.balance}}</span>/<span class="text-danger">{{ user.holdAmount }}</span> руб.</p>
+                            {% endif %}
+
                             {% if user.address %}
                                 <p><i class="fa fa-map-marker"></i> {{ user.address }}</p>
                             {% endif %}
-                            {% if isItMe %}
-                                <p><i class="fa fa-rouble"></i>&nbsp;<span class="text-success">{{ user.balance}}</span>/<span class="text-danger">{{ user.holdAmount }}</span>руб.</p>
-                            {% endif %}
+
                             {% if isItCompany %}
                                 <h5>Контактное лицо</h5>
                                 <h5><strong>{{ user.Fio }}</strong></h5>

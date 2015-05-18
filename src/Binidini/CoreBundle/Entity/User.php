@@ -33,7 +33,7 @@ class User extends BaseUser
 
     const PROFILE_TYPE_CARRIER = 1;
     const PROFILE_TYPE_SENDER = 2;
-    const PROFILE_TYPE_BOTH = 0;
+    const PROFILE_TYPE_CARRIER_AND_SENDER = 0;
 
     const BIT_ACCEPT_BID = 0;
     const BIT_REJECT_BID = 1;
@@ -1539,11 +1539,11 @@ class User extends BaseUser
 
     public function isCarrier()
     {
-        return $this->profileType == self::PROFILE_TYPE_BOTH || $this->profileType == self::PROFILE_TYPE_CARRIER;
+        return $this->profileType == self::PROFILE_TYPE_CARRIER_AND_SENDER || $this->profileType == self::PROFILE_TYPE_CARRIER;
     }
 
     public function isSender()
     {
-        return $this->profileType == self::PROFILE_TYPE_BOTH || $this->profileType == self::PROFILE_TYPE_SENDER;
+        return $this->profileType == self::PROFILE_TYPE_CARRIER_AND_SENDER || $this->profileType == self::PROFILE_TYPE_SENDER;
     }
 }

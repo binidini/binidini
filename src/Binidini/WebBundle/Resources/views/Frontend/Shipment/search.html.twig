@@ -5,7 +5,7 @@
 {% block pageheader %}Поиск заказа{% endblock %}
 
 {% block actions %}
-    <a href="{{ path('binidini_core_shipping_new') }}" class="btn btn-primary btn-outline"><i class="fa fa-plus-square"></i> Новый заказ</a>
+    <a href="{{ path('binidini_core_shipping_new') }}" class="btn btn-primary">Новый заказ</a>
 {% endblock %}
 
 {% block content %}
@@ -63,7 +63,7 @@
                                         <th>Откуда</th>
                                         <th>Куда</th>
                                         <th>{{ sylius_resource_sort('deliveryDatetime', 'Прибытие', 'desc') }}</th>
-                                        <th class="text-right text-center" colspan="2">{{ sylius_resource_sort('deliveryPrice', 'Цена/Страховка', 'desc') }}</th>
+                                        <th class="text-center" colspan="2">{{ sylius_resource_sort('deliveryPrice', 'Цена/Страховка', 'desc') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>

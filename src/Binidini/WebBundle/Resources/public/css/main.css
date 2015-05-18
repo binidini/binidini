@@ -158,6 +158,10 @@
     padding-left: 0;
 }
 
+.profile-type2 label{
+    padding-left: 0;
+}
+
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
     -ms-animation: spin .7s infinite linear;

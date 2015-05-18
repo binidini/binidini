@@ -34,9 +34,10 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('profileType', 'choice',
                 [
                     'choices' => [
-                        User::PROFILE_TYPE_BOTH => 'Оба',
-                        User::PROFILE_TYPE_CARRIER => 'Курьер',
-                        User::PROFILE_TYPE_SENDER => 'Заказчик',
+                        User::PROFILE_TYPE_CARRIER_AND_SENDER => 'Отправитель и перевозчик',
+                        User::PROFILE_TYPE_CARRIER => 'Перевозчик',
+                        User::PROFILE_TYPE_SENDER => 'Отправитель',
+
                     ],
                     'multiple' => false,
                     'expanded' => true,

@@ -39,3 +39,7 @@ binidini_review:
 binidini_email:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/email.yml
     prefix: /
+
+binidini_payment:
+    resource: @BinidiniWebBundle/Resources/config/routing/frontend/payment.yml
+    prefix: /

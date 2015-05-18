@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="ru-RU">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="robots" content="index, follow" />
+	<title>Альфабанк</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../../js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.timers-1.2.js"></script>
+	<script type="text/javascript" src="../../js/jquery.url.js"></script>
+	<script type="text/javascript" src="../../js/jquery.payment.js"></script>
+	<script type="text/javascript">
+    $(document).payment({
+        language: "en",
+        messageAjaxError: "Service is not avaiable. Please try again later.",
+        messageTimeRemaining: "Payment expires in #MIN# minutes #SEC# seconds."
+    });
+</script>
+
+</head>
+<body>
+<div id="body">
+
+<form name="PaymentForm" action="" method="post" id="formPayment">
+<input id="mdOrder" type="hidden">
+<input id="location" type="hidden" value="/testpayment/">
+<input type="hidden" id="expiry">
+<input id="language" value="RU" type="hidden">
+<div id="orderNumber" style="display:none;"></div>
+<div id="header">
+	<div class="logo left" ><a href=""></a></div>
+	<div class="info left"><div class="box" id="description"></div></div>
+	<div class="logo right"><a href=""></a></div>
+	<div class="clear"></div>
+</div>
+<div id="errorBlock" style="color:red;"></div>
+<div id="numberCountdown"></div>
+<div id="infoBlock"></div>
+<div id="indicator" style="display:none;">
+	<label for="indicatorImage" class="formLabel">&nbsp;</label>
+	<div class="val" id="indicatorImage">
+		<img src="../../img/ajax-loader.gif" height="19" width="220" alt="indicator">
+	</div>
+</div>
+<div id="main">
+	<div class="column left">
+		<table>
+			<tr><td>Amount</td><td class="param_1"><div id="amount"></div></td></tr>
+			<tr><td>Card Number</td><td class="param_2">
+				<input type="text" id="pan1"  maxlength="4" autocomplete="off" onkeyup="append()"/>
+				<input type="text" id="pan2"  maxlength="4" autocomplete="off" onkeyup="append()"/>
+				<input type="text" id="pan3"  maxlength="4" autocomplete="off" onkeyup="append()"/>
+				<input type="text" id="pan4"  maxlength="8" autocomplete="off" onkeyup="append()"/>
+				<input type="hidden" id="iPAN" >
+			</td></tr>
+			<script>
+				function append() {
+					$('#iPAN').val($('#pan1').val()+$('#pan2').val()+$('#pan3').val()+$('#pan4').val());
+					$('#iPAN').keyup();
+					return true;
+				}
+			</script>
+			<tr><td>Expire Date</td><td class="param_3"><select name="MM" id="month">
+                    <option value="01" selected>&nbsp;&nbsp;1 - January</option>
+                    <option value="02">&nbsp;&nbsp;2 - February</option>
+                    <option value="03">&nbsp;&nbsp;3 - March</option>
+                    <option value="04">&nbsp;&nbsp;4 - April</option>
+                    <option value="05">&nbsp;&nbsp;5 - May</option>
+                    <option value="06">&nbsp;&nbsp;6 - June</option>
+                    <option value="07">&nbsp;&nbsp;7 - Jule</option>
+                    <option value="08">&nbsp;&nbsp;8 - August</option>
+                    <option value="09">&nbsp;&nbsp;9 - September</option>
+                    <option value="10">10 - October</option>
+                    <option value="11">11 - November</option>
+                    <option value="12">12 - December</option>
+                </select> /
+                <select name="YYYY" id="year">
+                    <option value='2010'>2010</option>
+                    <option value='2011'>2011</option>
+                    <option value='2012' selected>2012</option>
+                    <option value='2013'>2013</option>
+                    <option value='2014'>2014</option>
+                    <option value='2015'>2015</option>
+                    <option value='2016'>2016</option>
+                    <option value='2017'>2017</option>
+                    <option value='2018'>2018</option>
+                    <option value='2019'>2019</option>
+                </select></td></tr>
+			<tr><td>Cardholder Name</td><td class="param_4"><input type="text" maxlength="90" id="iTEXT"/><div class="hint"></div></td></tr>
+		</table>
+	</div>
+	<div class="column right">
+		<table>
+				<tr><td>CVV2/CVC2</td><td class="param_1"><input maxlength="4" id="iCVC" type="password" autocomplete="off"/></td></tr>
+		</table>
+		<a href="" class="hint">What is CVV2/CVC2?</a>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="footer">
+	<div class="box">
+		<div class="icon protected">ПЛАТЕЖ БЕЗОПАСЕН</div>
+		<p>Передача информации защищена 256-битным сертификатом SSL, подписанным компанией Thawte.</p>
+	</div>
+	<input type="button" class="button" id="buttonPayment" />
+</div>
+</form>
+<form id="acs" method="post" action="">
+	<input type="hidden" id="MD" name="MD"/>
+	<input type="hidden" id="PaReq" name="PaReq"/>
+	<input type="hidden" id="TermUrl" name="TermUrl"/>
+</form>
+</div>
+</body>
+</html>

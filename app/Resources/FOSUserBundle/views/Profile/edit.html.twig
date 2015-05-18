@@ -57,23 +57,12 @@
                                                                 Вы:
                                                             </label>
 
-                                                            <div class="col-sm-5 profile-type">
+                                                            <div class="col-sm-5  no-padding profile-type">
                                                                 {{ form_widget(form.type, {'attr':{'class':'radio i-checks'}}) }}
                                                                 {{ form_errors(form.type) }}
                                                             </div>
-
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label">
-                                                                Деятельность:
-                                                            </label>
 
-                                                            <div class="col-sm-5">
-                                                                {{ form_widget(form.profileType, {'attr':{'class':'radio i-checks'}}) }}
-                                                                {{ form_errors(form.profileType) }}
-                                                            </div>
-
-                                                        </div>
                                                         <div class="form-group company-field {{ not isItCompany?'hide' }}">
                                                             <label class="col-sm-3 control-label">Название компании:</label>
 
@@ -117,6 +106,7 @@
                                                         <div class="form-group company-field {{ not isItCompany?'hide' }}">
 
                                                         </div>
+
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">Email:</label>
 
@@ -142,6 +132,17 @@
                                                                 {{ form_widget(form.aboutMe, {'attr': {'class': 'form-control', 'placeholder': 'О себе'}, 'data':user.aboutme}) }}
                                                                 {{ form_errors(form.aboutMe) }}
                                                             </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">
+                                                                Деятельность:
+                                                            </label>
+
+                                                            <div class="col-sm-5 no-padding profile-type2">
+                                                                {{ form_widget(form.profileType, {'attr':{'class':'radio i-checks'}}) }}
+                                                                {{ form_errors(form.profileType) }}
+                                                            </div>
+
                                                         </div>
                                                         <input type="hidden" name="tab-switch" value="{{ activeTab }}">
                                                     </div>

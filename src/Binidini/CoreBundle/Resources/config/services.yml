@@ -53,6 +53,23 @@ services:
         tags:
             - { name: guzzle.client }
 
+    binidini.alfabank.client:
+        class: %guzzle.client.class%
+        arguments: ['https://test.paymentgate.ru/testpayment/rest/']
+        tags:
+            - { name: guzzle.client }
+
+    binidini.alfabank_service:
+        class: Binidini\CoreBundle\Service\AlfabankService
+        arguments:
+            - @router
+            - @logger
+            - @binidini.alfabank.client
+            - %alfabank_login%
+            - %alfabank_password%
+        tags:
+              - { name: monolog.logger, channel: alfabank }
+
     binidini.sms_service:
         class: Binidini\CoreBundle\Service\SmsService
         arguments:

@@ -87,9 +87,9 @@
                                 <dl class="dl-horizontal">
 
                                     <dt>Откуда:</dt>
-                                    <dd><a id="show-map-btn" data-map-pickup="{{ shipping.pickupGeoPoint }}" data-map-delivery="{{ shipping.deliveryGeoPoint }}">{{ shipping.pickupAddress }}</a></dd>
+                                    <dd>{{ shipping.pickupAddress }}</dd>
                                     <dt>Куда:</dt>
-                                    <dd><a href="#" onclick=" $('#show-map-btn').click()">{{ shipping.deliveryAddress }}</a></dd>
+                                    <dd>{{ shipping.deliveryAddress }}</dd>
                                     <dt>Отправитель:</dt>
                                     <dd>
                                         <a href="{{ path('binidini_core_profile_show', {'id': shipping.sender.id}) }}">{{ shipping.sender.name }}</a>
@@ -118,9 +118,9 @@
                                     <dt>Вес:</dt>
                                     <dd>{{ shipping.weight | default('~') | weight }}</dd>
                                     <dt>Габариты:</dt>
-                                    <dd>{{ shipping.x | default(0) }}x{{ shipping.y | default(0) }}x{{ shipping.z | default(0) }} см
-                                    </dd>
-
+                                    <dd>{{ shipping.x | default(0) }}x{{ shipping.y | default(0) }}x{{ shipping.z | default(0) }} см </dd>
+                                    <dt><i class="fa fa-map-marker"></i> </dt>
+                                    <dd><a id="show-map-btn" data-map-pickup="{{ shipping.pickupGeoPoint }}" data-map-delivery="{{ shipping.deliveryGeoPoint }}">карта маршрута</a></dd>
                                 </dl>
                             </div>
                         </div>

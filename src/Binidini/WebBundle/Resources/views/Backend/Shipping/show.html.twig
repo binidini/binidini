@@ -71,18 +71,16 @@
                                     <dt>Отправитель:</dt>
                                     <dd>
                                         <a href="{{ path('binidini_core_profile_show', {'id': shipping.sender.id}) }}">{{ shipping.sender.name }}</a>
-                                        {% if (shipping.carrier is not empty) and (shipping.carrier.id == app.user.id) %}
+                                        {% if (shipping.carrier is not empty)  %}
                                             {{ shipping.sender.mobilephone }}
                                         {% endif %}
                                     </dd>
                                     <dt>Перевозчик:</dt>
                                     <dd>
                                         {% if shipping.carrier is not empty %}
-                                                <a href="{{ path('binidini_core_profile_show', {'id': shipping.carrier.id} ) }}">{{ shipping.carrier.name }}</a>
-                                                {% if shipping.sender.id == app.user.id %}
-                                            {{ shipping.sender.mobilephone }}
+                                            <a href="{{ path('binidini_core_profile_show', {'id': shipping.carrier.id} ) }}">{{ shipping.carrier.name }}</a>
+                                            {{ shipping.carrier.mobilephone }}
                                         {% endif %}
-                                            {% endif %}
                                     </dd>
                                 </dl>
                             </div>

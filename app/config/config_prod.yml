@@ -16,6 +16,7 @@ monolog:
         main:
             type:         fingers_crossed
             action_level: error
+            handler:      nested
             channels: [!sms, !email, !alfabank]
         sms:
             type: stream

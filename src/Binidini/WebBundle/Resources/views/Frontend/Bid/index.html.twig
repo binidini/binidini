@@ -27,13 +27,17 @@
                     {{ bid.comment | nl2br }}
                 </div>
             {% endif %}
-            {% if isShippingSender and bid.shipping.isNew() and bid.isNew() %}
+            {% if isShippingSender and bid.isNew() %}
                 <div class="col-sm-12">
                     <span class="badge badge-{{ bid.state }} pull-right">{{ bid.price|price }}</span>
                         <span class="text-{{ bid.state }} pull-right">{{ ('binidini.bid.state.' ~ bid.state) | trans }}
                             &nbsp;&nbsp;</span>
-                    <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'accept'}) }}"
-                       class="btn btn-w-m btn-primary">Принять за {{ bid.price|price }}</a>
+
+                    {% if bid.shipping.isNew() %}
+                        <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'accept'}) }}"
+                           class="btn btn-w-m btn-primary">Принять за {{ bid.price|price }}</a>
+                    {% endif %}
+
                     <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'reject'}) }}"
                        class="btn btn-w-m btn-success ">Отказать</a>
                 </div>
@@ -42,15 +46,17 @@
                     <span class="badge badge-{{ bid.state }} pull-right">{{ bid.price|price }}</span>
                         <span class="text-{{ bid.state }} pull-right">{{ ('binidini.bid.state.' ~ bid.state) | trans }}
                             &nbsp;&nbsp;</span>
-                    {% if isBidOwner and bid.shipping.isNew() %}
+                    {% if isBidOwner %}
                         {% if bid.isNew() %}
                             <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'cancel'}) }}"
                                class="btn btn-w-m btn-success">Отменить</a>
-                        {% elseif bid.isAccepted() %}
+                        {% elseif bid.isAccepted()%}
                             <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'recall'}) }}"
                                class="btn btn-w-m btn-success">Отозвать</a>
-                            <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'agree'}) }}"
-                               class="btn btn-w-m btn-primary">Поехать</a>
+                            {% if bid.shipping.isNew() %}
+                                <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'agree'}) }}"
+                                   class="btn btn-w-m btn-primary">Поехать</a>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 </div>

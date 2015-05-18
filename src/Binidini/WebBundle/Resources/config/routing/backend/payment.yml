@@ -1,0 +1,13 @@
+binidini_admin_payment_index:
+    path: /payment
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.payment:indexAction
+        _sylius:
+            criteria:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            template: BinidiniWebBundle:Backend/Payment:index.html.twig

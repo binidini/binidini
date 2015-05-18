@@ -84,3 +84,7 @@ binidini_admin_user_unlock:
     methods: [GET]
     defaults:
         _controller: BinidiniCoreBundle:User:unlock
+
+binidini_payment:
+    resource: @BinidiniWebBundle/Resources/config/routing/backend/payment.yml
+    prefix: /

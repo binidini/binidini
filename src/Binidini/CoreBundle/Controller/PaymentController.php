@@ -99,7 +99,7 @@ class PaymentController extends ResourceController
         $orderNumber = uniqid();
         /** @var User $user */
         $user = $this->getUser();
-        if ($amount >= 100 && $amount < $user->getBalance()) {
+        if ($amount >= 100 && $amount <= $user->getBalance()) {
             $payment = new Payment();
             $payment
                 ->setUser($user)

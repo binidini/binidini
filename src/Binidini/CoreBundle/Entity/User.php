@@ -299,7 +299,7 @@ class User extends BaseUser
         $this->holdAmount = 0;
 
         $this->type = User::TYPE_INDIVIDUAL;
-        $this->profileType = USER::PROFILE_TYPE_BOTH;
+        $this->profileType = self::PROFILE_TYPE_CARRIER_AND_SENDER;
 
         $this->emailVerified = false;
 

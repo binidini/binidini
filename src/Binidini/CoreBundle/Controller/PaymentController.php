@@ -108,6 +108,8 @@ class PaymentController extends ResourceController
                 ->setType(Payment::TYPE_WITHDRAWAL)
                 ->setMethod(Payment::METHOD_ALFABANK_PAYMENT)
                 ->setState(Payment::STATE_INIT)
+                ->setBalance($user->getBalance() + $user->getHoldAmount())
+                ->setDetails('Запрос обрабатывается')
             ;
 
             $em = $this->getDoctrine()->getManager();

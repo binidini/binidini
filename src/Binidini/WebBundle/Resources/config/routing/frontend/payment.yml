@@ -6,7 +6,6 @@ binidini_core_payment_index:
         _sylius:
             criteria:
                 user: ['expr:service("security.context").getToken().getUser().getId()']
-                state: 'completed'
             paginate: $paginate
             sortable: true
             sorting:

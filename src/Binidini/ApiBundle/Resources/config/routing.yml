@@ -1,18 +1,19 @@
-# This file is part of the Binidini project.
-# (c) Denis Manilo
+binidini_api_open:
+    resource: @BinidiniApiBundle/Resources/config/routing/open.yml
+    prefix: /open
 
 binidini_api_users:
     resource: @BinidiniApiBundle/Resources/config/routing/user.yml
-    prefix: /users
+    prefix: /close/users
 
 binidini_api_bids:
     resource: @BinidiniApiBundle/Resources/config/routing/bid.yml
-    prefix: /bids
+    prefix: /close/bids
 
 binidini_api_shipments:
     resource: @BinidiniApiBundle/Resources/config/routing/shipment.yml
-    prefix: /shipments
+    prefix: /close/shipments
 
 binidini_api_shipping:
     resource: @BinidiniApiBundle/Resources/config/routing/shipping.yml
-    prefix: /shipping
+    prefix: /close/shipping

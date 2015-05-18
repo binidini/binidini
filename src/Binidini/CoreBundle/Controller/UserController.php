@@ -91,7 +91,9 @@ class UserController extends Controller
 
         $user->setRecoverSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
         $plainPassword = SecurityService::generatePassword();
-        $encoder = new Pbkdf2PasswordEncoder();
+        /** @var EncoderFactoryInterface $encoderFactory */
+        $encoderFactory = $this->get("security.encoder_factory");
+        $encoder = $encoderFactory->getEncoder($user);
         $user->setRecoverPassword($encoder->encodePassword($plainPassword, $user->getRecoverSalt()));
         $userManager->updateUser($user);
         $memcached->set(User::PASSWORD_RECOVER_PREFIX.$username, 1, User::PASSWORD_RECOVER_TTL);

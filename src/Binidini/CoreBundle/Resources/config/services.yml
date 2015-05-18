@@ -146,6 +146,13 @@ services:
             - @doctrine.orm.entity_manager
             - @sm.factory
 
+    binidini.authentication.service:
+        class: Binidini\CoreBundle\Service\AuthenticationService
+        arguments:
+            - @fos_user.user_manager
+            - @security.encoder_factory
+            - @memcache.default
+
     binidini.exceptions.listner:
         class: Binidini\CoreBundle\EventListener\ExceptionListener
         arguments: [@router, @session]
@@ -169,12 +176,21 @@ services:
     binidini.handler.authentication.failure:
         class: Binidini\CoreBundle\Handler\AuthenticationFailureHandler
         arguments:
+            - @binidini.authentication.service
             - @fos_user.security.login_manager
-            - %fos_user.firewall_name%
-            - @memcache.default
-            - @fos_user.user_manager
             - @router
             - @http_kernel
             - @security.http_utils
-            - collection
             - @logger
+
+    binidini.oauth.server.storage:
+        class: Binidini\CoreBundle\Storage\OAuthStorage
+        arguments:
+            - @binidini.authentication.service
+            - @fos_oauth_server.client_manager
+            - @fos_oauth_server.access_token_manager
+            - @fos_oauth_server.refresh_token_manager
+            - @fos_oauth_server.auth_code_manager
+            - @fos_oauth_server.user_provider
+            - @security.encoder_factory
+

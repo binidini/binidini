@@ -178,3 +178,9 @@ services:
             - @security.http_utils
             - collection
             - @logger
+
+    binidini.user.manager:
+        class: Binidini\CoreBundle\Handler\AuthorizeFormHandler
+        arguments:
+            - @fos_oauth_server.authorize.form
+            - request

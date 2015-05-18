@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Encoder\Pbkdf2PasswordEncoder;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class UserController extends ResourceController
+class UserController extends Controller
 {
 
     public function changePasswordAction(Request $request)

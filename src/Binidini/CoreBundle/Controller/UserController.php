@@ -6,7 +6,6 @@ use Binidini\CoreBundle\Entity\User;
 use Binidini\CoreBundle\Service\NotificationService;
 use Binidini\CoreBundle\Service\SecurityService;
 use FOS\UserBundle\Model\UserManager;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,7 +15,6 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use Symfony\Component\Security\Core\Encoder\Pbkdf2PasswordEncoder;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -150,4 +148,5 @@ class UserController extends Controller
         }
         return new RedirectResponse($this->generateUrl('binidini_admin_user_show', ['id' => $user->getId()]));
     }
+
 }

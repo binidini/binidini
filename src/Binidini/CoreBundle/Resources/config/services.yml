@@ -1,7 +1,9 @@
 services:
     binidini_user.registration.form.type:
         class: Binidini\CoreBundle\Form\Type\RegistrationFormType
-        arguments: [%fos_user.model.user.class%]
+        arguments:
+            - @service_container
+            - %fos_user.model.user.class%
         tags:
             - { name: form.type, alias: binidini_user_registration }
 

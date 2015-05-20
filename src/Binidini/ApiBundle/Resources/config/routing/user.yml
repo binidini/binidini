@@ -1,6 +1,3 @@
-# This file is part of the Binidini project.
-# (c) Denis Manilo
-
 binidini_api_user_index:
     path: /
     methods: [GET]
@@ -12,11 +9,7 @@ binidini_api_user_index:
             sorting:
                 id: desc
 
-binidini_api_user_create:
-    path: /
-    methods: [POST]
-    defaults:
-        _controller: binidini_core.controller.user:createAction
+
 
 binidini_api_user_update:
     path: /{id}

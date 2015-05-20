@@ -3,3 +3,9 @@ binidini_api_user_reset_password:
     methods: [POST, GET]
     defaults:
         _controller: BinidiniCoreBundle:User:resetPassword
+
+binidini_api_user_create:
+    path: /users/
+    methods: [POST]
+    defaults:
+        _controller: BinidiniApiBundle:Registration:register

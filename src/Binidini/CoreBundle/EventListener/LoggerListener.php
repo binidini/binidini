@@ -34,7 +34,7 @@ class LoggerListener extends StLoggerListener
         }
 
         $token = $this->securityContext->getToken();
-        if (null !== $token && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (null !== $token && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') && $token->getUser()) {
             $this->loggableListener->setUsername((string)$token->getUser()->getId());
         }
     }

@@ -6,11 +6,9 @@ binidini_home:
     defaults:
         _controller: BinidiniWebBundle:Default:index
 
-binidini_landing_page:
-    path: /landing
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    BinidiniWebBundle::Frontend/landing.html.twig
+binidini_static:
+    resource: @BinidiniWebBundle/Resources/config/routing/frontend/static.yml
+    prefix: /static
 
 binidini_shipping:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/shipping.yml

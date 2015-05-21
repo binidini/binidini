@@ -17,7 +17,7 @@ security:
         oauth_token:
             pattern:    ^/oauth/v2/token
             security:   false
-        api-close:
+        api-open:
             pattern:    ^/api/open
             security:  false
         api:
@@ -41,6 +41,7 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/landing$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/static/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/, role: ROLE_ADMIN }
         - { path: ^/api/close, roles: [ IS_AUTHENTICATED_FULLY ] }
         - { path: ^/api/open, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }

@@ -1,23 +1,24 @@
 <div class="panel-body">
     <div class="panel-group" id="accordion">
-        <div class="panel panel-info">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h5 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="">
-                        <i class="fa fa-search"></i>&nbsp;Форма для поиска</a>
+                        <i class="fa fa-search"></i>&nbsp;Поиск</a>
                 </h5>
             </div>
             <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false">
                 <div class="panel-body">
                     <form method="GET" action="{{ path('binidini_admin_shipping') }}" id="search-form" name="search-form" class="form-horizontal small">
                         <div class="form-group">
-                            <div class="input-group col-sm-offset-1 col-sm-10">
-                                <span class="input-group-addon">Номер:</span>
-                                <input data-valid='number' type="text" class="form-control" name="id" placeholder="0"
-                                       value="{{ app.request.get('id')?:'' }}">
-                                <span class="input-group-addon">Статус:</span>
+                            <label class="col-sm-2 control-label">Номер</label>
+
+                            <div class="col-sm-5">
+                                <input data-valid='number' type="text" class="form-control" name="id" placeholder="заказа" value="{{ app.request.get('id')?:'' }}">
+                            </div>
+                            <div class="col-sm-5">
                                 <select class="form-control m-b" name="state">
-                                    <option value="">Все</option>
+                                    <option value="">Статус</option>
                                     <option value="init">Добавлен</option>
                                     <option value="new">Новый</option>
                                     <option value="accepted">Принят</option>
@@ -30,33 +31,40 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="hr-line-dashed"></div>
+
                         <div class="form-group">
-                            <div class="input-group col-sm-offset-1 col-sm-10">
-                                <span class="input-group-addon">Цена от:</span>
-                                <input data-valid='number' value="{{ app.request.get('deliveryPriceFrom')?:'' }}" type="text" class="form-control" name="deliveryPriceFrom" placeholder="0">
-                                <span class="input-group-addon">до:</span>
-                                <input data-valid='number' value="{{ app.request.get('deliveryPriceTo')?:'' }}" type="text" class="form-control" name="deliveryPriceTo" placeholder="0" >
+                            <label class="col-sm-2 control-label">Цена</label>
+
+                            <div class="col-sm-5">
+                                <input data-valid='number' value="{{ app.request.get('deliveryPriceFrom')?:'' }}" type="text" class="form-control" name="deliveryPriceFrom" placeholder="от">
+                            </div>
+                            <div class="col-sm-5">
+                                <input data-valid='number' value="{{ app.request.get('deliveryPriceTo')?:'' }}" type="text" class="form-control" name="deliveryPriceTo" placeholder="до" >
                             </div>
                         </div>
-                        <div class="hr-line-dashed"></div>
+
                         <div class="form-group">
-                            <div class="input-group col-sm-offset-1 col-sm-10">
-                                <span class="input-group-addon">Страховка от:</span>
-                                <input data-valid='number' value="{{ app.request.get('insurancePriceFrom')?:'' }}" type="text" class="form-control" name="insurancePriceFrom" placeholder="0">
-                                <span class="input-group-addon">до:</span>
-                                <input data-valid='number' value="{{ app.request.get('insurancePriceTo')?:'' }}" type="text" class="form-control" name="insurancePriceTo" placeholder="0" >
+                            <label class="col-sm-2 control-label">Страховка</label>
+
+                            <div class="col-sm-5">
+                                <input data-valid='number' value="{{ app.request.get('insurancePriceFrom')?:'' }}" type="text" class="form-control" name="insurancePriceFrom" placeholder="от">
+                            </div>
+                            <div class="col-sm-5">
+                                <input data-valid='number' value="{{ app.request.get('insurancePriceTo')?:'' }}" type="text" class="form-control" name="insurancePriceTo" placeholder="до" >
                             </div>
                         </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <div class="input-daterange input-group col-sm-offset-1 col-sm-10">
-                                <span class="input-group-addon">Доставка от:</span>
-                                <input type="text" value="{{ app.request.get('deliveryTimeFrom')?:'' }}" class="form-control" name="deliveryTimeFrom">
-                                <span class="input-group-addon">до</span>
-                                <input type="text" value="{{ app.request.get('deliveryTimeTo')?:'' }}" class="form-control" name="deliveryTimeTo">
+
+                        <div class="form-group input-daterange">
+                            <label class="col-sm-2 control-label">Прибытие</label>
+
+                            <div class="col-sm-5">
+                                <input type="text" value="{{ app.request.get('deliveryTimeFrom')?:'' }}" class="form-control" name="deliveryTimeFrom" placeholder="с">
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text" value="{{ app.request.get('deliveryTimeTo')?:'' }}" class="form-control" name="deliveryTimeTo" placeholder="по">
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

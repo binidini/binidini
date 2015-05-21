@@ -1,0 +1,35 @@
+binidini_landing_page:
+    path: /landing
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/landing.html.twig
+
+binidini_rules:
+    path: /rules
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/rules.html.twig
+
+binidini_rules_appendix_1:
+    path: /rules/appendix_1
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/appendix_1.html.twig
+
+binidini_rules_appendix_2:
+    path: /rules/appendix_2
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/appendix_2.html.twig
+
+binidini_rules_appendix_3:
+    path: /rules/appendix_3
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/appendix_3.html.twig
+
+binidini_rules_appendix_4:
+    path: /rules/appendix_4
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/appendix_4.html.twig

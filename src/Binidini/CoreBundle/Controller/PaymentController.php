@@ -41,7 +41,7 @@ class PaymentController extends ResourceController
             return $this->redirectHandler->redirect($payment->formUrl);
 
         } else {
-            $this->lashHelper->setFlash('error', 'registerOrderInAlfa');
+            $this->flashHelper->setFlash('error', 'registerOrderInAlfa');
             return $this->redirectHandler->redirectToIndex();
         }
     }

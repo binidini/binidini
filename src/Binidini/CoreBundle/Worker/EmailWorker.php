@@ -45,6 +45,8 @@ class EmailWorker implements ConsumerInterface
 
         try {
             $result = $this->mailer->send($message);
+            $this->mailer->getTransport()->stop();
+
             $this->logger->info("result: {$result}, from: " . implode(" ", $data['from']). ", to: {$data['to']}, subject: {$data['subject']}");
         } catch ( \Exception $ex) {
             $this->logger->error("error: {$ex->getMessage()}, from: " . implode(" ", $data['from']). ", to: {$data['to']}, subject: {$data['subject']}");

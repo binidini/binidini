@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="UTF-8">
-    <meta name="description" content="Титимити — это p2p сервис доставки, а также мощная технология, объединяющая отправителей и перевозчиков в единую систему с выгодой для всех.">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <title>Правила — то, что пишут мелким шрифтом.</title>
-    <link href="{{ asset('bundles/binidiniweb/css/static_fonts.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/binidiniweb/css/static.css') }}" rel="stylesheet">
-</head>
-<body>
-<div class="wrapper">
-    <div class="content">
-        <h1>Правила Титимити</h1>
+{% extends 'BinidiniWebBundle::Frontend/Static/rules_layout.html.twig' %}
+
+{% block content %}
+<h1>Правила Титимити</h1>
 
 
         <a name="1"></a>
@@ -28,7 +19,7 @@
         <h2>2. Термины и определения.</h2>
 
         <a name="2.1"></a>
-        <p class="m-b-25"><b>2.1. Администрация сайта</b> — Общество с ограниченной ответственной «Рудив», Россия, 196105, г. Санкт-Петербург, ул. Благодатная, дом 69, корпус 1, литер А, помещение 2/3, ОГРН 1157847148326, ИНН 7810349272, КПП 781001001.</p>
+        <p class="m-b-25"><b>2.1. Администрация сайта</b> — Общество с ограниченной ответственностью «Рудив», Россия, 196105, г. Санкт-Петербург, ул. Благодатная, дом 69, корпус 1, литер А, помещение 2/3, ОГРН 1157847148326, ИНН 7810349272, КПП 781001001.</p>
         <a name="2.2"></a>
         <p class="m-b-25"><b>2.2. Баланс счета, баланс</b> - сумма безналичных денежных средств Пользователя, доступных в Системе Титимити для обеспечения исполнения Заказов (на отправку), Заявок (на перевозку) и других Услуг. Баланс отражает денежные средства, внесенные Пользователем на Счет в Системе с учетом заблокированных средств для оплаты Гарантии или Страховки, указанных при составлении Заказа (на отправку) или других Услуг.</p>
         <a name="2.3"></a>
@@ -256,40 +247,10 @@
 
         <h3>Приложения</h3>
         <ul>
-            <li><a href="{{ path('binidini_rules_appendix_1') }}">«Запрещенные к перевозке через Систему «Титимити» грузы»</a> </li>
-            <li><a href="{{ path('binidini_rules_appendix_2') }}">«Правила заполнения учетных данных при регистрации Пользователя и дальнейшей его работе на Странице пользователя»</a> </li>
-            <li><a href="{{ path('binidini_rules_appendix_3') }}">«Порядок предоставления Услуг Администрацией сайта своим Пользователям»</a> </li>
+            <li><a href="{{ path('binidini_rules_appendix_1') }}">Приложение 1</a> «Запрещенные к перевозке через Систему «Титимити» грузы»</li>
+            <li><a href="{{ path('binidini_rules_appendix_2') }}">Приложение 2</a> «Правила заполнения учетных данных при регистрации Пользователя и дальнейшей его работе на Странице пользователя»</li>
+            <li><a href="{{ path('binidini_rules_appendix_3') }}">Приложение 3 </a> «Порядок предоставления Услуг Администрацией сайта своим Пользователям»</li>
+            <li><a href="{{ path('binidini_rules_appendix_4') }}">Приложение 4 </a> «Порядок рассмотрения обращений Пользователей»</li>
         </ul>
 
-    </div>
-</div>
-
-<div class="footer wrapper">
-    <div class="footer-wrapper">
-        <div class="desktop-footer">
-
-            <div class="address address-russia">
-                <div>Санкт-Петербург,</div>
-                <div>ул. Благодатная,</div>
-                <div>д. 69, корп. 1, литера А</div>
-                <div>+7 (952) 246 23 08</div>
-            </div>
-
-            <div class="copyright">Copyright © 2014 <a href="{{ path('binidini_home') }}" >tytymyty.ru</a></div>
-        </div>
-        <div class="mobile-footer">
-            <div class="info-1">
-                <div class="address address-swiss">
-                    <div>Санкт-Петербург,</div>
-                    <div>Пироговская набережная, 21А,</div>
-                    <div>БЦ "НОБЕЛЬ",</div>
-                    <div>офис 69</div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-</body></html>
+{% endblock %}

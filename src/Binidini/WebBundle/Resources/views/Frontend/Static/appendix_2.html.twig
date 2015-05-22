@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="UTF-8">
-    <meta name="description" content="Титимити — это p2p сервис доставки, а также мощная технология, объединяющая отправителей и перевозчиков в единую систему с выгодой для всех.">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <title>Правила — то, что пишут мелким шрифтом.</title>
-    <link href="{{ asset('bundles/binidiniweb/css/static_fonts.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/binidiniweb/css/static.css') }}" rel="stylesheet">
-</head>
-<body>
-<div class="wrapper">
-    <div class="header">
-        <a href="{{ path('binidini_rules') }}">Правила Титимити</a>
-    </div>
-    <div class="content">
+{% extends 'BinidiniWebBundle::Frontend/Static/rules_layout.html.twig' %}
+
+{% block content %}
         <h1>Приложение 2 к Договору оферты</h1>
 
         <h2>Правила заполнения учетных данных при регистрации Пользователя и дальнейшей его работе на Странице пользователя </h2>
@@ -33,35 +21,4 @@
         <p class="m-b-25">Важно: для повышения доверия других Пользователей сайта рекомедуется заполнять представленные на Странице пользователя данные. При этом такие контактные данные Пользователя как номер телефона и e-mail будут скрыты, но  в случае если конретный Курьер принял Заказ Отправителя, то в рамках их взаимодействия по этой Заявке данные о номере телефоне друг друга будут им доступны.</p>
         <p class="m-b-25">Работа с оповещениями: используется опция Мои настройки/ Оповещения.В данном разделе выставляются уведомления, которые Пользоветель хочет получать посредством sms и/или email как Отправитель или Перевозчик Груза.</p>
 
-    </div>
-</div>
-
-<div class="footer wrapper">
-    <div class="footer-wrapper">
-        <div class="desktop-footer">
-
-            <div class="address address-russia">
-                <div>Санкт-Петербург,</div>
-                <div>ул. Благодатная,</div>
-                <div>д. 69, корп. 1, литера А</div>
-                <div>+7 (952) 246 23 08</div>
-            </div>
-
-            <div class="copyright">Copyright © 2014 <a href="{{ path('binidini_home') }}" >tytymyty.ru</a></div>
-        </div>
-        <div class="mobile-footer">
-            <div class="info-1">
-                <div class="address address-swiss">
-                    <div>Санкт-Петербург,</div>
-                    <div>Пироговская набережная, 21А,</div>
-                    <div>БЦ "НОБЕЛЬ",</div>
-                    <div>офис 69</div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-</body></html>
+{% endblock %}

@@ -67,6 +67,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Assert\Length(max=4000)
+     * @Expose
      */
     private $description;
 
@@ -109,6 +110,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @Gedmo\Versioned
      * @Assert\NotBlank()
      * @Assert\Range(min=0)
+     * @Expose
      */
     private $deliveryPrice;
 
@@ -116,6 +118,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @var boolean
      *
      * @ORM\Column(name="payment_guarantee", type="boolean", options={"default" = false})
+     * @Expose
      */
     private $paymentGuarantee;
 
@@ -124,6 +127,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      *
      * @ORM\Column(name="insurance", type="integer", options={"default" = 0})
      * @Assert\Range(min=0)
+     * @Expose
      */
     private $insurance;
 
@@ -133,6 +137,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @ORM\Column(name="pickup_address", type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Length(min=1, max=255)
+     * @Expose
      */
     private $pickupAddress;
 
@@ -140,6 +145,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @var double
      *
      * @ORM\Column(name="pickup_longitude", type="decimal", precision=12, scale=8, nullable=true )
+     * @Expose
      */
     private $pickupLongitude;
 
@@ -147,6 +153,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @var double
      *
      * @ORM\Column(name="pickup_latitude", type="decimal", precision=12, scale=8, nullable=true)
+     * @Expose
      */
     private $pickupLatitude;
 
@@ -156,6 +163,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @ORM\Column(name="delivery_address", type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Length(min=1, max=255)
+     * @Expose
      */
     private $deliveryAddress;
 
@@ -163,6 +171,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @var double
      *
      * @ORM\Column(name="delivery_longitude", type="decimal", precision=12, scale=8, nullable=true)
+     * @Expose
      */
     private $deliveryLongitude;
 
@@ -170,6 +179,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @var double
      *
      * @ORM\Column(name="delivery_latitude", type="decimal", precision=12, scale=8, nullable=true)
+     * @Expose
      */
     private $deliveryLatitude;
     
@@ -177,6 +187,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @var \DateTime
      *
      * @ORM\Column(name="pickup_datetime", type="datetime", nullable=true   )
+     * @Expose
      */
     private $pickupDatetime;
 
@@ -186,6 +197,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @ORM\Column(name="delivery_datetime", type="datetime")
      * @Assert\NotBlank()
      * @Assert\DateTime()
+     * @Expose
      */
     private $deliveryDatetime;
 
@@ -213,6 +225,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @var string
      * @Gedmo\Versioned
      * @ORM\Column(name="state", type="string", length=32)
+     * @Expose
      */
     private $state;
 

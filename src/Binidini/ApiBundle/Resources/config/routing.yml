@@ -2,6 +2,10 @@ binidini_api_users:
     resource: @BinidiniApiBundle/Resources/config/routing/user.yml
     prefix: /users
 
+binidini_api_carrier:
+    resource: @BinidiniApiBundle/Resources/config/routing/carrier.yml
+    prefix: /carrier
+
 binidini_api_bids:
     resource: @BinidiniApiBundle/Resources/config/routing/bid.yml
     prefix: /bids

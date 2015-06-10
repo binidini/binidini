@@ -1,0 +1,15 @@
+binidini_api_carrier_shipping_index:
+    path: /shipping/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                carrier: $userId
+                state: $state
+            template: BinidiniWebBundle:Frontend/Shipping:carrier_index.html.twig

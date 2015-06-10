@@ -19,21 +19,25 @@ class ShippingController extends ResourceController
 
     public function showAction(Request $request)
     {
-        /** @var $shipping Shipping */
-        $shipping = $this->findOr404($request);
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('show.html'))
-            ->setTemplateVar($this->config->getResourceName())
-            ->setData(
-                [
-                    'shipping' => $shipping,
-                    'bid_form' => $this->createForm(new BidType())->createView(),
-                    'message_form' => $this->createForm(new MessageType())->createView(),
-                    'review_form' => $this->createForm(new ReviewType())->createView(),
-                ]
-            );
-        return $this->handleView($view);
+        if ($this->config->isApiRequest()) {
+            return parent::showAction($request);
+        } else {
+            /** @var $shipping Shipping */
+            $shipping = $this->findOr404($request);
+            $view = $this
+                ->view()
+                ->setTemplate($this->config->getTemplate('show.html'))
+                ->setTemplateVar($this->config->getResourceName())
+                ->setData(
+                    [
+                        'shipping' => $shipping,
+                        'bid_form' => $this->createForm(new BidType())->createView(),
+                        'message_form' => $this->createForm(new MessageType())->createView(),
+                        'review_form' => $this->createForm(new ReviewType())->createView(),
+                    ]
+                );
+            return $this->handleView($view);
+        }
     }
 
     public function historyIndexAction(Request $request){

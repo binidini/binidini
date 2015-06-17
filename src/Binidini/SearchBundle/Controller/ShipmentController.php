@@ -21,6 +21,7 @@ namespace Binidini\SearchBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Hateoas\Configuration\Route;
 
 class ShipmentController extends ResourceController
 {
@@ -48,12 +49,29 @@ class ShipmentController extends ResourceController
             return $this->redirectHandler->redirectToIndex();
         }
 
-        $this->flashHelper->setFlash('success', 'top_search', ['%address%' => $searchAddress]);
-
         $shipments = $this->getRepository()->findByLocation($longitude, $latitude);
         $shipments->setCurrentPage($request->get('page', 1), true, true);
         $shipments->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
-        return $this->render('BinidiniWebBundle::Frontend/Shipment/search.html.twig', ['shipments' => $shipments]);
+        if ($this->config->isApiRequest()) {
+            $shipments = $this->getPagerfantaFactory()->createRepresentation(
+                $shipments,
+                new Route(
+                    $request->attributes->get('_route'),
+                    $request->attributes->get('_route_params')
+                )
+            );
+        } else {
+            $this->flashHelper->setFlash('success', 'top_search', ['%address%' => $searchAddress]);
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate('BinidiniWebBundle::Frontend/Shipment/search.html.twig')
+            ->setTemplateVar($this->config->getPluralResourceName())
+            ->setData($shipments);
+
+        return $this->handleView($view);
+
     }
 }

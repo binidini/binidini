@@ -68,7 +68,7 @@ class Shipment
     private $pickupAddress;
 
     /**
-     * @MongoDB\EmbedOne(targetDocument="Coordinates")
+     * @MongoDB\EmbedOne(targetDocument="Coordinates", name="pickup_coordinates")
      */
     public $pickupCoordinates;
 
@@ -80,7 +80,7 @@ class Shipment
     private $deliveryAddress;
 
     /**
-     * @MongoDB\EmbedOne(targetDocument="Coordinates")
+     * @MongoDB\EmbedOne(targetDocument="Coordinates", name="delivery_coordinates")
      */
     public $deliveryCoordinates;
 

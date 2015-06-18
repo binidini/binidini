@@ -19,7 +19,7 @@
         "sensio/distribution-bundle": "~2.3",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "sensio/generator-bundle": "~2.3",
-        "sylius/resource-bundle": "0.12.*",
+        "sylius/resource-bundle": "0.14.*",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "oldsound/rabbitmq-bundle": "1.*",
         "misd/guzzle-bundle": "~1.0",

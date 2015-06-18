@@ -1,18 +1,16 @@
 # This file is part of the Binidini project.
 # (c) Denis Manilo
 
-binidini_api_bid_index:
-    path: /
+binidini_api_shipping_bid_index:
+    path: /shipping/{shipping_id}/bid
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.bid:indexAction
         _sylius:
-            paginate:  $limit
-            sortable:  true
-
-
-binidini_api_bid_show:
-    path: /{id}
-    methods: [GET]
-    defaults:
-        _controller: binidini_core.controller.bid:showAction
+            criteria:
+                shipping: $shipping_id
+            paginate: false
+            sortable: true
+            sorting:
+                price: asc
+            filterable: true

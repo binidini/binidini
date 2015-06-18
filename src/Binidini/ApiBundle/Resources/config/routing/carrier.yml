@@ -10,6 +10,6 @@ binidini_api_carrier_shipping_index:
                 id: desc
             filterable: true
             criteria:
-                carrier: $userId
+                carrier: ['expr:service("security.context").getToken().getUser().getId()']
                 state: $state
             template: BinidiniWebBundle:Frontend/Shipping:carrier_index.html.twig

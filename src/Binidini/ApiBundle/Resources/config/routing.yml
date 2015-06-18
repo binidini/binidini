@@ -8,7 +8,7 @@ binidini_api_carrier:
 
 binidini_api_bids:
     resource: @BinidiniApiBundle/Resources/config/routing/bid.yml
-    prefix: /bids
+    prefix: /
 
 binidini_api_shipments:
     resource: @BinidiniApiBundle/Resources/config/routing/shipment.yml
@@ -17,3 +17,9 @@ binidini_api_shipments:
 binidini_api_shipping:
     resource: @BinidiniApiBundle/Resources/config/routing/shipping.yml
     prefix: /shipping
+
+binidini_api_review:
+    resource: @BinidiniApiBundle/Resources/config/routing/review.yml
+    prefix: /
+
+

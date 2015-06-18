@@ -1,0 +1,13 @@
+binidini_api_shipping_review_index:
+    path: /shipping/{shipping_id}/reviews/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.review:indexAction
+        _sylius:
+            paginate: 50
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                shipping: $shipping_id

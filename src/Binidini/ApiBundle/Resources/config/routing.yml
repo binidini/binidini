@@ -22,4 +22,6 @@ binidini_api_review:
     resource: @BinidiniApiBundle/Resources/config/routing/review.yml
     prefix: /
 
-
+binidini_api_history:
+    resource: @BinidiniApiBundle/Resources/config/routing/history.yml
+    prefix: /

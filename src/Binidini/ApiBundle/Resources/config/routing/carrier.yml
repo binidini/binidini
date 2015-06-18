@@ -12,4 +12,48 @@ binidini_api_carrier_shipping_index:
             criteria:
                 carrier: ['expr:service("security.context").getToken().getUser().getId()']
                 state: $state
-            template: BinidiniWebBundle:Frontend/Shipping:carrier_index.html.twig
+
+binidini_api_carrier_shipping_active:
+    path: /shipping/active/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                carrier: ['expr:service("security.context").getToken().getUser().getId()']
+                state: ['accepted', 'dispatched', 'on_way', 'delivered', 'paid']
+
+binidini_api_carrier_shipping_completed:
+    path: /shipping/completed/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                carrier: ['expr:service("security.context").getToken().getUser().getId()']
+                state: ['completed', 'canceled']
+
+binidini_api_carrier_shipping_conflict:
+    path: /shipping/conflict/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                carrier: ['expr:service("security.context").getToken().getUser().getId()']
+                state: 'conflict'

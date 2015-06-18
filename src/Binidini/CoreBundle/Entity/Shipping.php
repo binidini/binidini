@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 
 
@@ -49,6 +50,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -358,7 +360,6 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 
     /**
      * Get id
-     *
      * @return integer
      */
     public function getId()

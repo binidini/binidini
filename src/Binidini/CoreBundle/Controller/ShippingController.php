@@ -55,7 +55,7 @@ class ShippingController extends ResourceController
                 if ($entry->getUsername() == $currentUser->getId()) {
                     $user = $currentUser;
                 } else {
-                    $user = $userManager->findUserBy(['id' => $currentUser->getId()]);
+                    $user = $userManager->findUserBy(['id' => $entry->getUsername()]);
                 }
                 $usersInHistory[$entry->getUsername()] = $user;
             }

@@ -32,6 +32,7 @@ class Bid implements UserAwareInterface, SenderCarrierAwareInterface
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -49,6 +50,7 @@ class Bid implements UserAwareInterface, SenderCarrierAwareInterface
      * @var string
      *
      * @ORM\Column(name="comment", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $comment;
 
@@ -83,6 +85,7 @@ class Bid implements UserAwareInterface, SenderCarrierAwareInterface
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @Expose
      */
     private $createdAt;
 
@@ -90,6 +93,7 @@ class Bid implements UserAwareInterface, SenderCarrierAwareInterface
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     * @Expose
      */
     private $updatedAt;
 

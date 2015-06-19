@@ -60,14 +60,17 @@ class ShippingController extends ResourceController
                 $usersInHistory[$entry->getUsername()] = $user;
             }
         }
+        $data = [
+            'entries' => $entries,
+        ];
+        if (!$this->config->isApiRequest()){
+          $data['history_users'] = $usersInHistory;
+        }
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('history_index.html'))
             ->setData(
-                [
-                    'entries' => $entries,
-                    'history_users' => $usersInHistory,
-                ]
+               $data
             );
         return $this->handleView($view);
 

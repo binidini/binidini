@@ -5,11 +5,14 @@ namespace Binidini\CoreBundle\Entity;
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name = "review")
- *
+ * @ExclusionPolicy("all")
  */
 class Review implements UserAwareInterface
 {
@@ -19,6 +22,7 @@ class Review implements UserAwareInterface
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     protected $id;
 
@@ -26,6 +30,7 @@ class Review implements UserAwareInterface
      * @var string
      *
      * @ORM\Column(name="text", type="string", length=255, nullable=false)
+     * @Expose
      */
     private $text;
 
@@ -50,6 +55,7 @@ class Review implements UserAwareInterface
      *
      * @ORM\Column(name="rating", type="integer", nullable=false, options={"default" = 0})
      * @Assert\Range(min=1, max=5)
+     * @Expose
      */
     private $rating;
 
@@ -65,6 +71,7 @@ class Review implements UserAwareInterface
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @Expose
      */
     private $createdAt;
 

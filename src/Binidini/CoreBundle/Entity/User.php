@@ -9,6 +9,8 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity
@@ -24,6 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      allowedTypes="image/jpeg,image/pjpeg,image/png,image/x-png,image/gif",
  *      maxSize = 32000000
  * )
+ * @ExclusionPolicy("all")
  *
  */
 class User extends BaseUser
@@ -70,6 +73,7 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     protected $id;
 
@@ -77,6 +81,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=128, nullable=true)
+     * @Expose
      */
     private $firstName;
 
@@ -84,6 +89,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=128, nullable=true)
+     * @Expose
      */
     private $lastName;
 
@@ -91,6 +97,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="patronymic", type="string", length=128, nullable=true)
+     * @Expose
      */
     private $patronymic;
 
@@ -98,6 +105,7 @@ class User extends BaseUser
      * @var string
      * @ORM\Column(name="img_path", type="string", length=255, nullable=true)
      * @Gedmo\UploadableFileName
+     * @Expose
      */
     private $imgPath;
 

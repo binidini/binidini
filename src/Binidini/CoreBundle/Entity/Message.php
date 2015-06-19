@@ -38,6 +38,7 @@ class Message implements UserAwareInterface
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Expose
      */
     private $user;
 

@@ -39,6 +39,7 @@ class Review implements UserAwareInterface
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Expose
      */
     private $user;
 
@@ -47,6 +48,7 @@ class Review implements UserAwareInterface
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="user_to_id", referencedColumnName="id", nullable=false)
+     * @Expose
      */
     private $userTo;
 

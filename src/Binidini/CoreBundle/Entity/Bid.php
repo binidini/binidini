@@ -63,6 +63,7 @@ class Bid implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="bids")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Expose
      */
     protected $user;
 

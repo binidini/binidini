@@ -3,3 +3,25 @@ binidini_api_shipping_show:
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.shipping:showAction
+
+binidini_api_shipping_message_index:
+    path: /{id}/messages/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.message:indexAction
+        _sylius:
+            paginate: false
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                shipping: $id
+
+binidini_api_shipping_history_index:
+    path: /{id}/history/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:historyIndexAction
+        _sylius:
+            template: BinidiniWebBundle:Frontend/Shipping:history_index.html.twig

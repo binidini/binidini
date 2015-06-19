@@ -4,11 +4,14 @@ namespace Binidini\CoreBundle\Entity;
 
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name = "message")
- *
+ * @ExclusionPolicy("all")
  */
 class Message implements UserAwareInterface
 {
@@ -18,6 +21,7 @@ class Message implements UserAwareInterface
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     protected $id;
 
@@ -25,6 +29,7 @@ class Message implements UserAwareInterface
      * @var string
      *
      * @ORM\Column(name="text", type="string", length=255, nullable=false)
+     * @Expose
      */
     private $text;
 
@@ -33,6 +38,7 @@ class Message implements UserAwareInterface
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Expose
      */
     private $user;
 
@@ -48,6 +54,7 @@ class Message implements UserAwareInterface
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @Expose
      */
     private $createdAt;
 

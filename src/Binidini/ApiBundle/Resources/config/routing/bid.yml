@@ -14,3 +14,9 @@ binidini_api_shipping_bid_index:
             sorting:
                 price: asc
             filterable: true
+
+binidini_api_shipping_bid_new:
+    path: /shipping/{shipping_id}/bid/new
+    methods: [GET, POST]
+    defaults:
+        _controller: binidini_core.controller.bid:chipping_id }

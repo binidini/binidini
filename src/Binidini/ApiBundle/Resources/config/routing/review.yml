@@ -11,3 +11,9 @@ binidini_api_shipping_review_index:
             filterable: true
             criteria:
                 shipping: $shipping_id
+
+binidini_api_shipping_review_new:
+    path: shipping/{shipping_id}/reviews/new
+    methods: [GET, POST]
+    defaults:
+        _controller: binidini_core.controller.review:createAction

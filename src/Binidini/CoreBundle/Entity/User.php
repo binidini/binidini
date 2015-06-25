@@ -761,7 +761,8 @@ class User extends BaseUser
      */
     public function setImgPath($imgPath)
     {
-        if ((bool)$imgPath) {
+        $this->imgIsChanged = (bool)$imgPath;
+        if ($this->imgIsChanged) {
             $this->backImage = $this->imgPath;
             $this->imgPath = $imgPath;
         }
@@ -789,6 +790,13 @@ class User extends BaseUser
     {
         $this->imgPath = $this->backImage;
         return $this;
+    }
+
+    private $imgIsChanged = false;
+
+    public function imgIsChanged()
+    {
+        return $this->imgIsChanged;
     }
 
     /**

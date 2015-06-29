@@ -123,6 +123,7 @@ class User extends BaseUser
      * @var integer
      *
      * @ORM\Column(name="balance", type="integer", options={"default" = 0})
+     * @Expose
      */
     private $balance;
 

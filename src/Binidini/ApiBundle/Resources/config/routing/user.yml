@@ -29,6 +29,15 @@ binidini_api_user_delete:
     defaults:
         _controller: binidini_core.controller.user:deleteAction
 
+binidini_api_user_show_current:
+    path: /current
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.user:showAction
+        _sylius:
+            criteria:
+                id: 'expr:service("security.context").getToken().getUser().getId()'
+
 binidini_api_user_show:
     path: /{id}
     methods: [GET]
@@ -37,7 +46,7 @@ binidini_api_user_show:
 
 binidini_api_user_reset_password:
     path: /password/reset
-    methods: [POST, GET]
+    methods: [POST]
     defaults:
         _controller: BinidiniCoreBundle:User:resetPassword
 

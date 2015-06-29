@@ -39,7 +39,7 @@ class CreateClientCommand extends ContainerAwareCommand
             )
             ->setHelp(
                 <<<EOT
-                    The <info>%command.name%</info>command creates a new client.
+                    The <info>%command.name%</info> command creates a new client.
 
 <info>php %command.full_name% [--redirect-uri=...] [--grant-type=...] name</info>
 

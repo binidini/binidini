@@ -33,6 +33,11 @@ class ExceptionListener
 
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
+        //if api request just skip
+        if ($event->getRequest()->getRequestFormat() !== 'html') {
+            return;
+        }
+
         $exception = $event->getException();
         $request = $event->getRequest();
 

@@ -28,7 +28,7 @@ binidini_api_shipping_history_index:
 
 binidini_api_shipping_state_transition:
     path: /{id}/state/{transition}
-    methods: [GET]
+    methods: [POST]
     defaults:
         _controller: binidini_core.controller.shipping:updateStateAction
 

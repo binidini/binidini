@@ -1,0 +1,12 @@
+binidini_api_gcm_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: binidini_core.controller.gcm_token:createAction
+
+binidini_api_gcm_delete:
+    path: /
+    methods: [DELETE]
+    defaults:
+        _controller: binidini_core.controller.gcm_token:deleteAction
+

@@ -46,3 +46,11 @@ sylius_resource:
                 model: Binidini\CoreBundle\Entity\Payment
                 controller: Binidini\CoreBundle\Controller\PaymentController
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+
+        binidini_core.gcm_token:
+            driver: doctrine/orm
+            classes:
+                model: Binidini\CoreBundle\Entity\GCMToken
+                controller: Binidini\CoreBundle\Controller\GCMTokenController
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+

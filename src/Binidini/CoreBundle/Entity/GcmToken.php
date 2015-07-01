@@ -4,6 +4,7 @@ namespace Binidini\CoreBundle\Entity;
 
 use Binidini\CoreBundle\Model\UserAwareInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 
@@ -12,10 +13,11 @@ use JMS\Serializer\Annotation\Expose;
  *
  * @ORM\Table(name = "gcm_token")
  * @ORM\Entity
+ * @UniqueEntity("token")
  *
  * @ExclusionPolicy("all")
  */
-class GCMToken implements UserAwareInterface
+class GcmToken implements UserAwareInterface
 {
 
     /**
@@ -31,7 +33,7 @@ class GCMToken implements UserAwareInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="token", type="string", length=1024)
+     * @ORM\Column(name="token", type="string", length=256)
      */
     private $token;
 

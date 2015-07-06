@@ -24,3 +24,7 @@ binidini_search_shipment_search:
     methods: [GET, POST]
     defaults:
         _controller: binidini_search.controller.shipment:searchAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            filterable: true

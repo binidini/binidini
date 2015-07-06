@@ -1,12 +1,5 @@
 <?php
-/*
- * This file is part of the Binidini project.
- *
- * (c) Denis Manilo
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+
 /*
  * This file is part of the Binidini project.
  *
@@ -19,6 +12,7 @@
 namespace Binidini\SearchBundle\Controller;
 
 
+use Binidini\SearchBundle\Model\MyPagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Hateoas\Configuration\Route;
@@ -54,7 +48,8 @@ class ShipmentController extends ResourceController
         $shipments->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
         if ($this->config->isApiRequest()) {
-            $shipments = $this->getPagerfantaFactory()->createRepresentation(
+
+            $shipments = $this->getMyPagerfantaFactory()->createRepresentation(
                 $shipments,
                 new Route(
                     $request->attributes->get('_route'),
@@ -74,4 +69,13 @@ class ShipmentController extends ResourceController
         return $this->handleView($view);
 
     }
+
+    /**
+     * @return MyPagerfantaFactory
+     */
+    protected function getMyPagerfantaFactory()
+    {
+        return new MyPagerfantaFactory();
+    }
+
 }

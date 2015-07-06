@@ -15,3 +15,5 @@ binidini_api_search_shipment_search:
     methods: [GET]
     defaults:
         _controller: binidini_search.controller.shipment:searchAction
+        _sylius:
+            sortable: true

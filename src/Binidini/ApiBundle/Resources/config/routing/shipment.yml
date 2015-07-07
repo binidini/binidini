@@ -9,3 +9,11 @@ binidini_api_shipment_index:
             sorting:
                 id: desc
             filterable: true
+
+binidini_api_search_shipment_search:
+    path: /search
+    methods: [GET]
+    defaults:
+        _controller: binidini_search.controller.shipment:searchAction
+        _sylius:
+            sortable: true

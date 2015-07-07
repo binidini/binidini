@@ -12,11 +12,19 @@ binidini_api_shipping_bid_index:
             paginate: false
             sortable: true
             sorting:
-                price: asc
+                id: desc
             filterable: true
 
 binidini_api_shipping_bid_new:
     path: /shipping/{shipping_id}/bid/new
-    methods: [GET, POST]
+    methods: [POST]
     defaults:
-        _controller: binidini_core.controller.bid:chipping_id }
+        _controller: binidini_core.controller.bid:createAction
+        criteria:
+            shipping: $shipping_id
+
+binidini_api_shipping_bid_state_transition:
+    path: /shipping/{shipping_id}/bid/{id}/state/{transition}
+    methods: [POST]
+    defaults:
+        _controller: binidini_core.controller.bid:updateStateAction

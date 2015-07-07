@@ -79,6 +79,7 @@ class Bid implements UserAwareInterface, SenderCarrierAwareInterface
      * @var string
      *
      * @ORM\Column(name="state", type="string", length=32)
+     * @Expose
      */
     protected $state = Bid::STATE_NEW;
 

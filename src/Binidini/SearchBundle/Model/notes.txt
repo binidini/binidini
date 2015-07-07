@@ -1,0 +1,6 @@
+MyCollectionRepresentation and MyPagerFantaFactory  iis created just for changing in
+CollectionRepresentation.php
+
+$resources = iterator_to_array($resources); -> $resources = iterator_to_array($resources, false);
+
+https://github.com/willdurand/Hateoas/issues/190

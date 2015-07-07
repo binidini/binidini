@@ -14,7 +14,7 @@ Vagrant.configure(2) do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   config.vm.network "private_network", ip: "192.168.33.10"
-  # config.vm.network "public_network"
+  config.vm.network "public_network", bridge: 'en0: Wi-Fi (AirPort)'
  config.vm.synced_folder ".", "/vagrant", :type => "nfs"
 
   # Enable provisioning with a shell script. Additional provisioners such as

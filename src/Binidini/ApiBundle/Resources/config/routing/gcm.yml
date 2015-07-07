@@ -1,0 +1,16 @@
+binidini_api_gcm_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: binidini_core.controller.gcm_token:createAction
+
+binidini_api_gcm_delete:
+    path: /{token}
+    methods: [DELETE]
+    defaults:
+        _controller: binidini_core.controller.gcm_token:deleteAction
+        _sylius:
+            criteria:
+                token: $token
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+

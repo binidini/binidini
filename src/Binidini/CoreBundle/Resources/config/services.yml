@@ -27,6 +27,7 @@ services:
             - { name: kernel.event_listener, event: binidini_core.bid.pre_create, method: setUser  }
             - { name: kernel.event_listener, event: binidini_core.message.pre_create, method: setUser  }
             - { name: kernel.event_listener, event: binidini_core.review.pre_create, method: setUser  }
+            - { name: kernel.event_listener, event: binidini_core.gcm_token.pre_create, method: setUser  }
 
     binidini.listener.shipping:
         class: Binidini\CoreBundle\EventListener\ShippingListener
@@ -121,6 +122,11 @@ services:
             class: Binidini\CoreBundle\Form\Type\ReviewType
             tags:
                 - { name: form.type, alias: binidini_core_review}
+
+    binidini.form.type.gcm_token:
+            class: Binidini\CoreBundle\Form\Type\GcmTokenType
+            tags:
+                - { name: form.type, alias: binidini_core_gcm_token}
 
     binidini.security.service:
         class: Binidini\CoreBundle\Service\SecurityService

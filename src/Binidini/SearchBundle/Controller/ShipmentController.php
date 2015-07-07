@@ -21,29 +21,37 @@ class ShipmentController extends ResourceController
 {
     public function searchAction(Request $request)
     {
+
+        $longitude = $request->get('lon');
+        $latitude  = $request->get('lat');
         $searchAddress = $request->get('top-search');
 
-        $geocode = $this->container->get('binidini.geocode.yandex.client');
+        if ( !empty($searchAddress) && (is_null($longitude) || is_null($latitude))) {
 
-        $params = array(
-            'geocode' => $searchAddress,
-            'format'  => 'json',
-            'results' => 1,
-        );
-        $res = $geocode->get('?'.http_build_query($params, '', '&'))->send();
+            $geocode = $this->container->get('binidini.geocode.yandex.client');
 
-        if ($res->getStatusCode() == 200) {
-            $response = json_decode($res->getBody(true));
-            if ($response->response->GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found > 0) {
-                list($longitude, $latitude) = explode(' ', $response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos);
-            } else {
-                return $this->redirectHandler->redirectToIndex();
+            $params = array(
+                'geocode' => $searchAddress,
+                'format'  => 'json',
+                'results' => 1,
+            );
+            $res = $geocode->get('?'.http_build_query($params, '', '&'))->send();
+
+            if ($res->getStatusCode() == 200) {
+                $response = json_decode($res->getBody(true));
+                if ($response->response->GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found > 0) {
+                    list($longitude, $latitude) = explode(' ', $response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos);
+                }
             }
-        } else {
-            return $this->redirectHandler->redirectToIndex();
+
         }
 
-        $shipments = $this->getRepository()->findByLocation($longitude, $latitude);
+        if (is_null($longitude) || is_null($latitude)) {
+            $shipments = $this->getRepository()->createPaginator();
+        } else {
+            $shipments = $this->getRepository()->findByLocation($longitude, $latitude);
+        }
+
         $shipments->setCurrentPage($request->get('page', 1), true, true);
         $shipments->setMaxPerPage($this->config->getPaginationMaxPerPage());
 

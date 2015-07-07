@@ -11,7 +11,6 @@
 namespace Binidini\SearchBundle\Model;
 
 use Hateoas\Configuration\Route;
-use Hateoas\Representation\CollectionRepresentation;
 use Hateoas\Representation\PaginatedRepresentation;
 use Pagerfanta\Pagerfanta;
 

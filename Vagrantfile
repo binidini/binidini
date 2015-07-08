@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
   # using a specific IP.
   config.vm.network "private_network", ip: "192.168.33.10"
   config.vm.network "public_network", bridge: 'en0: Wi-Fi (AirPort)'
- config.vm.synced_folder ".", "/vagrant", :type => "nfs"
+  config.vm.synced_folder ".", "/vagrant", :type => "nfs"
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
@@ -37,6 +37,7 @@ Vagrant.configure(2) do |config|
     ./app/console assets:install
     ./app/console doctrine:database:create
     ./app/console doctrine:schema:create
-
+    cp -r web/bundles/binidiniweb/img web/media/
+    mysql -u root -proot binidini <  /vagrant/vagrant/binidini.sql
   SHELL
 end

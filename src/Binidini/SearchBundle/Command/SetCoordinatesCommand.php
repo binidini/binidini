@@ -82,10 +82,10 @@ EOT
 
         /** @var Shipment $shipment  */
         foreach ($shipments as $shipment) {
-            $output->write($shipment->getPickupAddress());
+            $output->write($shipment->getDeliveryAddress());
 
             $params = array(
-                'geocode' => $shipment->getPickupAddress(),
+                'geocode' => $shipment->getDeliveryAddress(),
                 'format'  => 'json',
                 'results' => 1,
             );

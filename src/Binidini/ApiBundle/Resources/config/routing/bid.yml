@@ -28,3 +28,12 @@ binidini_api_shipping_bid_state_transition:
     methods: [POST]
     defaults:
         _controller: binidini_core.controller.bid:updateStateAction
+
+binidini_api_shipping_message_new:
+    path: /shipping/{shipping_id}/messages/new
+    methods: [POST]
+    defaults:
+        _controller: binidini_core.controller.message:createAction
+        _sylius:
+            criteria:
+                shipping: $shipping_id

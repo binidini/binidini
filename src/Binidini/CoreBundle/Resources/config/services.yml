@@ -84,6 +84,14 @@ services:
         tags:
               - { name: monolog.logger, channel: sms }
 
+    binidini.gcm_service:
+        class: Binidini\CoreBundle\Service\GcmService
+        arguments:
+            - @logger
+            - %gcm_api_key%
+        tags:
+              - { name: monolog.logger, channel: gcm }
+
     binidini.geocode_worker:
         class: Binidini\CoreBundle\Worker\GeocodeWorker
         arguments:
@@ -94,6 +102,10 @@ services:
     binidini.sms_worker:
         class: Binidini\CoreBundle\Worker\SmsWorker
         arguments: [@binidini.sms_service]
+
+    binidini.gcm_worker:
+        class: Binidini\CoreBundle\Worker\GcmWorker
+        arguments: [@binidini.gcm_service]
 
     binidini.email_worker:
         class: Binidini\CoreBundle\Worker\EmailWorker
@@ -138,6 +150,7 @@ services:
         arguments:
             - @old_sound_rabbit_mq.binidini_sms_producer
             - @old_sound_rabbit_mq.binidini_email_producer
+            - @old_sound_rabbit_mq.binidini_gcm_producer
             - @twig
 
     binidini.shipping.logic.service:

@@ -197,6 +197,14 @@ class User extends BaseUser
     private $emailMask;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="gcm_mask", type="integer", options={"default"=0})
+     */
+
+    private $gcmMask;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="email_verified", type="boolean", options={"default"=false})
@@ -279,6 +287,12 @@ class User extends BaseUser
     private $senderCount;
 
     /**
+     * @ORM\OneToMany(targetEntity="GcmToken", mappedBy="user")
+     */
+    private $gcmTokens;
+
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="carrier_count", type="integer", options={"default"=0})
@@ -322,6 +336,7 @@ class User extends BaseUser
 
         $this->smsMask = 0b1111111111111111111111111;
         $this->emailMask = 0b1111111111111111111111111;
+        $this->gcmMask = 0b1111111111111111111111111;
 
         $this->imgPath = 'profile/'.rand(1,39).'.jpg';
     }
@@ -847,6 +862,29 @@ class User extends BaseUser
     }
 
     /**
+     * Set gcmMask
+     *
+     * @param integer $gcmMask
+     * @return User
+     */
+    public function setGcmMask($gcmMask)
+    {
+        $this->gcmMask = $gcmMask;
+
+        return $this;
+    }
+
+    /**
+     * Get gcmMask
+     *
+     * @return integer
+     */
+    public function getGcmMask()
+    {
+        return $this->gcmMask;
+    }
+
+    /**
      * Set emailMask
      *
      * @param integer $emailMask
@@ -868,6 +906,189 @@ class User extends BaseUser
     {
         return $this->emailMask;
     }
+
+
+### Start Gcm section
+
+    /**
+     * @return bool
+     */
+    public function getGcmBidCreateNotification()
+    {
+        return $this->getGcmN(self::BIT_CREATE_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmBidCreateNotification($flag)
+    {
+        $this->setGcmN(self::BIT_CREATE_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGcmBidAcceptNotification()
+    {
+        return $this->getGcmN(self::BIT_ACCEPT_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmBidAcceptNotification($flag)
+    {
+        $this->setGcmN(self::BIT_ACCEPT_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGcmBidAgreeNotification()
+    {
+        return $this->getGcmN(self::BIT_AGREE_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmBidAgreeNotification($flag)
+    {
+        $this->setGcmN(self::BIT_AGREE_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGcmBidRejectNotification()
+    {
+        return $this->getGcmN(self::BIT_REJECT_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmBidRejectNotification($flag)
+    {
+        $this->setGcmN(self::BIT_REJECT_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGcmBidRecallNotification()
+    {
+        return $this->getGcmN(self::BIT_RECALL_BID);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmBidRecallNotification($flag)
+    {
+        $this->setGcmN(self::BIT_RECALL_BID, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGcmShippingDeliverNotification()
+    {
+        return $this->getGcmN(self::BIT_DELIVER_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmShippingDeliverNotification($flag)
+    {
+        $this->setGcmN(self::BIT_DELIVER_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGcmShippingPayNotification()
+    {
+        return $this->getGcmN(self::BIT_PAY_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmShippingPayNotification($flag)
+    {
+        $this->setGcmN(self::BIT_PAY_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGcmShippingCompleteNotification()
+    {
+        return $this->getGcmN(self::BIT_COMPLETE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmShippingCompleteNotification($flag)
+    {
+        $this->setGcmN(self::BIT_COMPLETE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGcmShippingRefuseNotification()
+    {
+        return $this->getGcmN(self::BIT_REFUSE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmShippingRefuseNotification($flag)
+    {
+        $this->setGcmN(self::BIT_REFUSE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGcmShippingDisputeNotification()
+    {
+        return $this->getGcmN(self::BIT_DISPUTE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmShippingDisputeNotification($flag)
+    {
+        $this->setGcmN(self::BIT_DISPUTE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGcmShippingDebateNotification()
+    {
+        return $this->getGcmN(self::BIT_DEBATE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmShippingDebateNotification($flag)
+    {
+        $this->setGcmN(self::BIT_DEBATE_SHIPPING, $flag);
+    }
+
+### End Gcm section
+
+### Start Sms section
 
     /**
      * @return bool
@@ -1199,6 +1420,14 @@ class User extends BaseUser
     }
 
     /**
+     * @param bool $flag
+     */
+    public function setEmailBidRecallNotification($flag)
+    {
+        $this->setEmailN(self::BIT_RECALL_BID, $flag);
+    }
+
+    /**
      * @return bool
      */
     public function getEmailShippingDebateNotification()
@@ -1214,20 +1443,20 @@ class User extends BaseUser
         $this->setEmailN(self::BIT_DEBATE_SHIPPING, $flag);
     }
 
-    /**
-     * @param bool $flag
-     */
-    public function setEmailBidRecallNotification($flag)
-    {
-        $this->setEmailN(self::BIT_RECALL_BID, $flag);
-    }
-
     public function getSmsN($n) {
         return ($this->smsMask & (1 << $n)) != 0;
     }
 
     private function setSmsN($n, $new) {
         $this->smsMask = ($this->smsMask & ~(1 << $n)) | ($new << $n);
+    }
+
+    public function getGcmN($n) {
+        return ($this->gcmMask & (1 << $n)) != 0;
+    }
+
+    private function setGcmN($n, $new) {
+        $this->gcmMask = ($this->gcmMask & ~(1 << $n)) | ($new << $n);
     }
 
     public function getEmailN($n) {
@@ -1562,5 +1791,39 @@ class User extends BaseUser
     public function isSender()
     {
         return $this->profileType == self::PROFILE_TYPE_CARRIER_AND_SENDER || $this->profileType == self::PROFILE_TYPE_SENDER;
+    }
+
+
+    /**
+     * Add gcmTokens
+     *
+     * @param GcmToken $gcmTokens
+     * @return User
+     */
+    public function addGcmToken(GcmToken $gcmTokens)
+    {
+        $this->gcmTokens[] = $gcmTokens;
+
+        return $this;
+    }
+
+    /**
+     * Remove gcmTokens
+     *
+     * @param GcmToken $gcmTokens
+     */
+    public function removeGcmToken(GcmToken $gcmTokens)
+    {
+        $this->gcmTokens->removeElement($gcmTokens);
+    }
+
+    /**
+     * Get gcmTokens
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGcmTokens()
+    {
+        return $this->gcmTokens;
     }
 }

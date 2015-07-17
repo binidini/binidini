@@ -158,6 +158,7 @@
                                                                 <th>Уведомления для перевозчика</th>
                                                                 <th>sms</th>
                                                                 <th>email</th>
+                                                                <th>gcm</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -174,6 +175,11 @@
                                                                         {{ form_widget(form.emailBidAcceptNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmBidAcceptNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>2</td>
@@ -186,6 +192,11 @@
                                                                 <td>
                                                                     <label class="checkbox-inline i-checks">
                                                                         {{ form_widget(form.emailBidRejectNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmBidRejectNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
                                                             </tr>
@@ -202,6 +213,11 @@
                                                                         {{ form_widget(form.emailShippingPayNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmShippingPayNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>4</td>
@@ -214,6 +230,11 @@
                                                                 <td>
                                                                     <label class="checkbox-inline i-checks">
                                                                         {{ form_widget(form.emailShippingRefuseNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmShippingRefuseNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
                                                             </tr>
@@ -230,6 +251,11 @@
                                                                         {{ form_widget(form.emailShippingDisputeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmShippingDisputeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
                                                             </tr>
                                                             </tbody>
                                                         </table>
@@ -242,6 +268,7 @@
                                                                 <th>Уведомления для отправителя</th>
                                                                 <th>sms</th>
                                                                 <th>email</th>
+                                                                <th>gcm</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -259,6 +286,11 @@
                                                                         {{ form_widget(form.emailBidCreateNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmBidCreateNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>2</td>
@@ -271,6 +303,11 @@
                                                                 <td>
                                                                     <label class="checkbox-inline i-checks">
                                                                         {{ form_widget(form.emailBidRecallNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmBidRecallNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
                                                             </tr>
@@ -288,6 +325,11 @@
                                                                         {{ form_widget(form.emailBidAgreeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmBidAgreeNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>4</td>
@@ -300,6 +342,11 @@
                                                                 <td>
                                                                     <label class="checkbox-inline i-checks">
                                                                         {{ form_widget(form.emailShippingDeliverNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmShippingDeliverNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
                                                             </tr>
@@ -316,6 +363,11 @@
                                                                         {{ form_widget(form.emailShippingCompleteNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmShippingCompleteNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>6</td>
@@ -328,6 +380,11 @@
                                                                 <td>
                                                                     <label class="checkbox-inline i-checks">
                                                                         {{ form_widget(form.emailShippingDebateNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmShippingDebateNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
                                                                     </label>
                                                                 </td>
                                                             </tr>

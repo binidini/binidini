@@ -71,6 +71,17 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('emailShippingDisputeNotification', 'checkbox', ['required' => false])
             ->add('emailShippingDebateNotification', 'checkbox', ['required' => false])
 
+            ->add('gcmBidCreateNotification', 'checkbox', ['required' => false])
+            ->add('gcmBidAcceptNotification', 'checkbox', ['required' => false])
+            ->add('gcmBidAgreeNotification', 'checkbox', ['required' => false])
+            ->add('gcmBidRejectNotification', 'checkbox', ['required' => false])
+            ->add('gcmBidRecallNotification', 'checkbox', ['required' => false])
+            ->add('gcmShippingDeliverNotification', 'checkbox', ['required' => false])
+            ->add('gcmShippingPayNotification', 'checkbox', ['required' => false])
+            ->add('gcmShippingCompleteNotification', 'checkbox', ['required' => false])
+            ->add('gcmShippingRefuseNotification', 'checkbox', ['required' => false])
+            ->add('gcmShippingDisputeNotification', 'checkbox', ['required' => false])
+            ->add('gcmShippingDebateNotification', 'checkbox', ['required' => false])
         ;
 
     }

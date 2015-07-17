@@ -171,7 +171,9 @@ old_sound_rabbit_mq:
         binidini_geocode:
              connection: default
              exchange_options: {name: 'binidini-geocode', type: direct}
-
+        binidini_gcm:
+            connection: default
+            exchange_options: {name: 'binidini-gcm', type: direct}
     consumers:
         binidini_sms:
             connection:       default
@@ -188,6 +190,11 @@ old_sound_rabbit_mq:
             exchange_options: {name: 'binidini-geocode', type: direct}
             queue_options:    {name: 'binidini-geocode'}
             callback:         binidini.geocode_worker
+        binidini_gcm:
+            connection:       default
+            exchange_options: {name: 'binidini-gcm', type: direct}
+            queue_options:    {name: 'binidini-gcm'}
+            callback:         binidini.gcm_worker
 
 doctrine_migrations:
     dir_name: %kernel.root_dir%/DoctrineMigrations

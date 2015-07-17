@@ -27,12 +27,14 @@ class NotificationService
 {
     private $smsRabbitMqProducer;
     private $emailRabbitMqProducer;
+    private $gcmRabbitMqProducer;
     private $twig;
 
-    public function __construct(Producer $smsRabbitMqProducer, Producer $emailRabbitMqProducer, \Twig_Environment $twig)
+    public function __construct(Producer $smsRabbitMqProducer, Producer $emailRabbitMqProducer, Producer $gcmRabbitMqProducer, \Twig_Environment $twig)
     {
         $this->smsRabbitMqProducer = $smsRabbitMqProducer;
         $this->emailRabbitMqProducer = $emailRabbitMqProducer;
+        $this->gcmRabbitMqProducer = $gcmRabbitMqProducer;
         $this->twig = $twig;
     }
 
@@ -54,19 +56,29 @@ class NotificationService
 
         if ($user->getSmsN($bitN)) {
             $sms = $this->twig->render('BinidiniWebBundle::Template/Sms/'.$event.'.txt.twig', ['resource' => $resource]);
-            $msg = array('mobile' => $user->getUsername(), 'sms' => $sms);
+            $msg = ['mobile' => $user->getUsername(), 'sms' => $sms];
             $this->smsRabbitMqProducer->publish(serialize($msg));
         }
 
-        if ($user->getEmailVerified() && $user->getEmailN($bitN))
-        {
+        if ($user->getEmailVerified() && $user->getEmailN($bitN)) {
+
             $emailBody = $this->twig->render('BinidiniWebBundle::Template/Email/'.$event.'.txt.twig', ['resource' => $resource]);
             $subject = $this->twig->render('BinidiniWebBundle::Template/Sms/'.$event.'.txt.twig', ['resource' => $resource]);
-            $from = array('info@tytymyty.ru' => 'Титимити');
+            $from = ['info@tytymyty.ru' => 'Титимити'];
 
 
-            $msg = array('to' => $user->getEmailCanonical(), 'from' =>$from, 'subject' => $subject, 'body' => $emailBody);
+            $msg = ['to' => $user->getEmailCanonical(), 'from' =>$from, 'subject' => $subject, 'body' => $emailBody];
             $this->emailRabbitMqProducer->publish(serialize($msg));
+        }
+
+        if (!$user->getGcmTokens()->isEmpty() && $user->getGcmN($bitN)) {
+            foreach ($user->getGcmTokens() as $gcmToken) {
+                $ids[] = $gcmToken->getToken();
+            }
+            $data = ['message' => $this->twig->render('BinidiniWebBundle::Template/Sms/'.$event.'.txt.twig', ['resource' => $resource])];
+            $msg = ['registration_ids' => $ids, 'data' => $data];
+            $this->gcmRabbitMqProducer->publish(serialize($msg));
+
         }
     }
 

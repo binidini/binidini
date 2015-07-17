@@ -19,6 +19,8 @@
 namespace Binidini\CoreBundle\Service;
 
 
+use Binidini\CoreBundle\Entity\Bid;
+use Binidini\CoreBundle\Entity\Shipping;
 use Binidini\CoreBundle\Entity\User;
 use Binidini\CoreBundle\Model\SenderCarrierAwareInterface;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
@@ -75,10 +77,15 @@ class NotificationService
             foreach ($user->getGcmTokens() as $gcmToken) {
                 $ids[] = $gcmToken->getToken();
             }
-            $data = ['message' => $this->twig->render('BinidiniWebBundle::Template/Sms/'.$event.'.txt.twig', ['resource' => $resource])];
+            if ($resource instanceof Shipping) {
+                $shippingId = $resource->getId();
+            } elseif ($resource instanceof Bid) {
+                $shippingId = $resource->getShipping()->getId();
+            }
+
+            $data = ['shipping_id' => $shippingId, 'message' => $this->twig->render('BinidiniWebBundle::Template/Gcm/'.$event.'.txt.twig', ['resource' => $resource])];
             $msg = ['registration_ids' => $ids, 'data' => $data];
             $this->gcmRabbitMqProducer->publish(serialize($msg));
-
         }
     }
 

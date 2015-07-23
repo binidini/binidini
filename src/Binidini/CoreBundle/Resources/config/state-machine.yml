@@ -8,9 +8,6 @@ winzou_state_machine:
             - init
             - new
             - accepted
-            - dispatched
-            - on_way
-            - delivered     #awaiting_payment
             - paid          #awaiting_payment_confirmation
             - completed
             - rejected      # rejected by carrier, awaiting_cancel confirmation from sender
@@ -21,29 +18,20 @@ winzou_state_machine:
             create: #by sender
                 from: [init]
                 to: new
-            accept: #by sender
+            accept: #by carrier
                 from: [new]
                 to: accepted
-            dispatch: #by sender
-                from: [accepted]
-                to: dispatched
-            load:  #by carrier
-                from: [dispatched]
-                to: on_way
-            deliver:  #by carrier
-                from: [on_way]
-                to: delivered
             pay:  #by sender
-                from: [delivered]
+                from: [accepted]
                 to: paid
             complete: #by carrier
                 from: [paid]
                 to: completed
             reject:  #by carrier
-                from: [accepted, dispatched, on_way, delivered, paid]
+                from: [accepted, paid]
                 to: rejected
             refuse:  #by sender
-                from: [accepted, dispatched, on_way, delivered, paid]
+                from: [accepted, paid]
                 to: refused
             cancel:  #by sender
                 from: [new]
@@ -55,7 +43,7 @@ winzou_state_machine:
                 from: [refused]
                 to: canceled
             dispute: #by sender
-                from: [accepted, dispatched, on_way, delivered, paid]
+                from: [accepted, paid]
                 to: conflict
             debate:  #by carrier
                 from: [refused]
@@ -66,9 +54,6 @@ winzou_state_machine:
         callbacks:
             before:
                 check_accept:   { on: 'accept',   do: [@binidini.security.service, 'checkCarrier'],    args: ['object'] }
-                check_dispatch: { on: 'dispatch', do: [@binidini.security.service, 'checkSender'],    args: ['object'] }
-                check_load:     { on: 'load',     do: [@binidini.security.service, 'checkCarrier'],   args: ['object'] }
-                check_deliver:  { on: 'deliver',  do: [@binidini.security.service, 'checkCarrier'],   args: ['object'] }
                 check_pay:      { on: 'pay',      do: [@binidini.security.service, 'checkSender'],    args: ['object'] }
                 check_complete: { on: 'complete', do: [@binidini.shipping.logic.service, 'beforeComplete'], args: ['object'] }
                 check_reject:   { on: 'reject',   do: [@binidini.security.service, 'checkResolver'],  args: ['object'] }
@@ -81,11 +66,10 @@ winzou_state_machine:
                 check_resolve:  { on: 'resolve',  do: [@binidini.security.service, 'checkResolver'],  args: ['object'] }
             after:
                 after_cancel:   { on: 'cancel',     do: [@binidini.shipping.logic.service, 'removeShipment'], args: ['object'] }
+                after_pay:      { on: 'pay',        do: [@binidini.notification.service, 'notifyCarrier'],  args: ['object', '"pay_shipping"'] }
                 after_complete: { on: 'complete',   do: [@binidini.notification.service, 'notifySender'],   args: ['object', '"complete_shipping"'] }
                 after_debate:   { on: 'debate',     do: [@binidini.notification.service, 'notifySender'],   args: ['object', '"debate_shipping"'] }
-                after_deliver:  { on: 'deliver',    do: [@binidini.notification.service, 'notifySender'],   args: ['object', '"deliver_shipping"'] }
                 after_dispute:  { on: 'dispute',    do: [@binidini.notification.service, 'notifyCarrier'],  args: ['object', '"dispute_shipping"'] }
-                after_pay:      { on: 'pay',        do: [@binidini.notification.service, 'notifyCarrier'],  args: ['object', '"pay_shipping"'] }
                 after_refuse:   { on: 'refuse',     do: [@binidini.notification.service, 'notifyCarrier'],  args: ['object', '"refuse_shipping"'] }
 
 

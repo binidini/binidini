@@ -1,6 +1,6 @@
 binidini_api_gcm_create:
     path: /new
-    methods: [GET, POST]
+    methods: [POST]
     defaults:
         _controller: binidini_core.controller.gcm_token:createAction
 

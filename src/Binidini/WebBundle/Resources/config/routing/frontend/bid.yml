@@ -40,6 +40,9 @@ binidini_user_bids_accepted:
         _controller: binidini_core.controller.bid:indexAction
         _sylius:
             paginate: 10
+            sortable: true
+            sorting:
+                id: desc
             filterable: true
             criteria:
                 user: ['expr:service("security.context").getToken().getUser().getId()']
@@ -53,6 +56,9 @@ binidini_sender_bids_new:
         _controller: binidini_core.controller.bid:indexAction
         _sylius:
             paginate: 10
+            sortable: true
+            sorting:
+                id: desc
             filterable: true
             criteria:
                 sender: ['expr:service("security.context").getToken().getUser().getId()']

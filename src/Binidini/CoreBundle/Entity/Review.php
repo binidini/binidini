@@ -29,7 +29,7 @@ class Review implements UserAwareInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="text", type="string", nullable=false)
+     * @ORM\Column(name="text", type="string", length=2000, nullable=false)
      * @Expose
      */
     private $text;

@@ -23,8 +23,7 @@ binidini_api_shipping_history_index:
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.shipping:historyIndexAction
-        _sylius:
-            template: BinidiniWebBundle:Frontend/Shipping:history_index.html.twig
+
 
 binidini_api_shipping_state_transition:
     path: /{id}/state/{transition}

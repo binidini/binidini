@@ -1,0 +1,22 @@
+binidini_api_payment_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.payment:indexAction
+        _sylius:
+            criteria:
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+
+binidini_api_shipping_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.payment:showAction
+        _sylius:
+            criteria:
+                user: ['expr:service("security.context").getToken().getUser().getId()']

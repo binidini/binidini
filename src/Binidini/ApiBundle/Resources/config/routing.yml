@@ -29,3 +29,7 @@ binidini_api_history:
 binidini_api_gcm:
     resource: @BinidiniApiBundle/Resources/config/routing/gcm.yml
     prefix: /gcm
+
+binidini_api_payment:
+    resource: @BinidiniApiBundle/Resources/config/routing/payment.yml
+    prefix: /payment

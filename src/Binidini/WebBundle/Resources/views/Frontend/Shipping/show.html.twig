@@ -1,13 +1,22 @@
 {% extends 'BinidiniWebBundle::layout.html.twig' %}
 
+{% block meta %}
+    {{ parent() }}
+    <meta property = "og:title" content = "Прокатись от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }} за {{ shipping.deliveryPrice }} руб." />
+    <meta property = "og:type" content = "article" />
+    <meta property = "og:image" content = "http://tytymyty.ru/logo.png" />
+    <meta property = "og:description" content = "WANTED перевозчик, курьер, попутчик - необходимо перевезти '{{ shipping.name }}' за {{ shipping.deliveryPrice }} руб. - от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }}. Крайнее время доставки: {{ shipping.deliveryDatetime | date('d.m.y H:i') }}." />
+{% endblock %}
+
 {% block title %}
-    {{ shipping.name }}: {{ shipping.deliveryPrice }} руб. - {{ shipping.pickupAddress }} - {{ shipping.deliveryAddress }}
+    Титимити нужен перевозчик, курьер, попутчик - необходимо перевезти '{{ shipping.name }}' за {{ shipping.deliveryPrice }} руб. - от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }}
 {% endblock %}
 
 {% if shipping.canHasReview() %}
     {% block stylesheets %}
         {{ parent() }}
         <link href="{{ asset('bundles/binidiniweb/css/plugins/raty/jquery.raty.css') }}" rel="stylesheet">
+
     {% endblock %}
 {% endif %}
 
@@ -130,14 +139,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="m-b-md pull-right">
-                                    <script type="text/javascript"><!--
-                                        document.write(VK.Share.button({
-                                            title: "{{ shipping.name }}: {{ shipping.deliveryPrice }} руб. - {{ shipping.pickupAddress }} - {{ shipping.deliveryAddress }}",
-                                            description: "Нужен перевозчик. Доставить необходимо до {{ shipping.deliveryDatetime | date('d.m.y H:i') }}.",
-                                            image: "http://tytymyty.ru/logo2.png",
-                                            noparse: true
-                                        },{type: "link", text: "Поделиться Вконтакте"}));
-                                        --></script>
+
+                                    <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="link" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
+
                                 </div>
                              </div>
                         </div>

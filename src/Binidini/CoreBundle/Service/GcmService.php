@@ -27,7 +27,7 @@ class GcmService
 
     /**
      * @param json array $data
-     * @param массив токенов $ids
+     * @param string[] массив токенов $ids
      * @return int
      */
     public function send ($data, $ids)

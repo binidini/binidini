@@ -52,24 +52,24 @@ class NotificationService
         $this->notify($user, $event, $resource);
     }
 
-    private function notify (User $user, $event, $resource)
+    private function notify(User $user, $event, $resource)
     {
-        $bitN = constant('Binidini\CoreBundle\Entity\User::BIT_'.strtoupper($event));
+        $bitN = constant('Binidini\CoreBundle\Entity\User::BIT_' . strtoupper($event));
 
         if ($user->getSmsN($bitN)) {
-            $sms = $this->twig->render('BinidiniWebBundle::Template/Sms/'.$event.'.txt.twig', ['resource' => $resource]);
+            $sms = $this->twig->render('BinidiniWebBundle::Template/Sms/' . $event . '.txt.twig', ['resource' => $resource]);
             $msg = ['mobile' => $user->getUsername(), 'sms' => $sms];
             $this->smsRabbitMqProducer->publish(serialize($msg));
         }
 
         if ($user->getEmailVerified() && $user->getEmailN($bitN)) {
 
-            $emailBody = $this->twig->render('BinidiniWebBundle::Template/Email/'.$event.'.txt.twig', ['resource' => $resource]);
-            $subject = $this->twig->render('BinidiniWebBundle::Template/Sms/'.$event.'.txt.twig', ['resource' => $resource]);
+            $emailBody = $this->twig->render('BinidiniWebBundle::Template/Email/' . $event . '.txt.twig', ['resource' => $resource]);
+            $subject = $this->twig->render('BinidiniWebBundle::Template/Sms/' . $event . '.txt.twig', ['resource' => $resource]);
             $from = ['info@tytymyty.ru' => 'Титимити'];
 
 
-            $msg = ['to' => $user->getEmailCanonical(), 'from' =>$from, 'subject' => $subject, 'body' => $emailBody];
+            $msg = ['to' => $user->getEmailCanonical(), 'from' => $from, 'subject' => $subject, 'body' => $emailBody];
             $this->emailRabbitMqProducer->publish(serialize($msg));
         }
 
@@ -81,9 +81,16 @@ class NotificationService
                 $shippingId = $resource->getId();
             } elseif ($resource instanceof Bid) {
                 $shippingId = $resource->getShipping()->getId();
+            } else {
+                $shippingId = 0;
             }
 
-            $data = ['shipping_id' => $shippingId, 'message' => $this->twig->render('BinidiniWebBundle::Template/Gcm/'.$event.'.txt.twig', ['resource' => $resource])];
+            $data = [
+                'event' => $event,
+                'shipping_id' => $shippingId,
+                'message' => $this->twig->render('BinidiniWebBundle::Template/Gcm/' . $event . '.txt.twig',
+                    ['resource' => $resource])
+            ];
             $msg = ['registration_ids' => $ids, 'data' => $data];
             $this->gcmRabbitMqProducer->publish(serialize($msg));
         }

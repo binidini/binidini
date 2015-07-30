@@ -131,6 +131,7 @@ class User extends BaseUser
      * @var integer
      *
      * @ORM\Column(name="hold_amount", type="integer", options={"default" = 0})
+     * @Expose
      */
     private $holdAmount;
 
@@ -169,6 +170,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="about_me", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $aboutMe;
 
@@ -200,6 +202,7 @@ class User extends BaseUser
      * @var integer
      *
      * @ORM\Column(name="gcm_mask", type="integer", options={"default"=0})
+     * @Expose
      */
 
     private $gcmMask;

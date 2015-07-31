@@ -23,6 +23,7 @@ class Payment
     const STATE_INIT = 'init';
     const STATE_COMPLETED = 'completed';
 
+
     /**
      * @var integer
      *

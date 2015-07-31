@@ -37,16 +37,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('binidini_search_shipment_index') }}">Вход | Регистрация</a>
+                <a href="#page-top"><img src="{{ asset('bundles/binidiniweb/img/logo.png') }}"/></a>
+                <br/><span style="color: #ffffff;">Титимити - нам по пути</span>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="page-scroll" href="#page-top">Титимити</a></li>
+
                     <li><a class="page-scroll" href="#features">О нас</a></li>
                     <li><a class="page-scroll" href="#price">Цена</a></li>
                     <li><a class="page-scroll" href="#secure">Безопасность</a></li>
                     <li><a class="page-scroll" href="#application">Загрузить</a></li>
                     <li><a class="page-scroll" href="#contact">Контакты</a></li>
+                    <li><a class="page-scroll" href="{{ path('binidini_search_shipment_index') }}">Вход</a></li>
                 </ul>
             </div>
         </div>
@@ -56,41 +58,96 @@
     <ol class="carousel-indicators">
         <li data-target="#inSlider" data-slide-to="0" class="active"></li>
         <li data-target="#inSlider" data-slide-to="1"></li>
+        <li data-target="#inSlider" data-slide-to="2"></li>
+        <li data-target="#inSlider" data-slide-to="3"></li>
+        <li data-target="#inSlider" data-slide-to="4"></li>
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
             <div class="container">
-                <div class="carousel-caption">
-                    <h1>Доставка и перевозка:<br/>
-                        быстро,<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;надежно,<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;недорого!
-                    </h1>
+                <div class="carousel-caption blank">
+                    <div class="col-sm-offset-2 col-sm-5" >
+                        <h1 class="well" style="background-color: #1ab394; opacity: 0.8">Вам нужно что-то доставить или перевезти?</h1>
 
-                    <p>Титимити 24/7 - доставка и отправка чего-либо куда-либо.</p>
+                        <a class="btn btn-lg btn-primary" href="{{ path('binidini_search_shipment_index') }}">Отправить...</a>
 
-                    <p>
-                        <a class="btn btn-lg btn-primary" href="{{ path('binidini_search_shipment_index') }}"
-                           role="button">Присоединиться!</a>
-                    </p>
-                </div>
-                <div class="carousel-image">
-                    <img src="/bundles/binidiniweb/img/landing/laptop.png" alt="laptop"/>
+
+                    </div>
+                    <div class="col-sm-5">
+                        <h1 class="well" style="background-color: #5bc0de; opacity: 0.8">Хотите стать перевозчиком или курьером?</h1>
+
+                        <a class="btn btn-info pull-right" href="{{ path('binidini_search_shipment_index') }}">Перевезти...</a>
+
+                    </div>
+
                 </div>
             </div>
             <!-- Set background for slide in css -->
             <div class="header-back one"></div>
-
         </div>
         <div class="item">
             <div class="container">
                 <div class="carousel-caption blank">
-                    <h1>Получайте деньги <br/> по дороге домой,<br/> на работу и дачу.</h1>
+                    <div class="col-sm-offset-0 col-sm-6" >
+                        <h1 class="well" style="background-color: #1ab394; opacity: 0.8">Отправитель назначает цену доставки.</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <h1 class="well" style="background-color: #5bc0de; opacity: 0.8">Перевозчик предлагает стоимость перевозки.</h1>
+                    </div>
 
-                    <p>Захватите букет соседке и получите деньги на бензин.</p>
+                   </div>
+            </div>
+            <!-- Set background for slide in css -->
+            <div class="header-back four"></div>
+        </div>
 
-                    <p><a class="btn btn-lg btn-primary" href="{{ path('binidini_search_shipment_index') }}"
-                          role="button">Присоединиться!</a></p>
+        <div class="item">
+            <div class="container">
+                <div class="carousel-caption blank">
+                    <div class="col-sm-offset-4" >
+                        <h1 class="well" style="background-color: #1ab394; opacity: 0.8">Гарантия оплаты доставки и страховка от потери и порчи.</h1>
+
+
+                        <a class="btn btn-primary" href="{{ path('binidini_search_shipment_index') }}">Гарантии и страховка.</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Set background for slide in css -->
+            <div class="header-back seven"></div>
+        </div>
+
+        <div class="item">
+            <div class="container">
+                <div class="carousel-caption blank">
+                    <div class="col-sm-offset-4">
+                        <h1>Получайте деньги, путешествуя по миру</h1>
+
+                        <p>
+                            Получайте деньги по дороге домой, на работу и дачу.
+                        </p>
+                        <a class="btn btn-lg btn-primary" href="{{ path('binidini_search_shipment_index') }}"
+                              role="button">Присоединиться!</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Set background for slide in css -->
+            <div class="header-back five"></div>
+        </div>
+
+        <div class="item">
+            <div class="container">
+                <div class="carousel-caption blank">
+                    <div class="col-sm-offset-4">
+                        <h1>Сервис бесплатный!</h1>
+
+                        <p>
+                            Мы верим, что наш сервис поможет людям помогать близким и соседям, которые в этом нуждаются. Прежде всего это касается наших детей, стариков и инвалидов.
+                        </p>
+
+                        <p><a class="btn btn-lg btn-primary" href="{{ path('binidini_search_shipment_index') }}"
+                              role="button">Присоединиться!</a></p>
+                    </div>
                 </div>
             </div>
             <!-- Set background for slide in css -->
@@ -285,32 +342,7 @@
 
 </section>
 
-<section id="review" class="navy-section testimonials">
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <i class="fa fa-comment big-icon"></i>
-
-                <h1>
-                    Что пишут наши пользователи...
-                </h1>
-
-                <div class="testimonials-text">
-                    <i>"Мы используем систему Титимити для доставки строительных товаров, которые заказываются по интернету. Нам удалось снизить затрат на доставку в двое.
-                        Также хочу отметить, что система Титимити позволяет находить перевозчика в течение нескольких минут, что сократило время доставки.
-                        Мы используем систему страхования Титимити, что позволяет не беспокоится о сохранности товаров."</i>
-                </div>
-                <small>
-                    <strong>14.12.2014 - Владимир Исаков</strong>
-                </small>
-            </div>
-        </div>
-    </div>
-
-</section>
-
-<section class="features">
+<section class="features gray-section">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -366,6 +398,7 @@
 
 </section>
 
+
 <section id="application" class="application">
     <div class="container">
         <div class="row m-b-sm">
@@ -410,7 +443,35 @@
 
 </section>
 
-<section id="contact" class="gray-section contact">
+<section id="video" class="gray-section">
+    <div class="container">
+        <div class="row">
+            <div class="row m-b-sm">
+                <div class="col-sm-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>Правила Титимити</h1>
+
+                    <p>
+                        Работа курьером и перевозчиком может оказаться очень опасной, если не следовать правилам. Обязательно прочитайте <a href="{{ path('binidini_rules') }}" target="_blank">правила Титимити</a> и следуйте им.
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <figure>
+                    <iframe src="http://www.youtube.com/embed/C4G2LA1dLIo" frameborder="0" allowfullscreen="" data-aspectratio="0.8211764705882353" style="width: 730px; height: 599.458823529412px;"></iframe>
+                </figure>
+            </div>
+            <div class="col-sm-12 text-center">
+                <p>
+                    Надеемся фильм Вам понравится и убедит следовать правилам Титимити. Возможно будет интересно пересмотреть сериал "Перевозчик".
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact">
     <div class="container">
         <div class="row m-b-lg">
             <div class="col-lg-12 text-center">
@@ -471,6 +532,8 @@
 <script src="{{ asset('bundles/binidiniweb/js/landing/classie.js') }}"></script>
 <script src="{{ asset('bundles/binidiniweb/js/landing/cbpAnimatedHeader.js') }}"></script>
 <script src="{{ asset('bundles/binidiniweb/js/landing/inspinia.js') }}"></script>
+
+<script src="{{ asset('bundles/binidiniweb/js/plugins/video/responsible-video.js') }}"></script>
 
 </body>
 </html>

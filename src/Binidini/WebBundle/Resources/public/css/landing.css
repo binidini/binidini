@@ -144,12 +144,36 @@ h1 {
 .header-back {
     height: 470px;
     width: 100%;
+    background-color: #000; /* Чёрный фон */
+    opacity: 0.50; /* Степень прозрачности */
+    z-index: 100; /* Заведомо быть НАД другими элементами */
 }
 .header-back.one {
-    background: url('/bundles/binidiniweb/img/landing/header_one.jpg') 50% 0 no-repeat;
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_1.jpg') 50% 0 no-repeat;
 }
 .header-back.two {
-    background: url('/bundles/binidiniweb/img/landing/header_two.jpg') 50% 0 no-repeat;
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_2.jpg') 50% 0 no-repeat;
+}
+.header-back.three {
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_3.jpg') 50% 0 no-repeat;
+}
+.header-back.four {
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_4.jpg') 50% 0 no-repeat;
+}
+.header-back.five {
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_5.jpg') 50% 0 no-repeat;
+}
+.header-back.six {
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_6.jpg') 50% 0 no-repeat;
+}
+.header-back.seven {
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_7.jpg') 50% 0 no-repeat;
+}
+.header-back.eight {
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_8.jpg') 50% 0 no-repeat;
+}
+.header-back.nine {
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_9.jpg') 50% 0 no-repeat;
 }
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */

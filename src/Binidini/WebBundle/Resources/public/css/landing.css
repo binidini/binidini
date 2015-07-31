@@ -175,6 +175,9 @@ h1 {
 .header-back.ten {
     background: url('/bundles/binidiniweb/img/landing/tytymyty_10.jpg') 50% 0 no-repeat;
 }
+.header-back.eleven {
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_11.jpg') 50% 0 no-repeat;
+}
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 /* Carousel base class */

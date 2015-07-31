@@ -144,9 +144,6 @@ h1 {
 .header-back {
     height: 470px;
     width: 100%;
-    background-color: #000; /* Чёрный фон */
-    opacity: 0.50; /* Степень прозрачности */
-    z-index: 100; /* Заведомо быть НАД другими элементами */
 }
 .header-back.one {
     background: url('/bundles/binidiniweb/img/landing/tytymyty_1.jpg') 50% 0 no-repeat;
@@ -174,6 +171,9 @@ h1 {
 }
 .header-back.nine {
     background: url('/bundles/binidiniweb/img/landing/tytymyty_9.jpg') 50% 0 no-repeat;
+}
+.header-back.ten {
+    background: url('/bundles/binidiniweb/img/landing/tytymyty_10.jpg') 50% 0 no-repeat;
 }
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */

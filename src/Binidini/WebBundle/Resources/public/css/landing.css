@@ -144,7 +144,7 @@ h1 {
 .header-back {
     height: 470px;
     width: 100%;
-}
+    style="color: #ffffff"}
 .header-back.one {
     background: url('/bundles/binidiniweb/img/landing/tytymyty_1.jpg') 50% 0 no-repeat;
 }
@@ -794,3 +794,4 @@ fieldset[disabled] .btn-primary.active {
 .pace-inactive {
     display: none;
 }
+

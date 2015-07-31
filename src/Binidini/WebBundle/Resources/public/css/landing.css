@@ -798,3 +798,9 @@ fieldset[disabled] .btn-primary.active {
     display: none;
 }
 
+/* DENIS MANILO SECTION
+------------------------------------------------------*/
+.carrier-icon {
+    color: #009ee0;
+    font-size: 40px;
+}

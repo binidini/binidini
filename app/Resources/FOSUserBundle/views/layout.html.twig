@@ -8,7 +8,7 @@
     {% block meta %}{% endblock %}
     <title>
         {% block title %}
-            Титимити - p2p сервис доставки
+            Титимити - p2p сервис доставки - Вход
         {% endblock %}
     </title>
 
@@ -27,7 +27,9 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-                <img src="{{ asset('bundles/binidiniweb/img/logo.png') }}"/>
+                <img  src="{{ asset('bundles/binidiniweb/img/logo.png') }}"/>
+                <h1 class="logo-name">&#165;</h1>
+
             </div>
 
             {% for type, messages in app.session.flashbag.all() %}

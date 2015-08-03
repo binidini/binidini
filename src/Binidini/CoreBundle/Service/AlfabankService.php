@@ -70,6 +70,8 @@ class AlfabankService
 
         if ($res->getStatusCode() == 200) {
 
+            $this->logger->info("getOrderStatus: {$orderId}, response:{$res->getBody(true)}");
+
             $result = json_decode($res->getBody(true));
 
             return $result;
@@ -78,5 +80,23 @@ class AlfabankService
         $this->logger->critical("getOrderStatus: {$orderId}, status_code:{$res->getStatusCode()}");
 
         return (object) ['orderStatus' => $res->getStatusCode(), 'errorMessage' => 'Внутренняя ошибка'];
+    }
+
+    public function refund($orderId, $amount) {
+
+        $res = $this->alfabank->get("getOrderStatus.do?userName={$this->login}&password={$this->password}&orderId={$orderId}&amount={$amount}")->send();
+
+        if ($res->getStatusCode() == 200) {
+
+            $this->logger->info("Refund: {$orderId}, amount: {$amount}, response:{$res->getBody(true)}");
+
+            $result = json_decode($res->getBody(true));
+
+            return $result;
+        }
+
+        $this->logger->critical("Refund: {$orderId}, amount: {$amount}, status_code:{$res->getStatusCode()}");
+
+        return (object) ['errorCode' => $res->getStatusCode(), 'errorMessage' => 'Внутренняя ошибка'];
     }
 }

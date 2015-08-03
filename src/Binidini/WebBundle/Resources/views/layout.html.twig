@@ -57,7 +57,7 @@
                         </a>
                     </div>
                     <div class="logo-element">
-                        &#165;++
+                        &#165;+
                     </div>
                 </li>
                 <li {{ croute.is_current_route('fos_user_profile_show') }}>
@@ -110,7 +110,7 @@
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('binidini_admin_shipping') }}">Администрирование</a>
                         {% else %}
-                            <span class="m-r-sm text-muted welcome-message"><img src="{{ asset('bundles/binidiniweb/img/logo.png') }}"/></span>
+                            <span class="m-r-sm text-muted welcome-message">Титимити - Нам по пути</span>
                         {% endif %}
 
                     </li>

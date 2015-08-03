@@ -144,39 +144,40 @@ h1 {
 .header-back {
     height: 470px;
     width: 100%;
-    style="color: #ffffff"}
+}
+
 .header-back.one {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_1.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_1.jpg') 50% 0 no-repeat;
 }
 .header-back.two {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_2.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_2.jpg') 50% 0 no-repeat;
 }
 .header-back.three {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_3.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_3.jpg') 50% 0 no-repeat;
 }
 .header-back.four {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_4.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_4.jpg') 50% 0 no-repeat;
 }
 .header-back.five {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_5.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_5.jpg') 50% 0 no-repeat;
 }
 .header-back.six {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_6.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_6.jpg') 50% 0 no-repeat;
 }
 .header-back.seven {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_7.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_7.jpg') 50% 0 no-repeat;
 }
 .header-back.eight {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_8.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_8.jpg') 50% 0 no-repeat;
 }
 .header-back.nine {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_9.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_9.jpg') 50% 0 no-repeat;
 }
 .header-back.ten {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_10.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_10.jpg') 50% 0 no-repeat;
 }
 .header-back.eleven {
-    background: url('/bundles/binidiniweb/img/landing/tytymyty_11.jpg') 50% 0 no-repeat;
+    background: url('../img/landing/tytymyty_11.jpg') 50% 0 no-repeat;
 }
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -384,7 +385,7 @@ li.pricing-title {
     padding-top: 40px;
     padding-bottom: 60px;
     background-color: #1ab394;
-    background-image: url('/bundles/binidiniweb/img/landing/avatar_all.png');
+    background-image: url('../img/landing/avatar_all.png');
 }
 .big-icon {
     font-size: 56px;
@@ -393,7 +394,7 @@ li.pricing-title {
     color: #1ab394;
 }
 .contact {
-    background-image: url('/bundles/binidiniweb/img/landing/word_map.png');
+    background-image: url('../img/landing/word_map.png');
     background-position: 50% 50%;
     background-repeat: no-repeat;
     margin-top: 60px;

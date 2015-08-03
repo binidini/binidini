@@ -15,7 +15,6 @@
 {% endblock %}
 {% block actions %}
     <a class="btn btn-primary"  data-toggle="modal" data-target="#depositModal">Пополнить</a>
-    <a class="btn btn-primary"  data-toggle="modal" data-target="#withdrawalModal">Снять</a>
 {% endblock %}
 
 {% block content %}
@@ -70,10 +69,10 @@
                                     <tr>
                                         <th>№</th>
                                         <th>Тип</th>
-                                        <th>Метод</th>
                                         <th>Детализация</th>
                                         <th>Дата</th>
                                         <th class="text-right">Cумма</th>
+                                        <th>&nbsp;</th>
                                         <th class="text-right">Баланс</th>
                                     </tr>
                                     </thead>
@@ -82,13 +81,17 @@
                                         <tr>
                                             <td>{{ payment.id }}</td>
                                             <td>{{ payment.type | trans}}</td>
-                                            <td>{{ payment.method | trans}}</td>
                                             <td>{{ payment.details }}</td>
                                             <td>{{ payment.createdAt | date('d.m.y H:i') }}</td>
                                             <td>
                                                 <span class="pull-right">
                                                     {{ payment.amount | price }}
                                                 </span>
+                                            </td>
+                                            <td>
+                                                {% if payment.state == 'completed' %}
+                                                    <button class="btn btn-xs btn-primary"   data-href="#" data-toggle="modal" data-target="#returnModal">Вернуть на карту</button>
+                                                {% endif %}
                                             </td>
                                             <td>
                                                 <span class="pull-right">
@@ -118,7 +121,7 @@
     <div class="modal inmodal" id="depositModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <form action="{{ path('binidini_core_payment_new') }}" method="POST" class="form-horizontal" id="deposit">
-                <div class="modal-content animated bounceInRight">
+                <div class="modal-content animated flipInY">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">×</span>
@@ -155,36 +158,43 @@
         </div>
     </div>
 
-    <div class="modal inmodal" id="withdrawalModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal inmodal" id="returnModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
-            <form action="{{ path('binidini_core_payment_withdrawal') }}" method="POST" class="form-horizontal" id="deposit">
-                <div class="modal-content animated bounceInRight">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
-                                    class="sr-only">Закрыть</span></button>
-                        <h4 class="modal-title">Снятие со счета</h4>
-
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Сумма:</label>
-
-                            <div class="col-sm-3">
-                                <input type="number" min="100" max={{ app.user.balance }} step="1" class="form-control" name="amount" placeholder="руб"/>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <input type="submit" class="btn btn-primary" value="Снять"/>
-                            </div>
-                        </div>
-
-                    </div>
-
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Возврат на карту</h4>
+                    <small class="font-bold">Эквайринговый центр взимает комиссию 3.5%.</small>
                 </div>
-            </form>
-
+                <div class="modal-body">
+                    <p>
+                        <strong>Подтвердите, что Вы хотите вернуть деньги на карту.</strong> Обращаем внимание, что эквайринговый центр
+                        взимает комиссию <strong>3.5%</strong>. Вам на карту должна поступить сумма за вычетом комиссии.
+                        Всвязи с этим, мы рекомендуем оптимизировать количество пополнений и возвратов.
+                    </p>
+                    <p>
+                        Если у Вас возникли вопросы по порядку возврата, мы будем рады ответить на Ваши вопросы по телефону <b>+7 (952) 246-23-08</b>
+                        или адресу электронной почты: <a href="mailto:info@tytymyty.ru">info@tytymyty.ru</a>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <a class="pull-left" href="{{ path('binidini_rules_appendix_3')~'#1' }}" target="_blank">Правила Титимити</a>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Отменить</button>
+                    <a class="btn btn-primary btn-ok">Подтвердить</a>
+                </div>
+            </div>
         </div>
     </div>
+
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('#returnModal').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    </script>
+
+{% endblock %}

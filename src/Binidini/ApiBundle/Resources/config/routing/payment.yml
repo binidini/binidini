@@ -6,13 +6,20 @@ binidini_api_payment_index:
         _sylius:
             criteria:
                 user: ['expr:service("security.context").getToken().getUser().getId()']
+                state: ['completed']
             paginate: $paginate
             sortable: true
             sorting:
                 id: desc
             filterable: true
 
-binidini_api_shipping_show:
+binidini_api_payment_new:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: binidini_core.controller.payment:newAlfaAction
+
+binidini_api_payment_show:
     path: /{id}
     methods: [GET]
     defaults:

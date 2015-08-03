@@ -58,7 +58,8 @@ services:
 
     binidini.alfabank.client:
         class: %guzzle.client.class%
-        arguments: ['https://engine.paymentgate.ru/payment/rest/']
+#        arguments: ['https://engine.paymentgate.ru/payment/rest/']
+        arguments: ['https://test.paymentgate.ru/testpayment/rest/']
         tags:
             - { name: guzzle.client }
 

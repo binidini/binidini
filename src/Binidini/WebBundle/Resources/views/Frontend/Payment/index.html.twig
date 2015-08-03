@@ -89,8 +89,8 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                {% if payment.state == 'completed' %}
-                                                    <button class="btn btn-xs btn-primary"   data-href="#" data-toggle="modal" data-target="#returnModal">Вернуть на карту</button>
+                                                {% if (payment.state == 'completed' and payment.type == 'deposit') %}
+                                                    <button class="btn btn-xs btn-primary"   data-href="{{ path('binidini_core_payment_refund', {'order_id': payment.ref} ) }}" data-toggle="modal" data-target="#returnModal">Вернуть на карту</button>
                                                 {% endif %}
                                             </td>
                                             <td>
@@ -140,7 +140,7 @@
                             </div>
 
                             <div class="col-sm-4">
-                                <input type="submit" class="btn btn-primary" value="Пополнить счет"/>
+
                             </div>
                         </div>
                         <p>
@@ -149,7 +149,9 @@
                         </p>
                     </div>
                     <div class="modal-footer ">
-                        <a href="{{ path('binidini_rules_appendix_3')~'#1' }}" target="_blank">Правила Титимити</a>
+                        <a class="pull-left" href="{{ path('binidini_rules_appendix_3')~'#1' }}" target="_blank">Правила Титимити</a>
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Отменить</button>
+                        <input type="submit" class="btn btn-primary" value="Пополнить счет"/>
                     </div>
 
                 </div>

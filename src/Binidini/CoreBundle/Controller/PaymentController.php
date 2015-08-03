@@ -81,24 +81,22 @@ class PaymentController extends ResourceController
             $payment
                 ->setAmount($res->Amount / 100)
                 ->setBalance($user->getBalance() + $user->getHoldAmount() + $res->Amount / 100)
-                ->setDetails('Карта: ' . $res->Pan .', ' . substr($res->expiration, -2) . '/' . substr($res->expiration, 2,2) . ', ' . ucwords(strtolower($res->cardholderName)))
+                ->setDetails('Карта: ' . $res->Pan .', ' . substr($res->expiration, -2) . '/' . substr($res->expiration, 2,2) . ', ' . ucwords(strtolower($res->cardholderName .'.')))
                 ->setState(Payment::STATE_COMPLETED)
             ;
 
             $user->addBalance($res->Amount / 100);
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($payment);
             $em->flush();
             $this->flashHelper->setFlash('success', 'successPaymentInAlfa');
 
-
-            return $this->redirectHandler->redirectToIndex();
-
         } else {
             $this->flashHelper->setFlash('error', 'failPaymentInAlfa');
-            return $this->redirectHandler->redirectToIndex();
         }
+
+        return $this->redirectHandler->redirectToIndex();
+
     }
 
 
@@ -120,7 +118,6 @@ class PaymentController extends ResourceController
             ;
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($payment);
             $em->flush();
         }
 
@@ -128,40 +125,54 @@ class PaymentController extends ResourceController
         return $this->redirectHandler->redirectToIndex();
     }
 
-    public function refund(Request $request)
+    public function refundAction(Request $request)
     {
-
-    }
-
-    public function withdrawalAction(Request $request)
-    {
-        $amount = (int)$request->get('amount');
-        $orderNumber = uniqid();
         /** @var User $user */
         $user = $this->getUser();
-        if ($amount >= 100 && $amount <= $user->getBalance()) {
-            $payment = new Payment();
-            $payment
-                ->setUser($user)
-                ->setAmount($amount)
-                ->setFlagCreditDebit(-1)
-                ->setType(Payment::TYPE_WITHDRAWAL)
-                ->setMethod(Payment::METHOD_ALFABANK_PAYMENT)
-                ->setState(Payment::STATE_INIT)
-                ->setBalance($user->getBalance() + $user->getHoldAmount())
-                ->setDetails('Запрос обрабатывается')
-            ;
+        $orderId = $request->get('order_id');
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($payment);
-            $em->flush();
+        /** @var Payment $payment */
+        $payment = $this->getRepository()->findOneBy(['user'=>$user->getId(), 'ref' => $orderId]);
+        $res = $this->getAlfabank()->getOrderStatus($orderId);
 
+        if (isset($res) && isset($payment) && $payment->getHash() === $res->OrderNumber) {
 
-            $this->flashHelper->setFlash('success', 'successWithdrawal');
+            $refund = $this->getAlfabank()->refund($orderId, $payment->getAmount()*100);
+
+            if ($refund->ErrorCode === "0") {
+                $payment
+                    ->setDetails($payment->getDetails() . ' Сделан возврат.')
+                    ->setState(Payment::STATE_RETURNED)
+                ;
+                $user->addBalance(-$payment->getAmount());
+
+                $withdrawal = new Payment();
+                $withdrawal
+                    ->setUser($user)
+                    ->setAmount($payment->getAmount())
+                    ->setRef($payment->getHash())
+                    ->setFlagCreditDebit(-1)
+                    ->setType(Payment::TYPE_WITHDRAWAL)
+                    ->setMethod(Payment::METHOD_ALFABANK_PAYMENT)
+                    ->setState(Payment::STATE_COMPLETED)
+                    ->setBalance($user->getBalance() + $user->getHoldAmount())
+                    ->setDetails('Возврат по платежу №' . $payment->getId())
+                ;
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($withdrawal);
+                $em->flush();
+
+                $this->flashHelper->setFlash('success', 'successRefundInAlfa');
+            } else {
+                $this->flashHelper->setFlash('error', 'failRefundInAlfa');
+            }
+
+            if ($this->config->isApiRequest()) {
+                return new JsonResponse(json_decode($refund));
+            }
             return $this->redirectHandler->redirectToIndex();
-        } else {
-            $this->flashHelper->setFlash('error', 'errorWithdrawal');
-            return $this->redirectHandler->redirectToIndex();
+
         }
     }
 

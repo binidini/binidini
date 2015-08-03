@@ -61,6 +61,11 @@ class PaymentController extends ResourceController
             return $this->redirectHandler->redirect($paymentOrder->formUrl);
 
         } else {
+
+            if ($this->config->isApiRequest()) {
+                return new JsonResponse(['ErrorCode' => 101, 'ErrorMessage' => 'Сумма пополнения должна быть больше 100 рублей']);
+            }
+
             $this->flashHelper->setFlash('error', 'registerOrderInAlfa');
             return $this->redirectHandler->redirectToIndex();
         }
@@ -156,7 +161,7 @@ class PaymentController extends ResourceController
                     ->setMethod(Payment::METHOD_ALFABANK_PAYMENT)
                     ->setState(Payment::STATE_COMPLETED)
                     ->setBalance($user->getBalance() + $user->getHoldAmount())
-                    ->setDetails('Возврат по платежу №' . $payment->getId())
+                    ->setDetails('Возврат на карту по платежу №' . $payment->getId())
                 ;
 
                 $em = $this->getDoctrine()->getManager();

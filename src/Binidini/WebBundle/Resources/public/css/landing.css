@@ -149,35 +149,8 @@ h1 {
 .header-back.one {
     background: url('../img/landing/tyty.jpg') 50% 0 no-repeat;
 }
-.header-back.two {
+.header-back.zero {
     background: url('../img/landing/myty.jpg') 50% 0 no-repeat;
-}
-.header-back.three {
-    background: url('../img/landing/tytymyty_3.jpg') 50% 0 no-repeat;
-}
-.header-back.four {
-    background: url('../img/landing/tytymyty_4.jpg') 50% 0 no-repeat;
-}
-.header-back.five {
-    background: url('../img/landing/tytymyty_5.jpg') 50% 0 no-repeat;
-}
-.header-back.six {
-    background: url('../img/landing/tytymyty_6.jpg') 50% 0 no-repeat;
-}
-.header-back.seven {
-    background: url('../img/landing/tytymyty_7.jpg') 50% 0 no-repeat;
-}
-.header-back.eight {
-    background: url('../img/landing/tytymyty_8.jpg') 50% 0 no-repeat;
-}
-.header-back.nine {
-    background: url('../img/landing/tytymyty_9.jpg') 50% 0 no-repeat;
-}
-.header-back.ten {
-    background: url('../img/landing/tytymyty_10.jpg') 50% 0 no-repeat;
-}
-.header-back.eleven {
-    background: url('../img/landing/tytymyty_11.jpg') 50% 0 no-repeat;
 }
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */

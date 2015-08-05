@@ -17,8 +17,8 @@ binidini_api_user_index:
 
 
 binidini_api_user_update:
-    path: /
-    methods: [PUT, PATCH]
+    path: /{id}
+    methods: [POST]
     defaults:
         _controller: BinidiniApiBundle:Profile:edit
 

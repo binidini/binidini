@@ -9,9 +9,12 @@ services:
 
     binidini_user.profile.form.type:
         class: Binidini\CoreBundle\Form\Type\ProfileFormType
-        arguments: [%fos_user.model.user.class%]
+        arguments:
+            - @service_container
+            - %fos_user.model.user.class%
         tags:
             - { name: form.type, alias: binidini_user_profile }
+
 
     binidini.subscriber.user_registration:
         class: Binidini\CoreBundle\EventListener\RegistrationListener
@@ -140,6 +143,12 @@ services:
             class: Binidini\CoreBundle\Form\Type\GcmTokenType
             tags:
                 - { name: form.type, alias: binidini_core_gcm_token}
+
+    binidini.form.type.user:
+            class: Binidini\CoreBundle\Form\Type\UserType
+            tags:
+                - { name: form.type, alias: binidini_core_user}
+
 
     binidini.security.service:
         class: Binidini\CoreBundle\Service\SecurityService

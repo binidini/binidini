@@ -17,10 +17,10 @@ binidini_api_user_index:
 
 
 binidini_api_user_update:
-    path: /{id}
+    path: /
     methods: [PUT, PATCH]
     defaults:
-        _controller: binidini_core.controller.user:updateAction
+        _controller: BinidiniApiBundle:Profile:edit
 
 
 binidini_api_user_delete:

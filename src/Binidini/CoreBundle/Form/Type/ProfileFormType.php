@@ -3,10 +3,7 @@
 namespace Binidini\CoreBundle\Form\Type;
 
 use Binidini\CoreBundle\Entity\User;
-use Binidini\CoreBundle\Form\DataTransformer\MaskToBoolTransformer;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
 {

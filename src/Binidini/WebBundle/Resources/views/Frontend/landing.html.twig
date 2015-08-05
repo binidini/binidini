@@ -60,112 +60,85 @@
         <div class="item active">
             <div class="container">
                 <div class="carousel-caption blank">
+                    <div class="col-sm-12 wrapper wrapper-content animated fadeInUp">
+                        <ul class="notes row text-center">
+                            <li>
+                                <a class="navy-link" href="#">
+                                    <div class="sender">
 
-                    <div class="col-sm-5">
-                        <div class="well text-center" style="background-color: #1ab394; opacity: 0.85;padding:2px;">
-                            <h3>Нужно что-то отвезти?</h3>
-                            <hr/>
-                            <h4>
-                                Отправьте посылку с попутчиком, курьером или перевозчиком.
-                            </h4>
-                        </div>
-                    </div>
+                                        <h3>Нужно что-то отвезти?</h3>
+                                        <hr/>
+                                        <h4>Отправьте посылку с попутчиком, курьером или перевозчиком.</h4>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="navy-link" href="#">
+                                    <div class="carrier">
+                                        <h3>Зарабатывайте по пути!</h3>
+                                        <hr/>
+                                        <h4>
+                                            Получайте деньги, путешествуя по миру, по дороге домой, на работу и дачу.
+                                        </h4>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
 
-                    <div class="col-sm-offset-2 col-sm-5">
-                        <div class="well text-center"
-                             style="background-color: #009ee0; opacity: 0.85;padding: 2px;">
-                            <h3>Зарабатывайте по пути!</h3>
-                            <hr/>
-                            <h4>
-                                Получайте деньги, путешествуя по миру, по дороге домой, на работу и дачу.
-                            </h4>
-                        </div>
-                    </div>
+                        <ul class="notes row" id="orders">
 
-                    <div class="col-sm-12">
-                        <div class="wrapper wrapper-content animated fadeInUp">
-                            <ul class="notes" id="orders">
-
-                                <li>
-                                    <div>
+                            <li>
+                                <div>
+                                    <a href="#" class="navy-link">
                                         <b class="time">{{ "now"|date("d.m") }} 23:45</b>
                                         <b class="price"><i class="fa fa-rub"></i>300</b>
-                                        <h4>Букет красных роз</h4>
-                                        <small>Санкт-Петербург, ул. Маяковского, д. 22 | Санкт-Петербург, Нахимова ул., 5</small>
-                                        <a href="#" class="navy-link">Перевезу</a>
-                                        <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
+
+                                        <h3>Букет роз</h3>
+                                        <h4>Санкт-Петербург, ул. Маяковского, д. 22 </h4><h4> Санкт-Петербург, Нахимова
+                                            ул., 5</h4>
+                                    </a>
+                                    <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <a href="#" class="navy-link">
+
                                         <b class="time">{{ "now" | date_modify("+2 day") | date("d.m") }} 18:00</b>
                                         <b class="price"><i class="fa fa-rub"></i>1000</b>
-                                        <h4>Сотовый телефон LG G3</h4>
-                                        <small>Финляндия, Иматра, Lappeentie 44 | Россия, Санкт-Петербург, Парашютная ул., 52</small>
-                                        <a href="#" class="navy-link">Перевезу</a>
-                                        <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <b class="time">{{ "now" | date_modify("+1 day") | date("d.m") }} 11:00</b>
-                                        <b class="price"><i class="fa fa-rub"></i>250</b>
-                                        <h4>Пакет документов</h4>
-                                        <small>Санкт-Петербург, ул. Типанова, д. 3 | Санкт-Петербург, Приморское шоссе, 418</small>
-                                        <a href="#" class="navy-link">Перевезу</a>
-                                        <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <b class="time">{{ "now" | date_modify("+14 day") | date("d.m") }} 10:00</b>
-                                        <b class="price"><i class="fa fa-rub"></i>3000</b>
-                                        <h4>Фотоальбом бабушки</h4>
-                                        <small>Россия, Санкт-Петербург, ул. Гаккелевская, д. 22/1 | 515 Ninth Avenue, Мидтаун-Уэст, Нью-Йорк, NY 10018, США</small>
-                                        <a href="#" class="navy-link">Перевезу</a>
-                                        <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
+
+                                        <h3>Телефон LG G3</h3>
+                                        <h4>Финляндия, Иматра, Lappeentie 44 </h4><h4> Санкт-Петербург, Парашютная ул., 52</h4>
+                                    </a>
+                                    <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="row notes" id="orders2">
+                            <li>
+                                <div>
+                                    <a href="#" class="navy-link">
                                         <b class="time">{{ "now" | date_modify("+7 day") | date("d.m") }} 12:00</b>
                                         <b class="price"><i class="fa fa-rub"></i>750</b>
-                                        <h4>Старый диван</h4>
-                                        <small>Санкт-Петербург, Савушкина, д. 7 | Ленинградская обл., Тосно, Ленина пр., 5</small>
-                                        <a href="#" class="navy-link">Перевезу</a>
-                                        <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
+                                        <h3>Старый диван</h3>
+                                        <h4>Санкт-Петербург, Савушкина, д. 7 </h4><h4> Ленинградская обл., Тосно, Ленина пр., 5</h4>
+                                    </a>
+                                    <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <a href="#" class="navy-link">
                                         <b class="time">{{ "now" | date_modify("+1 day") | date("d.m") }} 14:30</b>
                                         <b class="price"><i class="fa fa-rub"></i>400</b>
-                                        <h4>Клетка с попугаями</h4>
-                                        <small>Санкт-Петербург, Невский пр., д. 22 | Санкт-Петербург, Ветеранов пр., 5</small>
-                                        <a href="#" class="navy-link">Перевезу</a>
-                                        <a href="#"  class="clear"><i class="fa fa-trash-o "></i></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <b class="time">{{ "now"|date("d.m") }} 23:30</b>
-                                        <b class="price"><i class="fa fa-rub"></i>450</b>
-                                        <h4>Корзина с продуктами</h4>
-                                        <small>Москва, Моховая, 15/1 | Москва, Скатертный пер., 13</small>
-                                        <a href="#" class="navy-link">Перевезу</a>
-                                        <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div >
-                                        <a href="#" class="navy-link">Наклей свой стикер</a>
-                                        <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                                        <h3>Документы</h3>
+                                        <h4>Санкт-Петербург, Невский пр., д. 22 </h4><h4> Санкт-Петербург, Ветеранов пр., 5</h4>
+                                    </a>
+                                    <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-
                 </div>
             </div>
             <div class="header-back zero"></div>
@@ -177,7 +150,7 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
-            <h1>Чтобы пожинать добро, надо его сеять.</h1>
+            <h1>Титимити - это народная доставка и карманные деньги.</h1>
             <p>
                 Ежедневно тысячи товаров ждут своего получателя. Миллионы людей едут из одной части города в другую.<br/>
                 Мы связываем эти два потока и делаем их взаимовыгодными.
@@ -286,7 +259,7 @@
         <div class="row ">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
-                <h1 >Титимити - это бесплатный сервис</h1>
+                <h1>Выгодные отличия Титимити</h1>
 
                 <p>Чтобы быть полезным людям, нужно ничем не пользоваться от них. (В. О. Ключевский)</p>
             </div>
@@ -517,6 +490,10 @@
 
 <script>
     $("#orders a.clear").click(function() {
+        $(this).parent().remove();
+        return false;
+    });
+    $("#orders2 a.clear").click(function() {
         $(this).parent().remove();
         return false;
     });

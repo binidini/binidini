@@ -128,11 +128,11 @@
                             <div class="col-sm-12">
                                 <div class="m-b-md pull-right">
 
-                                    <div class="share42init"
-                                         data-icons-file="../img/icons.png"
-                                         data-title="WANTED перевозчик, курьер, попутчик от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }} за {{ shipping.deliveryPrice }} руб."
-                                         data-image="{{ app.request.scheme ~ '://' ~ app.request.host ~ asset('bundles/binidiniweb/img/share.jpg') }}"
-                                         data-description="Крайнее время доставки: {{ shipping.deliveryDatetime | date('d.m.y H:i') }}."></div>
+                                    <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+                                    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="link" data-yashareQuickServices="vkontakte,twitter,moimir"
+                                         data-yashareTitle="WANTED перевозчик, курьер, попутчик от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }} за {{ shipping.deliveryPrice }} руб."
+                                         data-yashareDescription="Крайнее время доставки: {{ shipping.deliveryDatetime | date('d.m.y H:i') }}."
+                                         data-yashareImage="http://dev.tytymyty.ru/bundles/binidiniweb/img/share.png"></div>
 
                                 </div>
                              </div>
@@ -198,7 +198,6 @@
         <script src="{{ asset('bundles/binidiniweb/js/plugins/raty/jquery.raty.js') }}"></script>
         <script src="{{ asset('bundles/binidiniweb/js/review.js') }}"></script>
     {% endif %}
-    <script src="{{ asset('bundles/binidiniweb/js/share42.js') }}"></script>
     <script type="text/javascript">
         var successCallback = function (href) {
             if (href == '#tab-4') {

@@ -2625,6 +2625,11 @@ table.table-mail tr td {
   font-size: 12px;
 }
 /* BACKGROUNDS */
+.bg-tyty {
+  background-image: url('../img/landing/myty.jpg');
+  background-repeat: no-repeat;
+}
+
 .gray-bg {
   background-color: #f3f3f4;
 }
@@ -3071,6 +3076,7 @@ body.modal-open {
   margin-left: -150px;
   margin-top: -330px;
 }
+
 .logo-name {
   color: #e6e6e6;
   font-size: 180px;

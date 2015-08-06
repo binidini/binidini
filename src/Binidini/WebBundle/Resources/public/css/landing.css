@@ -931,8 +931,8 @@ ul.notes li div.sender {
     color: #ffffff;
     background: #1ab394;
     display: block;
-    height: 140px;
-    width: 370px;
+    height: 120px;
+    width: 240px;
     padding: 0.3em;
     -moz-box-shadow: 5px 5px 7px #212121;
     -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
@@ -948,8 +948,8 @@ ul.notes li div.carrier {
     color: #ffffff;
     background: #009ee0;
     display: block;
-    height: 140px;
-    width: 370px;
+    height: 120px;
+    width: 240px;
     padding: 0.3em;
     -moz-box-shadow: 5px 5px 7px #212121;
     -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);

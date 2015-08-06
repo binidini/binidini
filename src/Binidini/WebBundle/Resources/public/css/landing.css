@@ -909,6 +909,22 @@ ul.notes li div {
     -webkit-transition: -webkit-transform 0.15s linear;
 }
 
+ul.notes li div.red {
+    text-decoration: none;
+    color: #333;
+    background: #fcc;
+    display: block;
+    height: 190px;
+    width: 200px;
+    padding: 1em;
+    -moz-box-shadow: 5px 5px 7px #212121;
+    -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    -moz-transition: -moz-transform 0.15s linear;
+    -o-transition: -o-transform 0.15s linear;
+    -webkit-transition: -webkit-transform 0.15s linear;
+}
+
 ul.notes li div.sender {
     opacity: 0.8;
     text-decoration: none;

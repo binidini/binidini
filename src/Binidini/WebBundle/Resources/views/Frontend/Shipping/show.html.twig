@@ -131,7 +131,7 @@
                                     <div class="share42init"
                                          data-icons-file="../img/icons.png"
                                          data-title="WANTED перевозчик, курьер, попутчик от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }} за {{ shipping.deliveryPrice }} руб."
-                                         data-image="http://dev.tytymyty.ru/logo.jpg"
+                                         data-image="{{ app.request.scheme ~ '://' ~ app.request.host ~ asset('bundles/binidiniweb/img/share.jpg') }}"
                                          data-description="Крайнее время доставки: {{ shipping.deliveryDatetime | date('d.m.y H:i') }}."></div>
 
                                 </div>

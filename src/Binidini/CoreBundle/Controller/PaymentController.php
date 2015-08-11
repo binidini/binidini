@@ -26,7 +26,7 @@ class PaymentController extends ResourceController
 
         if ($amount >= 100) {
 
-            $paymentOrder = $this->getAlfabank()->registerOrder($amount*100, $hash, "Пополнение счета {$user->getId()}" );
+            $paymentOrder = $this->getAlfabank()->registerOrder($amount*100, $hash, "Пополнение счета {$user->getId()}", $this->config->isApiRequest());
 
             if (isset($paymentOrder->errorCode)) {
 
@@ -144,7 +144,7 @@ class PaymentController extends ResourceController
 
             $refund = $this->getAlfabank()->refund($orderId, $payment->getAmount()*100);
 
-            if ($refund->ErrorCode === "0") {
+            if ($refund->errorCode === "0") {
                 $payment
                     ->setDetails($payment->getDetails() . ' Сделан возврат.')
                     ->setState(Payment::STATE_RETURNED)

@@ -27,3 +27,21 @@ binidini_api_payment_show:
         _sylius:
             criteria:
                 user: ['expr:service("security.context").getToken().getUser().getId()']
+
+binidini_api_payment_refund:
+    path: /refund
+    methods: [GET, POST]
+    defaults:
+        _controller: binidini_core.controller.payment:refundAction
+
+binidini_api_payment_new_success:
+    path: /new/success
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.payment:depositAlfaSuccessAction
+
+binidini_api_payment_new_fail:
+    path: /new/fail
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.payment:depositAlfaFailAction

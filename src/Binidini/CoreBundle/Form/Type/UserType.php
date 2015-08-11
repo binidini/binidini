@@ -19,6 +19,37 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
+            ->add('firstName')
+            ->add('lastName')
+            ->add('patronymic')
+            ->add('companyName')
+            ->add('address')
+            ->add('type', 'choice',
+                [
+                    'choices' => [
+                        User::TYPE_INDIVIDUAL => 'Физическое лицо',
+                        User::TYPE_BUSINESS => 'Юридическое лицо',
+                    ],
+                    'multiple' => false,
+                    'expanded' => true,
+                    'required' => true,
+                ]
+            )
+            ->add('profileType', 'choice',
+                [
+                    'choices' => [
+                        User::PROFILE_TYPE_CARRIER_AND_SENDER => 'Отправитель и перевозчик',
+                        User::PROFILE_TYPE_CARRIER => 'Перевозчик',
+                        User::PROFILE_TYPE_SENDER => 'Отправитель',
+
+                    ],
+                    'multiple' => false,
+                    'expanded' => true,
+                    'required' => true,
+                ]
+            )
+            ->add('aboutMe', 'textarea', ['required' => false])
+            ->add('imgPath', 'file', ['required' => false, 'data_class' => null, 'mapped' => true])
             ;
     }
 

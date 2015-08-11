@@ -32,11 +32,12 @@
 
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
-                    <div>
-                        <h3>{{ message }}</h3>
-                    </div>
+                    <h3>
+                        {{ message }}
+                    </h3>
                 {% endfor %}
             {% endfor %}
+
 
             {% block fos_user_content %}{% endblock %}
 

@@ -26,7 +26,7 @@ class PaymentController extends ResourceController
 
         if ($amount >= 100) {
 
-            $paymentOrder = $this->getAlfabank()->registerOrder($amount*100, $hash, "Пополнение счета {$user->getId()}", $this->config->isApiRequest());
+            $paymentOrder = $this->getAlfabank()->registerOrder($amount*100, $hash, "Пополнение счета {$user->getId()}");
 
             if (isset($paymentOrder->errorCode)) {
 
@@ -73,16 +73,14 @@ class PaymentController extends ResourceController
 
     public function depositAlfaSuccessAction(Request $request)
     {
-        /** @var User $user */
-        $user = $this->getUser();
         $orderId = $request->get('orderId');
 
-
-        $payment = $this->getRepository()->findOneBy(['user'=>$user->getId(), 'ref' => $orderId]);
+        $payment = $this->getRepository()->findOneBy(['ref' => $orderId]);
+        $user = $payment->getUser();
 
         $res = $this->getAlfabank()->getOrderStatus($orderId);
 
-        if (isset($res->OrderStatus) && $res->OrderStatus == 2 && isset($payment) && $payment->getHash() === $res->OrderNumber) {
+        if (isset($res->OrderStatus) && $res->OrderStatus == 2 && isset($payment) && $payment->getHash() === $res->OrderNumber && $payment->getState() === Payment::STATE_INIT) {
             $payment
                 ->setAmount($res->Amount / 100)
                 ->setBalance($user->getBalance() + $user->getHoldAmount() + $res->Amount / 100)
@@ -107,15 +105,14 @@ class PaymentController extends ResourceController
 
     public function depositAlfaFailAction(Request $request)
     {
-        /** @var User $user */
-        $user = $this->getUser();
         $orderId = $request->get('orderId');
 
+        $payment = $this->getRepository()->findOneBy(['ref' => $orderId]);
+        $user = $payment->getUser();
 
-        $payment = $this->getRepository()->findOneBy(['user'=>$user->getId(), 'ref' => $orderId]);
         $res = $this->getAlfabank()->getOrderStatus($orderId);
 
-        if (isset($res) && isset($payment) && $payment->getHash() === $res->OrderNumber) {
+        if (isset($res) && isset($payment) && $payment->getHash() === $res->OrderNumber && $payment->getState() === Payment::STATE_INIT) {
             $payment
                 ->setBalance($user->getBalance() + $user->getHoldAmount())
                 ->setDetails($res->ErrorMessage .' ('. $res->ErrorCode . '). ' . 'Карта: ' . $res->Pan .', ' . substr($res->expiration, -2) . '/' . substr($res->expiration, 2,2) . ', ' . ucwords(strtolower($res->cardholderName)))

@@ -69,7 +69,6 @@ services:
     binidini.alfabank_service:
         class: Binidini\CoreBundle\Service\AlfabankService
         arguments:
-            - @security.context
             - @router
             - @logger
             - @binidini.alfabank.client

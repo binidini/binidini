@@ -40,6 +40,8 @@ security:
         - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/static/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/payload, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/payment/new/success$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/payment/new/fail$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/, role: ROLE_ADMIN }
         - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }
         - { path: ^/, role: ROLE_USER}

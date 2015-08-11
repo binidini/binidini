@@ -3,12 +3,14 @@
 namespace Binidini\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 /**
  * Payment
  *
  * @ORM\Table(name = "payment")
  * @ORM\Entity
+ * @ExclusionPolicy("all")
  */
 class Payment
 {
@@ -32,6 +34,7 @@ class Payment
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -39,6 +42,7 @@ class Payment
      * @var integer
      *
      * @ORM\Column(name="amount", type="integer")
+     * @Expose
      */
     private $amount;
 
@@ -46,6 +50,7 @@ class Payment
      * @var integer
      *
      * @ORM\Column(name="balance", type="integer", nullable=true)
+     * @Expose
      */
     private $balance;
     
@@ -53,6 +58,7 @@ class Payment
      * @var integer
      *
      * @ORM\Column(name="flag_credit_debit", type="integer")
+     * @Expose
      */
     private $flagCreditDebit;
 
@@ -60,6 +66,7 @@ class Payment
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=64)
+     * @Expose
      */
     private $type;
 
@@ -67,6 +74,7 @@ class Payment
      * @var string
      *
      * @ORM\Column(name="method", type="string", length=64)
+     * @Expose
      */
     private $method;
 
@@ -81,6 +89,7 @@ class Payment
      * @var string
      *
      * @ORM\Column(name="state", type="string", length=32)
+     * @Expose
      */
     private $state;
 
@@ -88,6 +97,7 @@ class Payment
      * @var string
      *
      * @ORM\Column(name="ref", type="string", length=127, nullable=true)
+     * @Expose
      */
     private $ref;
 
@@ -95,6 +105,7 @@ class Payment
      * @var string
      *
      * @ORM\Column(name="detail", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $details;
 
@@ -108,6 +119,7 @@ class Payment
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
+     * @Expose
      */
     private $createdAt;
 
@@ -115,6 +127,7 @@ class Payment
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     * @Expose
      */
     private $updatedAt;
 

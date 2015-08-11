@@ -32,8 +32,8 @@
 
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
-                    <div class="text-{{ type }}">
-                        {{ message }}
+                    <div>
+                        <h3>{{ message }}</h3>
                     </div>
                 {% endfor %}
             {% endfor %}

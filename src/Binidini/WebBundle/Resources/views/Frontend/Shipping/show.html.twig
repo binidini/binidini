@@ -12,6 +12,7 @@
     {% endblock %}
 {% endif %}
 
+
 {% block pageheader %}Детализация заказа{% endblock %}
 {% block actions %}
     {% if app.user.id == shipping.user.id and shipping.state == 'new' %} <a
@@ -134,7 +135,6 @@
                                          data-yashareDescription="{{ shipping.name }}. Крайнее время доставки: {{ shipping.deliveryDatetime | date('d.m.y H:i') }}."
                                          data-yashareImage="http://dev.tytymyty.ru/bundles/binidiniweb/img/ty.png"
                                          data-yashareLink="http://dev.tytymyty.ru/static/landing"></div>
-
                                 </div>
                              </div>
                         </div>

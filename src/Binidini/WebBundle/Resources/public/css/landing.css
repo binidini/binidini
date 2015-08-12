@@ -796,10 +796,11 @@ fieldset[disabled] .btn-primary.active {
 ul.notes li,
 ul.tag-list li {
     list-style: none;
+    font-family: Helvetica;
 }
 ul.notes li h4 {
-    margin-top: 20px;
-    font-size: 16px;
+    margin-top: 10px;
+    font-size: 18px;
 }
 ul.notes li div {
     text-decoration: none;

@@ -44,5 +44,6 @@ security:
         - { path: ^/payment/new/fail$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/, role: ROLE_ADMIN }
         - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }
+        - { path: ^/media, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
         - { path: ^/, role: ROLE_USER}
 

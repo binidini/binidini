@@ -61,11 +61,11 @@ class EditUserProfileListener implements EventSubscriberInterface
             $fileName = uniqid();
             $content = base64_decode($user->imgBase64);
 
-            $path = $this->rootDir . "/../web/media/img/{$fileName}";
+            $path = $this->rootDir . "/../web/media/img/{$fileName}.jpg";
             file_put_contents($path, $content);
 
 
-            $uploadedFile = new UploadedFile($path, $user->fileName, null, null, null, true);
+            $uploadedFile = new UploadedFile($path, "{$fileName}.jpg", null, null, null, true);
             $this->uploadableManager->markEntityToUpload($user, $uploadedFile);
 
             try {

@@ -69,7 +69,6 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('smsShippingRefuseNotification', 'checkbox', ['required' => false])
             ->add('smsShippingDisputeNotification', 'checkbox', ['required' => false])
             ->add('smsShippingDebateNotification', 'checkbox', ['required' => false])
-
             ->add('emailBidCreateNotification', 'checkbox', ['required' => false])
             ->add('emailBidAcceptNotification', 'checkbox', ['required' => false])
             ->add('emailBidAgreeNotification', 'checkbox', ['required' => false])
@@ -81,7 +80,6 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('emailShippingRefuseNotification', 'checkbox', ['required' => false])
             ->add('emailShippingDisputeNotification', 'checkbox', ['required' => false])
             ->add('emailShippingDebateNotification', 'checkbox', ['required' => false])
-
             ->add('gcmBidCreateNotification', 'checkbox', ['required' => false])
             ->add('gcmBidAcceptNotification', 'checkbox', ['required' => false])
             ->add('gcmBidAgreeNotification', 'checkbox', ['required' => false])
@@ -92,8 +90,12 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('gcmShippingCompleteNotification', 'checkbox', ['required' => false])
             ->add('gcmShippingRefuseNotification', 'checkbox', ['required' => false])
             ->add('gcmShippingDisputeNotification', 'checkbox', ['required' => false])
-            ->add('gcmShippingDebateNotification', 'checkbox', ['required' => false])
-        ;
+            ->add('gcmShippingDebateNotification', 'checkbox', ['required' => false]);
+        if ($this->routeName == "binidini_api_user_update") {
+            $builder
+                ->add('imgBase64', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true])
+                ->add('fileName', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true]);
+        }
 
     }
 
@@ -102,7 +104,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
         if ($this->routeName == "binidini_api_user_update") {
             $resolver->setDefaults(array(
                 'data_class' => $this->class,
-                'intention'  => 'profile',
+                'intention' => 'profile',
                 'csrf_protection' => false
             ));
         } else {

@@ -109,6 +109,9 @@ class User extends BaseUser
      */
     private $imgPath;
 
+    public $imgBase64;
+    public $fileName;
+
     /**
      * @ORM\OneToMany(targetEntity="Shipping", mappedBy="user")
      */
@@ -1859,4 +1862,5 @@ class User extends BaseUser
     {
         $this->salt = $salt;
     }
+
 }

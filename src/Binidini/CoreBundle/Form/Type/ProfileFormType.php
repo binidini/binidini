@@ -26,7 +26,8 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
         $builder
             ->add('firstName')
             ->add('lastName')
-            ->add('patronymic');
+            ->add('patronymic')
+            ->add('aboutMe', 'textarea', ['required' => false]);
         if ($this->routeName == "binidini_api_user_update") {
             $builder
                 ->add('imgBase64', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true])
@@ -60,7 +61,6 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
                         'required' => true,
                     ]
                 )
-                ->add('aboutMe', 'textarea', ['required' => false])
                 ->add('imgPath', 'file', ['required' => false, 'data_class' => null, 'mapped' => true])
                 // Блок настроек оповещения
                 ->add('smsBidCreateNotification', 'checkbox', ['required' => false])

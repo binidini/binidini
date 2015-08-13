@@ -10,6 +10,7 @@ use FOS\UserBundle\Event\GetResponseUserEvent;
 use Gedmo\Exception\UploadableException;
 use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -22,13 +23,15 @@ class EditUserProfileListener implements EventSubscriberInterface
     private $email;
     private $security;
     private $route;
+    private $rootDir;
 
-    public function __construct(UploadableManager $uploadableManager, EntityManager $doctrine, SecurityContextInterface $security, RouterInterface $route)
+    public function __construct(UploadableManager $uploadableManager, EntityManager $doctrine, SecurityContextInterface $security, RouterInterface $route, $rootDir)
     {
         $this->uploadableManager = $uploadableManager;
         $this->doctrineManager = $doctrine;
         $this->security = $security;
         $this->route = $route;
+        $this->rootDir = $rootDir;
     }
 
     public static function getSubscribedEvents()
@@ -49,6 +52,29 @@ class EditUserProfileListener implements EventSubscriberInterface
             $user->setEmailVerified(false);
         }
         $this->doctrineManager->persist($user);
+        if (!empty($user->imgBase64)) {
+
+            $file = tmpfile();
+            if ($file === false)
+                throw new \Exception('File can not be opened.');
+
+            $fileName = uniqid();
+            $content = base64_decode($user->imgBase64);
+
+            $path = $this->rootDir . "/../web/media/img/{$fileName}.jpg";
+            file_put_contents($path, $content);
+
+
+            $uploadedFile = new UploadedFile($path, "{$fileName}.jpg", null, null, null, true);
+            $this->uploadableManager->markEntityToUpload($user, $uploadedFile);
+
+            try {
+                $this->doctrineManager->flush();
+            } catch (UploadableException $e) {
+                $user->revertImage();
+            }
+
+        }
         if ($user->imgIsChanged()) {
             $fileInfo = $user->getImgPath();
             $this->uploadableManager->markEntityToUpload($user, $fileInfo);

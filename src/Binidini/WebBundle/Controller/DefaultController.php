@@ -30,6 +30,7 @@ class DefaultController extends Controller
         $user = $this->getUser();
 
         if ($user && $user->hasRole('ROLE_USER')) {
+
             return $this->redirect($this->generateUrl('binidini_search_shipment_index'));
         }
 

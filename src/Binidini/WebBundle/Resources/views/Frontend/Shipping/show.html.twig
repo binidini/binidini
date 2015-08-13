@@ -14,7 +14,9 @@
 
 
 {% block pageheader %}Детализация заказа{% endblock %}
+
 {% block actions %}
+{% if app.user is not empty %}
     {% if app.user.id == shipping.user.id and shipping.state == 'new' %} <a
             href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}"
             class="btn btn-primary">Отменить</a> {% endif %}
@@ -52,6 +54,7 @@
                class="btn btn-primary">Аннулировать</a>
         {% endif %}
     {% endif %}
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -93,7 +96,7 @@
                                     <dt>Отправитель:</dt>
                                     <dd>
                                         <a href="{{ path('binidini_core_profile_show', {'id': shipping.sender.id}) }}">{{ shipping.sender.name }}</a>
-                                        {% if (shipping.carrier is not empty) and (shipping.carrier.id == app.user.id) %}
+                                        {% if (shipping.carrier is not empty) and (app.user is not empty) and (shipping.carrier.id == app.user.id) %}
                                             {{ shipping.sender.mobilephone }}
                                         {% endif %}
                                     </dd>
@@ -101,7 +104,7 @@
                                     <dd>
                                         {% if shipping.carrier is not empty %}
                                                 <a href="{{ path('binidini_core_profile_show', {'id': shipping.carrier.id} ) }}">{{ shipping.carrier.name }}</a>
-                                                {% if shipping.sender.id == app.user.id %}
+                                                {% if (app.user is not empty) and (shipping.sender.id == app.user.id) %}
                                             {{ shipping.carrier.mobilephone }}
                                         {% endif %}
                                             {% endif %}

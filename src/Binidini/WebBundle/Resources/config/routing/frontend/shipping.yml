@@ -24,7 +24,7 @@ binidini_core_shipping_index:
 
 
 binidini_core_shipping_show:
-    path: /shipping/{id}
+    path: /public/shipping/{id}
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.shipping:showAction
@@ -55,7 +55,7 @@ binidini_core_shipping_state_transition:
         _controller: binidini_core.controller.shipping:updateStateAction
 
 binidini_core_shipping_history_index:
-    path: /shipping/{id}/history
+    path: /public/shipping/{id}/history
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.shipping:historyIndexAction

@@ -49,15 +49,9 @@ class ShippingController extends ResourceController
         $usersInHistory = [];
         /** @var $userManager UserManager */
         $userManager = $this->get('fos_user.user_manager');
-        $currentUser = $user = $this->getUser();
         foreach ($entries as $key => $entry) {
             if (!isset($usersInHistory[$entry->getUsername()])) {
-                if ($entry->getUsername() == $currentUser->getId()) {
-                    $user = $currentUser;
-                } else {
-                    $user = $userManager->findUserBy(['id' => $entry->getUsername()]);
-                }
-                $usersInHistory[$entry->getUsername()] = $user;
+                $usersInHistory[$entry->getUsername()] = $userManager->findUserBy(['id' => $entry->getUsername()]);;
             }
         }
         $data = [

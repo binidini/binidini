@@ -35,7 +35,7 @@ fos_oauth_server_authorize:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
 
 github_webhook:
-    path: /payload
+    path: /public/payload
     methods: [GET, POST]
     defaults:
         _controller: BinidiniApiBundle:Github:push

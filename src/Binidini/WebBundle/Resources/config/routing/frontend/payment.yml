@@ -27,13 +27,13 @@ binidini_core_payment_refund:
         _controller: binidini_core.controller.payment:refundAction
 
 binidini_core_payment_new_success:
-    path: /payment/new/success
+    path: /public/payment/new/success
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.payment:depositAlfaSuccessAction
 
 binidini_core_payment_new_fail:
-    path: /payment/new/fail
+    path: /public/payment/new/fail
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.payment:depositAlfaFailAction

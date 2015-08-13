@@ -1,6 +1,3 @@
-# This file is part of the Binidini project.
-# (c) Denis Manilo
-
 binidini_api_shipping_bid_index:
     path: /shipping/{shipping_id}/bid
     methods: [GET]
@@ -9,6 +6,22 @@ binidini_api_shipping_bid_index:
         _sylius:
             criteria:
                 shipping: $shipping_id
+            paginate: false
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+
+binidini_api_shipping_bid_for_accep:
+    path: /shipping/{shipping_id}/bid/accepted
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.bid:indexAction
+        _sylius:
+            criteria:
+                shipping: $shipping_id
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+                state: accepted
             paginate: false
             sortable: true
             sorting:

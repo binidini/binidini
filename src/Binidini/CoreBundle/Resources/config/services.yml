@@ -192,7 +192,7 @@ services:
 
     binidini.listener.edit_user_profile:
         class: Binidini\CoreBundle\EventListener\EditUserProfileListener
-        arguments: [@stof_doctrine_extensions.uploadable.manager, @doctrine.orm.entity_manager, @security.context, @router]
+        arguments: [@stof_doctrine_extensions.uploadable.manager, @doctrine.orm.entity_manager, @security.context, @router, %kernel.root_dir%]
         tags:
             - { name: kernel.event_listener, event: fos_user.profile.edit.completed }
             - { name: kernel.event_listener, event: fos_user.profile.edit.success }

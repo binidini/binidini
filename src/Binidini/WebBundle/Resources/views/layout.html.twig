@@ -44,19 +44,26 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <img alt="image" class="img-circle" src="{{ app.user.imgPath|imagine_filter('photo48x48') }}"/>
-                        <a href="{{ path('fos_user_profile_show') }}">
-                            <span class="clear">
-                                <span class="block m-t-xs"> <strong
-                                            class="font-bold">{{ app.user.name }}</strong></span>
-                            </span>
-                            <span class="text-muted text-xs block">
-                                Счет:
-                                {{ app.user.balance }}{% if app.user.holdAmount > 0 %}/{{ app.user.holdAmount }}{% endif %}
-                                руб.
+                        {% if (app.user is not empty)  %}
+                            <img alt="image" class="img-circle" src="{{ app.user.imgPath|imagine_filter('photo48x48') }}"/>
+                            <a href="{{ path('fos_user_profile_show') }}">
+                                <span class="clear">
+                                    <span class="block m-t-xs"> <strong
+                                                class="font-bold">{{ app.user.name }}</strong></span>
+                                </span>
+                                <span class="text-muted text-xs block">
+                                    Счет:
+                                    {{ app.user.balance }}{% if app.user.holdAmount > 0 %}/{{ app.user.holdAmount }}{% endif %}
+                                    руб.
 
-                            </span>
-                        </a>
+                                </span>
+                            </a>
+                        {% else %}
+                            <a href="{{ path('binidini_home') }}">
+                                <img alt="Титимити" src="{{ asset('bundles/binidiniweb/img/tm.png') }}"/>
+                                <span class="clear"><span class="block m-t-xs"><strong class="font-bold">Нам по пути</strong></span></span>
+                            </a>
+                        {% endif %}
                     </div>
                     <div class="logo-element">
                         &#165;++
@@ -74,12 +81,12 @@
                         </span>
                     </a>
                 </li>
-                {% if app.user.isCarrier %}
+                {% if (app.user is empty) or app.user.isCarrier %}
                 <li {{ croute.is_current_route('binidini_core_carrier_index') }}>
                     <a href="{{ path('binidini_core_carrier_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-truck"></i> <span class="nav-label">Мои перевозки</span></a>
                 </li>
                 {% endif %}
-                {% if app.user.isSender %}
+                {% if (app.user is empty) or app.user.isSender %}
                 <li {{ croute.is_current_route('binidini_core_shipping_index') }}>
                     <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-archive"></i> <span class="nav-label">Мои отправки</span></a>
                 </li>
@@ -116,12 +123,20 @@
                         {% endif %}
 
                     </li>
-                    {% render path('binidini_user_bids_accepted') %}
-                    {% render path('binidini_sender_bids_new') %}
+                    {% if (app.user is not empty) %}
+                        {% render path('binidini_user_bids_accepted') %}
+                        {% render path('binidini_sender_bids_new') %}
+                    {% endif %}
                     <li>
-                        <a href="{{ path("fos_user_security_logout") }}">
-                            <i class="fa fa-sign-out"></i> Выход
-                        </a>
+                        {% if (app.user is not empty)  %}
+                            <a href="{{ path("fos_user_security_logout") }}">
+                                <i class="fa fa-sign-out"></i> Выход
+                            </a>
+                        {% else %}
+                            <a href="{{ path("fos_user_security_login") }}">
+                                <i class="fa fa-sign-in"></i> Вход
+                            </a>
+                        {% endif %}
                     </li>
                 </ul>
 

@@ -8,7 +8,7 @@ binidini_home:
 
 binidini_static:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/static.yml
-    prefix: /static
+    prefix: /public
 
 binidini_shipping:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/shipping.yml

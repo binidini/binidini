@@ -28,7 +28,7 @@ binidini_core_user_to_review_index:
             template: BinidiniWebBundle:Frontend/Review:user_to_index.html.twig
 
 binidini_core_shipping_review_index:
-    path: /shipping/{shipping_id}/reviews/
+    path: /public/shipping/{shipping_id}/reviews/
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.review:indexAction

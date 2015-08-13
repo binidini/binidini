@@ -1,5 +1,5 @@
 binidini_core_shipping_message_index:
-    path: /shipping/{shipping_id}/messages/
+    path: /public/shipping/{shipping_id}/messages/
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.message:indexAction

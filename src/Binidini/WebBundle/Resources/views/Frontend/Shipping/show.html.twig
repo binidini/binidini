@@ -1,13 +1,13 @@
 {% extends 'BinidiniWebBundle::layout.html.twig' %}
 
 {% block meta %}
-    <meta property="og:title" content="{{ shipping.pickupAddress }} - {{ shipping.deliveryAddress }} WANTED перевозчик за {{ shipping.deliveryPrice }} руб." />
+    <meta property="og:title" content="WANTED перевозчик, курьер, попутчик" />
     <meta property="og:site_name" content="Титимити - народный сервис доставки"/>
     <meta property="og:description" content="Титимити нужен перевозчик, курьер, попутчик.
     Необходимо перевезти '{{ shipping.name }}' за {{ shipping.deliveryPrice }} руб. - от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }}.
     Крайнее время доставки: {{ shipping.deliveryDatetime | date('d.m.y H:i') }}." />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="http://dev.tytymyty.ry/bundles/binidiniweb/tytymyty.jpg" />
+    <meta property="og:image" content="http://dev.tytymyty.ru/bundles/binidiniweb/img/tytymyty.jpg" />
 {% endblock %}
 
 {% block title %}

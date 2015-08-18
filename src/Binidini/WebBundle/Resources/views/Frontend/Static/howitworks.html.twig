@@ -1,0 +1,251 @@
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
+
+{% block title %}
+    Как работает сервис Титимити
+{% endblock %}
+
+{% block pageheader %}Вопросы и ответы{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content animated fadeInUp">
+
+                <div class="faq-item">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a data-toggle="collapse" href="#faq1" class="faq-question collapsed" aria-expanded="false" name="faq">Как отправить что-либо ?</a>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="small font-bold">Отправляйте быстро и дешево!</span>
+                            <div class="tag-list">
+                                <span class="tag-item">Отправителям</span>
+                                <span class="tag-item">Интернет магазинам</span>
+                                <span class="tag-item">Частным лицам</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-right">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="faq1" class="panel-collapse faq-answer collapse" aria-expanded="false" style="height: 32px;">
+                                
+                                <img class="img-responsive" src="{{ asset('bundles/binidiniweb/img/elephant_sender_carrier.jpg') }}" align="right">
+
+                                <h3>Создание заказа</h3>
+                                <p>
+                                    На странице <strong>Мои отправки</strong> или <strong>Заказы</strong> нажмите кнопку <a href="{{ path('binidini_core_shipping_new') }}" class="btn btn-primary btn-sm btn">Новый заказ</a>.
+                                </p>
+                                <p>
+                                    Заполните форму заказа. Укажите информацию о месте отправления и доставки груза, стоимость перевозки и крайнее время доставки заказа.
+                                    При необходимости добавьте информацию о размере и весе заказа, а также любую другую информацию важную для перевозчика.
+                                    Чем более полную информацию вы предоставите в задании, тем быстрее найдется перевозчик для вашего груза!
+                                </p>
+                                <h3>Установите страховку</h3>
+                                <p>
+                                    Вы можете установить страхование вашего зазака от невыполнения или порчи груза. Это не обязательно, но мы рекомендуем,
+                                    особенно если ценность груза высока. Вы сами устанавливаете ставку страхования. Сумма страхования будет заморожена на счете перевозчика
+                                    и зачислена на ваш счет в случае, если исполнитель окажется недобросовестным. Имейте ввиду, что на ваш заказ смогут откликнуться
+                                    только курьеры, которые внесли депозит банковской картой. Данная опция не обязательна.
+                                </p>
+                                <h3>Укажите, что оплата гарантирована</h3>
+                                <p>
+                                    Дайте знать курьерам, что вы добросовестный отправитель. Для этого внесите депозит в размере стоимости отправки и выберите опцию <strong>Гарантия</strong>.
+                                    Сумма стоимости перервозки будет запорожена на вашем счете, пока заказ не будет выполнен. После расчета с перевозчиком гарантия возвращается на счет
+                                    отправителя. Данная опция не обязательна. Возможно, вы испольуете предоплату, оплату по доставке в пункте назначения или другой вариант.
+                                    Укажите метод оплаты в деталях заказа или договоритесь непосредственно с перевозчиком.
+                                </p>
+                                <h3>Предложите друзьям заработать</h3>
+
+                                <p>
+                                    Как только задание создано, перевозчики, находящиеся поблизости от вашего маршрута, получат уведомление.
+                                    Не ждите, пока они заметят ваше задание, поделитесь Вашим заказом со своими друзьями в Вконтакте, Facebook и Twitter.
+                                </p>
+                                <h3>Принимайте заявки на исполнение</h3>
+                                <p>
+                                    Заказ опубликован в системе и все активные перевозчики видят его и могут направить вам заявку на исполнение.
+                                    Чем лучше вы описали ваш заказ, тем больше заявок на исполнение вы получите.
+                                </p>
+                                <h3>Обсудите подробности</h3>
+                                <p>
+                                    С каждым перевозчиком вы можете обсудить подробности выполнения вашего заказа, время и условия доставки, особенности груза, оплату и любые другие вопросы, используя сообщения в нашей системе.
+                                </p>
+                                <h3>Договоритесь о цене</h3>
+                                <p>
+                                    Вы устанавливаете свою ставку за выполнение заказа, перевозчик может с ней согласиться или предложить свой вариант.
+                                    Договаривайтесь о цене, либо ожидайте, пока на ваше задание найдется исполнитель, который согласится с вашей ставкой. Выбор за вами!
+                                </p>
+                                <h3>Оплата выполнения</h3>
+                                <p>
+                                    Все финансовые расчеты между отправителями и перевозчиками ведутся без участия нашей системы. Вы сами выбираете способ и форму оплаты.
+                                    Переведите заказ в статус <strong>Оплачен</strong> после расчета с перевозчиком.
+                                </p>
+                                <h3>Оцените выполненную работу</h3>
+                                <p>
+                                    Остались довольны выполненной работой? Поставьте оценку перевозчику, это поможет ему получать больше заказов на доставку. В свою очередь перевозчик может оценить вас как отправителя. Цените труд людей, которые помогают вам!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a data-toggle="collapse" href="#faq2" class="faq-question collapsed" aria-expanded="false">Как получить заказ ?</a>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="small font-bold">Зарабатывайте по пути!</span>
+                            <div class="tag-list">
+                                <span class="tag-item">Перевозчикам</span>
+                                <span class="tag-item">Курьерам</span>
+                                <span class="tag-item">Попутчикам</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-right">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="faq2" class="panel-collapse faq-answer collapse" aria-expanded="false" style="height: 32px;">
+                                <img class="img-responsive" src="{{ asset('bundles/binidiniweb/img/elephant_carrier.jpg') }}" align="right">
+
+                                <h3>Поиск заказов</h3>
+                                <p>
+                                    На странице <strong>Заказы</strong> Вы получаете доступ к списку всех заданий в системе.
+                                    Система сама оценит вашу геолокацию и предложит самые удобные для вас задания.
+                                    Также вы можете самостоятельно искать заказы по адресу, чтобы находить задания в соответствии с вашими планами, временем и возможностями.
+                                </p>
+
+                                <h3>Заявка отправителю</h3>
+                                <p>
+                                    Выберете интересующий вас заказ и нажмите «Принять».
+                                    Ваша заявка на выполнение поступит отправителю. Обратите внимание на условия выполнения задания и сумму страховки.
+                                    Для выполнения ответственных заданий защищенных страховой суммы вам необходимо иметь на счету достаточно средств.
+                                </p>
+
+                                <h3>Торгуйтесь!</h3>
+                                <p>
+                                    С помощью сообщений вы можете выяснить все подробности доставки и повлиять на цену.
+                                    Если заявок от перевозчиков много – назначьте более выгодную цену на перевозку и отправитель выберет именно вас!
+                                    Также вы можете назначить свою цену, изменив ее и в большую сторону.
+                                </p>
+
+                                <h3>По рукам!</h3>
+                                <p>
+                                    После подтверждения вашей заявки отправителем приступайте к выполнению задания и начинайте зарабатывать!
+                                </p>
+
+                                <h3>Оплата выполнения</h3>
+                                <p>
+                                    Все финансовые расчеты между отправителями и перевозчиками ведутся без участия нашей системы. Вы сами выбираете способ и форму оплаты.
+                                </p>
+
+                                <h3>Оцените отправителя</h3>
+                                <p>
+                                    Вам было приятно работать с отправителем? Поставьте ему оценку, это поможет другим перевозчикам узнать о его благонадежности. В свою очередь отправитель может оценить вас как перевозчика и повлиять на ваш рейтинг в системе.
+                                </p>
+                                <h3>Зарабатывайте деньги и репутацию.</h3>
+                                <p>
+                                    Система рейтингов ТитиМити позволяет фиксировать все выполненные вами заказы, а также оценки вашей работы отправителями и даже их комментарии в ваш адрес.
+                                    Будьте надежным перевозчиком, выполняйте работу качественно и в срок, повышайте свой рейтинг и получайте еще больше заказов!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a data-toggle="collapse" href="#faq3" class="faq-question collapsed" aria-expanded="false">Как застраховать отправку ?</a>
+
+                        </div>
+                        <div class="col-md-3">
+                            <span class="small font-bold">Страховка от порчи и утраты</span>
+                            <div class="tag-list">
+                                <span class="tag-item">Страховка заказа</span>
+                                <span class="tag-item">Безопасность отправки</span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-right">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="faq3" class="panel-collapse faq-answer collapse" aria-expanded="false" style="height: 32px;">
+                                <p>
+                                    Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a data-toggle="collapse" href="#faq4" class="faq-question">Кто гарантирует оплату ?</a>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="small font-bold">Гарантия оплаты перевозки</span>
+                            <div class="tag-list">
+                                <span class="tag-item">Гарантия оплаты</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-right">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="faq4" class="panel-collapse collapse faq-answer">
+                                <p>
+                                    Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a data-toggle="collapse" href="#faq5" class="faq-question">Как получить оплату перевозки?</a>
+
+                        </div>
+                        <div class="col-md-3">
+                            <span class="small font-bold">Перевод оплаты</span>
+                            <div class="tag-list">
+                                <span class="tag-item">Способы оплаты</span>
+                                <span class="tag-item">Варианты расчета</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-right">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="faq5" class="panel-collapse collapse faq-answer">
+                                <p>
+                                    The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(location.hash).collapse('show');
+    </script>
+{% endblock %}

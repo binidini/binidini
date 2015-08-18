@@ -33,3 +33,9 @@ binidini_rules_appendix_4:
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/appendix_4.html.twig
+
+binidini_how_it_works:
+    path: /howitworks
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/howitworks.html.twig

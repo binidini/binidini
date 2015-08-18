@@ -62,7 +62,7 @@
                             </a>
                         {% else %}
                             <a href="{{ path('binidini_home') }}">
-                                <img alt="Титимити" src="{{ asset('bundles/binidiniweb/img/tm.png') }}"/>
+                                <img alt="Титимити" src="{{ asset('bundles/binidiniweb/img/logo2.png') }}"/>
                                 <span class="clear"><span class="block m-t-xs"><strong class="font-bold">Нам по пути</strong></span></span>
                             </a>
                         {% endif %}
@@ -98,6 +98,9 @@
                 </li>
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
                     <a href="{{ path('fos_user_profile_edit') }}"><i class="fa fa-gears"></i> <span class="nav-label">Мои настройки</span> </a>
+                </li>
+                <li class="special_link">
+                    <a href="{{ path('binidini_how_it_works') }}"><i class="fa fa-medkit"></i> <span class="nav-label">Как все работает</span></a>
                 </li>
 
             </ul>

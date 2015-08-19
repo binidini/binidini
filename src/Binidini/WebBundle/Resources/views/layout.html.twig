@@ -99,7 +99,7 @@
                 <li {{ croute.is_current_route('fos_user_profile_edit') }}>
                     <a href="{{ path('fos_user_profile_edit') }}"><i class="fa fa-gears"></i> <span class="nav-label">Мои настройки</span> </a>
                 </li>
-                <li class="special_link">
+                <li class="special_link ">
                     <a href="{{ path('binidini_how_it_works') }}"><i class="fa fa-medkit"></i> <span class="nav-label">Как все работает</span></a>
                 </li>
 
@@ -175,7 +175,7 @@
 
         <div class="footer">
             <div class="pull-right">
-                <strong>Титимити</strong> - p2p сервис доставки.
+                <a href="{{ path('binidini_landing_page') }}">Титимити</a> - народный сервис доставки.
             </div>
             <div>
                 <a href="{{ path('binidini_rules') }}" target="_blank" class="link-block">Правила Титимити</a>

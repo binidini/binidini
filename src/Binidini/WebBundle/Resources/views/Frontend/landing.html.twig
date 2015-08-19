@@ -62,14 +62,14 @@
                     <div class="col-sm-12 wrapper wrapper-content animated fadeInUp">
                         <ul class="notes row text-center">
                             <li>
-                                <a class="navy-link" href="{{ path('binidini_search_shipment_index') }}">
+                                <a class="navy-link" href="{{ path('binidini_how_it_works')~'#faq1' }}">
                                     <div class="sender">
                                         <h2>Нужно что-то отвезти?</h2>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a class="navy-link" href="{{ path('binidini_search_shipment_index') }}">
+                                <a class="navy-link" href="{{ path('binidini_how_it_works')~'#faq2' }}">
                                     <div class="carrier">
                                         <h2>Зарабатывайте по пути!</h2>
                                     </div>
@@ -225,7 +225,6 @@
                 в течение минут смогут забрать заказ.
             </p>
 
-            <p><a class="navy-link" href="#" role="button">Подробнее &raquo;</a></p>
         </div>
         <div class="col-sm-3">
             <h2>Надежно</h2>
@@ -234,7 +233,6 @@
                 Гарантия оплаты, страховка от потери и порчи заказа, рейтинги отправителей и перевозчиков делают систему безопасной.
             </p>
 
-            <p><a class="navy-link" href="#" role="button">Подробнее &raquo;</a></p>
         </div>
         <div class="col-sm-3">
             <h2>Практично</h2>
@@ -243,7 +241,6 @@
                 Отправитель назначает цену заказа, перевозчик соглашается или устанавливает цену перевозки. Данная система позволяет найти справедливую цену.
             </p>
 
-            <p><a class="navy-link" href="#" role="button">Подробнее &raquo;</a></p>
         </div>
         <div class="col-sm-3">
             <h2>Просто и удобно</h2>
@@ -252,7 +249,6 @@
                 Титимити делает все, чтобы клиентом было удобно работать в системе. Мы стараемся операитино реагировать на запросы наших клиентов.
             </p>
 
-            <p><a class="navy-link" href="#" role="button">Подробнее &raquo;</a></p>
         </div>
     </div>
 </section>
@@ -331,7 +327,7 @@
                 <p>
                     Сумма, назначаемая отправителем и  равная стоимости груза, замораживается на счете перевозчика и возвращается после подтверждения отправителем доставки.
                 </p>
-                <a href="" class="btn btn-primary">Подробнее...</a>
+                <a href="{{ path('binidini_how_it_works')~'#faq3' }}" class="btn btn-primary">Подробнее...</a>
             </div>
             <div class="col-lg-6 text-right m-t-n-lg">
                 <img src="/bundles/binidiniweb/img/landing/laptop_key.png" class="img-responsive" alt="dashboard">
@@ -342,7 +338,7 @@
                 <p>
                     Сумма, равная стоимости перевозки, замораживается на счете отправителя и возвращается после подтверждения оплаты перевозчиком.
                 </p>
-                <a href="" class="btn btn-primary">Подробнее...</a>
+                <a href="{{ path('binidini_how_it_works')~'#faq4' }}" class="btn btn-primary">Подробнее...</a>
             </div>
         </div>
     </div>

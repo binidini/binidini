@@ -1,7 +1,17 @@
 {% extends 'BinidiniWebBundle::layout.html.twig' %}
 
+{% block meta %}
+    <meta property="og:title" content="{{ shipping.pickupAddress }} - {{ shipping.deliveryAddress }} за {{ shipping.deliveryPrice }} р." />
+    <meta property="og:site_name" content="Титимити - народный сервис доставки"/>
+    <meta property="og:description" content="WANTED перевозчик, курьер, попутчик.
+    Перевезти '{{ shipping.name }}' за {{ shipping.deliveryPrice }} руб. - от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }}.
+    Время доставки: {{ shipping.deliveryDatetime | date('d.m.y H:i') }}." />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/binidiniweb/img/tytymyty.jpg') }}" />
+{% endblock %}
+
 {% block title %}
-    Титимити нужен перевозчик, курьер, попутчик - необходимо перевезти '{{ shipping.name }}' за {{ shipping.deliveryPrice }} руб. - от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }}
+    Перевозчик, курьер, попутчик - необходимо перевезти '{{ shipping.name }}' за {{ shipping.deliveryPrice }} руб. - от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }}
 {% endblock %}
 
 {% if shipping.canHasReview() %}
@@ -132,11 +142,10 @@
                             <div class="col-sm-12">
                                 <div class="m-b-md pull-right">
                                     <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
-                                    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="link" data-yashareQuickServices="facebook,twitter,odnoklassniki,moimir,lj,vkontakte"
-                                         data-yashareTitle="WANTED перевозчик, курьер, попутчик от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }} за {{ shipping.deliveryPrice }} руб."
-                                         data-yashareDescription="{{ shipping.name }}. Крайнее время доставки: {{ shipping.deliveryDatetime | date('d.m.y H:i') }}."
-                                         data-yashareImage="http://dev.tytymyty.ru/bundles/binidiniweb/img/ty.png"
-                                         data-yashareLink="http://dev.tytymyty.ru/static/landing"></div>
+                                    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="link" data-yashareQuickServices="facebook,twitter,vkontakte"
+                                         data-yashareTitle="{{ shipping.pickupAddress }} - {{ shipping.deliveryAddress }} за {{ shipping.deliveryPrice }} р"
+                                         data-yashareDescription="Время доставки: {{ shipping.deliveryDatetime | date('d.m.y H:i') }}. {{ shipping.name }}"
+                                         data-yashareImage="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/binidiniweb/img/tytymyty.jpg') }}"></div>
                                 </div>
                              </div>
                         </div>

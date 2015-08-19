@@ -4,12 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Титимити - p2p сервис доставки">
+    <meta name="description" content="Титимити - это народная доставка и карманные деньги">
     <meta name="author" content="">
-    <!-- Add Your favicon here -->
-    <!--<link rel="icon" href="img/favicon.ico">-->
+    <link rel="icon" href="/favicon.ico">
 
-    <title>Титимити - p2p сервис доставки</title>
+    <title>Титимити - народный сервис доставки</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('bundles/binidiniweb/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -48,7 +47,7 @@
                     <li><a class="page-scroll" href="#application">Загрузить</a></li>
                     <li><a class="page-scroll" href="#contact">Контакты</a></li>
                     <li class="divider">&nbsp;&nbsp;&nbsp;</li>
-                    <li><a class="navbar-brand" href="{{ path('binidini_search_shipment_index') }}">Вход</a></li>
+                    <li><a class="navbar-brand" href="{{ path('binidini_search_shipment_private_index') }}">Вход</a></li>
 
                 </ul>
             </div>
@@ -63,14 +62,14 @@
                     <div class="col-sm-12 wrapper wrapper-content animated fadeInUp">
                         <ul class="notes row text-center">
                             <li>
-                                <a class="navy-link" href="{{ path('binidini_search_shipment_index') }}">
+                                <a class="navy-link" href="{{ path('binidini_how_it_works')~'#faq1' }}">
                                     <div class="sender">
                                         <h2>Нужно что-то отвезти?</h2>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a class="navy-link" href="{{ path('binidini_search_shipment_index') }}">
+                                <a class="navy-link" href="{{ path('binidini_how_it_works')~'#faq2' }}">
                                     <div class="carrier">
                                         <h2>Зарабатывайте по пути!</h2>
                                     </div>
@@ -226,7 +225,6 @@
                 в течение минут смогут забрать заказ.
             </p>
 
-            <p><a class="navy-link" href="#" role="button">Подробнее &raquo;</a></p>
         </div>
         <div class="col-sm-3">
             <h2>Надежно</h2>
@@ -235,7 +233,6 @@
                 Гарантия оплаты, страховка от потери и порчи заказа, рейтинги отправителей и перевозчиков делают систему безопасной.
             </p>
 
-            <p><a class="navy-link" href="#" role="button">Подробнее &raquo;</a></p>
         </div>
         <div class="col-sm-3">
             <h2>Практично</h2>
@@ -244,16 +241,14 @@
                 Отправитель назначает цену заказа, перевозчик соглашается или устанавливает цену перевозки. Данная система позволяет найти справедливую цену.
             </p>
 
-            <p><a class="navy-link" href="#" role="button">Подробнее &raquo;</a></p>
         </div>
         <div class="col-sm-3">
             <h2>Просто и удобно</h2>
 
             <p>
-                Титимити делает все, чтобы клиентом было удобно работать в системе. Мы стараемся операитино добавлять необходимый функционал по запросу клиентов.
+                Титимити делает все, чтобы клиентом было удобно работать в системе. Мы стараемся операитино реагировать на запросы наших клиентов.
             </p>
 
-            <p><a class="navy-link" href="#" role="button">Подробнее &raquo;</a></p>
         </div>
     </div>
 </section>
@@ -265,48 +260,51 @@
                 <div class="navy-line"></div>
                 <h1>Почему выбирают Титимити</h1>
 
-                <p>Чтобы быть полезным людям, нужно ничем не пользоваться от них. (В. О. Ключевский)</p>
+                <p>
+                    Вы не просто зарабатываете дополнительные деньги по пути или экономите на доставке. Вы помогаете
+                    людям решать их задачи с помощью имеющихся у вас ресурсов!
+                </p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <b>Титимити</b>
-                <h2>Отправитель определяет цену отправки</h2>
+                <h2>Прямой контакт отправителя и перевозчика</h2>
                 <i class="fa fa-dollar big-icon pull-right"></i>
 
                 <p>
-                    Переписать. Как только пользователь входит в систему он получает уведомления. Отправитель получает уведомления о новых заявках на перевозку. Перевозчик же получает
-                    уведомления о принятых отправителем заявках.
+                    Титимити – сервис, помогающий отправителям и перевозчикам найти друг друга.
+                    Мы не устанавливаем цен, не навязываем свои правила, сроки и даже способы оплаты.
+                    Обо всех подробностях выполнения заданий вы договариваетесь напрямую!
                 </p>
             </div>
             <div class="col-lg-5 features-text">
-                <b>Титимити</b>
-                <h2>Перевозчик назначает стоимость перевозки</h2>
+                <h2>Вы сами устанавливаете цены!</h2>
                 <i class="fa fa-euro big-icon pull-right"></i>
 
                 <p>
-                    Для оперативного оповещения Титимити рассылает смс сообщения на важные события. Отправители и перевозчики всегда могут настроить необходимые смс оповещения
-                    в настройках на своей странице.
+                    Рыночный способ определения стоимости заданий позволяет установить по-настоящему справедливую цену.
+                    Никаких ставок и тарифов! Ведите переговоры, торгуйтесь, экономьте и зарабатывайте на Титимити.
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <b>Титимити</b>
                 <h2>Никаких комиссионных</h2>
                 <i class="fa fa-ruble big-icon pull-right"></i>
 
                 <p>
-                    Все уведомления отсылаются на электронную почту. Пользователю необходимо верифицировать свой почтовый ящик для того чтобы получать уведомления на email.
+                    Наша задача – связать отправителей и перевозчиков, дать им возможность договориться и выполнить
+                    необходимые задачи с выгодой для каждой стороны.  Титимити не участвует в процессе ценообразования и
+                    оплаты работы. Мы не берем комиссионных!
                 </p>
             </div>
             <div class="col-lg-5 features-text">
-                <b>Титимити</b>
-                <h2>Возможность помочь соседям</h2>
+                <h2>Система рейтингов</h2>
                 <i class="fa fa-yen big-icon pull-right"></i>
 
                 <p>
-                    Любые уведомления по смс и на электронную почту можно включать и отключать. Выберайте только важные для вас уведомления.
+                    Ответственные отправители и надежные перевозчики на Титимити имеют высокие рейтинги, а значит получают
+                    больше заявок и заказов на выполнение. Зарабатывайте свою репутацию и как следствие будете более эфективней!
                 </p>
             </div>
         </div>    </div>
@@ -319,31 +317,28 @@
                 <div class="navy-line"></div>
                 <h1>Гарантия оплаты и страхование доставки.</h1>
 
-                <p>В этой жизни гарантию дает только Mercedes и то только на первые 750 000 пробега…</p>
+                <p>Титимити обеспечивает безопасность ваших сделок, не вмешиваясь в их суть.</p>
             </div>
         </div>
         <div class="row features-block">
             <div class="col-lg-3 features-text">
-                <b>Титимити</b>
-                <h2>Страхование</h2>
+                <h2>Страхование для отправителя</h2>
 
                 <p>
-                    Депозит в рублях, требуемый от перевозчика в качестве страховки на случай утраты или порчи посылки. Сумма, равная страховке, замораживается со счета перевозчика и возвращается после подтверждения отправителем доставки.
+                    Сумма, назначаемая отправителем и  равная стоимости груза, замораживается на счете перевозчика и возвращается после подтверждения отправителем доставки.
                 </p>
-                <a href="" class="btn btn-primary">Подробнее...</a>
+                <a href="{{ path('binidini_how_it_works')~'#faq3' }}" class="btn btn-primary">Подробнее...</a>
             </div>
             <div class="col-lg-6 text-right m-t-n-lg">
                 <img src="/bundles/binidiniweb/img/landing/laptop_key.png" class="img-responsive" alt="dashboard">
             </div>
             <div class="col-lg-3 features-text text-right">
-                <b>Титимити</b>
-                <h2>Гарантия оплаты</h2>
+                <h2>Гарантия оплаты для перевозчика</h2>
 
                 <p>
-                    Гарантия оплаты перевозки. Сумма, равная стоимости перевозки, замораживается со счета отправителя и возвращается после подтверждения оплаты перевозчиком.
-
+                    Сумма, равная стоимости перевозки, замораживается на счете отправителя и возвращается после подтверждения оплаты перевозчиком.
                 </p>
-                <a href="" class="btn btn-primary">Подробнее...</a>
+                <a href="{{ path('binidini_how_it_works')~'#faq4' }}" class="btn btn-primary">Подробнее...</a>
             </div>
         </div>
     </div>
@@ -357,12 +352,11 @@
                 <div class="navy-line"></div>
                 <h1>Гибкая система уведомлений</h1>
 
-                <p>Мы предоставляем информацию о перемещении заказа онлайн, через смс и email.</p>
+                <p>Мы предоставляем информацию о перемещении заказа онлайн, через email, смс и пуш-сообщения.</p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <b>Титимити</b>
                 <h2>Онлайн уведомления</h2>
                 <i class="fa fa-clock-o big-icon pull-right"></i>
 
@@ -372,7 +366,6 @@
                 </p>
             </div>
             <div class="col-lg-5 features-text">
-                <b>Титимити</b>
                 <h2>Смс оповещения</h2>
                 <i class="fa fa-comments-o big-icon pull-right"></i>
 
@@ -384,7 +377,6 @@
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <b>Титимити</b>
                 <h2>Email сообщения</h2>
                 <i class="fa fa-envelope-o big-icon pull-right"></i>
 
@@ -393,7 +385,6 @@
                 </p>
             </div>
             <div class="col-lg-5 features-text">
-                <b>Титимити</b>
                 <h2>Настройка уведомлений</h2>
                 <i class="fa fa-gears big-icon pull-right"></i>
 
@@ -489,12 +480,14 @@
                     Мы в социальных сетях
                 </p>
                 <ul class="list-inline social-icon">
-                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                    <li><a href="https://twitter.com/_tytymyty"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                    <li><a href="https://www.facebook.com/tytymyty.ru"><i class="fa fa-facebook"></i></a>
                     </li>
-                    <li><a href="#"><i class="fa fa-vk"></i></a>
+                    <li><a href="https://instagram.com/tytymyty.ru/"><i class="fa fa-instagram"></i> </a> </li>
+                    <li><a href="https://vk.com/tytymyty"><i class="fa fa-vk"></i></a>
                     </li>
+
                 </ul>
             </div>
         </div>

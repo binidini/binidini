@@ -19,6 +19,19 @@ binidini_search_shipment_index:
             filterable: true
             template: BinidiniWebBundle:Frontend/Shipment:search.html.twig
 
+binidini_search_shipment_private_index:
+    path: /shipment
+    methods: [GET]
+    defaults:
+        _controller: binidini_search.controller.shipment:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            template: BinidiniWebBundle:Frontend/Shipment:search.html.twig
+
 binidini_search_shipment_search:
     path: /public/shipment/search
     methods: [GET, POST]

@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\VirtualProperty;
 
 
-
 /**
  * Shipping
  *
@@ -269,6 +268,23 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      */
     private $hasCarrierReview;
 
+    /**
+     * @Assert\File(
+     *     maxSize = "1M",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png", "image/gif"},
+     *     mimeTypesMessage = "Вы можете загрузить фото только в формате: JPG, GIF или PNG"
+     * )
+     */
+    public $imgFile;
+
+    /**
+     * @ORM\Column(name="img_path", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=1, max=255)
+     * @Expose
+     */
+    private $imgPath;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -284,6 +300,8 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         $this->deliveryDatetime = new \DateTime();
         $this->deliveryDatetime->modify('+3 hours');
         $this->deliveryDatetime->setTimestamp(floor($this->deliveryDatetime->getTimestamp() / 3600) * 3600);
+
+        $this->imgPath = 'parcels/pics/tytymyty_'.rand(1,3).'.jpg';
     }
 
     public function hold()
@@ -319,7 +337,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
             try {
                 $this->user->release($this->deliveryPrice);
             } catch (InsufficientFrozenAmount $ex) {
-                throw new InsufficientFrozenAmount("На холде не достаточно средств");
+                throw new InsufficientFrozenAmount("У отправителя не достаточно средств");
             }
         }
     }
@@ -330,7 +348,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
             try {
                 $this->carrier->release($this->insurance);
             } catch (InsufficientFrozenAmount $ex) {
-                throw new InsufficientFrozenAmount("На холде не достаточно средств");
+                throw new InsufficientFrozenAmount("У перевозчика не достаточно средств");
             }
         }
     }
@@ -342,7 +360,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
                 $this->carrier->decreaseHoldBalance($this->insurance);
                 $this->user->addBalance($this->insurance);
             } catch (InsufficientFrozenAmount $ex) {
-                throw new InsufficientFrozenAmount("На холде не достаточно средств");
+                throw new InsufficientFrozenAmount("У перевозчика не достаточно средств");
             }
         }
     }
@@ -353,7 +371,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
                 $this->user->decreaseHoldBalance($this->insurance);
                 $this->carrier->addBalance($this->insurance);
             } catch (InsufficientFrozenAmount $ex) {
-                throw new InsufficientFrozenAmount("На холде не достаточно средств");
+                throw new InsufficientFrozenAmount("У отправителя не достаточно средств");
             }
         }
     }
@@ -1095,4 +1113,28 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
             return self::GEOPOINT_TYPE_ADDRESS;
         }
     }
+
+    /**
+     * Set imgPath
+     *
+     * @param string $imgPath
+     * @return Shipping
+     */
+    public function setImgPath($imgPath)
+    {
+        $this->imgPath = $imgPath;
+
+        return $this;
+    }
+
+    /**
+     * Get imgPath
+     *
+     * @return string 
+     */
+    public function getImgPath()
+    {
+        return $this->imgPath;
+    }
+
 }

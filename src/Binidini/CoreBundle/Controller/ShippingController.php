@@ -2,6 +2,7 @@
 
 namespace Binidini\CoreBundle\Controller;
 
+use Binidini\CoreBundle\Entity\Payment;
 use Binidini\CoreBundle\Entity\Shipping;
 use Binidini\CoreBundle\Exception\TransitionCannotBeApplied;
 use Binidini\CoreBundle\Form\Type\BidType;
@@ -72,10 +73,10 @@ class ShippingController extends ResourceController
 
     public function resolveAction(Request $request)
     {
-        /** @var Shipping $resource */
-        $resource = $this->findOr404($request);
+        /** @var Shipping $shipping */
+        $shipping = $this->findOr404($request);
         $graph = $this->stateMachineGraph;
-        $stateMachine = $this->get('sm.factory')->get($resource, $graph);
+        $stateMachine = $this->get('sm.factory')->get($shipping, $graph);
         $transition = 'resolve';
         if (!$stateMachine->can($transition)) {
             throw new NotFoundHttpException(
@@ -93,17 +94,83 @@ class ShippingController extends ResourceController
         $insurance = $request->get('insurance');
 
         if ($payment == 'sender') {
-            $resource->releaseSender();
+            $shipping->releaseSender();
         } elseif ($payment == 'carrier') {
-            $resource->payPayment();
+
+            $guarantee = new Payment();
+            $guarantee
+                ->setUser($shipping->getCarrier())
+                ->setAmount($shipping->getDeliveryPrice())
+                ->setRef($shipping->getId())
+                ->setFlagCreditDebit(1)
+                ->setType(Payment::TYPE_GUARANTEE)
+                ->setMethod(Payment::METHOD_INTERNAL_PAYMENT)
+                ->setState(Payment::STATE_COMPLETED)
+                ->setBalance($shipping->getCarrier()->getBalance() + $shipping->getCarrier()->getHoldAmount() + $shipping->getDeliveryPrice())
+                ->setDetails('Начисление гарантии по заказу №' . $shipping->getId())
+            ;
+
+            $guarantee2 = new Payment();
+            $guarantee2
+                ->setUser($shipping->getSender())
+                ->setAmount($shipping->getDeliveryPrice())
+                ->setRef($shipping->getId())
+                ->setFlagCreditDebit(-1)
+                ->setType(Payment::TYPE_GUARANTEE)
+                ->setMethod(Payment::METHOD_INTERNAL_PAYMENT)
+                ->setState(Payment::STATE_COMPLETED)
+                ->setBalance($shipping->getSender()->getBalance() + $shipping->getSender()->getHoldAmount() - $shipping->getDeliveryPrice())
+                ->setDetails('Списание гарантии по заказу №' . $shipping->getId())
+            ;
+
+            $shipping->payPayment();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($guarantee);
+            $em->persist($guarantee2);
+            $em->flush();
         }
 
         if ($insurance == 'carrier') {
-            $resource->releaseCarrier();
+            $shipping->releaseCarrier();
         } elseif ($insurance == 'sender') {
-            $resource->payInsurance();
+            $insurance = new Payment();
+            $insurance
+                ->setUser($shipping->getCarrier())
+                ->setAmount($shipping->getInsurance())
+                ->setRef($shipping->getId())
+                ->setFlagCreditDebit(-1)
+                ->setType(Payment::TYPE_INSURANCE)
+                ->setMethod(Payment::METHOD_INTERNAL_PAYMENT)
+                ->setState(Payment::STATE_COMPLETED)
+                ->setBalance($shipping->getCarrier()->getBalance() + $shipping->getCarrier()->getHoldAmount() - $shipping->getInsurance())
+                ->setDetails('Списание страховки по заказу №' . $shipping->getId())
+                ->setPaymentAt($insurance->getPaymentAt()->modify("+1 second"))
+            ;
+
+            $insurance2 = new Payment();
+            $insurance2
+                ->setUser($shipping->getSender())
+                ->setAmount($shipping->getInsurance())
+                ->setRef($shipping->getId())
+                ->setFlagCreditDebit(1)
+                ->setType(Payment::TYPE_INSURANCE)
+                ->setMethod(Payment::METHOD_INTERNAL_PAYMENT)
+                ->setState(Payment::STATE_COMPLETED)
+                ->setBalance($shipping->getSender()->getBalance() + $shipping->getSender()->getHoldAmount() + $shipping->getInsurance())
+                ->setDetails('Начисление страховки по заказу №' . $shipping->getId())
+                ->setPaymentAt($insurance2->getPaymentAt()->modify("+1 second"))
+            ;
+
+            $shipping->payInsurance();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($insurance);
+            $em->persist($insurance2);
+            $em->flush();
+
         }
-        $this->domainManager->update($resource);
+        $this->domainManager->update($shipping);
 
         return $this->redirectHandler->redirectToReferer();
     }

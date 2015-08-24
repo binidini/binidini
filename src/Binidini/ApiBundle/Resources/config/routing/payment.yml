@@ -10,7 +10,7 @@ binidini_api_payment_index:
             paginate: $paginate
             sortable: true
             sorting:
-                id: desc
+                paymentAt: desc
             filterable: true
 
 binidini_api_payment_new:

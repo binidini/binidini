@@ -8,7 +8,13 @@
 {% set isItMe = user.id == app.user.id %}
 {% set isItCompany = user.type == 2 %}
 
-{% block pageheader %} Моя страница {% endblock %}
+{% block pageheader %}
+    {% if isItMe %}
+        Моя Страница
+    {% else %}
+        Страница пользователя
+    {% endif %}
+{% endblock %}
 {% block content %}
     <div class="wrapper wrapper-content">
         <div class="row animated fadeInRight">

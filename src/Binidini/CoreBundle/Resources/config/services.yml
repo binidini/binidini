@@ -36,10 +36,14 @@ services:
         class: Binidini\CoreBundle\EventListener\ShippingListener
         arguments:
             - @doctrine.odm.mongodb.document_manager
+            - @doctrine.orm.entity_manager
             - @old_sound_rabbit_mq.binidini_geocode_producer
+            - @logger
+            - %kernel.root_dir%
         tags:
             - { name: kernel.event_listener, event: binidini_core.shipping.post_create, method: onShippingPostCreate }
             - { name: kernel.event_listener, event: binidini_core.shipping.pre_create, method: onShippingPreCreate }
+            - { name: monolog.logger, channel: main }
 
     binidini.listener.bid:
         class: Binidini\CoreBundle\EventListener\BidListener

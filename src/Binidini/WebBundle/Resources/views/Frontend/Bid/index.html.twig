@@ -12,12 +12,13 @@
             {% if bid.user.imgPath %}
                 <img alt="image" class="img-circle" src="{{ bid.user.imgpath|imagine_filter('photo38x38') }}">
             {% else %}
-                <img alt="image" class="img-circle" src="{{ asset('bundles/binidiniweb/img/logo2.png') }}">
+                <img alt="image" class="img-circle" src="{{ asset('bundles/binidiniweb/img/logo2.png')|imagine_filter('photo38x38') }}">
             {% endif %}
         </a>
 
         <div class="media-body ">
-            <a href="{{ profile }}"><strong>{{ bid.user.name }}</strong></a> доставит за {{ bid.price|price }}<br>
+            <a href="{{ profile }}"><strong>{{ bid.user.name }}</strong></a> доставит за {{ bid.price|price }}
+            {% if isShippingSender %}Тел. {{ bid.user.mobilephone }} {% endif %}<br>
             <small class="text-muted pull-right">{{ bid.createdAt | timeago }}</small>
             <small class="text-muted">{{ bid.createdAt | localizeddate('long', 'none', null, null, 'd MMMM в H:mm') }}</small>
         </div>
@@ -34,12 +35,16 @@
                             &nbsp;&nbsp;</span>
 
                     {% if bid.shipping.isNew() %}
-                        <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'accept'}) }}"
-                           class="btn btn-w-m btn-primary">Принять за {{ bid.price|price }}</a>
+                        <div class="p-xxs">
+                            <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'accept'}) }}"
+                                class="btn btn-w-m btn-primary">Принять</a>
+                        </div>
                     {% endif %}
 
-                    <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'reject'}) }}"
-                       class="btn btn-w-m btn-success ">Отказать</a>
+                    <div class="p-xxs">
+                        <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'reject'}) }}"
+                            class="btn btn-w-m btn-success ">Отказать</a>
+                    </div>
                 </div>
             {% else %}
                 <div class="col-sm-12">
@@ -51,11 +56,16 @@
                             <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'cancel'}) }}"
                                class="btn btn-w-m btn-success">Отменить</a>
                         {% elseif bid.isAccepted()%}
-                            <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'recall'}) }}"
-                               class="btn btn-w-m btn-success">Отозвать</a>
+                            <div class="p-xxs">
+                                <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'recall'}) }}"
+                                    class="btn btn-w-m btn-success">Отозвать</a>
+                            </div>
                             {% if bid.shipping.isNew() %}
-                                <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'agree'}) }}"
-                                   class="btn btn-w-m btn-primary">Поехать</a>
+                                <div class="p-xxs">
+                                    <a href="{{ path('binidini_core_shipping_bid_state_transition', {'shipping_id': bid.shipping.id, 'id': bid.id, 'transition': 'agree'}) }}"
+                                        class="btn btn-w-m btn-primary">Поехать</a>
+                                </div>
+                                <span class="block">Тел. {{ bid.shipping.user.mobilephone }}</span>
                             {% endif %}
                         {% endif %}
                     {% endif %}

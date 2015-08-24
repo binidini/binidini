@@ -86,6 +86,7 @@ class PaymentController extends ResourceController
                 ->setBalance($user->getBalance() + $user->getHoldAmount() + $res->Amount / 100)
                 ->setDetails('Карта: ' . $res->Pan .', ' . substr($res->expiration, -2) . '/' . substr($res->expiration, 2,2) . ', ' . ucwords(strtolower($res->cardholderName .'.')))
                 ->setState(Payment::STATE_COMPLETED)
+                ->setPaymentAt(new \DateTime())
             ;
 
             $user->addBalance($res->Amount / 100);
@@ -117,6 +118,7 @@ class PaymentController extends ResourceController
                 ->setBalance($user->getBalance() + $user->getHoldAmount())
                 ->setDetails($res->ErrorMessage .' ('. $res->ErrorCode . '). ' . 'Карта: ' . $res->Pan .', ' . substr($res->expiration, -2) . '/' . substr($res->expiration, 2,2) . ', ' . ucwords(strtolower($res->cardholderName)))
                 ->setState(Payment::STATE_FAILED)
+                ->setPaymentAt(new \DateTime())
             ;
 
             $em = $this->getDoctrine()->getManager();

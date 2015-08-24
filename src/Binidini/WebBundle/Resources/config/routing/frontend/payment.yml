@@ -10,7 +10,7 @@ binidini_core_payment_index:
             paginate: $paginate
             sortable: true
             sorting:
-                id: desc
+                paymentAt: desc
             filterable: true
             template: BinidiniWebBundle:Frontend/Payment:index.html.twig
 

@@ -12,7 +12,9 @@ namespace Binidini\CoreBundle\EventListener;
 use Binidini\SearchBundle\Document\Shipment;
 use Binidini\SearchBundle\Document\ShipmentItem;
 use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ORM\EntityManager;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use Psr\Log\LoggerInterface;
 use Sylius\Component\Resource\Event\ResourceEvent;
 
 /**
@@ -21,13 +23,20 @@ use Sylius\Component\Resource\Event\ResourceEvent;
 class ShippingListener
 {
     private $dm;
+    private $em;
     private $geocodeProducer;
+    private $logger;
+    private $rootDir;
 
-    public function __construct(DocumentManager $documentManager, Producer $geocodeProducer)
+    public function __construct(DocumentManager $documentManager, EntityManager $em, Producer $geocodeProducer, LoggerInterface $logger, $rootDir)
     {
         $this->dm = $documentManager;
+        $this->em = $em;
         $this->geocodeProducer = $geocodeProducer;
+        $this->logger = $logger;
+        $this->rootDir = $rootDir;
     }
+
 
     public function onShippingPreCreate(ResourceEvent $event)
     {
@@ -42,6 +51,7 @@ class ShippingListener
     }
 
     /**
+     * Move photo to upload dir
      * Copy shipping into mongodb
      */
     public function onShippingPostCreate(ResourceEvent $event)
@@ -50,6 +60,21 @@ class ShippingListener
          * @var \Binidini\CoreBundle\Entity\Shipping $shipping
          */
         $shipping = $event->getSubject();
+
+        if (!empty($shipping->imgFile)) {
+            try {
+                $filename = 'tytymyty_' . $shipping->getId() . '.' . $shipping->imgFile->guessExtension();
+                $shipping->imgFile->move(
+                    $this->rootDir . "/../web/media/img/parcels/",
+                    $filename
+                );
+                $shipping->setImgPath('parcels/'.$filename);
+                $this->em->flush($shipping);
+            } catch (\Exception $ex) {
+                $this->logger->critical('Не удалось загрузить файл.' . $ex->getMessage() . '.' . $ex->getTraceAsString());
+            }
+
+        }
 
         $shipment = new Shipment();
         $shipment
@@ -65,13 +90,16 @@ class ShippingListener
             ->setInsurance($shipping->getInsurance())
             ->setX($shipping->getX())
             ->setY($shipping->getY())
-            ->setZ($shipping->getZ());
+            ->setZ($shipping->getZ())
+            ->setImgPath($shipping->getImgPath())
+        ;
 
         $this->dm->persist($shipment);
         $this->dm->flush();
 
         $msg = array('id' => $shipping->getId());
         $this->geocodeProducer->publish(serialize($msg));
+
     }
 
 }

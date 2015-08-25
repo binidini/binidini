@@ -79,10 +79,8 @@
                         &#165;++
                     </div>
                 </li>
-                <li {{ croute.is_current_route('fos_user_profile_show') }}>
-                    <a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> <span class="nav-label">Моя страница</span></a>
-                </li>
-                <li {{ croute.is_current_route('binidini_search_shipment_index') }}>
+
+                <li {{ croute.is_current_route(['binidini_search_shipment_index','binidini_search_shipment_search']) }}>
                     <a class="count-info" href="{{ path('binidini_search_shipment_index') }}">
                         <i class="fa fa-map-marker"></i>
                         <span class="nav-label">
@@ -90,32 +88,50 @@
                             {% render path('binidini_search_shipment_count') %}
                         </span>
                     </a>
+                    <ul class="nav nav-second-level">
+
+                        <li {{ croute.is_current_route('binidini_search_shipment_index') }}><a href="{{ path('binidini_search_shipment_index', {'paginate': app.request.get('paginate')}) }}">Все заказы</a></li>
+                        <li {{ croute.is_current_route('binidini_search_shipment_search') }}><a href="{{ path('binidini_search_shipment_search', {'paginate': app.request.get('paginate')}) }}">Поиск заказа</a></li>
+                    </ul>
                 </li>
                 {% if (app.user is empty) or app.user.isCarrier %}
-                <li {{ croute.is_current_route('binidini_core_carrier_index') }}>
-                    <a href="{{ path('binidini_core_carrier_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-truck"></i> <span class="nav-label">Мои перевозки</span></a>
+                <li {{ croute.is_current_route(['binidini_core_carrier_index', 'binidini_core_carrier_active_index']) }}>
+                    <a href="#"><i class="fa fa-truck"></i> <span class="nav-label">Мои перевозки</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('binidini_core_carrier_index') }}><a href="{{ path('binidini_core_carrier_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}">Все перевозки</a></li>
+                        <li {{ croute.is_current_route('binidini_core_carrier_active_index') }}><a href="{{ path('binidini_core_carrier_active_index', {'paginate': app.request.get('paginate')}) }}">Активные</a></li>
+                    </ul>
                 </li>
                 {% endif %}
                 {% if (app.user is empty) or app.user.isSender %}
-                <li {{ croute.is_current_route(['binidini_core_shipping_index', 'binidini_core_shipping_new']) }}>
+                <li {{ croute.is_current_route(['binidini_core_shipping_index', 'binidini_core_shipping_new', 'binidini_core_shipping_active_index']) }}>
                     <a href="#"><i class="fa fa-archive"></i> <span class="nav-label">Мои отправки</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('binidini_core_shipping_index') }}><a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}">Все отправки</a></li>
+                        <li {{ croute.is_current_route('binidini_core_shipping_active_index') }}><a href="{{ path('binidini_core_shipping_active_index', {'paginate': app.request.get('paginate')}) }}">Активные</a></li>
                         <li {{ croute.is_current_route('binidini_core_shipping_new') }}><a href="{{ path('binidini_core_shipping_new') }}">Создать новую</a></li>
-                        <li ><a href="index.html">Активные</a></li>
-                        <li {{ croute.is_current_route('binidini_core_shipping_index') }}><a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}">Архив</a></li>
                     </ul>
 
                 </li>
                 {% endif %}
-                <li {{ croute.is_current_route('binidini_core_payment_index') }}>
-                    <a href="{{ path('binidini_core_payment_index') }}"><i class="fa fa-rub"></i> <span class="nav-label">Мои финансы</span> </a>
+
+                <li {{ croute.is_current_route(['fos_user_profile_edit','fos_user_profile_show', 'binidini_core_payment_index']) }}>
+                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Мой профиль </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('fos_user_profile_show') }}><a href="{{ path('fos_user_profile_show') }}">Моя страница</a></li>
+                        <li {{ croute.is_current_route('fos_user_profile_edit') }}><a href="{{ path('fos_user_profile_edit') }}">Мои настройки</a></li>
+                        <li {{ croute.is_current_route('binidini_core_payment_index') }}><a href="{{ path('binidini_core_payment_index') }}">Мои финансы</a></li>
+                    </ul>
                 </li>
-                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
-                    <a href="{{ path('fos_user_profile_edit') }}"><i class="fa fa-gears"></i> <span class="nav-label">Мои настройки</span> </a>
+                <li class="special_link"><hr/></li>
+                <li {{ croute.is_current_route(['binidini_how_it_works', 'binidini_rules']) }}>
+                    <a href="{{ path('binidini_how_it_works') }}"><i class="fa fa-medkit"></i> <span class="nav-label">Как все работает</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('binidini_how_it_works') }}><a href="{{ path('binidini_how_it_works') }}">Вопросы и ответы</a></li>
+                        <li {{ croute.is_current_route('binidini_rules') }}><a href="{{ path('binidini_rules') }}" target="rules">Правила</a></li>
+                    </ul>
                 </li>
-                <li class="special_link ">
-                    <a href="{{ path('binidini_how_it_works') }}"><i class="fa fa-medkit"></i> <span class="nav-label">Как все работает</span></a>
-                </li>
+
 
             </ul>
 
@@ -127,11 +143,6 @@
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="get" action="{{ path('binidini_search_shipment_search') }}">
-                        <div class="form-group">
-                            <input type="text" placeholder="Поиск заказа по адресу" class="form-control" name="top-search" id="top-search">
-                        </div>
-                    </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
@@ -190,9 +201,6 @@
         <div class="footer">
             <div class="pull-right">
                 <a href="{{ path('binidini_landing_page') }}">Титимити</a> - народный сервис доставки.
-            </div>
-            <div>
-                <a href="{{ path('binidini_rules') }}" target="_blank" class="link-block">Правила Титимити</a>
             </div>
         </div>
 

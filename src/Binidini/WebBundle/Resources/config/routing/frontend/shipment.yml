@@ -17,7 +17,7 @@ binidini_search_shipment_index:
             sorting:
                 id: desc
             filterable: true
-            template: BinidiniWebBundle:Frontend/Shipment:search.html.twig
+            template: BinidiniWebBundle:Frontend/Shipment:index.html.twig
 
 binidini_search_shipment_private_index:
     path: /shipment

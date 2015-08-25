@@ -12,15 +12,14 @@
 
                         <div class="col-sm-12">
                             <div class="text-center">
+                                {% if shipping.state is defined %}
+                                <span class="badge badge-{{ shipping.state }} pull-right">
+                                    {{ ('binidini.shipping.state.' ~ shipping.state) | trans }}
+                                </span>
+                                {% endif %}
                                 <h3><strong>{{ shipping.name }}</strong></h3>
                             </div>
                         </div>
-                        <!--div class="col-sm-6">
-                            <div class="text-center">
-                                <img alt="посылка Титимити" class="img-thumbnail"
-                                     src="{ { shipping.imgPath | imagine_filter('photo150x150') }}"/>
-                            </div>
-                        </div-->
                         <div class="col-sm-12">
 
                             <img alt="посылка Титимити" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}" align="left" style="margin-right: 10px"/>

@@ -10,6 +10,7 @@
 namespace Binidini\CoreBundle\Controller;
 
 use Binidini\CoreBundle\Entity\Payment;
+use Binidini\CoreBundle\Exception\InsufficientUserBalance;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -137,6 +138,15 @@ class PaymentController extends ResourceController
 
         /** @var Payment $payment */
         $payment = $this->getRepository()->findOneBy(['user'=>$user->getId(), 'ref' => $orderId]);
+
+        //проверка есть ли на счете деньги
+        if ($payment->getAmount() > $user->getBalance()) {
+            if ($this->config->isApiRequest()) {
+                return new JsonResponse(['ErrorCode' => 102, 'ErrorMessage' => 'Недостаточно средст для вывода.']);
+            }
+            throw new InsufficientUserBalance("Недостаточно средст для вывода.");
+        }
+
         $res = $this->getAlfabank()->getOrderStatus($orderId);
 
         if (isset($res) && isset($payment) && $payment->getHash() === $res->OrderNumber) {

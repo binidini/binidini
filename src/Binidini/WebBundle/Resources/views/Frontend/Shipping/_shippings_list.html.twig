@@ -1,0 +1,52 @@
+<div class="wrapper wrapper-content animated fadeInRight" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+
+        {% for shipping in shippings %}
+
+            {% if loop.index is divisibleby(3) %}
+                <div class="row">
+            {% endif %}
+            <div class="col-lg-4 ">
+                <div class="contact-box">
+                    <a href="{{ path('binidini_core_shipping_show', {'id': shipping.id}) }}">
+
+                        <div class="col-sm-12">
+                            <div class="text-center">
+                                <h3><strong>{{ shipping.name }}</strong></h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <img alt="посылка Титимити" class="img-thumbnail"
+                                     src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+
+                            <p><i class="fa fa-clock-o"></i> Время доставки:
+                                <strong>{{ shipping.deliveryDatetime | date('d.m H:i') }}</strong></p>
+
+                            <p class="{{ shipping.paymentGuarantee ? 'text-success' }}" style="font-size: x-large"><strong>{{ shipping.deliveryPrice | price }}</strong>
+                            </p>
+
+                            <p><i class="fa fa-credit-card"></i> Страховка:
+                                <strong>{{ shipping.insurance | price }}</strong></p>
+
+                        </div>
+                        <div class="col-sm-12">
+                            <p><i class="fa fa-map-marker"></i> {{ shipping.pickupAddress }}</p>
+
+                            <p><i class="fa fa-map-marker"></i> {{ shipping.deliveryAddress }}</p>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+            {% if loop.index is divisibleby(3) %}
+                </div>
+            {% endif %}
+
+        {% endfor %}
+    </div>
+</div>

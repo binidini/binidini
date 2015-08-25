@@ -1,7 +1,7 @@
 sylius_resource:
     settings:
-        allowed_paginate: [10, 25, 50, 100]
-        default_page_size: 25
+        allowed_paginate: [15, 30, 60, 90]
+        default_page_size: 15
         sortable: true
     resources:
         binidini_core.user:

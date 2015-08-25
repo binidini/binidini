@@ -16,9 +16,10 @@
 
 {% if shipping.canHasReview() %}
     {% block stylesheets %}
-        {{ parent() }}
-        <link href="{{ asset('bundles/binidiniweb/css/plugins/raty/jquery.raty.css') }}" rel="stylesheet">
 
+        <link href="{{ asset('bundles/binidiniweb/css/plugins/raty/jquery.raty.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/binidiniweb/js/plugins/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+        {{ parent() }}
     {% endblock %}
 {% endif %}
 
@@ -150,7 +151,9 @@
                                 </dl>
                             </div>
                             <div class="col-sm-2">
-                                <img alt="посылка Титимити" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}">
+                                <a href="{{ '/media/img/' ~ shipping.imgPath }}" id="single_image">
+                                    <img alt="посылка Титимити" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
+                                </a>
                             </div>
                             <div class="col-sm-5" id="cluster_info">
 
@@ -243,11 +246,14 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/fancybox/jquery.fancybox.js') }}"></script>
+
     {% if shipping.canHasReview() %}
         <script src="{{ asset('bundles/binidiniweb/js/plugins/raty/jquery.raty.js') }}"></script>
         <script src="{{ asset('bundles/binidiniweb/js/review.js') }}"></script>
     {% endif %}
     <script type="text/javascript">
+
         var successCallback = function (href) {
             if (href == '#tab-4') {
                 review.setReadonlyRating('.rating');
@@ -299,5 +305,12 @@
                 );
             }
         });
+
+
+        $(document).ready(function() {
+            $("a#single_image").fancybox(
+            );
+        });
+
     </script>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% macro pagination(paginator) %}
     {% if paginator.haveToPaginate() %}
-        {{ pagerfanta(paginator, 'twitter_bootstrap3', {'next_message': '→', 'prev_message': '←', 'proximity': 2}) }}
+        {{ pagerfanta(paginator, 'twitter_bootstrap3', {'next_message': '→', 'prev_message': '←'}) }}
     {% endif %}
 {% endmacro %}
 

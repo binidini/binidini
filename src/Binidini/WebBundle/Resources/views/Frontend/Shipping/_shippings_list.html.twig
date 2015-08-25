@@ -15,30 +15,27 @@
                                 <h3><strong>{{ shipping.name }}</strong></h3>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <!--div class="col-sm-6">
                             <div class="text-center">
                                 <img alt="посылка Титимити" class="img-thumbnail"
-                                     src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
+                                     src="{ { shipping.imgPath | imagine_filter('photo150x150') }}"/>
                             </div>
-                        </div>
-                        <div class="col-sm-8">
-
-                            <p><i class="fa fa-clock-o"></i> Время доставки:
-                                <strong>{{ shipping.deliveryDatetime | date('d.m H:i') }}</strong></p>
-
-                            <p class="{{ shipping.paymentGuarantee ? 'text-success' }}" style="font-size: x-large"><strong>{{ shipping.deliveryPrice | price }}</strong>
-                            </p>
-
-                            <p><i class="fa fa-credit-card"></i> Страховка:
-                                <strong>{{ shipping.insurance | price }}</strong></p>
-
-                        </div>
+                        </div-->
                         <div class="col-sm-12">
-                            <p><i class="fa fa-map-marker"></i> {{ shipping.pickupAddress }}</p>
+
+                            <img alt="посылка Титимити" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}" align="left" style="margin-right: 10px"/>
+
+                            <h3 class="inline"><i class="fa fa-clock-o"></i> {{ shipping.deliveryDatetime | date('d.m H:i') }}</h3>
+
+                            <p class="{{ shipping.paymentGuarantee ? 'text-success' }}" style="font-size: 25px"> <strong>{{ shipping.deliveryPrice}}&nbsp;руб.</strong></p>
+
+                            <p class="inline"><i class="fa fa-credit-card"></i> Cтраховка: <strong>{{ shipping.insurance | price }}</strong></p>
+
+                            <p><i class="fa fa-home"></i> {{ shipping.pickupAddress }}</p>
 
                             <p><i class="fa fa-map-marker"></i> {{ shipping.deliveryAddress }}</p>
-
                         </div>
+
                         <div class="clearfix"></div>
                     </a>
                 </div>

@@ -1,6 +1,14 @@
-{% macro is_current_route(route) %}
-    {%- if app.request.attributes.get('_route') == route -%}
-        {{- 'class="active"' -}}
+{% macro is_current_route(routes) %}
+    {%- if routes is iterable -%}
+        {% for route in routes %}
+            {%- if app.request.attributes.get('_route') == route -%}
+                {{- 'class="active"' -}}
+            {%- endif -%}
+        {% endfor %}
+    {%- else -%}
+        {%- if app.request.attributes.get('_route') == routes -%}
+            {{- 'class="active"' -}}
+        {%- endif -%}
     {%- endif -%}
 {% endmacro %}
 
@@ -89,8 +97,14 @@
                 </li>
                 {% endif %}
                 {% if (app.user is empty) or app.user.isSender %}
-                <li {{ croute.is_current_route('binidini_core_shipping_index') }}>
-                    <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-archive"></i> <span class="nav-label">Мои отправки</span></a>
+                <li {{ croute.is_current_route(['binidini_core_shipping_index', 'binidini_core_shipping_new']) }}>
+                    <a href="#"><i class="fa fa-archive"></i> <span class="nav-label">Мои отправки</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('binidini_core_shipping_new') }}><a href="{{ path('binidini_core_shipping_new') }}">Создать новую</a></li>
+                        <li ><a href="index.html">Активные</a></li>
+                        <li {{ croute.is_current_route('binidini_core_shipping_index') }}><a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}">Архив</a></li>
+                    </ul>
+
                 </li>
                 {% endif %}
                 <li {{ croute.is_current_route('binidini_core_payment_index') }}>

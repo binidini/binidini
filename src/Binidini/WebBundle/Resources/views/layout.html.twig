@@ -80,7 +80,7 @@
                     </div>
                 </li>
 
-                <li {{ croute.is_current_route(['binidini_search_shipment_index','binidini_search_shipment_search']) }}>
+                <li {{ croute.is_current_route(['binidini_search_shipment_index','binidini_search_shipment_search','binidini_search_shipment_nearest']) }}>
                     <a class="count-info" href="{{ path('binidini_search_shipment_index') }}">
                         <i class="fa fa-map-marker"></i>
                         <span class="nav-label">
@@ -90,8 +90,9 @@
                     </a>
                     <ul class="nav nav-second-level">
 
+                        <li {{ croute.is_current_route('binidini_search_shipment_search') }}><a href="{{  path('binidini_search_shipment_search', {'paginate': app.request.get('paginate')}) }}" >Поиск заказа</a></li>
+                        <li {{ croute.is_current_route('binidini_search_shipment_nearest') }}><a id="geo" href="#" myHref="{{  path('binidini_search_shipment_nearest', {'paginate': app.request.get('paginate', 15)}) }}"  onclick="getLocation()">Заказы рядом</a></li>
                         <li {{ croute.is_current_route('binidini_search_shipment_index') }}><a href="{{ path('binidini_search_shipment_index', {'paginate': app.request.get('paginate')}) }}">Все заказы</a></li>
-                        <li {{ croute.is_current_route('binidini_search_shipment_search') }}><a href="{{ path('binidini_search_shipment_search', {'paginate': app.request.get('paginate')}) }}">Поиск заказа</a></li>
                     </ul>
                 </li>
                 {% if (app.user is empty) or app.user.isCarrier %}
@@ -225,6 +226,23 @@
         function init0(){
             var suggestView = new ymaps.SuggestView('top-search');
         }
+
+        function getLocation() {
+
+            var myUrl =  document.getElementById('geo').getAttribute("myHref");
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(pos){
+                    window.location = myUrl + "&lon=" + pos.coords.longitude + "&lat=" +  pos.coords.latitude;
+                },
+                function() {
+                    window.location = myUrl;
+                });
+            } else {
+                window.location = myUrl;
+            }
+        }
+
     </script>
 
 {% endblock %}

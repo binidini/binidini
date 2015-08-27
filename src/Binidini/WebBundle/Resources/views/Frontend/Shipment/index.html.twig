@@ -4,6 +4,14 @@
 
 {% block pageheader %}Все заказы{% endblock %}
 
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li>
+            отсортированы по мере поступления в систему Титимити
+        </li>
+    </ol>
+{% endblock %}
+
 {% block actions %}
     <a href="{{ path('binidini_core_shipping_new') }}" class="btn btn-primary">Новый заказ</a>
 {% endblock %}

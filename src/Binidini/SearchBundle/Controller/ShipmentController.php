@@ -65,12 +65,14 @@ class ShipmentController extends ResourceController
                 )
             );
         } else {
-            $this->flashHelper->setFlash('success', 'top_search', ['%address%' => $searchAddress]);
+            if (!empty($searchAddress)) {
+                $this->flashHelper->setFlash('success', 'top_search', ['%address%' => $searchAddress]);
+            }
         }
 
         $view = $this
             ->view()
-            ->setTemplate('BinidiniWebBundle::Frontend/Shipment/search.html.twig')
+            ->setTemplate($this->config->getTemplate(''))
             ->setTemplateVar($this->config->getPluralResourceName())
             ->setData($shipments);
 

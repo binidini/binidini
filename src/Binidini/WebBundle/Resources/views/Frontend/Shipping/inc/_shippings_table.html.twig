@@ -1,0 +1,32 @@
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', 'Номер', 'desc') }}</th>
+            <th>Что</th>
+            <th>Откуда</th>
+            <th>Куда</th>
+            <th>{{ sylius_resource_sort('deliveryDatetime', 'Прибытие', 'desc') }}</th>
+            <th>Статус</th>
+            <th class="text-right">Цена</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for shipping in shippings %}
+            <tr>
+                <td>
+                    <a href="{{ path('binidini_core_shipping_show', {'id': shipping.id}) }}">{{ shipping.id }}</a>
+                </td>
+                <td>{{ shipping.name[:24] }}</td>
+                <td> <span >{{ shipping.pickupAddress[:64] }}</span></td>
+                <td>{{ shipping.deliveryAddress[:64] }}</td>
+                <td>{{ shipping.deliveryDatetime | date('d.m H:i') }}</td>
+                <td>
+                    <span class="text-{{ shipping.state }}">{{ ('binidini.shipping.state.' ~ shipping.state) | trans }}</span>
+                </td>
+                <td class="text-right">{{ shipping.deliveryPrice | price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

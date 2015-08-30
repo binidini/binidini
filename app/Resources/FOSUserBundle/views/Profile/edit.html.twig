@@ -43,7 +43,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-4 ">
                                                         {{ form_errors(form.imgPath) }}
-                                                        <img alt="image" class="img-responsive" id="photo"
+                                                        <img alt="image" class="img-thumbnail" id="photo"
                                                              src="{{ user.imgPath | imagine_filter('photo600x600') }}">
                                                         <a class="btn-file">{{ user.imgPath? 'Изменить фотографию': 'Загрузить фотографию' }} {{ form_widget(form.imgPath,{'id':'imgUpload', 'data': user.imgPath}) }}</a>
                                                         <div class="help-block">
@@ -158,7 +158,12 @@
                                                                 <th>Уведомления для перевозчика</th>
                                                                 <th>sms</th>
                                                                 <th>email</th>
-                                                                <th>gcm</th>
+                                                                <th>
+                                                                    gcm
+                                                                    <a href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Мгновенные сообщения, приходящие на мобильный телефон. Необходимо установить мобильное приложение." data-original-title="" title="" aria-describedby="popover982824">
+                                                                        <i class="fa fa-question" style="font-size: large"></i>
+                                                                    </a>
+                                                                </th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -268,7 +273,11 @@
                                                                 <th>Уведомления для отправителя</th>
                                                                 <th>sms</th>
                                                                 <th>email</th>
-                                                                <th>gcm</th>
+                                                                <th>gcm
+                                                                    <a href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Мгновенные сообщения, приходящие на мобильный телефон. Необходимо установить мобильное приложение." data-original-title="" title="" aria-describedby="popover982824">
+                                                                       <i class="fa fa-question" style="font-size: large"></i>
+                                                                    </a>
+                                                                </th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -392,7 +401,7 @@
                                                         </table>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        Отметьте те уведомления, которые Вы хотите получать по смс и электронной почте, в качестве отправителя и перевозчика.
+                                                        Отметьте те уведомления, которые Вы хотите получать черес смс, мгновенные сообщения (gcm) на мобильный телефон и по электронной почте, в качестве отправителя и перевозчика.
                                                         Чтобы получать уведомления по электронной почте, Ваш email должен быть верифицирован.
                                                     </div>
                                                 </div>

@@ -2,21 +2,10 @@
 
 {% extends 'BinidiniWebBundle::layout.html.twig' %}
 
-{% block pageheader %}Поиск заказа{% endblock %}
+{% block pageheader %}Активные отправки{% endblock %}
 
 {% block actions %}
-    <form role="search" class="" method="get" action="{{ path('binidini_search_shipment_search') }}">
-        <div class="form-group">
-            <div class="input-group">
-                <input type="text" placeholder="Поиск заказа по адресу" class="form-control" name="top-search" id="top-search">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> </button>
-                </span>
-            </div>
-            <span class="help-block m-b-none">Заказы отображаются по мере удаления от введенного адреса.</span>
-        </div>
-    </form>
-
+    <a href="{{ path('binidini_core_shipping_new') }}" class="btn btn-primary">Новый заказ</a>
 {% endblock %}
 
 {% block content %}
@@ -26,32 +15,31 @@
                 <div class="ibox float-e-margins">
 
                     <div class="ibox-title">
-                        {% if shipments.nbresults > 0 %}
-                            {{ page.paging(shipments) }}
+                        {% if shippings.nbresults > 0 %}
+                            {{ page.paging(shippings) }}
 
                             <div class="ibox-tools">
 
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    по {{ shipments.maxperpage() }} записей
+                                    по {{ shippings.maxperpage() }} записей
                                 </a>
-
-                                {{ include('BinidiniWebBundle::Frontend/Shipping/inc/_paginate_filter.html.twig', {'path': 'binidini_search_shipment_index'}) }}
+                                {{ include('BinidiniWebBundle::Frontend/Shipping/inc/_paginate_filter.html.twig', {'path': 'binidini_core_shipping_active_index'}) }}
 
                             </div>
                         {% else %}заказов нет{% endif %}
                     </div>
                     <div class="ibox-content">
 
-                        {% if shipments.nbresults > 0 %}
+                        {% if shippings.nbresults > 0 %}
 
-                            {{ include('BinidiniWebBundle::Frontend/Shipping/inc/_shippings_list.html.twig', {'shippings': shipments}) }}
+                            {{ include('BinidiniWebBundle::Frontend/Shipping/inc/_shippings_list.html.twig', {'shippings': shippings}) }}
 
                             <div class="row">
                                 <div class="col-sm-6">
                                 </div>
 
                                 <div class="col-sm-6 text-right">
-                                    {{ page.pagination(shipments) }}
+                                    {{ page.pagination(shippings) }}
                                 </div>
                             </div>
 

@@ -17,7 +17,7 @@ binidini_search_shipment_index:
             sorting:
                 id: desc
             filterable: true
-            template: BinidiniWebBundle:Frontend/Shipment:search.html.twig
+            template: BinidiniWebBundle:Frontend/Shipment:index.html.twig
 
 binidini_search_shipment_private_index:
     path: /shipment
@@ -30,7 +30,7 @@ binidini_search_shipment_private_index:
             sorting:
                 id: desc
             filterable: true
-            template: BinidiniWebBundle:Frontend/Shipment:search.html.twig
+            template: BinidiniWebBundle:Frontend/Shipment:index.html.twig
 
 binidini_search_shipment_search:
     path: /public/shipment/search
@@ -41,3 +41,15 @@ binidini_search_shipment_search:
             paginate: $paginate
             sortable: true
             filterable: true
+            template: BinidiniWebBundle:Frontend/Shipment:search.html.twig
+
+binidini_search_shipment_nearest:
+    path: /public/shipment/nearest
+    methods: [GET, POST]
+    defaults:
+        _controller: binidini_search.controller.shipment:searchAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            filterable: true
+            template: BinidiniWebBundle:Frontend/Shipment:nearest.html.twig

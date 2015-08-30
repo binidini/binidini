@@ -1,0 +1,19 @@
+<ul class="dropdown-menu dropdown-user">
+    <li>
+        <a href="{{ path(path, {'paginate': 15, 'state': app.request.get('state'), 'lon': app.request.get('lon'), 'lat': app.request.get('lat') } ) }}">по
+            15 записей</a>
+    </li>
+    <li>
+        <a href="{{ path(path, {'paginate': 30, 'state': app.request.get('state'), 'lon': app.request.get('lon'), 'lat': app.request.get('lat') } ) }}">по
+            30 записей</a>
+    </li>
+    <li>
+        <a href="{{ path(path, {'paginate': 60, 'state': app.request.get('state'), 'lon': app.request.get('lon'), 'lat': app.request.get('lat') } ) }}">по
+            60 записей</a>
+    </li>
+
+    <li>
+        <a href="{{ path(path, {'paginate': 90, 'state': app.request.get('state'), 'lon': app.request.get('lon'), 'lat': app.request.get('lat') } ) }}">по
+            90 записей</a>
+    </li>
+</ul>

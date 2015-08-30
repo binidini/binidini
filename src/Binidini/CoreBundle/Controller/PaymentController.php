@@ -10,6 +10,7 @@
 namespace Binidini\CoreBundle\Controller;
 
 use Binidini\CoreBundle\Entity\Payment;
+use Binidini\CoreBundle\Exception\InsufficientUserBalance;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -86,6 +87,7 @@ class PaymentController extends ResourceController
                 ->setBalance($user->getBalance() + $user->getHoldAmount() + $res->Amount / 100)
                 ->setDetails('Карта: ' . $res->Pan .', ' . substr($res->expiration, -2) . '/' . substr($res->expiration, 2,2) . ', ' . ucwords(strtolower($res->cardholderName .'.')))
                 ->setState(Payment::STATE_COMPLETED)
+                ->setPaymentAt(new \DateTime())
             ;
 
             $user->addBalance($res->Amount / 100);
@@ -117,6 +119,7 @@ class PaymentController extends ResourceController
                 ->setBalance($user->getBalance() + $user->getHoldAmount())
                 ->setDetails($res->ErrorMessage .' ('. $res->ErrorCode . '). ' . 'Карта: ' . $res->Pan .', ' . substr($res->expiration, -2) . '/' . substr($res->expiration, 2,2) . ', ' . ucwords(strtolower($res->cardholderName)))
                 ->setState(Payment::STATE_FAILED)
+                ->setPaymentAt(new \DateTime())
             ;
 
             $em = $this->getDoctrine()->getManager();
@@ -135,6 +138,15 @@ class PaymentController extends ResourceController
 
         /** @var Payment $payment */
         $payment = $this->getRepository()->findOneBy(['user'=>$user->getId(), 'ref' => $orderId]);
+
+        //проверка есть ли на счете деньги
+        if ($payment->getAmount() > $user->getBalance()) {
+            if ($this->config->isApiRequest()) {
+                return new JsonResponse(['ErrorCode' => 102, 'ErrorMessage' => 'Недостаточно средст для вывода.']);
+            }
+            throw new InsufficientUserBalance("Недостаточно средст для вывода.");
+        }
+
         $res = $this->getAlfabank()->getOrderStatus($orderId);
 
         if (isset($res) && isset($payment) && $payment->getHash() === $res->OrderNumber) {

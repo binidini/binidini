@@ -2,21 +2,21 @@
 
 {% extends 'BinidiniWebBundle::layout.html.twig' %}
 
-{% block pageheader %}Поиск заказа{% endblock %}
+{% block pageheader %}Ближайшие заказы{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li>
+            отсортированы по мере удаления
+            <a href="#" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Мы определили ваши координаты ({{ app.request.get('lon') |number_format(8) }}, {{ app.request.get('lat') | number_format(8) }}) и отсортировали заказы по мере удаления от места отправления." data-original-title="" title="" aria-describedby="popover982824">
+                <i class="fa fa-question"></i>
+            </a>
+        </li>
+    </ol>
+{% endblock %}
 
 {% block actions %}
-    <form role="search" class="" method="get" action="{{ path('binidini_search_shipment_search') }}">
-        <div class="form-group">
-            <div class="input-group">
-                <input type="text" placeholder="Поиск заказа по адресу" class="form-control" name="top-search" id="top-search">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> </button>
-                </span>
-            </div>
-            <span class="help-block m-b-none">Заказы отображаются по мере удаления от введенного адреса.</span>
-        </div>
-    </form>
-
+    <a href="{{ path('binidini_core_shipping_new') }}" class="btn btn-primary">Новый заказ</a>
 {% endblock %}
 
 {% block content %}
@@ -35,7 +35,7 @@
                                     по {{ shipments.maxperpage() }} записей
                                 </a>
 
-                                {{ include('BinidiniWebBundle::Frontend/Shipping/inc/_paginate_filter.html.twig', {'path': 'binidini_search_shipment_index'}) }}
+                                {{ include('BinidiniWebBundle::Frontend/Shipping/inc/_paginate_filter.html.twig', {'path': 'binidini_search_shipment_nearest'}) }}
 
                             </div>
                         {% else %}заказов нет{% endif %}

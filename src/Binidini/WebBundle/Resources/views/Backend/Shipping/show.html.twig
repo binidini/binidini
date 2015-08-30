@@ -33,9 +33,9 @@
                                         {{ shipping.deliveryPrice | price }}
                                         {% if shipping.state=='conflict' %}
                                         <span class="inline">
-                                            <select class="form-control" style="height: 20px; padding-top: 0;padding-bottom: 0;" id="sel-payment" name="payment">
-                                                <option value="none" selected="selected">Ничего не делать</option>
-                                                <option value="sender">Оставить отправителю</option>
+                                            <select class="form-control" style="height: 20px; padding-top: 0;padding-bottom: 0; color: red" id="sel-payment" name="payment">
+                                                <option value="none">Ничего не делать</option>
+                                                <option value="sender" selected="selected">Оставить отправителю</option>
                                                 <option value="carrier">Передать перевозчику</option>
                                             </select>
                                         </span>
@@ -48,9 +48,9 @@
                                     <dd>{{ shipping.insurance | price }}
                                         {% if shipping.state=='conflict' %}
                                         <span class="inline">
-                                            <select class="form-control" style="height: 20px; padding-top: 0;padding-bottom: 0" id="sel-insurance" name="insurance">
+                                            <select class="form-control" style="height: 20px; padding-top: 0;padding-bottom: 0; color: red;" id="sel-insurance" name="insurance">
                                                 <option value="none">Ничего не делать</option>
-                                                <option value="carrier">Оставить перевозчику</option>
+                                                <option value="carrier" selected="selected">Оставить перевозчику</option>
                                                 <option value="sender">Передать отправителю</option>
                                             </select>
                                         </span>

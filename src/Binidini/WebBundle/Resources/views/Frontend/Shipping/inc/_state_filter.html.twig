@@ -1,0 +1,22 @@
+&nbsp;&nbsp;&nbsp;
+<div class="btn-group">
+    <button data-toggle="dropdown"
+            class="btn btn-primary btn-outline dropdown-toggle">{{ ('binidini.shipping.state.fillter.' ~ app.request.get('state')) | trans }}
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+        <li><a href="{{ path('binidini_core_'~type~'_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}">Все заказы</a></li>
+        <li class="divider"></li>
+        {% if type == 'shipping' %}
+            <li><a href="{{ path('binidini_core_'~type~'_index', {'paginate': app.request.get('paginate'), 'state': 'new' }) }}">Новые заказы</a></li>
+        {% endif %}
+        <li><a href="{{ path('binidini_core_'~type~'_index', {'paginate': app.request.get('paginate'), 'state': 'accepted' }) }}">Принятые заказы</a></li>
+        <li><a href="{{ path('binidini_core_'~type~'_index', {'paginate': app.request.get('paginate'), 'state': 'delivered' }) }}">Доставленные заказы</a></li>
+        <li><a href="{{ path('binidini_core_'~type~'_index', {'paginate': app.request.get('paginate'), 'state': 'paid' }) }}">Оплаченные заказы</a></li>
+        <li><a href="{{ path('binidini_core_'~type~'_index', {'paginate': app.request.get('paginate'), 'state': 'completed' }) }}">Завершенные заказы</a></li>
+        <li class="divider"></li>
+        <li><a href="{{ path('binidini_core_'~type~'_index', {'paginate': app.request.get('paginate'), 'state': 'rejected' }) }}">Отказы</a></li>
+        <li><a href="{{ path('binidini_core_'~type~'_index', {'paginate': app.request.get('paginate'), 'state': 'canceled' }) }}">Аннулированные заказы</a></li>
+        <li><a href="{{ path('binidini_core_'~type~'_index', {'paginate': app.request.get('paginate'), 'state': 'refused' }) }}">Отмененные заказы</a></li>
+        <li><a href="{{ path('binidini_core_'~type~'_index', {'paginate': app.request.get('paginate'), 'state': 'conflict' }) }}">Спорные заказы</a></li>
+    </ul>
+</div>

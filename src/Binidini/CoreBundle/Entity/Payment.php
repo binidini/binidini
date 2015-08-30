@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation\Expose;
  *
  * @ORM\Table(name = "payment")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ExclusionPolicy("all")
  */
 class Payment
@@ -131,10 +132,19 @@ class Payment
      */
     private $updatedAt;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="payment_at", type="datetime")
+     * @Expose
+     */
+    private $paymentAt;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->paymentAt = new \DateTime();
     }
 
     /**
@@ -429,5 +439,28 @@ class Payment
     public function setUpdatedAtValue()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * Set paymentAt
+     *
+     * @param \DateTime $paymentAt
+     * @return Payment
+     */
+    public function setPaymentAt($paymentAt)
+    {
+        $this->paymentAt = $paymentAt;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentAt
+     *
+     * @return \DateTime 
+     */
+    public function getPaymentAt()
+    {
+        return $this->paymentAt;
     }
 }

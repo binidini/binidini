@@ -126,6 +126,11 @@ class Shipment
      */
     private $z;
 
+    /**
+     * @MongoDB\Field(name="img_path", type="string")
+     */
+    private $imgPath;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -488,5 +493,27 @@ class Shipment
     public function getDeliveryCoordinates()
     {
         return $this->deliveryCoordinates;
+    }
+
+    /**
+     * Set imgPath
+     *
+     * @param string $imgPath
+     * @return self
+     */
+    public function setImgPath($imgPath)
+    {
+        $this->imgPath = $imgPath;
+        return $this;
+    }
+
+    /**
+     * Get imgPath
+     *
+     * @return string $imgPath
+     */
+    public function getImgPath()
+    {
+        return $this->imgPath;
     }
 }

@@ -1,6 +1,14 @@
-{% macro is_current_route(route) %}
-    {%- if app.request.attributes.get('_route') == route -%}
-        {{- 'class="active"' -}}
+{% macro is_current_route(routes) %}
+    {%- if routes is iterable -%}
+        {% for route in routes %}
+            {%- if app.request.attributes.get('_route') == route -%}
+                {{- 'class="active"' -}}
+            {%- endif -%}
+        {% endfor %}
+    {%- else -%}
+        {%- if app.request.attributes.get('_route') == routes -%}
+            {{- 'class="active"' -}}
+        {%- endif -%}
     {%- endif -%}
 {% endmacro %}
 
@@ -39,7 +47,7 @@
 
 </head>
 
-<body class="body-small">
+<body {% if is_mobile() %}class="body-small"{% endif %}>
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -71,10 +79,8 @@
                         &#165;++
                     </div>
                 </li>
-                <li {{ croute.is_current_route('fos_user_profile_show') }}>
-                    <a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> <span class="nav-label">Моя страница</span></a>
-                </li>
-                <li {{ croute.is_current_route('binidini_search_shipment_index') }}>
+
+                <li {{ croute.is_current_route(['binidini_search_shipment_index','binidini_search_shipment_search','binidini_search_shipment_nearest']) }}>
                     <a class="count-info" href="{{ path('binidini_search_shipment_index') }}">
                         <i class="fa fa-map-marker"></i>
                         <span class="nav-label">
@@ -82,26 +88,52 @@
                             {% render path('binidini_search_shipment_count') %}
                         </span>
                     </a>
+
+                    <ul class="nav nav-second-level">
+
+                        <li {{ croute.is_current_route('binidini_search_shipment_search') }}><a href="{{  path('binidini_search_shipment_search', {'paginate': app.request.get('paginate')}) }}" >Поиск заказа</a></li>
+                        <li {{ croute.is_current_route('binidini_search_shipment_nearest') }}><a id="geo" href="#" myHref="{{  path('binidini_search_shipment_nearest', {'paginate': app.request.get('paginate', 15)}) }}"  onclick="getLocation()">Заказы рядом</a></li>
+                        <li {{ croute.is_current_route('binidini_search_shipment_index') }}><a href="{{ path('binidini_search_shipment_index', {'paginate': app.request.get('paginate')}) }}">Все заказы</a></li>
+                    </ul>
                 </li>
                 {% if (app.user is empty) or app.user.isCarrier %}
-                <li {{ croute.is_current_route('binidini_core_carrier_index') }}>
-                    <a href="{{ path('binidini_core_carrier_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-truck"></i> <span class="nav-label">Мои перевозки</span></a>
+                <li {{ croute.is_current_route(['binidini_core_carrier_index', 'binidini_core_carrier_active_index']) }}>
+                    <a href="#"><i class="fa fa-truck"></i> <span class="nav-label">Мои перевозки</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('binidini_core_carrier_index') }}><a href="{{ path('binidini_core_carrier_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}">Все перевозки</a></li>
+                        <li {{ croute.is_current_route('binidini_core_carrier_active_index') }}><a href="{{ path('binidini_core_carrier_active_index', {'paginate': app.request.get('paginate')}) }}">Активные</a></li>
+                    </ul>
                 </li>
                 {% endif %}
                 {% if (app.user is empty) or app.user.isSender %}
-                <li {{ croute.is_current_route('binidini_core_shipping_index') }}>
-                    <a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}"><i class="fa fa-archive"></i> <span class="nav-label">Мои отправки</span></a>
+                <li {{ croute.is_current_route(['binidini_core_shipping_index', 'binidini_core_shipping_new', 'binidini_core_shipping_active_index']) }}>
+                    <a href="#"><i class="fa fa-archive"></i> <span class="nav-label">Мои отправки</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('binidini_core_shipping_index') }}><a href="{{ path('binidini_core_shipping_index', {'paginate': app.request.get('paginate'), 'state': ''}) }}">Все отправки</a></li>
+                        <li {{ croute.is_current_route('binidini_core_shipping_active_index') }}><a href="{{ path('binidini_core_shipping_active_index', {'paginate': app.request.get('paginate')}) }}">Активные</a></li>
+                        <li {{ croute.is_current_route('binidini_core_shipping_new') }}><a href="{{ path('binidini_core_shipping_new') }}">Создать новую</a></li>
+                    </ul>
+
                 </li>
                 {% endif %}
-                <li {{ croute.is_current_route('binidini_core_payment_index') }}>
-                    <a href="{{ path('binidini_core_payment_index') }}"><i class="fa fa-rub"></i> <span class="nav-label">Мои финансы</span> </a>
+
+                <li {{ croute.is_current_route(['fos_user_profile_edit','fos_user_profile_show', 'binidini_core_payment_index']) }}>
+                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Мой профиль </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('fos_user_profile_show') }}><a href="{{ path('fos_user_profile_show') }}">Моя страница</a></li>
+                        <li {{ croute.is_current_route('fos_user_profile_edit') }}><a href="{{ path('fos_user_profile_edit') }}">Мои настройки</a></li>
+                        <li {{ croute.is_current_route('binidini_core_payment_index') }}><a href="{{ path('binidini_core_payment_index') }}">Мои финансы</a></li>
+                    </ul>
                 </li>
-                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
-                    <a href="{{ path('fos_user_profile_edit') }}"><i class="fa fa-gears"></i> <span class="nav-label">Мои настройки</span> </a>
+                <li class="special_link"><hr/></li>
+                <li {{ croute.is_current_route(['binidini_how_it_works']) }}>
+                    <a href="{{ path('binidini_how_it_works') }}"><i class="fa fa-medkit"></i> <span class="nav-label">Как все работает</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('binidini_how_it_works') }}><a href="{{ path('binidini_how_it_works') }}">Вопрос-ответ</a></li>
+                        <li {{ croute.is_current_route('binidini_rules') }}><a href="{{ path('binidini_rules') }}" target="rules">Правила</a></li>
+                    </ul>
                 </li>
-                <li class="special_link ">
-                    <a href="{{ path('binidini_how_it_works') }}"><i class="fa fa-medkit"></i> <span class="nav-label">Как все работает</span></a>
-                </li>
+
 
             </ul>
 
@@ -113,11 +145,6 @@
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="get" action="{{ path('binidini_search_shipment_search') }}">
-                        <div class="form-group">
-                            <input type="text" placeholder="Поиск заказа по адресу" class="form-control" name="top-search" id="top-search">
-                        </div>
-                    </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
@@ -173,12 +200,29 @@
 
         {% block content %}{% endblock %}
 
+        <div class="modal inmodal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
+                        <h4 class="modal-title">Ошибка</h4>
+                        <small class="font-bold">при определении местоположения</small>
+                    </div>
+                    <div class="modal-body">
+                        <p id="geoError"></p>
+                        <p>Вы можете воспользоваться поиском по адресу, меню <strong>Поиск заказа</strong>.</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="footer">
             <div class="pull-right">
                 <a href="{{ path('binidini_landing_page') }}">Титимити</a> - народный сервис доставки.
-            </div>
-            <div>
-                <a href="{{ path('binidini_rules') }}" target="_blank" class="link-block">Правила Титимити</a>
             </div>
         </div>
 
@@ -199,11 +243,74 @@
     <script type="text/javascript">
         ymaps.ready(init0);
 
-
         function init0(){
             var suggestView = new ymaps.SuggestView('top-search');
         }
+
+        function getLocation() {
+            var myUrl =  document.getElementById('geo').getAttribute("myHref");
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                function(pos){
+                    window.location = myUrl + "&lon=" + pos.coords.longitude + "&lat=" +  pos.coords.latitude;
+                },
+                function(error) {
+                    var x = document.getElementById("geoError");
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            x.innerHTML = "Пользователь отказался предоставить информацию о своем местомоложении."
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            x.innerHTML = "Информация о местоположении недоступна."
+                            break;
+                        case error.TIMEOUT:
+                            x.innerHTML = "Время ожидания запроса о местомоложении истекло."
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            x.innerHTML = "Неизвестная ошибка."
+                            break;
+                        default :
+                            x.innerHTML = 'Ошибка (' + error.code + '): ' + error.message;
+                            break;
+                    };
+                    $('#myModal').modal();
+                });
+            } else {
+                x.innerHTML = "Ваш браузер не поддерживает геолокацию. Смените браузер или воспользуйтесь поиском по адресу.";
+                $('#myModal').modal();
+            }
+        }
+
     </script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter32225569 = new Ya.Metrika({
+                        id:32225569,
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true
+                    });
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/32225569" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 
 {% endblock %}
 </body>

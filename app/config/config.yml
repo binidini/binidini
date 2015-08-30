@@ -151,6 +151,10 @@ liip_imagine:
             quality: 75
             filters:
                 thumbnail: { size: [38, 38], mode: outbound }
+        photo150x150:
+            quality: 100
+            filters:
+                thumbnail: { size: [150, 150], mode: outbound }
 
 old_sound_rabbit_mq:
     connections:
@@ -219,3 +223,9 @@ fos_oauth_server:
         user_provider: fos_user.user_manager
         options:
             access_token_lifetime: 315360000   # 10 years
+
+mobile_detect:
+    redirect:
+        mobile: ~
+        tablet: ~
+    switch_device_view: ~

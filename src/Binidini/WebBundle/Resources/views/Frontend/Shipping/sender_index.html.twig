@@ -17,32 +17,15 @@
 
                     <div class="ibox-title">
                         {% if shippings.nbresults > 0 %}
-                            Заказы {{ page.paging(shippings) }}
+                            {{ page.paging(shippings) }}
 
                             <div class="ibox-tools">
 
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     по {{ shippings.maxperpage() }} записей
                                 </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li>
-                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 10, 'state': app.request.get('state') } ) }}">по
-                                            10 записей</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 25, 'state': app.request.get('state') } ) }}">по
-                                            25 записей</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 50, 'state': app.request.get('state') } ) }}">по
-                                            50 записей</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 100, 'state': app.request.get('state') } ) }}">по
-                                            100 записей</a>
-                                    </li>
-                                </ul>
 
+                                {{ include('BinidiniWebBundle::Frontend/Shipping/inc/_paginate_filter.html.twig', {'path': 'binidini_core_shipping_index'}) }}
                             </div>
                         {% else %}
                             заказов нет
@@ -52,7 +35,7 @@
 
                             <div class="row">
                                 <div class="col-sm-6 pagination">
-                                    {{ include('BinidiniWebBundle::Frontend/Shipping/_state_filter.html.twig', {'type': 'shipping'}) }}
+                                    {{ include('BinidiniWebBundle::Frontend/Shipping/inc/_state_filter.html.twig', {'type': 'shipping'}) }}
                                 </div>
                                 <div class="col-sm-6 text-right">
                                     {{ page.pagination(shippings) }}
@@ -62,37 +45,9 @@
                         {% if shippings.nbresults > 0 %}
 
                             <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>{{ sylius_resource_sort('id', 'Номер', 'desc') }}</th>
-                                        <th>Что</th>
-                                        <th>Откуда</th>
-                                        <th>Куда</th>
-                                        <th>{{ sylius_resource_sort('deliveryDatetime', 'Прибытие', 'desc') }}</th>
-                                        <th>Статус</th>
-                                        <th class="text-right">Цена</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for shipping in shippings %}
-                                        <tr>
-                                            <td>
-                                                <a href="{{ path('binidini_core_shipping_show', {'id': shipping.id}) }}">{{ shipping.id }}</a>
-                                            </td>
-                                            <td>{{ shipping.name[:24] }}</td>
-                                            <td> <span >{{ shipping.pickupAddress[:64] }}</span></td>
-                                            <td>{{ shipping.deliveryAddress[:64] }}</td>
-                                            <td>{{ shipping.deliveryDatetime | date('d.m H:i') }}</td>
-                                            <td>
-                                                <span class="text-{{ shipping.state }}">{{ ('binidini.shipping.state.' ~ shipping.state) | trans }}</span>
-                                            </td>
-                                            <td class="text-right">{{ shipping.deliveryPrice | price }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+
+                                {{ include('BinidiniWebBundle::Frontend/Shipping/inc/_shippings_table.html.twig', {'shippings': shippings}) }}
+
                             <div class="row">
                                 <div class="col-sm-6">
                                 </div>

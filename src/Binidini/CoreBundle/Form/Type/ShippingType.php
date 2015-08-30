@@ -29,7 +29,8 @@ class ShippingType extends AbstractType
             ->add('weight')
             ->add('x')
             ->add('y')
-            ->add('z');
+            ->add('z')
+            ->add('imgFile','file', ['required' => false]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

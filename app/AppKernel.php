@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new \Lsw\MemcacheBundle\LswMemcacheBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new SunCat\MobileDetectBundle\MobileDetectBundle(),
 
             new Binidini\CoreBundle\BinidiniCoreBundle(),
             new Binidini\WebBundle\BinidiniWebBundle(),

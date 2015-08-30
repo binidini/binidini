@@ -3023,8 +3023,8 @@ body.modal-open {
 }
 /* CONTACTS */
 .contact-box {
-  background-color: #ffffff;
-  border: 1px solid #e7eaec;
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
   padding: 20px;
   margin-bottom: 20px;
 }

@@ -1,0 +1,51 @@
+<div class="wrapper wrapper-content animated fadeInRight" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+
+        {% for shipping in shippings %}
+
+            {% if loop.index is divisibleby(3) %}
+                <div class="row">
+            {% endif %}
+            <div class="col-lg-4 ">
+                <div class="contact-box">
+                    <a href="{{ path('binidini_core_shipping_show', {'id': shipping.id}) }}">
+
+                        <div class="col-sm-12">
+                            <div class="text-center">
+                                {% if shipping.state is defined %}
+                                <span class="badge badge-{{ shipping.state }} pull-right">
+                                    {{ ('binidini.shipping.state.' ~ shipping.state) | trans }}
+                                </span>
+                                {% endif %}
+                                <span class="pull-left">
+                                    №{{ shipping.id }}
+                                </span>
+                                <h3><strong>{{ shipping.name }}</strong></h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+
+                            <img alt="посылка Титимити" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}" align="left" style="margin-right: 10px"/>
+
+                            <p class="inline"><i class="fa fa-clock-o"></i> Время доставки: <strong>{{ shipping.deliveryDatetime | date('d.m H:i') }}</strong></p>
+
+                            <p class="{{ shipping.paymentGuarantee ? 'text-success' }}" style="font-size: 25px"> <strong>{{ shipping.deliveryPrice}}&nbsp;руб.</strong></p>
+
+                            <p class="inline"><i class="fa fa-credit-card"></i> Cтраховка: <strong>{{ shipping.insurance | price }}</strong></p>
+
+                            <p><i class="fa fa-home"></i> {{ shipping.pickupAddress }}</p>
+
+                            <p><i class="fa fa-map-marker"></i> {{ shipping.deliveryAddress }}</p>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+            {% if loop.index is divisibleby(3) %}
+                </div>
+            {% endif %}
+
+        {% endfor %}
+    </div>
+</div>

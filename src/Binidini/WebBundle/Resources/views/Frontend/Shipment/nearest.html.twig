@@ -8,6 +8,9 @@
     <ol class="breadcrumb">
         <li>
             отсортированы по мере удаления
+            <a href="#" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Мы определили ваши координаты ({{ app.request.get('lon') |number_format(8) }}, {{ app.request.get('lat') | number_format(8) }}) и отсортировали заказы по мере удаления от места отправления." data-original-title="" title="" aria-describedby="popover982824">
+                <i class="fa fa-question"></i>
+            </a>
         </li>
     </ol>
 {% endblock %}

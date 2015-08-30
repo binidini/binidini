@@ -47,7 +47,7 @@
 
 </head>
 
-<body class="body-small">
+<body {% if is_mobile() %}class="body-small"{% endif %}>
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -88,6 +88,7 @@
                             {% render path('binidini_search_shipment_count') %}
                         </span>
                     </a>
+
                     <ul class="nav nav-second-level">
 
                         <li {{ croute.is_current_route('binidini_search_shipment_search') }}><a href="{{  path('binidini_search_shipment_search', {'paginate': app.request.get('paginate')}) }}" >Поиск заказа</a></li>
@@ -125,10 +126,10 @@
                     </ul>
                 </li>
                 <li class="special_link"><hr/></li>
-                <li {{ croute.is_current_route(['binidini_how_it_works', 'binidini_rules']) }}>
+                <li {{ croute.is_current_route(['binidini_how_it_works']) }}>
                     <a href="{{ path('binidini_how_it_works') }}"><i class="fa fa-medkit"></i> <span class="nav-label">Как все работает</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li {{ croute.is_current_route('binidini_how_it_works') }}><a href="{{ path('binidini_how_it_works') }}">Вопросы и ответы</a></li>
+                        <li {{ croute.is_current_route('binidini_how_it_works') }}><a href="{{ path('binidini_how_it_works') }}">Вопрос-ответ</a></li>
                         <li {{ croute.is_current_route('binidini_rules') }}><a href="{{ path('binidini_rules') }}" target="rules">Правила</a></li>
                     </ul>
                 </li>
@@ -199,6 +200,26 @@
 
         {% block content %}{% endblock %}
 
+        <div class="modal inmodal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
+                        <h4 class="modal-title">Ошибка</h4>
+                        <small class="font-bold">при определении местоположения</small>
+                    </div>
+                    <div class="modal-body">
+                        <p id="geoError"></p>
+                        <p>Вы можете воспользоваться поиском по адресу, меню <strong>Поиск заказа</strong>.</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="footer">
             <div class="pull-right">
                 <a href="{{ path('binidini_landing_page') }}">Титимити</a> - народный сервис доставки.
@@ -222,24 +243,41 @@
     <script type="text/javascript">
         ymaps.ready(init0);
 
-
         function init0(){
             var suggestView = new ymaps.SuggestView('top-search');
         }
 
         function getLocation() {
-
             var myUrl =  document.getElementById('geo').getAttribute("myHref");
-
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(pos){
+                navigator.geolocation.getCurrentPosition(
+                function(pos){
                     window.location = myUrl + "&lon=" + pos.coords.longitude + "&lat=" +  pos.coords.latitude;
                 },
-                function() {
-                    window.location = myUrl;
+                function(error) {
+                    var x = document.getElementById("geoError");
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            x.innerHTML = "Пользователь отказался предоставить информацию о своем местомоложении."
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            x.innerHTML = "Информация о местоположении недоступна."
+                            break;
+                        case error.TIMEOUT:
+                            x.innerHTML = "Время ожидания запроса о местомоложении истекло."
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            x.innerHTML = "Неизвестная ошибка."
+                            break;
+                        default :
+                            x.innerHTML = 'Ошибка (' + error.code + '): ' + error.message;
+                            break;
+                    };
+                    $('#myModal').modal();
                 });
             } else {
-                window.location = myUrl;
+                x.innerHTML = "Ваш браузер не поддерживает геолокацию. Смените браузер или воспользуйтесь поиском по адресу.";
+                $('#myModal').modal();
             }
         }
 

@@ -223,3 +223,9 @@ fos_oauth_server:
         user_provider: fos_user.user_manager
         options:
             access_token_lifetime: 315360000   # 10 years
+
+mobile_detect:
+    redirect:
+        mobile: ~
+        tablet: ~
+    switch_device_view: ~

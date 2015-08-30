@@ -67,7 +67,15 @@
 {% block javascripts %}
     {{ parent() }}
 
+    <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+
     <script type="text/javascript">
+        ymaps.ready(init0);
+
+        function init0(){
+            var suggestView = new ymaps.SuggestView('top-search');
+        }
+
 
         $(document).ready(function() {
 

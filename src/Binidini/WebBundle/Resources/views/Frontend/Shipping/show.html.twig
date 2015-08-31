@@ -247,6 +247,8 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/binidiniweb/js/plugins/fancybox/jquery.fancybox.js') }}"></script>
+    <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+
 
     {% if shipping.canHasReview() %}
         <script src="{{ asset('bundles/binidiniweb/js/plugins/raty/jquery.raty.js') }}"></script>

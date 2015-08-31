@@ -142,10 +142,14 @@ class PaymentController extends ResourceController
         //проверка есть ли на счете деньги
         if ($payment->getAmount() > $user->getBalance()) {
             if ($this->config->isApiRequest()) {
-                return new JsonResponse(['ErrorCode' => 102, 'ErrorMessage' => 'Недостаточно средст для вывода.']);
+                return new JsonResponse(['ErrorCode' => 102, 'ErrorMessage' => 'Недостаточно средств для вывода.']);
             }
             throw new InsufficientUserBalance("Недостаточно средст для вывода.");
         }
+
+        /**
+         *  проверить что списаний не больше 3 за день
+         */
 
         $res = $this->getAlfabank()->getOrderStatus($orderId);
 

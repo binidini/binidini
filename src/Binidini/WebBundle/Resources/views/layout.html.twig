@@ -200,7 +200,7 @@
 
         {% block content %}{% endblock %}
 
-        <div class="modal inmodal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal inmodal fade" id="geoModal" tabindex="-1" role="dialog"  aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -267,11 +267,11 @@
                             x.innerHTML = 'Ошибка (' + error.code + '): ' + error.message;
                             break;
                     };
-                    $('#myModal').modal();
+                    $('#geoModal').modal();
                 });
             } else {
                 x.innerHTML = "Ваш браузер не поддерживает геолокацию. Смените браузер или воспользуйтесь поиском по адресу.";
-                $('#myModal').modal();
+                $('#geoModal').modal();
             }
         }
 

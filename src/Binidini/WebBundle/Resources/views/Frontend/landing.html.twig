@@ -76,7 +76,7 @@
                                 </a>
                             </li>
                         </ul>
-
+                        {% if not is_mobile() %}
                         <ul class="notes row" id="orders">
 
                             <li>
@@ -141,6 +141,7 @@
                                 </div>
                             </li>
                         </ul>
+                        {% endif %}
                     </div>
                 </div>
             </div>

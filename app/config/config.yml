@@ -155,6 +155,10 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [150, 150], mode: outbound }
+        photo115x35:
+                    quality: 100
+                    filters:
+                        thumbnail: { size: [115, 35], mode: outbound }
 
 old_sound_rabbit_mq:
     connections:

@@ -39,3 +39,9 @@ binidini_how_it_works:
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/howitworks.html.twig
+
+binidini_payment:
+    path: /payment
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/payment.html.twig

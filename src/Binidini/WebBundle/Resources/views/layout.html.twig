@@ -126,10 +126,11 @@
                     </ul>
                 </li>
                 <li class="special_link"><hr/></li>
-                <li {{ croute.is_current_route(['binidini_how_it_works']) }}>
+                <li {{ croute.is_current_route(['binidini_how_it_works', 'binidini_payment']) }}>
                     <a href="#"><i class="fa fa-medkit"></i> <span class="nav-label">Как все работает</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li {{ croute.is_current_route('binidini_how_it_works') }}><a href="{{ path('binidini_how_it_works') }}">Вопрос-ответ</a></li>
+                        <li {{ croute.is_current_route('binidini_payment') }}><a href="{{ path('binidini_payment') }}" target="rules">Оплата</a></li>
                         <li {{ croute.is_current_route('binidini_rules') }}><a href="{{ path('binidini_rules') }}" target="rules">Правила</a></li>
                     </ul>
                 </li>

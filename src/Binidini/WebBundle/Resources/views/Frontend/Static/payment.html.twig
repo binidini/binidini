@@ -1,0 +1,497 @@
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
+
+{% block title %}
+    Оплата доставки на Титимити
+{% endblock %}
+
+{% block pagetitle %}{% endblock %}
+
+{% block content %}
+    <div class="row  border-bottom white-bg dashboard-header">
+
+        <div class="col-sm-3">
+            <h2>Варианты оплаты</h2>
+            <small>Самые популярные способы расчета в Титимити</small>
+            <ul class="list-group clear-list m-t">
+                <li class="list-group-item fist-item">
+                                <span class="pull-right">
+                                    28%
+                                </span>
+                    <span class="label label-success">1</span> Оплата на сотовый телефон
+                </li>
+                <li class="list-group-item">
+                                <span class="pull-right">
+                                    26%
+                                </span>
+                    <span class="label label-info">2</span> Наличными
+                </li>
+                <li class="list-group-item">
+                                <span class="pull-right">
+                                    16%
+                                </span>
+                    <span class="label label-primary">3</span> Перевод с карты на карту
+                </li>
+                <li class="list-group-item">
+                                <span class="pull-right">
+                                    8%
+                                </span>
+                    <span class="label label-default">4</span> QIWI
+                </li>
+                <li class="list-group-item">
+                                <span class="pull-right">
+                                    22%
+                                </span>
+                    <span class="label label-warning">5</span> другие варианты
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <div class="flot-chart dashboard-chart">
+                Средняя оплата за доставку в Титимити, Москва - Санкт-Петербург
+                <div class="flot-chart-content" id="flot-dashboard-chart"></div>
+            </div>
+            <div class="row text-left">
+                <div class="col-xs-4">
+                    <div class=" m-l-md">
+                        <span class="h4 font-bold m-t block"><i class="fa fa-ruble"></i> 224,45</span>
+                        <small class="text-muted m-b block">Средний платеж в Петербурге</small>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <span class="h4 font-bold m-t block"><i class="fa fa-ruble"></i> 247,10</span>
+                    <small class="text-muted m-b block">Средний платеж в Москве</small>
+                </div>
+                <div class="col-xs-4">
+                    <span class="h4 font-bold m-t block"><i class="fa fa-ruble"></i> 221,90</span>
+                    <small class="text-muted m-b block">Средний платеж по России</small>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="statistic-box">
+                <p>
+                    Отправители, указывайте способ оплаты в заказе!
+                </p>
+                <div class="row text-center">
+                    <div class="col-lg-6">
+                        <canvas id="polarChart" width="80" height="80"></canvas>
+                        <h5 >Электронные платежные системы</h5>
+                    </div>
+                    <div class="col-lg-6">
+                        <canvas id="doughnutChart" width="78" height="78"></canvas>
+                        <h5 >Способы оплаты</h5>
+                    </div>
+                </div>
+                <div class="m-t">
+                    <small>Перевозчики, подключайтесь к электронным системам платежей!</small>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+     <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content">
+                        <div class="row">
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Оплата на сотовый телефон</h5> <span class="label label-primary"><i class="fa fa-yen"></i> ++</span>
+                                    <div class="ibox-tools">
+                                        <span class="rating" data-rating-score="5" title="популярный способ оплаты">
+                                                <img alt="1" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="2" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="3" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="4" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="5" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    <div>
+
+                                        <div class="pull-right text-right">
+                                            <small class="font-bold">28% всех платежей</small>
+                                        </div>
+                                        <p>Быстро, удобно, надежно!
+                                            <br/>
+                                            <small class="m-r">
+                                                <a href="http://www.megafon.ru/">Мегафон</a>,
+                                                <a href="http://www.mts.ru/">Мтс</a>,
+                                                <a href="http://www.beeline.ru/">Билайн</a>,
+                                                <a href="http://www.tele2.ru/">Теле2</a> </small>
+                                        </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Оплата наличными</h5> <span class="label label-primary"><i class="fa fa-yen"></i> ++</span>
+                                    <div class="ibox-tools">
+                                        <span class="rating" data-rating-score="5" title="популярный способ оплаты">
+                                                <img alt="1" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="2" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="3" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="4" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="5" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="ibox-content ibox-heading">
+                                    <h3>Тити мити - они и в Африке титимити.</h3>
+                                    <small><i class="fa fa-ruble"></i> Проверенный дедовский способ оплаты.</small>
+                                </div>
+                                <div class="ibox-content">
+                                    Обязательно уточните на каком этапе Вы оплатите/получите деньги.
+                                    <ul>
+                                        <li>
+                                            предоплата - оплата при передаче заказа
+                                        </li>
+                                        <li>
+                                            оплата с задержкой - оплата в месте выдачи заказа, после перевозки
+                                        </li>
+                                        <li>
+                                            оплата на месте - оплата за доставку на месте прибытия
+                                        </li>
+                                        <li>
+                                            оплата доставки + заказа на месте - часто используется интернет магазинами,
+                                            в этом случае надо договориться о передаче денег за заказ
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-lg-4">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Оплата с карты на карту</h5>
+                                        <div class="ibox-tools">
+                                            <span class="rating" data-rating-score="5" title="популярный способ оплаты">
+                                                <img alt="1" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="2" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="3" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="4" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="5" src="/bundles/binidiniweb/img/raty/star-off.png" title="популярный">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="ibox-content">
+
+                                        <div>
+                                            <div class="feed-activity-list">
+
+                                                <div class="feed-element">
+
+                                                    <div class="media-body ">
+                                                        Здесь приводится неполный список российских сервисов <em>P2P-переводов денег с карты на карту
+                                                        Visa и MasterCard</em>.
+                                                        Вы можете использовать карту MasterCard®, Maestro® или Visa, выпущенную любым российским банком.
+                                                        Для осуществления перевода Вам необходимо знать номер карты получателя.
+                                                        Срок зачисления составляет не более 3-х рабочих (обычно не более 5 минут) дней и зависит от банка-эмитента карты получателя.
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="feed-element">
+                                                    <a href="https://www.alfaportal.ru/card2card/ptpl/alfaportal/initial.html" class="pull-left">
+                                                        <img alt="Альфа банк" width="119px" src="{{ asset('bundles/binidiniweb/img/p2p_payment_system/alfa.png')  }}">
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <a href="https://www.alfaportal.ru/card2card/ptpl/alfaportal/initial.html">
+                                                            <strong>Альфа- Банк</strong>
+                                                        </a>
+                                                        <ul>
+                                                            <li>0% (без комиссии) - между картами Альфа-Банка, при этом карта отправителя не является кредитной картой</li>
+                                                            <li>0,5%* (минимум 30 руб.) - с карты другого банка на карту Альфа-Банка</li>
+                                                            <li>1,95% (минимум 30 руб.) – с дебетовой карты Альфа-Банка Россия на карту другого банка РФ или между картами разных банков</li>
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="feed-element">
+                                                    <a href="https://w.qiwi.com/cash/main.action" class="pull-left">
+                                                        <img alt="Visa Qiwi Wallet" width="119px" src="{{ asset('bundles/binidiniweb/img/p2p_payment_system/vqw.png')  }}">
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <a href="https://w.qiwi.com/cash/main.action">
+                                                            <strong>QIWI</strong>
+                                                        </a>.<br/>
+                                                        Комиссия: Россия 2% + 50 руб.; другие страны 2% + 100 руб.
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="feed-element">
+                                                    <a href="https://mobile.mastercard.ru/payments/Denezhnye_perevody_Perevod_s_karty_na_kartu/" class="pull-left">
+                                                        <img alt="MC Mobile" width="119px" src="{{ asset('bundles/binidiniweb/img/p2p_payment_system/mc_mobile.png') }}">
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <a href="https://mobile.mastercard.ru/payments/Denezhnye_perevody_Perevod_s_karty_na_kartu/"><strong>MasterCard Mobile</strong></a>.
+                                                        <br/>Уточняйте комиссию на сайте.
+                                                    </div>
+                                                </div>
+                                                <div class="feed-element">
+                                                    <a href="http://visa.com.ru/ru/ru-ru/personal/features/VisaDirect/index.html" class="pull-left">
+                                                        <img alt="Visa Direct" width="119px" src="{{ asset('bundles/binidiniweb/img/p2p_payment_system/visa-logo-blue.png')  }}">
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <a href="http://visa.com.ru/ru/ru-ru/personal/features/VisaDirect/index.html">
+                                                            <strong>Visa Direct</strong>.
+                                                        </a><br/>
+                                                        Уточняйте комиссию на сайте.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Электронные платежные системы</h5>
+                                    <div class="ibox-tools">
+                                        <span class="rating" data-rating-score="5" title="популярный способ оплаты">
+                                                <img alt="1" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="2" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="3" src="/bundles/binidiniweb/img/raty/star-on.png" title="популярный">&nbsp;
+                                                <img alt="4" src="/bundles/binidiniweb/img/raty/star-off.png" title="популярный">&nbsp;
+                                                <img alt="5" src="/bundles/binidiniweb/img/raty/star-off.png" title="популярный">
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="ibox-content ibox-heading">
+                                    <h3>Будущее уже не то, что прежде</h3>
+                                    <small><i class="fa fa-bitcoin"></i> Пользуйтесь электронными деньгами, чтоб экономить на комиссии.</small>
+                                </div>
+                                <div class="ibox-content inspinia-timeline">
+
+                                    <div class="timeline-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 date">
+                                                <i class="fa fa-rub"></i>
+                                                <a href="https://qiwi.ru/">
+                                                    <img alt="Qiwi" width="80px" src="{{ asset('bundles/binidiniweb/img/p2p_payment_system/qiwi.png')  }}">
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-7 content no-top-border">
+                                                <p class="m-b-xs">
+                                                    <a href="https://qiwi.ru/"><strong>QIWI</strong></a>
+                                                </p>
+
+                                                <p>Комиссия: 0%. Перевод дойдет мгновенно. </p>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 date">
+                                                <i class="fa fa-bitcoin"></i>
+                                                <a href="http://www.webmoney.ru/">
+                                                    <img alt="Webmoney" width="80px" src="{{ asset('bundles/binidiniweb/img/p2p_payment_system/wm.png')  }}">
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-7 content">
+                                                <p class="m-b-xs">
+                                                    <a href="http://www.webmoney.ru/"><strong>Webmoney</strong></a>
+                                                </p>
+                                                <p>За совершение каждой трансакции системой взимается комиссия в размере 0.8% от суммы платежа, но не менее 0.01WM.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 date">
+                                                <i class="fa fa-yen"></i>
+                                                <a href="https://money.yandex.ru">
+                                                    <img alt="Yandex Деньги" width="80px" src="{{ asset('bundles/binidiniweb/img/p2p_payment_system/yandex.png')  }}">
+                                                </a>
+
+                                            </div>
+                                            <div class="col-xs-7 content">
+                                                <p class="m-b-xs">
+                                                    <a href="https://money.yandex.ru"><strong>Yandex Деньги</strong></a>
+                                                </p>
+                                                <p>
+                                                    Комиссия: 0,5%. Перевод дойдет мгновенно.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{  parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Flot -->
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/flot/jquery.flot.spline.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/flot/jquery.flot.resize.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/flot/jquery.flot.pie.js') }}"></script>
+    <!-- ChartJS-->
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/chartJs/Chart.min.js') }}"></script>
+
+
+
+    <script>
+        $(document).ready(function() {
+
+            var data1 = [
+                [0,216],[1,250],[2,211],[3,260],[4,221],[5,240],[6,210],[7,213],[8,240],[9,230],[10,235],[11,260],[12, 216]
+            ];
+            var data2 = [
+                [0,210],[1,240],[2,221],[3,250],[4,215],[5,240],[6,200],[7,210],[8,230],[9,220],[10,215],[11,220],[12, 210]
+            ];
+            $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
+                        data1, data2
+                    ],
+                    {
+                        series: {
+                            lines: {
+                                show: false,
+                                fill: true
+                            },
+                            splines: {
+                                show: true,
+                                tension: 0.4,
+                                lineWidth: 1,
+                                fill: 0.4
+                            },
+                            points: {
+                                radius: 0,
+                                show: true
+                            },
+                            shadowSize: 2
+                        },
+                        grid: {
+                            hoverable: true,
+                            clickable: true,
+                            tickColor: "#d5d5d5",
+                            borderWidth: 1,
+                            color: '#d5d5d5'
+                        },
+                        colors: ["#1ab394", "#464f88"],
+                        xaxis:{
+                        },
+                        yaxis: {
+                            ticks: 4
+                        },
+                        tooltip: false
+                    }
+            );
+
+            var doughnutData = [
+                {
+                    value: 28,
+                    color: "#1c84c6",
+                    highlight: "#1ab394",
+                    label: "Тел"
+                },
+                {
+                    value: 26,
+                    color: "#23c6c8",
+                    highlight: "#1ab394",
+                    label: "Нал"
+                },
+                {
+                    value: 16,
+                    color: "#1ab394",
+                    highlight: "#1ab394",
+                    label: "Visa"
+                },
+                {
+                    value: 8,
+                    color: "#d1dade",
+                    highlight: "#1ab394",
+                    label: "QIWI"
+                },
+                {
+                    value: 22,
+                    color: "#f8ac59",
+                    highlight: "#1ab394",
+                    label: "ост"
+                }
+            ];
+
+            var doughnutOptions = {
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 45, // This is 0 for Pie charts
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
+                animateScale: false
+            };
+
+            var ctx = document.getElementById("doughnutChart").getContext("2d");
+            var DoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
+
+            var polarData = [
+                {
+                    value: 55,
+                    color: "#a3e1d4",
+                    highlight: "#1ab394",
+                    label: "QIWI"
+                },
+                {
+                    value: 30,
+                    color: "#dedede",
+                    highlight: "#1ab394",
+                    label: "WM"
+                },
+                {
+                    value: 15,
+                    color: "#b5b8cf",
+                    highlight: "#1ab394",
+                    label: "Ya"
+                }
+            ];
+
+            var polarOptions = {
+                scaleShowLabelBackdrop: true,
+                scaleBackdropColor: "rgba(255,255,255,0.75)",
+                scaleBeginAtZero: true,
+                scaleBackdropPaddingY: 1,
+                scaleBackdropPaddingX: 1,
+                scaleShowLine: true,
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
+                animateScale: false
+            };
+            var ctx = document.getElementById("polarChart").getContext("2d");
+            //var Polarchart = new Chart(ctx).PolarArea(polarData, polarOptions);
+            var Polarchart = new Chart(ctx).Doughnut(polarData, polarOptions);
+
+
+
+        });
+    </script>
+
+{% endblock %}
+

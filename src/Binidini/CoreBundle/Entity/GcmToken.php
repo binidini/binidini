@@ -38,6 +38,13 @@ class GcmToken implements UserAwareInterface
     private $token;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=16, nullable=true, options={"default" = "android"})
+     */
+    private $type;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="gcmTokens")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
@@ -53,6 +60,7 @@ class GcmToken implements UserAwareInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->type = 'android';
     }
 
 
@@ -133,5 +141,28 @@ class GcmToken implements UserAwareInterface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return GcmToken
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

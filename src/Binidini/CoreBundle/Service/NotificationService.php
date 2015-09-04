@@ -75,7 +75,7 @@ class NotificationService
 
         if (!$user->getGcmTokens()->isEmpty() && $user->getGcmN($bitN)) {
             foreach ($user->getGcmTokens() as $gcmToken) {
-                $ids[] = $gcmToken->getToken();
+                $ids[] = ['token' => $gcmToken->getToken(), 'type' => $gcmToken->getType()];
             }
             if ($resource instanceof Shipping) {
                 $shippingId = $resource->getId();
@@ -91,7 +91,7 @@ class NotificationService
                 'message' => $this->twig->render('BinidiniWebBundle::Template/Gcm/' . $event . '.txt.twig',
                     ['resource' => $resource])
             ];
-            $msg = ['registration_ids' => $ids, 'data' => $data];
+            $msg = ['registration_ids' => $ids, 'data' => $data, ];
             $this->gcmRabbitMqProducer->publish(serialize($msg));
         }
     }

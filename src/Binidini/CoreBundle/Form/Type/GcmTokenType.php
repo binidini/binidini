@@ -27,7 +27,8 @@ class GcmTokenType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('token');
+            ->add('token')
+            ->add('type');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

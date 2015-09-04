@@ -34,8 +34,21 @@ class GcmService
     {
         $url = 'https://android.googleapis.com/gcm/send';
 
-        $post = array(
-            'registration_ids' => $ids,
+        foreach($ids as $id) {
+            if ($id['type'] == 'ios') {
+                $ios_ids[] = $id['token'];
+            } else {
+                $android_ids[] = $id['token'];
+            }
+        }
+
+        $ios_post = array(
+            'registration_ids' => $ios_ids,
+            'content_available' => true,
+            'notification' => $data,
+        );
+        $android_post = array(
+            'registration_ids' => $android_ids,
             'data' => $data,
         );
 
@@ -44,22 +57,49 @@ class GcmService
             'Content-Type: application/json'
         );
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
+        if (count($android_ids) > 0) {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($android_post));
+            $result = curl_exec($ch);
 
-        $result = curl_exec($ch);
+            if (curl_errno($ch)) {
+                $this->logger->critical(
+                    'ids: ' . implode(",", $android_ids) . ', data: ' . json_encode($data) . ', error: ' . curl_error($ch)
+                );
+            }
 
-        if (curl_errno($ch)) {
-            $this->logger->critical('ids: ' . implode(",", $ids) .', data: '. json_encode($data) .', error: ' . curl_error($ch));
+            curl_close($ch);
+
+            $this->logger->info(
+                'ids: ' . implode(",", $android_ids) . ', data: ' . json_encode($data) . ', result: ' . $result
+            );
         }
 
-        curl_close($ch);
+        if (count($ios_ids) > 0) {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($ios_post));
+            $result = curl_exec($ch);
 
-        $this->logger->info('ids: ' . implode(",", $ids) .', data: '. json_encode($data) .', result: ' . $result);
+            if (curl_errno($ch)) {
+                $this->logger->critical(
+                    'ids: ' . implode(",", $ios_ids) . ', data: ' . json_encode($data) . ', error: ' . curl_error($ch)
+                );
+            }
+
+            curl_close($ch);
+
+            $this->logger->info(
+                'ids: ' . implode(",", $ios_ids) . ', data: ' . json_encode($data) . ', result: ' . $result
+            );
+        }
 
     }
 }

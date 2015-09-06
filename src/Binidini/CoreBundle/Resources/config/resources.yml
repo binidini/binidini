@@ -26,7 +26,7 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Binidini\CoreBundle\Entity\Message
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                controller: Binidini\CoreBundle\Controller\MessageController
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
         binidini_core.bid:
             driver: doctrine/orm

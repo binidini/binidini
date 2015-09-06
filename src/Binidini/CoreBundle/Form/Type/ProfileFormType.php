@@ -74,6 +74,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
                 ->add('smsShippingRefuseNotification', 'checkbox', ['required' => false])
                 ->add('smsShippingDisputeNotification', 'checkbox', ['required' => false])
                 ->add('smsShippingDebateNotification', 'checkbox', ['required' => false])
+                ->add('smsShippingMessageNotification', 'checkbox', ['required' => false])
                 ->add('emailBidCreateNotification', 'checkbox', ['required' => false])
                 ->add('emailBidAcceptNotification', 'checkbox', ['required' => false])
                 ->add('emailBidAgreeNotification', 'checkbox', ['required' => false])
@@ -85,6 +86,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
                 ->add('emailShippingRefuseNotification', 'checkbox', ['required' => false])
                 ->add('emailShippingDisputeNotification', 'checkbox', ['required' => false])
                 ->add('emailShippingDebateNotification', 'checkbox', ['required' => false])
+                ->add('emailShippingMessageNotification', 'checkbox', ['required' => false])
                 ->add('gcmBidCreateNotification', 'checkbox', ['required' => false])
                 ->add('gcmBidAcceptNotification', 'checkbox', ['required' => false])
                 ->add('gcmBidAgreeNotification', 'checkbox', ['required' => false])
@@ -95,7 +97,9 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
                 ->add('gcmShippingCompleteNotification', 'checkbox', ['required' => false])
                 ->add('gcmShippingRefuseNotification', 'checkbox', ['required' => false])
                 ->add('gcmShippingDisputeNotification', 'checkbox', ['required' => false])
-                ->add('gcmShippingDebateNotification', 'checkbox', ['required' => false]);
+                ->add('gcmShippingDebateNotification', 'checkbox', ['required' => false])
+                ->add('gcmShippingMessageNotification', 'checkbox', ['required' => false])
+            ;
         }
     }
 

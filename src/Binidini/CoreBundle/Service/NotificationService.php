@@ -20,6 +20,7 @@ namespace Binidini\CoreBundle\Service;
 
 
 use Binidini\CoreBundle\Entity\Bid;
+use Binidini\CoreBundle\Entity\Message;
 use Binidini\CoreBundle\Entity\Shipping;
 use Binidini\CoreBundle\Entity\User;
 use Binidini\CoreBundle\Model\SenderCarrierAwareInterface;
@@ -52,6 +53,12 @@ class NotificationService
         $this->notify($user, $event, $resource);
     }
 
+    public function notifyRecipient(Message $message, $event)
+    {
+        $user = $message->getRecipient();
+        $this->notify($user, $event, $message);
+    }
+
     private function notify(User $user, $event, $resource)
     {
         $bitN = constant('Binidini\CoreBundle\Entity\User::BIT_' . strtoupper($event));
@@ -79,7 +86,7 @@ class NotificationService
             }
             if ($resource instanceof Shipping) {
                 $shippingId = $resource->getId();
-            } elseif ($resource instanceof Bid) {
+            } elseif ($resource instanceof Bid or $resource instanceof Message) {
                 $shippingId = $resource->getShipping()->getId();
             } else {
                 $shippingId = 0;

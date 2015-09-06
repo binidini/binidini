@@ -61,6 +61,8 @@ class User extends BaseUser
     const BIT_DEBATE_SHIPPING   = 23;
     const BIT_RESOLVE_SHIPPING  = 24;
 
+    const BIT_MESSAGE_SHIPPING    = 25;
+
     const PASSWORD_RECOVER_TTL = 259200;
     const PASSWORD_RECOVER_PREFIX = 'password_recover:';
     const PASSWORD_RECOVER_ATTEMPTS = 3;
@@ -1092,6 +1094,21 @@ class User extends BaseUser
         $this->setGcmN(self::BIT_DEBATE_SHIPPING, $flag);
     }
 
+    /**
+     * @return bool
+     */
+    public function getGcmShippingMessageNotification()
+    {
+        return $this->getGcmN(self::BIT_MESSAGE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmShippingMessageNotification($flag)
+    {
+        $this->setGcmN(self::BIT_MESSAGE_SHIPPING, $flag);
+    }
 ### End Gcm section
 
 ### Start Sms section
@@ -1275,6 +1292,23 @@ class User extends BaseUser
     /**
      * @return bool
      */
+    public function getSmsShippingMessageNotification()
+    {
+        return $this->getSmsN(self::BIT_MESSAGE_SHIPPING);
+    }
+    /**
+     * @param bool $flag
+     */
+    public function setSmsShippingMessageNotification($flag)
+    {
+        $this->setSmsN(self::BIT_MESSAGE_SHIPPING, $flag);
+    }
+
+    // EMail section
+
+    /**
+     * @return bool
+     */
     public function getEmailBidCreateNotification()
     {
         return $this->getEmailN(self::BIT_CREATE_BID);
@@ -1448,6 +1482,24 @@ class User extends BaseUser
     {
         $this->setEmailN(self::BIT_DEBATE_SHIPPING, $flag);
     }
+
+    /**
+     * @return bool
+     */
+    public function getEmailShippingMessageNotification()
+    {
+        return $this->getEmailN(self::BIT_MESSAGE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailShippingMessageNotification($flag)
+    {
+        $this->setEmailN(self::BIT_MESSAGE_SHIPPING, $flag);
+    }
+
+    // End notifications
 
     public function getSmsN($n) {
         return ($this->smsMask & (1 << $n)) != 0;

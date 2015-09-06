@@ -14,7 +14,6 @@ namespace Binidini\CoreBundle\Controller;
 use Binidini\CoreBundle\Entity\Bid;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**

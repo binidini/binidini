@@ -11,6 +11,7 @@
 namespace Binidini\CoreBundle\Controller;
 
 
+use Binidini\CoreBundle\Entity\Message;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,34 +22,40 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class MessageController extends ResourceController
 {
-    /**
-     * @param Request $request
-     *
-     * @return RedirectResponse|Response
-     */
-    public function createAction(Request $request)
+    protected $stateMachineGraph = Message::GRAPH;
+
+    public function updateStateAction(Request $request, $transition, $graph = null)
     {
-        $resource = $this->createNew();
-        $form = $this->getForm($resource);
+        $resource = $this->findOr404($request);
 
-        if ($form->handleRequest($request)->isValid()) {
-            $resource = $this->domainManager->create($resource);
 
-            if ($this->config->isApiRequest()) {
-                return $this->handleView($this->view($resource, 201));
-            }
+        if (null === $graph) {
 
-            if (null === $resource) {
-                return $this->redirectHandler->redirectToIndex();
-            }
-
-            return $this->redirectHandler->redirectTo($resource);
+            $graph = $this->stateMachineGraph;
         }
+
+        $stateMachine = $this->get('sm.factory')->get($resource, $graph);
+        if (!$stateMachine->can($transition)) {
+            throw new NotFoundHttpException(sprintf(
+                'The requested transition %s cannot be applied on the given %s with graph %s.',
+                $transition,
+                $this->config->getResourceName(),
+                $graph
+            ));
+        }
+
+        $stateMachine->apply($transition);
+
+        $this->domainManager->update($resource);
 
         if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form));
+            if ($resource instanceof ResourceEvent) {
+                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            }
+
+            return $this->handleView($this->view($resource, 204));
         }
 
-        return $this->redirectHandler->redirectTo($resource);
+        return $this->redirectHandler->redirectToRoute($this->config->getRedirectRoute('index'), $this->config->getRedirectParameters());
     }
 }

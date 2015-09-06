@@ -74,7 +74,10 @@
                         <li><a href="#">По пользователям</a></li>
                     </ul>
                 </li>
-
+                <li class="special_link"><hr/></li>
+                <li>
+                    <a href="{{ path('binidini_home') }}"><i class="fa fa-exclamation-circle"></i>Титимити.ру</a>
+                </li>
             </ul>
 
         </div>
@@ -87,9 +90,7 @@
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <li>
-                        <a href="{{ path('binidini_home') }}">Титимити 24/7</a>
-                    </li>
+
                     {% render path('binidini_user_bids_accepted') %}
                     {% render path('binidini_sender_bids_new') %}
                     <li>

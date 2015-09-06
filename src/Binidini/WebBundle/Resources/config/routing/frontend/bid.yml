@@ -28,10 +28,7 @@ binidini_core_shipping_bid_state_transition:
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.bid:updateStateAction
-        _sylius:
-            redirect:
-                route: binidini_core_shipping_show
-                parameters: { id: $shipping_id }
+
 
 binidini_user_bids_accepted:
     path: /user/bids/accepted

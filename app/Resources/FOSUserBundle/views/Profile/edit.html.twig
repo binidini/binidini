@@ -400,9 +400,49 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
+                                                    <div class="col-sm-6">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Уведомления для всех</th>
+                                                                <th>sms</th>
+                                                                <th>email</th>
+                                                                <th>gcm
+                                                                    <a href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Мгновенные сообщения, приходящие на мобильный телефон. Необходимо установить мобильное приложение." data-original-title="" title="" aria-describedby="popover982824">
+                                                                        <i class="fa fa-question" style="font-size: large"></i>
+                                                                    </a>
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+
+                                                                <td>1</td>
+                                                                <td>Новое сообщение по заказу</td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.smsShippingMessageNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.emailShippingMessageNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="checkbox-inline i-checks">
+                                                                        {{ form_widget(form.gcmShippingMessageNotification, {'attr': {'style': 'position: absolute; opacity: 0;'}}) }}
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
                                                     <div class="col-sm-12">
                                                         Отметьте те уведомления, которые Вы хотите получать черес смс, мгновенные сообщения (gcm) на мобильный телефон и по электронной почте, в качестве отправителя и перевозчика.
-                                                        Чтобы получать уведомления по электронной почте, Ваш email должен быть верифицирован.
+                                                        Чтобы получать уведомления по электронной почте, Ваш email должен быть <a href="{{ path('fos_user_profile_show') }}">подтвержден</a>.
                                                     </div>
                                                 </div>
                                             </div>

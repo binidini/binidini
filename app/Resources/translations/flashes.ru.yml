@@ -2,6 +2,7 @@ binidini_core.review.create: Отзыв успешно отправлен.
 binidini_core.shipping.create: Заказ на доставку успешно создан.
 binidini_core.shipping.update: Заказ успешно изменен.
 binidini_core.message.create: Сообщение отправлено.
+binidini_core.message.update: Сообщение прочитано.
 binidini_core.bid.create: Заявка на доставку успешно создана.
 binidini_core.bid.update: Заявка на успешно изменена.
 binidini_core.bid.create.error: Ошибка при создании заявки: %error%

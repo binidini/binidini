@@ -51,6 +51,14 @@ services:
         tags:
             - { name: kernel.event_listener, event: binidini_core.bid.post_create, method: onBidPostCreate }
 
+    binidini.listener.message:
+        class: Binidini\CoreBundle\EventListener\MessageListener
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @binidini.notification.service
+        tags:
+            - { name: kernel.event_listener, event: binidini_core.message.post_create, method: onMessagePostCreate }
+
     binidini.geocode.yandex.client:
         class: %guzzle.client.class%
         arguments: ['http://geocode-maps.yandex.ru/1.x/']

@@ -56,7 +56,9 @@ class NotificationService
     public function notifyRecipient(Message $message, $event)
     {
         $user = $message->getRecipient();
-        $this->notify($user, $event, $message);
+        if (!is_null($user)) {
+            $this->notify($user, $event, $message);
+        }
     }
 
     private function notify(User $user, $event, $resource)

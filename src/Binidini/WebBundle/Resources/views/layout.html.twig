@@ -134,7 +134,11 @@
                         <li {{ croute.is_current_route('binidini_rules') }}><a href="{{ path('binidini_rules') }}" target="rules">Правила</a></li>
                     </ul>
                 </li>
-
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+                        <a href="{{ path('binidini_admin_shipping') }}"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Консоль</span></a>
+                    </li>
+                {% endif %}
 
             </ul>
 
@@ -149,14 +153,10 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('binidini_admin_shipping') }}">Администрирование</a>
-                        {% else %}
-                            <span class="m-r-sm text-muted welcome-message">Титимити по пути</span>
-                        {% endif %}
-
+                        <span class="m-r-sm text-muted welcome-message">Титимити по пути</span>
                     </li>
                     {% if (app.user is not empty) %}
+                        {% render path('binidini_my_messages') %}
                         {% render path('binidini_user_bids_accepted') %}
                         {% render path('binidini_sender_bids_new') %}
                     {% endif %}

@@ -1,0 +1,26 @@
+{% if messages.nbresults > 0 %}
+    <li class="dropdown" xmlns="http://www.w3.org/1999/html">
+        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+            <i class="fa fa-envelope"></i> <span class="label label-info">{{ messages.nbresults }}</span>
+        </a>
+        <ul class="dropdown-menu dropdown-alerts">
+            {% set i = 0 %}
+             {% for message in messages %}
+                <li>
+                    <a href="{{ path('binidini_read_my_message', {'id': message.id, 'shipping_id': message.shipping.id, 'transition': 'read'}) }}">
+                        <div>
+                            <img alt="image" class="img-circle pull-left" src="{{message.user.imgpath|imagine_filter('photo38x38')}}">
+                            &nbsp;{{ message.text[:70] ~ '...'}}<br>
+                            {{ message.user.name }}
+                            <span class="pull-right text-muted small">{{ message.createdAt | timeago }}</span>
+                        </div>
+                    </a>
+                </li>
+                {% set i = i + 1 %}
+                {% if i < messages.nbresults %}
+                    <li class="divider"></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+{% endif %}

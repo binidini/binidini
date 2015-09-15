@@ -132,3 +132,19 @@ winzou_state_machine:
                 after_reject: { on: 'reject', do: [@binidini.notification.service, 'notifyCarrier'], args: ['object', '"reject_bid"']}
                 after_agreet: { on: 'agree',  do: [@binidini.notification.service, 'notifySender'],  args: ['object', '"agree_bid"']}
                 after_recall: { on: 'recall', do: [@binidini.notification.service, 'notifySender'],  args: ['object', '"recall_bid"']}
+
+    binidini_core_message:
+        class: Binidini\CoreBundle\Entity\Message
+        property_path: state
+        graph: message
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            - new
+            - read
+        transitions:
+            read:
+                from: [new, read]
+                to: read
+        callbacks:
+            before:
+                before_read: { on: 'read', do: [@binidini.security.service, 'checkRecipient'],  args: ['object'] }

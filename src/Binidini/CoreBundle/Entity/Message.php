@@ -15,6 +15,10 @@ use JMS\Serializer\Annotation\VirtualProperty;
  */
 class Message implements UserAwareInterface
 {
+    const GRAPH             = 'message';
+
+    const STATE_NEW  = 'new';
+    const STATE_READ = 'read';
     /**
      * @var int
      *
@@ -43,6 +47,24 @@ class Message implements UserAwareInterface
     private $user;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="recipient_id", referencedColumnName="id", nullable=true)
+     * @Expose
+     */
+    private $recipient;
+
+    /**
+     * Message state.
+     *
+     * @var string
+     * @ORM\Column(name="state", type="string", length=32, options={"default"="new"})
+     * @Expose
+     */
+    private $state;
+
+    /**
      * @var Shipping
      *
      * @ORM\ManyToOne(targetEntity="Shipping", inversedBy="messages")
@@ -61,6 +83,7 @@ class Message implements UserAwareInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->state = Shipping::STATE_NEW;
     }
 
     /**
@@ -165,4 +188,52 @@ class Message implements UserAwareInterface
         return $this->shipping;
     }
 
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return Message
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+
+
+    /**
+     * Set recipient
+     *
+     * @param \Binidini\CoreBundle\Entity\User $recipient
+     * @return Message
+     */
+    public function setRecipient(\Binidini\CoreBundle\Entity\User $recipient = null)
+    {
+        $this->recipient = $recipient;
+
+        return $this;
+    }
+
+    /**
+     * Get recipient
+     *
+     * @return \Binidini\CoreBundle\Entity\User 
+     */
+    public function getRecipient()
+    {
+        return $this->recipient;
+    }
 }

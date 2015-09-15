@@ -24,3 +24,29 @@ binidini_core_shipping_message_new:
                 parameters: { id: $shipping_id, tab: message }
             criteria:
                 shipping: $shipping_id
+
+binidini_my_messages:
+    path: /messages/last
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.message:indexAction
+        _sylius:
+            paginate: 10
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                recipient: ['expr:service("security.context").getToken().getUser().getId()']
+                state: 'new'
+            template: BinidiniWebBundle:Frontend/Message:alert_new.html.twig
+
+binidini_read_my_message:
+    path: /shipping/{shipping_id}/message/{id}/state/{transition}
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.message:updateStateAction
+        _sylius:
+            redirect:
+                route: binidini_core_shipping_show
+                parameters: { id: $shipping_id, tab: message }

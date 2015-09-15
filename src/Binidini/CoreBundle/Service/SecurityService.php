@@ -2,6 +2,7 @@
 
 namespace Binidini\CoreBundle\Service;
 
+use Binidini\CoreBundle\Entity\Message;
 use Binidini\CoreBundle\Entity\User;
 use Binidini\CoreBundle\Model\SenderCarrierAwareInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -27,6 +28,12 @@ class SecurityService
     {
         if ( is_null($resource->getCarrier()) or  $resource->getCarrier()->getId() != $this->getUser()->getId())
             throw new AccessDeniedHttpException("Вы не являетесь перевозчиком. Данная операция запрещена.");
+    }
+
+    public function checkRecipient(Message $message)
+    {
+        if ( is_null($message->getRecipient()) or  $message->getRecipient()->getId() != $this->getUser()->getId())
+            throw new AccessDeniedHttpException("Вы не являетесь получателем сообщения. Данная операция запрещена.");
     }
 
     public function checkResolver()

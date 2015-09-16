@@ -208,6 +208,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="parcels")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Expose
      */
     private $user;
 

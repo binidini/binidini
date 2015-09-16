@@ -18,6 +18,7 @@
 
 namespace Binidini\CoreBundle\Worker;
 
+use Binidini\CoreBundle\Service\NotificationService;
 use Binidini\SearchBundle\Document\Coordinates;
 use Binidini\SearchBundle\Document\Shipment;
 use Doctrine\ODM\MongoDB\DocumentManager;
@@ -33,12 +34,14 @@ class GeocodeWorker implements ConsumerInterface
     private $geocode;
     private $em;
     private $dm;
+    private $ns;
 
-    public function __construct(ClientInterface $geocode, EntityManager $em, DocumentManager $dm)
+    public function __construct(ClientInterface $geocode, EntityManager $em, DocumentManager $dm, NotificationService $ns)
     {
         $this->geocode = $geocode;
         $this->em = $em;
         $this->dm = $dm;
+        $this->ns = $ns;
     }
 
     public function execute(AMQPMessage $msg)
@@ -108,5 +111,7 @@ class GeocodeWorker implements ConsumerInterface
             $this->dm->flush($shipment);
         }
 
+        //после того как у заказа появились координаты, можно проинформировать курьеров возле заказа
+        $this->ns->notifyAboutNewShipping($shipping);
     }
 }

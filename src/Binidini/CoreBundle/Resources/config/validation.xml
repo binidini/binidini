@@ -13,19 +13,19 @@
                     <value>BinidiniRegistration</value>
                 </option>
             </constraint>
-            <constraint name="Length">
-                <option name="min">10</option>
-                <option name="minMessage">fos_user.username.short</option>
-                <option name="max">10</option>
-                <option name="maxMessage">fos_user.username.long</option>
-                <option name="groups">
-                    <value>BinidiniRegistration</value>
-                </option>
-            </constraint>
             <constraint name="Regex">
                 <option name="pattern">/^[0-9]{10}$/</option>
                 <option name="match">true</option>
                 <option name="message">Номер телефона состоит из 10 цифр</option>
+                <option name="groups">
+                    <value>BinidiniRegistration</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">10</option>
+                <option name="max">10</option>
+                <option name="minMessage">fos_user.username.short</option>
+                <option name="maxMessage">fos_user.username.long</option>
                 <option name="groups">
                     <value>BinidiniRegistration</value>
                 </option>

@@ -52,4 +52,9 @@ sylius_resource:
                 model: Binidini\CoreBundle\Entity\GcmToken
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
-
+        binidini_core.place:
+            driver: doctrine/orm
+            classes:
+                model: Binidini\CoreBundle\Entity\Place
+                controller: Binidini\CoreBundle\Controller\PlaceController
+                repository: Binidini\CoreBundle\Entity\PlaceRepository

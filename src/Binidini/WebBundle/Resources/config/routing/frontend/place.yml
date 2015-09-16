@@ -1,0 +1,14 @@
+binidini_core_place_index:
+    path: /place
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.place:indexAction
+        _sylius:
+            criteria:
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            template: BinidiniWebBundle:Frontend/Place:index.html.twig

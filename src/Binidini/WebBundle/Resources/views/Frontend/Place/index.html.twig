@@ -1,0 +1,95 @@
+{% import 'BinidiniWebBundle:Frontend/Macros:page.html.twig' as page %}
+
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
+
+{% block pageheader %}Мои адреса{% endblock %}
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li>
+        Адреса, в районе которых вас интересуют заказы.
+    </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        {% if places.nbresults > 0 %}
+                            Платежи {{ page.paging(places) }}
+
+                            <div class="ibox-tools">
+
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    по {{ places.maxperpage() }} записей
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li>
+                                        <a href="{{ path('binidini_core_payment_index', {'paginate': 15} ) }}">по
+                                            15 записей</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('binidini_core_payment_index', {'paginate': 30} ) }}">по
+                                            30 записей</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('binidini_core_payment_index', {'paginate': 60} ) }}">по
+                                            60 записей</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ path('binidini_core_payment_index', {'paginate': 90} ) }}">по
+                                            90 записей</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        {% else %}адресов нет{% endif %}
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-12 text-right">
+                                {{ page.pagination(places) }}
+                            </div>
+                        </div>
+
+                        {% if places.nbresults > 0 %}
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Адрес</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for place in places %}
+                                        <tr>
+                                            <td>{{ place.address}}</td>
+                                            <td>
+                                                <button class="btn btn-xs btn-danger"  data-href="{{ path('binidini_core_payment_refund', {'order_id': payment.ref} ) }}" data-toggle="modal" data-target="#returnModal">Удалить</button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                </div>
+
+                                <div class="col-sm-6 text-right">
+                                    {{ page.pagination(places) }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

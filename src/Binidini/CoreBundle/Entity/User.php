@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Binidini\CoreBundle\Entity\UserRepository")
  * @ORM\Table(name = "user")
  *
  * @ORM\AttributeOverrides({
@@ -307,6 +307,35 @@ class User extends BaseUser
      */
     private $carrierCount;
 
+    /**
+     * @var double
+     *
+     * @ORM\Column(name="longitude", type="decimal", precision=12, scale=8, nullable=true)
+     * @Expose
+     */
+    private $longitude;
+
+    /**
+     * @var double
+     *
+     * @ORM\Column(name="latitude", type="decimal", precision=12, scale=8, nullable=true)
+     * @Expose
+     */
+    private $latitude;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Place", mappedBy="user")
+     */
+    private $places;
+
     public function __construct()
     {
         parent::__construct();
@@ -315,6 +344,7 @@ class User extends BaseUser
         $this->shipments = new ArrayCollection();
         $this->bids = new ArrayCollection();
         $this->payments = new ArrayCollection();
+        $this->places = new ArrayCollection();
 
         $this->senderRating = 0;
         $this->senderRatingAmount= 0;
@@ -342,9 +372,9 @@ class User extends BaseUser
         $this->carrierRatingAmount = 0;
         $this->carrierRatingCount = 0;
 
-        $this->smsMask = 0b1111111111111111111111111;
-        $this->emailMask = 0b1111111111111111111111111;
-        $this->gcmMask = 0b1111111111111111111111111;
+        $this->smsMask =   0b1111111111111111111111111111;
+        $this->emailMask = 0b1111111111111111111111111111;
+        $this->gcmMask =   0b1111111111111111111111111111;
 
         $this->imgPath = 'profile/'.rand(1,39).'.jpg';
     }
@@ -1109,6 +1139,23 @@ class User extends BaseUser
     {
         $this->setGcmN(self::BIT_MESSAGE_SHIPPING, $flag);
     }
+
+    /**
+     * @return bool
+     */
+    public function getGcmShippingCreateNotification()
+    {
+        return $this->getGcmN(self::BIT_CREATE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setGcmShippingCreateNotification($flag)
+    {
+        $this->setGcmN(self::BIT_CREATE_SHIPPING, $flag);
+    }
+
 ### End Gcm section
 
 ### Start Sms section
@@ -1304,6 +1351,21 @@ class User extends BaseUser
         $this->setSmsN(self::BIT_MESSAGE_SHIPPING, $flag);
     }
 
+    /**
+     * @return bool
+     */
+    public function getSmsShippingCreateNotification()
+    {
+        return $this->getSmsN(self::BIT_CREATE_SHIPPING);
+    }
+    /**
+     * @param bool $flag
+     */
+    public function setSmsShippingCreateNotification($flag)
+    {
+        $this->setSmsN(self::BIT_CREATE_SHIPPING, $flag);
+    }
+
     // EMail section
 
     /**
@@ -1497,6 +1559,22 @@ class User extends BaseUser
     public function setEmailShippingMessageNotification($flag)
     {
         $this->setEmailN(self::BIT_MESSAGE_SHIPPING, $flag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmailShippingCreateNotification()
+    {
+        return $this->getEmailN(self::BIT_CREATE_SHIPPING);
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function setEmailShippingCreateNotification($flag)
+    {
+        $this->setEmailN(self::BIT_CREATE_SHIPPING, $flag);
     }
 
     // End notifications
@@ -1915,4 +1993,107 @@ class User extends BaseUser
         $this->salt = $salt;
     }
 
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     * @return User
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string 
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     * @return User
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string 
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Shipping
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+
+    /**
+     * Add places
+     *
+     * @param \Binidini\CoreBundle\Entity\Place $places
+     * @return User
+     */
+    public function addPlace(\Binidini\CoreBundle\Entity\Place $places)
+    {
+        $this->places[] = $places;
+
+        return $this;
+    }
+
+    /**
+     * Remove places
+     *
+     * @param \Binidini\CoreBundle\Entity\Place $places
+     */
+    public function removePlace(\Binidini\CoreBundle\Entity\Place $places)
+    {
+        $this->places->removeElement($places);
+    }
+
+    /**
+     * Get places
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlaces()
+    {
+        return $this->places;
+    }
 }

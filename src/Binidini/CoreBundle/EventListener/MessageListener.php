@@ -45,7 +45,7 @@ class MessageListener
         }
         $this->em->flush($message);
 
-        $this->notifier->notifyRecipient($message, 'message_shipping');
+        $this->notifier->notifyRecipient($message);
 
     }
 

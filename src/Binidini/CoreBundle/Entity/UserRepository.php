@@ -66,4 +66,23 @@ class UserRepository extends EntityRepository
         }
         return $this->getPaginator($queryBuilder);
     }
+
+    //http://stackoverflow.com/questions/2234204/latitude-longitude-find-nearest-latitude-longitude-complex-sql-or-complex-calc
+    //пока отсылаем 50 курьерам сообщение, которые были возле
+
+    public function findByCoordinates($lon, $lat) {
+
+        $params = [
+            'lon' => $lon,
+            'lat' => $lat
+        ];
+
+        $sql = 'SELECT id FROM user u WHERE u.type !=2 AND (POW(69.1 * (u.latitude - :lat), 2) + POW(69.1 * (:lon - u.longitude) * COS(u.latitude / 57.3), 2)) < 100 ORDER BY u.updated_at DESC LIMIT 51';
+
+        $em = $this->getEntityManager();
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+
+    }
 }

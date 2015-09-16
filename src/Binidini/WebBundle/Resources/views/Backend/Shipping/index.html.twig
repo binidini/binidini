@@ -30,19 +30,19 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-user">
                                     <li>
-                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 15, 'state': app.request.get('state') } ) }}">по
+                                        <a href="{{ path('binidini_admin_shipping', {'paginate': 15, 'state': app.request.get('state') } ) }}">по
                                             15 записей</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 30, 'state': app.request.get('state') } ) }}">по
+                                        <a href="{{ path('binidini_admin_shipping', {'paginate': 30, 'state': app.request.get('state') } ) }}">по
                                             30 записей</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 60, 'state': app.request.get('state') } ) }}">по
+                                        <a href="{{ path('binidini_admin_shipping', {'paginate': 60, 'state': app.request.get('state') } ) }}">по
                                             60 записей</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('binidini_core_shipping_index', {'paginate': 90, 'state': app.request.get('state') } ) }}">по
+                                        <a href="{{ path('binidini_admin_shipping', {'paginate': 90, 'state': app.request.get('state') } ) }}">по
                                             90 записей</a>
                                     </li>
                                 </ul>
@@ -70,6 +70,7 @@
                                     <tr>
                                         <th>{{ sylius_resource_sort('id', 'Номер', 'desc') }}</th>
                                         <th>Что</th>
+                                        <th>Кто</th>
                                         <th>Откуда</th>
                                         <th>Куда</th>
                                         <th>{{ sylius_resource_sort('deliveryDatetime', 'Прибытие', 'desc') }}</th>
@@ -84,6 +85,10 @@
                                                 <a href="{{ path('binidini_admin_shipping_show', {'id': shipping.id}) }}">{{ shipping.id }}</a>
                                             </td>
                                             <td>{{ shipping.name[:24] }}</td>
+                                            <td>
+                                                <a href="{{ path('binidini_admin_user_show', {'id': shipping.sender.id}) }}">{{ shipping.sender.name }}</a>
+                                            </td>
+
                                             <td> <span >{{ shipping.pickupAddress[:64] }}</span></td>
                                             <td>{{ shipping.deliveryAddress[:64] }}</td>
                                             <td>{{ shipping.deliveryDatetime | date('d.m H:i') }}</td>

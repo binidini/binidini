@@ -114,6 +114,7 @@ services:
             - @binidini.geocode.yandex.client
             - @doctrine.orm.entity_manager
             - @doctrine.odm.mongodb.document_manager
+            - @binidini.notification.service
 
     binidini.sms_worker:
         class: Binidini\CoreBundle\Worker\SmsWorker
@@ -174,6 +175,8 @@ services:
             - @old_sound_rabbit_mq.binidini_email_producer
             - @old_sound_rabbit_mq.binidini_gcm_producer
             - @twig
+            - @doctrine.orm.entity_manager
+
 
     binidini.shipping.logic.service:
         class: Binidini\CoreBundle\Service\ShippingLogicService

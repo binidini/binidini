@@ -16,6 +16,7 @@ use Binidini\SearchBundle\Model\MyPagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Hateoas\Configuration\Route;
+use Binidini\CoreBundle\Entity\User;
 
 class ShipmentController extends ResourceController
 {
@@ -25,6 +26,18 @@ class ShipmentController extends ResourceController
         $longitude = $request->get('lon');
         $latitude  = $request->get('lat');
         $searchAddress = $request->get('top-search');
+
+        if (!is_null($longitude) && !is_null($latitude)) {
+            /** @var $user User */
+            $user = $this->getUser();
+
+            if (!is_null($user)) {
+
+                $user->setLatitude($latitude);
+                $user->setLongitude($longitude);
+                $this->getDoctrine()->getManager()->flush($user);
+            }
+        }
 
         if ( !empty($searchAddress) && (is_null($longitude) || is_null($latitude))) {
 

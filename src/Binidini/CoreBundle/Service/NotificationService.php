@@ -24,6 +24,7 @@ use Binidini\CoreBundle\Entity\Message;
 use Binidini\CoreBundle\Entity\Shipping;
 use Binidini\CoreBundle\Entity\User;
 use Binidini\CoreBundle\Model\SenderCarrierAwareInterface;
+use Doctrine\ORM\EntityManager;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 
 class NotificationService
@@ -32,33 +33,55 @@ class NotificationService
     private $emailRabbitMqProducer;
     private $gcmRabbitMqProducer;
     private $twig;
+    private $em;
 
-    public function __construct(Producer $smsRabbitMqProducer, Producer $emailRabbitMqProducer, Producer $gcmRabbitMqProducer, \Twig_Environment $twig)
+    public function __construct(Producer $smsRabbitMqProducer, Producer $emailRabbitMqProducer, Producer $gcmRabbitMqProducer, \Twig_Environment $twig, EntityManager $em)
     {
         $this->smsRabbitMqProducer = $smsRabbitMqProducer;
         $this->emailRabbitMqProducer = $emailRabbitMqProducer;
         $this->gcmRabbitMqProducer = $gcmRabbitMqProducer;
         $this->twig = $twig;
+        $this->em = $em;
     }
 
     public function notifySender(SenderCarrierAwareInterface $resource, $event)
     {
         $user = $resource->getSender();
-        $this->notify($user, $event, $resource);
+        if ($user->isSender()) {
+            $this->notify($user, $event, $resource);
+        }
     }
 
     public function notifyCarrier(SenderCarrierAwareInterface $resource, $event)
     {
         $user = $resource->getCarrier();
-        $this->notify($user, $event, $resource);
+        if ($user->isCarrier()) {
+            $this->notify($user, $event, $resource);
+        }
     }
 
-    public function notifyRecipient(Message $message, $event)
+    public function notifyRecipient(Message $message)
     {
         $user = $message->getRecipient();
         if (!is_null($user)) {
-            $this->notify($user, $event, $message);
+            $this->notify($user, 'message_shipping', $message);
         }
+    }
+
+    public function notifyAboutNewShipping(Shipping $shipping) {
+
+        if (is_null($shipping->getPickupLongitude()) or is_null($shipping->getPickupLatitude())) {
+            return;
+        }
+
+        $uids = $this->em->getRepository('BinidiniCoreBundle:User')->findByCoordinates($shipping->getPickupLongitude(), $shipping->getPickupLatitude());
+        foreach ($uids as $uid) {
+            $user = $this->em->getRepository('BinidiniCoreBundle:User')->find($uid['id']);
+            if ($shipping->getSender()->getId() != $uid['id'] && $user->isCarrier()) {
+                $this->notify($user, 'create_shipping', $shipping);
+            }
+        }
+
     }
 
     private function notify(User $user, $event, $resource)
@@ -82,7 +105,7 @@ class NotificationService
             $this->emailRabbitMqProducer->publish(serialize($msg));
         }
 
-        if (!$user->getGcmTokens()->isEmpty() && $user->getGcmN($bitN)) {
+        if (!($user->getGcmTokens()->isEmpty()) && $user->getGcmN($bitN)) {
             foreach ($user->getGcmTokens() as $gcmToken) {
                 $ids[] = ['token' => $gcmToken->getToken(), 'type' => $gcmToken->getType()];
             }

@@ -122,9 +122,6 @@
                     <ul class="nav nav-second-level">
                         <li {{ croute.is_current_route('fos_user_profile_show') }}><a href="{{ path('fos_user_profile_show') }}">Моя страница</a></li>
                         <li {{ croute.is_current_route('fos_user_profile_edit') }}><a href="{{ path('fos_user_profile_edit') }}">Мои настройки</a></li>
-                        {% if ((app.user is not empty) and (app.user.isCarrier))  %}
-                            <li {{ croute.is_current_route('binidini_core_place_index') }}><a href="{{ path('binidini_core_place_index') }}">Мои адреса</a></li>
-                        {% endif %}
                         <li {{ croute.is_current_route('binidini_core_payment_index') }}><a href="{{ path('binidini_core_payment_index') }}">Мои финансы</a></li>
                     </ul>
                 </li>

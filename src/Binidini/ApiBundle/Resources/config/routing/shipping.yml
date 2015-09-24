@@ -36,3 +36,63 @@ binidini_api_shipping_new:
     methods: [POST]
     defaults:
         _controller: binidini_core.controller.shipping:createAction
+
+binidini_api_my_shipping_available_index:
+    path: /sender/available
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+                state: ['new']
+
+binidini_api_my_shipping_active_index::
+    path: /sender/active
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+                state: ['dispatched', 'on_way', 'accepted', 'delivered', 'paid', 'rejected', 'refused', 'canceled']
+
+binidini_api_my_shipping_conflict_index:
+    path: /sender/conflict
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+                state: ['conflict']
+
+binidini_api_my_shipping_completed_index:
+    path: /sender/completed
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+                state: ['completed']

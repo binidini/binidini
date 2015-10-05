@@ -302,7 +302,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         $this->deliveryDatetime->modify('+3 hours');
         $this->deliveryDatetime->setTimestamp(floor($this->deliveryDatetime->getTimestamp() / 3600) * 3600);
 
-        $this->imgPath = 'parcels/pics/tytymyty_'.rand(1,16).'.jpg';
+        $this->imgPath = 'parcels/pics/tytymyty_'.rand(1,18).'.jpg';
     }
 
     public function hold()

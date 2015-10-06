@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManager;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use Psr\Log\LoggerInterface;
 use Sylius\Component\Resource\Event\ResourceEvent;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Listener responsible to copy shipping object into mongodb
@@ -60,6 +61,27 @@ class ShippingListener
          * @var \Binidini\CoreBundle\Entity\Shipping $shipping
          */
         $shipping = $event->getSubject();
+
+        if (!empty($shipping->imgBase64)) {
+
+            try {
+                $file = tmpfile();
+                if ($file === false)
+                    throw new \Exception('File can not be opened.');
+
+                $filename = 'tytymyty_' . $shipping->getId() .uniqid().".jpg";
+                $content = base64_decode($shipping->imgBase64);
+
+                $path = $this->rootDir . "/../web/media/img/parcels/{$filename}";
+                file_put_contents($path, $content);
+
+
+                $shipping->setImgPath('parcels/' . $filename);
+                $this->em->flush($shipping);
+            } catch(\Exception $ex){
+                $this->logger->critical('Не удалось загрузить файл.' . $ex->getMessage() . '.' . $ex->getTraceAsString());
+            }
+        }
 
         if (!empty($shipping->imgFile)) {
             try {

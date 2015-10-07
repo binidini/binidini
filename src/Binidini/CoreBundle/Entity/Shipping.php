@@ -285,7 +285,9 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @Expose
      */
     private $imgPath;
+
     public $imgBase64;
+    public $fileName;
 
     public function __construct()
     {

@@ -133,6 +133,8 @@ services:
 
     binidini.form.type.shipping:
         class: Binidini\CoreBundle\Form\Type\ShippingType
+        arguments:
+            - @service_container
         tags:
             - { name: form.type, alias: binidini_core_shipping}
 

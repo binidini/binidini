@@ -33,6 +33,8 @@ class GcmService
     public function send ($data, $ids)
     {
         $url = 'https://android.googleapis.com/gcm/send';
+        $android_ids = [];
+        $ios_ids = [];
 
         foreach($ids as $id) {
             if ($id['type'] == 'ios') {

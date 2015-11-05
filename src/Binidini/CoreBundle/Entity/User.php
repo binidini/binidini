@@ -154,6 +154,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="company_name", type="string", length=128, nullable=true)
+     * @Expose
      */
     private $companyName;
 
@@ -161,6 +162,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=32, options={"default" = 1})
+     * @Expose
      */
     private $type;
 
@@ -168,6 +170,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="profile_type", type="integer", options={"default" = 0})
+     * @Expose
      */
     private $profileType;
 

@@ -45,3 +45,9 @@ binidini_payment:
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/payment.html.twig
+
+binidini_rest_api:
+    path: /restapi
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/restapi.html.twig

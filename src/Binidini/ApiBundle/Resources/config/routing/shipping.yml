@@ -52,7 +52,7 @@ binidini_api_my_shipping_available_index:
                 user: ['expr:service("security.context").getToken().getUser().getId()']
                 state: ['new']
 
-binidini_api_my_shipping_active_index::
+binidini_api_my_shipping_active_index:
     path: /sender/active
     methods: [GET]
     defaults:

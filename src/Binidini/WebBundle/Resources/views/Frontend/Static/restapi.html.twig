@@ -1,0 +1,215 @@
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
+
+{% block title %}
+    Tytymyty RESTful API
+{% endblock %}
+
+{% block pageheader %}Титимити REST API{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content animated fadeInUp">
+
+                <div class="faq-item">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a data-toggle="collapse" href="#faq0" class="faq-question collapsed" aria-expanded="false"> Как использовать API?</a>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="small font-bold"></span>
+                            <div class="tag-list">
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-right">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="faq0" class="panel-collapse faq-answer collapse" aria-expanded="false" style="height: 32px;">
+
+                                <p>
+                                    Платформа@Tytymyty.Ru предоставляет возможность внешним разработчикам программными средствами получать и записывать данные в Tytymyty.Ru. Одним из способов такого взаимодействия вляется использование REST API.
+                                </p>
+                                <p>
+                                    REST API определяет набор функций, к которым разработчики могут совершать запросы и получать ответы. Взаимодействие происходит по <a href="http://tools.ietf.org/html/rfc2616">протоколу HTTP</a>. Преимуществом такого подхода является широкое распространение протокола HTTP, поэтому REST API можно использовать практически из любого языка программирования.
+                                </p>
+
+                                <p>
+                                    Все вызовы методов API — это HTTP-запросы к URL <b>http://www.tytymyty.ru/api</b> с некоторым набором параметров. Вы выбираете в документации нужный метод, формируете запрос согласно документации метода, и осуществляете этот запрос. В ответ на запрос вы получаете его результат, который также описан в документации каждой функции. Кодировка результата — <b>UTF-8</b>.
+                                </p>
+                                <p>
+                                    Например, на PHP для осуществления такого запроса можно использовать <a href="http://ru.php.net/manual/en/curl.examples-basic.php">cURL</a>, на Perl — <a href="http://search.cpan.org/~gaas/libwww-perl-5.836/lib/LWP/Simple.pm">LWP::Simple</a>, на Python — <a href="http://docs.python.org/library/httplib.html">httplib</a>, использовать <a href="http://curl.haxx.se/docs/manpage.html">cURL</a> из командной строки и даже просто ваш браузер.
+                                    Обратите внимание на готовые библиотеки, возможно, для вашего языка программирования уже существует реализация REST API.
+                                </p>
+                                <p>
+                                    Данные запроса могут передаваться в виде query-строки (после знака ?) при использовании метода GET, либо в теле POST-запроса. Помните, что в случае GET-запроса, параметры должны быть закодированы с помощью <a href="http://ru.wikipedia.org/wiki/URL#.D0.9A.D0.BE.D0.B4.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5_URL">URL encoding</a>.
+                                </p>
+                                <h3>Параметры запроса</h3>
+                                <p>
+                                    В каждом запросе должен присутствовать обязательный параметр access_token, который выдает специалист технической поддержки Титимити и передается в заголовке
+                                    HTTP запроса, как <b>Authorization: Bearer [access_token]</b>.
+                                    Также для каждой функции в ее документации определены дополнительные параметры, нужные только для этой функции.
+                                    Текстовые значения параметров должны быть преданы в кодировке UTF-8.
+                                </p>
+                                <p>
+                                    Порядок следования параметров в запросе значения не имеет, порядок параметров важен только при расчете подписи.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a data-toggle="collapse" href="#faq1" class="faq-question collapsed" aria-expanded="false" >Создание заказа</a>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="small font-bold">/shipping/new</span>
+                            <div class="tag-list">
+                                <span class="tag-item">POST</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-right">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="faq1" class="panel-collapse faq-answer collapse" aria-expanded="false" style="height: 32px;">
+                                <div data-toggle="buttons-checkbox" class="btn-group">
+                                    <button class="btn btn-primary active" type="button"><b>POST</b></button>
+                                    <button class="btn btn-primary" type="button">/shipping/new</button>
+                                </div>
+                                <h3>Authorization: Bearer [access_token]</h3>
+                                <p>
+                                    Метод используется для создания заказа в системе Титимити.
+                                </p>
+                                <h3>Параметры</h3>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Имя</th>
+                                            <th>Тип</th>
+                                            <th>Описание</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>name</td>
+                                            <td>string</td>
+                                            <td>Название заказа. Длина не должна превышать 64 символа.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>pickupAddress</td>
+                                            <td>string</td>
+                                            <td>Адрес получения заказа. Убедитесь, что он находится в Yandex картах. Длина не должна превышать 255 символов.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>deliveryAddress</td>
+                                            <td>string</td>
+                                            <td>Адрес доставки заказа. Убедитесь, что он находится в Yandex картах. Длина не должна превышать 255 символов.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>deliveryDatetime</td>
+                                            <td>string</td>
+                                            <td>Крайнее время доставки заказа. Формат dd.MM.yy HH:mm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>deliveryPrice</td>
+                                            <td>int</td>
+                                            <td>Стоимость доставки в рублях.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>* insurance</td>
+                                            <td>int</td>
+                                            <td>Требуемая страховка от курьера в рублях. По умолчанию страховка 0 рублей.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>* paymentGuarantee</td>
+                                            <td>boolean</td>
+                                            <td>Гарантия платежа отправителем в рублях. По умолчанию значение false, отправитель не гарантирует платеж в системе Титимити.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>* description</td>
+                                            <td>string</td>
+                                            <td>Дополнительная информация по заказу. Длина не должна превышать 4000 символов.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>* weight</td>
+                                            <td>int</td>
+                                            <td>Вес заказа в килограммах.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>* x</td>
+                                            <td>int</td>
+                                            <td>Длина заказа в сантиметрах.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>* y</td>
+                                            <td>int</td>
+                                            <td>Ширина заказа в сантиметрах.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>* z</td>
+                                            <td>int</td>
+                                            <td>Высота заказа в сантиметрах.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>* imgBase64</td>
+                                            <td>string</td>
+                                            <td>Картинка к заказу в кодировке base64. Размер картинки не должен превышать 1М.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>* fileName</td>
+                                            <td>string</td>
+                                            <td>Имя файла. Длина не должна превышать 64 символа.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p>
+                                    * Звездочкой помечены необязательные поля.
+                                </p>
+                                <h3>Пример запроса</h3>
+                                <ul>
+                                    <li> POST http://www.tytymyty.ru/api/shipping/new</li>
+                                    <li> <b>Заголовок</b>  Authorization: Bearer NmI4NTg1MzdkMGgfMDUzYTFiYzRiMTJhM2Y0NmFjNTc5NmUwNjcwNDE0MGIwMzMzMDdmNDU5ZjE4MGVjY2YzZg</li>
+                                    <li> <b>Тело запроса</b> name=Букет роз&pickupAddress=Cанкт-Петербург, Парашютная улица , 52&deliveryAddress=Санкт-Петербург, Гаккелевская улица, 22/1&deliveryDatetime=26.11.16 23:45&deliveryPrice=200</li>
+                                </ul>
+                                <h3>Пример ответа (JSON)</h3>
+                                <pre>{
+  id: 123934
+  name: "Букет роз"
+  delivery_price: 200
+  payment_guarantee: false
+  insurance: 0
+  pickup_address: "Cанкт-Петербург, Парашютная улица , 52"
+  delivery_address: "Санкт-Петербург, Гаккелевская улица, 22/1"
+  delivery_datetime: "2016-11-26T23:45:00+0300"
+  user: {...}
+  state: "new"
+  img_path: "parcels/pics/tytymyty_12.jpg"
+}                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content m-b-sm border-bottom">
+                    <div class="text-center p-lg">
+                        <h3>Если у Вас есть вопросы или пожелания, напишите нам</h3>
+                        <span>support<i>@</i>tytymyty.ru</i> </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(location.hash).collapse('show');
+    </script>
+{% endblock %}

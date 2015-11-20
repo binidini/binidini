@@ -67,6 +67,22 @@ binidini_api_my_shipping_active_index:
                 user: ['expr:service("security.context").getToken().getUser().getId()']
                 state: ['dispatched', 'on_way', 'accepted', 'delivered', 'paid', 'rejected', 'refused']
 
+binidini_api_my_shipping_active_index_new:
+    path: /sender/active_with_new
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            filterable: true
+            criteria:
+                user: ['expr:service("security.context").getToken().getUser().getId()']
+                state: ['new', 'dispatched', 'on_way', 'accepted', 'delivered', 'paid', 'rejected', 'refused']
+
+
 binidini_api_my_shipping_conflict_index:
     path: /sender/conflict
     methods: [GET]

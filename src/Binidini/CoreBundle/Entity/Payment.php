@@ -19,9 +19,12 @@ class Payment
     const TYPE_GUARANTEE = 'guarantee';
     const TYPE_DEPOSIT = 'deposit';
     const TYPE_WITHDRAWAL = 'withdrawal';
+    const TYPE_PROMOTION = 'promotion';
 
     const METHOD_ALFABANK_PAYMENT = 'alfabank';
     const METHOD_INTERNAL_PAYMENT = 'internal';
+    const METHOD_PROMO_CODE = 'promocode';
+
 
     const STATE_INIT = 'init';
     const STATE_COMPLETED = 'completed';

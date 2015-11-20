@@ -15,6 +15,7 @@
 {% endblock %}
 {% block actions %}
     <a class="btn btn-primary"  data-toggle="modal" data-target="#depositModal">Пополнить</a>
+    <a class="btn btn-primary"  data-toggle="modal" data-target="#promoCode">Промо код</a>
 {% endblock %}
 
 {% block content %}
@@ -144,7 +145,7 @@
                             </div>
                         </div>
                         <p>
-                            Если у Вас возникли вопросы по порядку пополнения счета, мы будем рады ответить на Ваши вопросы по телефону <b>+7 (952) 246-23-08</b>
+                            Если у Вас возникли вопросы по порядку пополнения счета, мы будем рады ответить на Ваши вопросы по телефону <b>+7 (921) 093-43-34</b>
                             или адресу электронной почты: <a href="mailto:info@tytymyty.ru">info@tytymyty.ru</a>
                         </p>
                     </div>
@@ -175,7 +176,7 @@
                         Всвязи с этим, мы рекомендуем оптимизировать количество пополнений и возвратов.-->
                     </p>
                     <p>
-                        Если у Вас возникли вопросы по порядку возврата, мы будем рады ответить на Ваши вопросы по телефону <b>+7 (952) 246-23-08</b>
+                        Если у Вас возникли вопросы по порядку возврата, мы будем рады ответить на Ваши вопросы по телефону <b>+7 (921) 093-43-34</b>
                         или адресу электронной почты: <a href="mailto:info@tytymyty.ru">info@tytymyty.ru</a>
                     </p>
                 </div>
@@ -187,6 +188,49 @@
             </div>
         </div>
     </div>
+
+    <div class="modal inmodal" id="promoCode" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <form action="{{ path('binidini_core_promotion_check') }}" method="POST" class="form-horizontal" id="promocode">
+                <div class="modal-content animated flipInY">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Закрыть</span>
+                        </button>
+                        <h4 class="modal-title">Рекламная компания</h4>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Промо код:</label>
+
+                            <div class="col-sm-4">
+                                <input type="input" class="form-control" name="promo_code" placeholder=""/>
+                            </div>
+
+                            <div class="col-sm-4">
+
+                            </div>
+                        </div>
+                        <p>
+                            Если у Вас возникли вопросы по порядку пополнения счета, мы будем рады ответить на Ваши вопросы по телефону <b>+7 (921) 093-43-34</b>
+                            или адресу электронной почты: <a href="mailto:info@tytymyty.ru">info@tytymyty.ru</a>
+                        </p>
+                    </div>
+                    <div class="modal-footer ">
+                        <a class="pull-left" href="{{ path('binidini_rules_appendix_3')~'#1' }}" target="_blank">Правила Титимити</a>
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Отменить</button>
+                        <input type="submit" class="btn btn-primary" value="Послать"/>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
 
 {% endblock %}
 

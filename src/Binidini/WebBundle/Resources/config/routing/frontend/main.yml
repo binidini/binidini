@@ -45,3 +45,7 @@ binidini_payment:
 binidini_place:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/place.yml
     prefix: /
+
+binidini_promotion:
+    resource: @BinidiniWebBundle/Resources/config/routing/frontend/promotion.yml
+    prefix: /

@@ -1,0 +1,5 @@
+binidini_core_promotion_check:
+    path: /promotion/check
+    methods: [GET, POST]
+    defaults:
+        _controller: binidini_core.controller.promotion:checkAction

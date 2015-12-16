@@ -52,7 +52,7 @@ class PromotionController extends ResourceController
                     ->setMethod(Payment::METHOD_PROMO_CODE)
                     ->setState(Payment::STATE_COMPLETED)
                     ->setBalance($user->getBalance() + $user->getHoldAmount())
-                    ->setDetails('Промо код:' . $promotion->getCode());
+                    ->setDetails('Промокод:' . substr_replace($promotion->getCode(), ' XXXX XXXX XXXX', 4));
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($deposit);

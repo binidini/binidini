@@ -293,7 +293,6 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @var integer
      *
      * @ORM\Column(name="delivery_code", type="integer", options={"default" = 0})
-     * @Expose
      */
     private $deliveryCode;
 

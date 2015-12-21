@@ -289,6 +289,14 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     public $imgBase64;
     public $fileName;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="delivery_code", type="integer", options={"default" = 0})
+     * @Expose
+     */
+    private $deliveryCode;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -885,7 +893,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      */
     public function canAcceptBid()
     {
-        return in_array($this->state, [self::STATE_NEW, self::STATE_CANCELED, self::STATE_ACCEPTED]);
+        return in_array($this->state, [self::STATE_NEW]);
     }
 
 
@@ -1141,4 +1149,27 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         return $this->imgPath;
     }
 
+
+    /**
+     * Set deliveryCode
+     *
+     * @param integer $deliveryCode
+     * @return Shipping
+     */
+    public function setDeliveryCode($deliveryCode)
+    {
+        $this->deliveryCode = $deliveryCode;
+
+        return $this;
+    }
+
+    /**
+     * Get deliveryCode
+     *
+     * @return integer 
+     */
+    public function getDeliveryCode()
+    {
+        return $this->deliveryCode;
+    }
 }

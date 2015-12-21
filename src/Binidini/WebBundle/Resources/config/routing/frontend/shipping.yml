@@ -85,6 +85,12 @@ binidini_core_shipping_state_transition:
     defaults:
         _controller: binidini_core.controller.shipping:updateStateAction
 
+binidini_core_shipping_deliver_transition:
+    path: /shipping/{id}/deliver/
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:checkDeliveryCodeAction
+
 binidini_core_shipping_history_index:
     path: /public/shipping/{id}/history
     methods: [GET]

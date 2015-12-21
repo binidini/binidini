@@ -31,6 +31,8 @@ twig:
         resources:
             - 'BinidiniWebBundle:Form:form_errors.html.twig'
             - 'BinidiniWebBundle:Form:choice_widget_expanded.html.twig'
+    globals:
+        dcprime: %delivery_code_prime%
 
 # Assetic Configuration
 assetic:

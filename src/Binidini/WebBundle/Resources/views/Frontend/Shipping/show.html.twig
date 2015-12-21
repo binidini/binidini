@@ -70,8 +70,54 @@
         {% if shipping.carrier is not null %}
             {% if app.user.id == shipping.carrier.id and shipping.state == 'accepted' %}
                 <div class="p-xxs">
-                    <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'deliver'}) }}"
-                       class="btn btn-primary">Доставлен</a>
+                    {% if shipping.deliveryCode > 0 %}
+                        <a class="btn btn-primary"  data-toggle="modal" data-target="#deliveryCode">Доставлен</a>
+
+                        <div class="modal inmodal" id="deliveryCode" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
+                                <form action="{{ path('binidini_core_shipping_deliver_transition', {'id': shipping.id}) }}" method="GET" class="form-horizontal" id="promocode">
+                                    <div class="modal-content animated flipInY">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span aria-hidden="true">×</span>
+                                                <span class="sr-only">Закрыть</span>
+                                            </button>
+                                            <h4 class="modal-title">Код подтверждения доставки</h4>
+
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Код:</label>
+
+                                                <div class="col-sm-4">
+                                                    <input type="input" class="form-control" name="delivery_code" placeholder=""/>
+                                                </div>
+
+                                                <div class="col-sm-4">
+
+                                                </div>
+                                            </div>
+                                            <p>
+                                                Код подтверждения доставки известен отправителю. Отправитель должен передать код получателю, а получатель перевозчику
+                                                после получения заказа. Рекомендуем отдавать заказ получателю только после того, как передан правильный код подтверждения доставки.
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer ">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Отменить</button>
+                                            <input type="submit" class="btn btn-primary" value="Подтвердить"/>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    {% else %}
+                        <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'deliver'}) }}"
+                           class="btn btn-primary">Доставлен</a>
+                    {% endif %}
                 </div>
             {% endif %}
             {% if app.user.id == shipping.carrier.id and shipping.state == 'paid' %}
@@ -125,6 +171,21 @@
                                     </dd>
                                     <dt>Страховка:</dt>
                                     <dd>{{ shipping.insurance | price }}</dd>
+
+                                    {% if shipping.deliveryCode > 0 %}
+                                        <dt>Код доставки:</dt>
+                                        <dd>
+                                            {% if app.user is not empty and app.user.id == shipping.user.id %}
+                                                {{ 10000+(dcprime * shipping.id)%10000 }}
+                                                {% if shipping.deliveryCode > 5 %}
+                                                    | <span class="text-danger">неправильных попыток: {{ shipping.deliveryCode - 1 }}</span>
+                                                {% endif %}
+                                            {% else %}
+                                                у получателя
+                                            {% endif %}
+                                        </dd>
+                                    {% endif %}
+
                                 </dl>
                                 <dl class="dl-horizontal">
 
@@ -241,6 +302,7 @@
         </div>
     </div>
     {{ include('BinidiniWebBundle::Frontend/Shipping/show/modal_map.html.twig') }}
+
 {% endblock %}
 
 {% block javascripts %}

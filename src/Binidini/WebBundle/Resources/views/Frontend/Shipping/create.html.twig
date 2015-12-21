@@ -116,7 +116,22 @@
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Код подтверждения</label>
 
+                                                        <div class="col-sm-2">
+                                                            {{ form_widget(form.deliveryCode, {'attr': {'class': 'checkbox-inline i-checks', 'style': 'position: absolute; opacity: 0;'}}) }}
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            {{ form_errors(form.deliveryCode) }}
+                                                            <span class="help-block m-b-none">
+                                                                Код подтверждения доставки.
+                                                                Курьер должен получить код при передаче заказа получателю и ввести его в систему. Это является подтверждением доставки заказа.
+                                                                Не ставьте галку, если Вам не нужен данный механизм подтверждения.
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
 
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">Вес</label>

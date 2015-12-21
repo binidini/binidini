@@ -4,6 +4,7 @@ namespace Binidini\CoreBundle\Controller;
 
 use Binidini\CoreBundle\Entity\Payment;
 use Binidini\CoreBundle\Entity\Shipping;
+use Binidini\CoreBundle\Exception\IncorrectDeliveryCode;
 use Binidini\CoreBundle\Exception\TransitionCannotBeApplied;
 use Binidini\CoreBundle\Form\Type\BidType;
 use Binidini\CoreBundle\Form\Type\MessageType;
@@ -17,6 +18,27 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ShippingController extends ResourceController
 {
     protected $stateMachineGraph = Shipping::GRAPH;
+
+    public function checkDeliveryCodeAction(Request $request) {
+        /** @var $shipping Shipping */
+        $shipping = $this->findOr404($request);
+
+        if ($shipping->getCarrier() == $this->getUser()) {
+
+            $shipping->setDeliveryCode($shipping->getDeliveryCode() + 1);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($shipping);
+            $em->flush();
+
+            $deliveryCode = (int)$request->get('delivery_code');
+            if ($deliveryCode != (10000 + $shipping->getId()*$this->container->getParameter('delivery_code_prime')%10000)) {
+                throw new IncorrectDeliveryCode('Код подтверждения доставки некорректен.');
+            }
+
+        }
+
+        return $this->updateStateAction($request, 'deliver');
+    }
 
     public function showAction(Request $request)
     {

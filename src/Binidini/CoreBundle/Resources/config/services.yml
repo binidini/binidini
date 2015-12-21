@@ -168,6 +168,7 @@ services:
         class: Binidini\CoreBundle\Service\SecurityService
         arguments:
             - @security.context
+            - %delivery_code_prime%
 
     binidini.notification.service:
         class: Binidini\CoreBundle\Service\NotificationService

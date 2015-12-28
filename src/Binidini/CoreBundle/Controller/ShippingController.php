@@ -197,4 +197,39 @@ class ShippingController extends ResourceController
         return $this->redirectHandler->redirectToReferer();
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
+     */
+    public function createLikeAction(Request $request)
+    {
+        $this->isGrantedOr403('createLike');
+
+        /** @var Shipping $shipping */
+        $shipping = $this->findOr404($request);
+
+        $now = new \DateTime();
+
+        if ($shipping->getDeliveryDatetime() < $now) {
+            $deliveryDatetime = new \DateTime();
+            $deliveryDatetime->modify('+3 hours');
+            $deliveryDatetime->setTimestamp(floor($deliveryDatetime->getTimestamp() / 3600) * 3600);
+
+            $shipping->setDeliveryDatetime($deliveryDatetime);
+        }
+
+        $form = $this->getForm($shipping);
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('create.html'))
+            ->setData(array(
+                $this->config->getResourceName() => $shipping,
+                'form'                           => $form->createView(),
+            ))
+        ;
+
+        return $this->handleView($view);
+    }
 }

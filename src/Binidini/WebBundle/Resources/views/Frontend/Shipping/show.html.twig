@@ -240,14 +240,20 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="m-b-md pull-right">
+                                <span class="m-b-md pull-right">
+                                    <a href="{{ path('binidini_core_shipping_create_like', {'id': shipping.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-reply"></i> Создать такой же заказ</a>
+                                </span>
+
+                                <span class="m-b-md pull-right">
+
                                     <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+
                                     <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="link" data-yashareQuickServices="facebook,twitter,odnoklassniki,lj,moimir,vkontakte"
                                          data-yashareTitle="{{ shipping.pickupAddress }} - {{ shipping.deliveryAddress }} за {{ shipping.deliveryPrice }} р"
                                          data-yashareDescription="Время доставки: {{ shipping.deliveryDatetime | date('d.m.y H:i') }}. {{ shipping.name }}"
                                          data-yashareImage="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/binidiniweb/img/tytymyty.jpg') }}"></div>
-                                </div>
-                             </div>
+                                </span>
+                            </div>
                         </div>
 
                         {% if shipping.description is not empty %}

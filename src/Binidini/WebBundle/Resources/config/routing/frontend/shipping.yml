@@ -98,3 +98,11 @@ binidini_core_shipping_history_index:
         _controller: binidini_core.controller.shipping:historyIndexAction
         _sylius:
             template: BinidiniWebBundle:Frontend/Shipping:history_index.html.twig
+
+binidini_core_shipping_create_like:
+    path: /shipping/like/{id}
+    methods: [GET, POST]
+    defaults:
+        _controller: binidini_core.controller.shipping:createLikeAction
+        _sylius:
+            template: BinidiniWebBundle:Frontend/Shipping:create.html.twig

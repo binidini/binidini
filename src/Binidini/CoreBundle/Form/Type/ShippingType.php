@@ -11,6 +11,7 @@ namespace Binidini\CoreBundle\Form\Type;
 
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -39,6 +40,24 @@ class ShippingType extends AbstractType
             ->add('x')
             ->add('y')
             ->add('z');
+
+        $builder->get('deliveryCode')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($originalDeliveryCode) {
+                    if ($originalDeliveryCode > 0 )
+                        return true;
+                    else
+                        return false;
+                },
+                function ($submittedDeliveryCode) {
+                    if ($submittedDeliveryCode)
+                        return 1;
+                    else
+                        return 0;
+                }
+            ))
+        ;
+
         if ($this->routeName == "binidini_api_shipping_new") {
             $builder
                 ->add('imgBase64', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true])

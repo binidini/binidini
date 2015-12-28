@@ -20,7 +20,7 @@
 
                             <div class="ibox-content">
 
-                                {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'id': 'shipping_form'} }) }}
+                                {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'id': 'shipping_form'  }, 'action': path('binidini_core_shipping_new') }) }}
                                 {{ form_errors(form) }}
 
                                 <div class="form-group">
@@ -28,7 +28,14 @@
 
                                     <div class="col-sm-10">
                                         {{ form_errors(form.name) }}
-                                        {{ form_widget(form.name, {'id': 'what', 'attr': {'class': 'form-control', 'placeholder': 'Коротко, что нужно перевезти'}}) }}
+                                        {{ form_widget(form.name, {'id': 'what', 'attr': {'class': 'form-control', 'placeholder': 'Коротко, что нужно перевезти', 'list': 'defaults'}}) }}
+                                        <datalist id="defaults">
+                                            <option value="Документы">
+                                            <option value="Лекарства">
+                                            <option value="Одежда">
+                                            <option value="Животные">
+                                            <option value="Мебель">
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -66,7 +73,7 @@
                                     <label class="col-sm-2 control-label">Цена*</label>
 
                                     <div class="col-sm-5">
-                                        {{ form_widget(form.deliveryPrice, {'attr': {'class': 'form-control', 'placeholder': 'Стоимость доставки в рублях'}}) }}
+                                        {{ form_widget(form.deliveryPrice, {'attr': {'class': 'form-control', 'placeholder': 'Стоимость доставки в рублях', 'min': 0}}) }}
                                     </div>
                                     <div class="col-sm-5">
                                         {{ form_errors(form.deliveryPrice) }}
@@ -104,7 +111,7 @@
                                                         <label class="col-sm-2 control-label">Страховка</label>
 
                                                         <div class="col-sm-2">
-                                                            {{ form_widget(form.insurance, {'attr': {'class': 'form-control', 'placeholder': 'руб.'}}) }}
+                                                            {{ form_widget(form.insurance, {'attr': {'class': 'form-control', 'placeholder': 'руб.', 'min': 0}}) }}
                                                         </div>
                                                         <div class="col-sm-8">
                                                             {{ form_errors(form.insurance) }}
@@ -137,7 +144,7 @@
                                                         <label class="col-sm-2 control-label">Вес</label>
 
                                                         <div class="col-sm-2">
-                                                            {{ form_widget(form.weight, {'attr': {'class': 'form-control', 'placeholder': 'кг'}}) }}
+                                                            {{ form_widget(form.weight, {'attr': {'class': 'form-control', 'placeholder': 'кг', 'min': 0}}) }}
                                                         </div>
                                                         <div class="col-sm-8">
                                                             {{ form_errors(form.weight) }}
@@ -149,13 +156,13 @@
                                                         <label class="col-sm-2 control-label">Размер</label>
 
                                                         <div class="col-sm-2">
-                                                            {{ form_widget(form.x, {'attr': {'class': 'form-control', 'placeholder': 'длина'}}) }}
+                                                            {{ form_widget(form.x, {'attr': {'class': 'form-control', 'placeholder': 'длина', 'min': 0}}) }}
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            {{ form_widget(form.y, {'attr': {'class': 'form-control', 'placeholder': 'ширина'}}) }}
+                                                            {{ form_widget(form.y, {'attr': {'class': 'form-control', 'placeholder': 'ширина', 'min': 0}}) }}
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            {{ form_widget(form.z, {'attr': {'class': 'form-control', 'placeholder': 'высота'}}) }}
+                                                            {{ form_widget(form.z, {'attr': {'class': 'form-control', 'placeholder': 'высота', 'min': 0}}) }}
                                                         </div>
                                                         <div class="col-sm-4">
                                                             {{ form_errors(form.x) }}

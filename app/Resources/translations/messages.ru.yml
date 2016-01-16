@@ -38,6 +38,8 @@ binidini.bid.state.rejected: отказ
 binidini.bid.state.auto_rejected: отказ
 binidini.bid.state.canceled: отменена
 
+binidini.message.create: Написать сообщение
+
 insurance: Страховой платеж
 guarantee: Гарантийная оплата
 deposit: Пополнение счета

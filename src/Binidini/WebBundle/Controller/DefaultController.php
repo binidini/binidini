@@ -34,6 +34,6 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('binidini_search_shipment_index'));
         }
 
-        return $this->redirect($this->generateUrl('binidini_landing_page'));
+        return $this->render('BinidiniWebBundle::Frontend/landing.html.twig');
     }
 }

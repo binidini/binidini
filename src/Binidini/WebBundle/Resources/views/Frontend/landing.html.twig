@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Титимити - это народная доставка и карманные деньги">
+    <meta name="description" content="Титимити - это народная дешевая доставка">
     <meta name="author" content="">
     <link rel="icon" href="/favicon.ico">
 
@@ -84,7 +84,7 @@
                                 <div>
                                     <a href="{{ path('binidini_search_shipment_index') }}" class="navy-link">
                                         <b class="time">{{ "now"|date("d.m") }} 23:45</b>
-                                        <b class="price"><i class="fa fa-rub"></i>300</b>
+                                        <b class="price"><i class="fa fa-rub"></i>150</b>
 
                                         <h3>Букет роз</h3>
                                         <h4>Санкт-Петербург, ул. Маяковского, д. 22 </h4><h4> Санкт-Петербург, Нахимова
@@ -97,11 +97,13 @@
                                 <div class="red">
                                     <a href="{{ path('binidini_search_shipment_index') }}" class="navy-link">
 
-                                        <b class="time">{{ "now" | date_modify("+2 day") | date("d.m") }} 18:00</b>
-                                        <b class="price"><i class="fa fa-rub"></i>1000</b>
-
-                                        <h3>iPhone 6</h3>
-                                        <h4>Финляндия, Иматра, Lappeentie 44 </h4><h4> Санкт-Петербург, Парашютная ул., 5</h4>
+                                        <b class="time">быстро</b>
+                                        <b class="price">дешево</b>
+                                        <br/>
+                                        <h3>Ваш заказ</h3>
+                                        <h4>Откуда</h4><h4>Куда</h4>
+                                        <br/>
+                                        <b>надежно</b>
                                     </a>
                                     <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
                                 </div>
@@ -110,7 +112,7 @@
                                 <div>
                                     <a href="{{ path('binidini_search_shipment_index') }}" class="navy-link">
                                         <b class="time">{{ "now" | date_modify("+1 day") | date("d.m") }} 14:30</b>
-                                        <b class="price"><i class="fa fa-rub"></i>400</b>
+                                        <b class="price"><i class="fa fa-rub"></i>200</b>
                                         <h3>Документы</h3>
                                         <h4>Санкт-Петербург, Невский пр., д. 22 </h4><h4> Санкт-Петербург, Ветеранов пр., 5</h4>
                                     </a>
@@ -120,10 +122,10 @@
                         </ul>
                         <ul class="row notes" id="orders2">
                             <li>
-                                <div class="red">
+                                <div >
                                     <a href="{{ path('binidini_search_shipment_index') }}" class="navy-link">
                                         <b class="time">{{ "now" | date_modify("+7 day") | date("d.m") }} 12:00</b>
-                                        <b class="price"><i class="fa fa-rub"></i>4000</b>
+                                        <b class="price"><i class="fa fa-rub"></i>2000</b>
                                         <h3>Фотоальбом</h3>
                                         <h4>Россия, Москва, Тверская ул., д. 2 </h4><h4>234 West 48th Street, New York, NY, USA</h4>
                                     </a>
@@ -134,7 +136,7 @@
                                 <div>
                                     <a href="{{ path('binidini_search_shipment_index') }}" class="navy-link">
                                         <b class="time">{{ "now" | date_modify("+7 day") | date("d.m") }} 12:00</b>
-                                        <b class="price"><i class="fa fa-rub"></i>750</b>
+                                        <b class="price"><i class="fa fa-rub"></i>250</b>
                                         <h3>Старый диван</h3>
                                         <h4>Санкт-Петербург, Савушкина, д. 7 </h4><h4> Ленинградская обл., Тосно, Ленина пр., 5</h4>
                                     </a>
@@ -155,11 +157,10 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
-            <h1>Титимити - это народная доставка и дополнительные деньги.</h1>
-            <p>
-                Отправьте посылку с попутчиком, курьером или перевозчиком.
-                Получайте деньги, путешествуя по миру, по дороге домой, на работу и дачу.
-            </p>
+            <h1>Титимити - это народная дешевая доставка.</h1>
+            <h2>
+                Недорогая доставка с попутчиком или курьером. Зарабатывайте по пути домой и на работу.
+            </h2>
 
         </div>
     </div>
@@ -168,21 +169,21 @@
             <div>
                 <i class="fa fa-rub features-icon"></i>
 
-                <h2>Малому Бизнесу</h2>
+                <h3>Малому Бизнесу</h3>
 
                 <p>Экономьте на стоимости доставки. Выбирайте подходящих вашему бизнесу курьеров.</p>
             </div>
             <div class="m-t-lg">
                 <i class="fa fa-bitcoin features-icon"></i>
 
-                <h2>Интернет покупателям</h2>
+                <h3>Интернет покупателям</h3>
 
                 <p>Найдите более дешевый способ отправки и доставки интернет покупок.</p>
             </div>
             <div class="m-t-lg">
                 <i class="fa fa-users features-icon"></i>
 
-                <h2>Всем</h2>
+                <h3>Всем</h3>
 
                 <p>Экономьте на доставке товаров. Покройте расходы на бензин, став курьеров по пути своего маршрута.</p>
             </div>
@@ -194,14 +195,14 @@
             <div>
                 <i class="fa fa-taxi carrier-icon"></i>
 
-                <h2>Таксистам, курьерам, ...</h2>
+                <h3>Таксистам, курьерам</h3>
 
                 <p>Откройте новый поток заказов. Выбирайте интересные заказы в удобных районах.</p>
             </div>
             <div class="m-t-lg">
                 <i class="fa fa-user carrier-icon"></i>
 
-                <h2>Студентам</h2>
+                <h3>Студентам</h3>
 
                 <p>Способ заработка наличных, не мешающий учебе. Найдите заказы недалеко от дома, места учебы и
                     зарабатывайте походу карманные деньги.</p>
@@ -209,7 +210,7 @@
             <div>
                 <i class="fa fa-truck carrier-icon"></i>
 
-                <h2>Перевозчикам</h2>
+                <h3>Перевозчикам</h3>
 
                 <p>Вы едите в дальнюю поезду и у вас есть место в машине. Почему не получить по пути дополнительный
                     заработок.</p>
@@ -237,7 +238,7 @@
 
         </div>
         <div class="col-sm-3">
-            <h2>Практично</h2>
+            <h2>Дешево</h2>
 
             <p>
                 Отправитель назначает цену заказа, перевозчик соглашается или устанавливает цену перевозки. Данная система позволяет найти справедливую цену.
@@ -260,17 +261,16 @@
         <div class="row ">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
-                <h1>Почему выбирают Титимити</h1>
+                <h1>Почему выбирают Титимити?</h1>
 
-                <p>
-                    Вы не просто зарабатываете дополнительные деньги по пути или экономите на доставке. Вы помогаете
-                    людям решать их задачи с помощью имеющихся у вас ресурсов!
-                </p>
+                <h2>
+                    Вы зарабатываете деньги по дороге домой. Вы экономите на доставке и оптимизируете расходы на перевозку.
+                </h2>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <h2>Прямой контакт отправителя и перевозчика</h2>
+                <h3>Самая дешевая доставка</h3>
                 <i class="fa fa-dollar big-icon pull-right"></i>
 
                 <p>
@@ -280,7 +280,7 @@
                 </p>
             </div>
             <div class="col-lg-5 features-text">
-                <h2>Вы сами устанавливаете цены!</h2>
+                <h3>Вы сами устанавливаете цены</h3>
                 <i class="fa fa-euro big-icon pull-right"></i>
 
                 <p>
@@ -291,40 +291,40 @@
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <h2>Никаких комиссионных</h2>
+                <h3>Самая надежная страховка</h3>
                 <i class="fa fa-ruble big-icon pull-right"></i>
 
                 <p>
-                    Наша задача – связать отправителей и перевозчиков, дать им возможность договориться и выполнить
-                    необходимые задачи с выгодой для каждой стороны.  Титимити не участвует в процессе ценообразования и
-                    оплаты работы. Мы не берем комиссионных!
+                    В случае неоходимости система Титимити замораживает необходимую сумму на карте перевозчика до момента
+                    выполнения заказа. После выполнения заказа отправитель разблокирует деньги.
                 </p>
             </div>
             <div class="col-lg-5 features-text">
-                <h2>Система рейтингов</h2>
+                <h3>Никаких комиссионных</h3>
                 <i class="fa fa-yen big-icon pull-right"></i>
 
                 <p>
-                    Ответственные отправители и надежные перевозчики на Титимити имеют высокие рейтинги, а значит получают
-                    больше заявок и заказов на выполнение. Зарабатывайте свою репутацию и как следствие будете более эффективней!
+                    Наша задача – связать отправителей и перевозчиков, дать им возможность договориться и выполнить
+                    необходимые задачи с выгодой для каждой стороны. Титимити не участвует в процессе ценообразования и
+                    оплаты работы. Мы не берем комиссионных!
                 </p>
             </div>
         </div>    </div>
 </section>
 
-<section id='secure' class="secure">
+<section id='secure' class="features">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
                 <h1>Гарантия оплаты и страхование доставки.</h1>
 
-                <p>Титимити обеспечивает безопасность ваших сделок, не вмешиваясь в их суть.</p>
+                <h2>Титимити обеспечивает безопасность ваших сделок, не вмешиваясь в их суть.</h2>
             </div>
         </div>
         <div class="row features-block">
             <div class="col-lg-3 features-text">
-                <h2>Страхование для отправителя</h2>
+                <h3>Страхование для отправителя</h3>
 
                 <p>
                     Сумма, назначаемая отправителем и  равная стоимости груза, замораживается на счете перевозчика и возвращается после подтверждения отправителем доставки.
@@ -335,7 +335,7 @@
                 <img src="/bundles/binidiniweb/img/landing/laptop_key.png" class="img-responsive" alt="dashboard">
             </div>
             <div class="col-lg-3 features-text text-right">
-                <h2>Гарантия оплаты для перевозчика</h2>
+                <h3>Гарантия оплаты для перевозчика</h3>
 
                 <p>
                     Сумма, равная стоимости перевозки, замораживается на счете отправителя и возвращается после подтверждения оплаты перевозчиком.
@@ -354,12 +354,12 @@
                 <div class="navy-line"></div>
                 <h1>Гибкая система уведомлений</h1>
 
-                <p>Мы предоставляем информацию о перемещении заказа онлайн, через email, смс и пуш-сообщения.</p>
+                <h2>Мы предоставляем информацию о перемещении заказа онлайн, через email, смс и пуш-сообщения.</h2>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <h2>Онлайн уведомления</h2>
+                <h3>Онлайн уведомления</h3>
                 <i class="fa fa-clock-o big-icon pull-right"></i>
 
                 <p>
@@ -368,7 +368,7 @@
                 </p>
             </div>
             <div class="col-lg-5 features-text">
-                <h2>Смс оповещения</h2>
+                <h3>Смс оповещения</h3>
                 <i class="fa fa-comments-o big-icon pull-right"></i>
 
                 <p>
@@ -379,7 +379,7 @@
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <h2>Email сообщения</h2>
+                <h3>Email сообщения</h3>
                 <i class="fa fa-envelope-o big-icon pull-right"></i>
 
                 <p>
@@ -387,7 +387,7 @@
                 </p>
             </div>
             <div class="col-lg-5 features-text">
-                <h2>Настройка уведомлений</h2>
+                <h3>Настройка уведомлений</h3>
                 <i class="fa fa-gears big-icon pull-right"></i>
 
                 <p>
@@ -400,14 +400,14 @@
 </section>
 
 
-<section id="application" class="application">
+<section id="application" class="features">
     <div class="container">
         <div class="row m-b-sm">
             <div class="col-sm-12 text-center">
                 <div class="navy-line"></div>
                 <h1>Мобильное приложение</h1>
 
-                <p>Выберите удобную для Вас платформу и присоединяйтесь к нам.</p>
+                <h2>Выберите удобную для Вас платформу и присоединяйтесь к Титимити Mobile.</h2>
             </div>
         </div>
         <div class="row">
@@ -439,14 +439,14 @@
 
 </section>
 
-<section id="rest" class="rest gray-section">
+<section id="rest" class="features gray-section">
     <div class="container">
         <div class="row m-b-sm">
             <div class="col-sm-12 text-center">
                 <div class="navy-line"></div>
                 <h1>Интеграция с интернет-магазинами и не только...</h1>
 
-                <p>Воспользуйтесь Титимити REST API для интеграция с нашим сервисом.</p>
+                <h2>Воспользуйтесь Титимити REST API для интеграция с нашим сервисом.</h2>
             </div>
         </div>
         <div class="row">
@@ -479,14 +479,14 @@
 
 </section>
 
-<section id="contact" class="contact">
+<section id="contact" class="features">
     <div class="container">
         <div class="row m-b-lg">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
                 <h1>Контакты</h1>
 
-                <p>Свяжитесь с нами удобным для Вас способом.</p>
+                <h2>Свяжитесь с Титимити удобным для Вас способом.</h2>
             </div>
         </div>
         <div class="row m-b-lg">

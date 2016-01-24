@@ -47,6 +47,15 @@ class ShippingController extends ResourceController
         } else {
             /** @var $shipping Shipping */
             $shipping = $this->findOr404($request);
+
+            // мы закрываем для отображения старые заказы
+            if (new \DateTime() >  $shipping->getDeliveryDatetime() &&
+                (is_null($this->getUser()) ||($this->getUser() != $shipping->getSender() && $this->getUser() != $shipping->getCarrier())))
+            {
+                $this->flashHelper->setFlash('danger', 'show.error');
+                return $this->redirectHandler->redirectToRoute('binidini_search_shipment_index');
+            }
+
             $view = $this
                 ->view()
                 ->setTemplate($this->config->getTemplate('show.html'))

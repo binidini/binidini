@@ -296,6 +296,13 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      */
     private $deliveryCode;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="category", type="integer", options={"default" = 0})
+     */
+    private $category;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -313,6 +320,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         $this->deliveryDatetime->setTimestamp(floor($this->deliveryDatetime->getTimestamp() / 3600) * 3600);
 
         $this->imgPath = 'parcels/pics/tytymyty_'.rand(1,18).'.jpg';
+        $this->category = 0;
     }
 
     public function hold()
@@ -1170,5 +1178,28 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     public function getDeliveryCode()
     {
         return $this->deliveryCode;
+    }
+
+    /**
+     * Set category
+     *
+     * @param integer $category
+     * @return Shipping
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return integer 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

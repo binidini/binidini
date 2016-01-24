@@ -36,6 +36,7 @@ class ShippingType extends AbstractType
             ->add('paymentGuarantee', 'checkbox', ['required' => false])
             ->add('insurance', null, ['required' => false])
             ->add('deliveryCode', 'checkbox', ['required' => false])
+            ->add('category', 'hidden', ['required' => false])
             ->add('weight')
             ->add('x')
             ->add('y')

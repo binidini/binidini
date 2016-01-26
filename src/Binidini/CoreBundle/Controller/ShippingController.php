@@ -42,6 +42,8 @@ class ShippingController extends ResourceController
 
     public function showAction(Request $request)
     {
+        $request->attributes->remove('slug');
+
         if ($this->config->isApiRequest()) {
             return parent::showAction($request);
         } else {
@@ -50,7 +52,8 @@ class ShippingController extends ResourceController
 
             // мы закрываем для отображения старые заказы
             if (new \DateTime() >  $shipping->getDeliveryDatetime() &&
-                (is_null($this->getUser()) ||($this->getUser() != $shipping->getSender() && $this->getUser() != $shipping->getCarrier())))
+                (is_null($this->getUser()) ||($this->getUser() != $shipping->getSender() && $this->getUser() != $shipping->getCarrier())) &&
+                !$this->isBot())
             {
                 $this->flashHelper->setFlash('danger', 'show.error');
                 return $this->redirectHandler->redirectToRoute('binidini_search_shipment_index');
@@ -240,5 +243,27 @@ class ShippingController extends ResourceController
         ;
 
         return $this->handleView($view);
+    }
+
+    private function isBot(&$botname = '')
+    {
+        /* Эта функция будет проверять, является ли посетитель роботом поисковой системы */
+        $bots = array(
+            'rambler','googlebot','aport','yahoo','msnbot','turtle','mail.ru','omsktele',
+            'yetibot','picsearch','sape.bot','sape_context','gigabot','snapbot','alexa.com',
+            'megadownload.net','askpeter.info','igde.ru','ask.com','qwartabot','yanga.co.uk',
+            'scoutjet','similarpages','oozbot','shrinktheweb.com','aboutusbot','followsite.com',
+            'dataparksearch','google-sitemaps','appEngine-google','feedfetcher-google',
+            'liveinternet.ru','xml-sitemaps.com','agama','metadatalabs.com','h1.hrn.ru',
+            'googlealert.com','seo-rus.com','yaDirectBot','yandeG','yandex',
+            'yandexSomething','Copyscape.com','AdsBot-Google','domaintools.com',
+            'Nigma.ru','bing.com','dotnetdotcom'
+        );
+        foreach($bots as $bot)
+            if(stripos($_SERVER['HTTP_USER_AGENT'], $bot) !== false){
+                $botname = $bot;
+                return true;
+            }
+        return false;
     }
 }

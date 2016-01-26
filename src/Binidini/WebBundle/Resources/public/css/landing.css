@@ -827,6 +827,12 @@ ul.notes li div b.price {
     font-size: 20px;
 }
 
+ul.notes li div b.insurance {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    font-size: 15px;
+}
 
 ul.notes li div a.clear {
     position: absolute;

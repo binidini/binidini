@@ -16,7 +16,7 @@
         {% for shipping in shippings %}
             <tr>
                 <td>
-                    <a href="{{ path('binidini_core_shipping_show', {'id': shipping.id}) }}">{{ shipping.id }}</a>
+                    <a href="{{ path('binidini_core_shipping_show', {'id': shipping.id, 'slug': (shipping.name | slug | lower )}) }}">{{ shipping.id }}</a>
                 </td>
                 <td>{{ shipping.name[:24] }}</td>
                 <td> <span >{{ shipping.pickupAddress[:64] }}</span></td>

@@ -7,7 +7,7 @@
             {% set i = 0 %}
             {% for bid in bids %}
                 <li>
-                    <a href="{{ path('binidini_core_shipping_show', {'id': bid.shipping.id}) }}">
+                    <a href="{{ path('binidini_core_shipping_show', {'id': bid.shipping.id, 'slug': (bid.shipping.name | slug | lower )}) }}">
                         <div>
                             <img alt="image" class="img-circle pull-left" src="{{bid.sender.imgpath|imagine_filter('photo38x38')}}">
                             &nbsp;Ваша заявка на {{ bid.price | price }} принята.<br>

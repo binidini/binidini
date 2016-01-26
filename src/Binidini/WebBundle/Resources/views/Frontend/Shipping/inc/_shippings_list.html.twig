@@ -8,7 +8,7 @@
             {% endif %}
             <div class="col-lg-4 ">
                 <div class="contact-box">
-                    <a href="{{ path('binidini_core_shipping_show', {'id': shipping.id}) }}">
+                    <a href="{{ path('binidini_core_shipping_show', {'id': shipping.id, 'slug': (shipping.name | slug | lower ) }) }}">
 
                         <div class="col-sm-12">
                             <div class="text-center">

@@ -25,20 +25,20 @@ use JMS\Serializer\Annotation\VirtualProperty;
  */
 class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 {
-    const GRAPH             = 'logic';
+    const GRAPH = 'logic';
 
     const TRANSITION_ACCEPT = 'accept';
     const TRANSITION_RECALL = 'recall';
 
-    const STATE_INIT        = 'init';
-    const STATE_NEW         = 'new';
-    const STATE_ACCEPTED    = 'accepted';
-    const STATE_DELIVERED   = 'delivered';     #awaiting_payment
-    const STATE_PAID        = 'paid';          #awaiting_payment_confirmation
-    const STATE_COMPLETED   = 'completed';
-    const STATE_REJECTED    = 'rejected';      #awaiting_cancel_confirmation
-    const STATE_CANCELED    = 'canceled';
-    const STATE_CONFLICT    = 'conflict';
+    const STATE_INIT = 'init';
+    const STATE_NEW = 'new';
+    const STATE_ACCEPTED = 'accepted';
+    const STATE_DELIVERED = 'delivered';     #awaiting_payment
+    const STATE_PAID = 'paid';          #awaiting_payment_confirmation
+    const STATE_COMPLETED = 'completed';
+    const STATE_REJECTED = 'rejected';      #awaiting_cancel_confirmation
+    const STATE_CANCELED = 'canceled';
+    const STATE_CONFLICT = 'conflict';
 
     const GEOPOINT_TYPE_COORDINATION = 'coordination';
     const GEOPOINT_TYPE_ADDRESS = 'address';
@@ -183,7 +183,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @Expose
      */
     private $deliveryLatitude;
-    
+
     /**
      * @var \DateTime
      *
@@ -319,7 +319,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         $this->deliveryDatetime->modify('+3 hours');
         $this->deliveryDatetime->setTimestamp(floor($this->deliveryDatetime->getTimestamp() / 3600) * 3600);
 
-        $this->imgPath = 'parcels/pics/tytymyty_'.rand(1,18).'.jpg';
+        $this->imgPath = 'parcels/pics/tytymyty_' . rand(1, 18) . '.jpg';
         $this->category = 0;
     }
 
@@ -384,7 +384,8 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         }
     }
 
-    public function payPayment(){
+    public function payPayment()
+    {
         if ($this->paymentGuarantee && $this->deliveryPrice > 0) {
             try {
                 $this->user->decreaseHoldBalance($this->insurance);
@@ -467,8 +468,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      */
     public function getAcceptedBid()
     {
-        foreach($this->getBids() as $bid)
-        {
+        foreach ($this->getBids() as $bid) {
             if ($bid->isAccepted()) {
                 return $bid;
             }
@@ -612,6 +612,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     {
         return $this->user;
     }
+
     /**
      * Set state
      *
@@ -634,7 +635,6 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     {
         return $this->state;
     }
-
 
 
     /**
@@ -976,7 +976,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * Get hasUserReview
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHasUserReview()
     {
@@ -999,7 +999,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * Get hasCarrierReview
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHasCarrierReview()
     {
@@ -1022,7 +1022,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * Get pickupLongitude
      *
-     * @return string 
+     * @return string
      */
     public function getPickupLongitude()
     {
@@ -1045,7 +1045,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * Get pickupLatitude
      *
-     * @return string 
+     * @return string
      */
     public function getPickupLatitude()
     {
@@ -1068,7 +1068,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * Get deliveryLongitude
      *
-     * @return string 
+     * @return string
      */
     public function getDeliveryLongitude()
     {
@@ -1091,7 +1091,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * Get deliveryLatitude
      *
-     * @return string 
+     * @return string
      */
     public function getDeliveryLatitude()
     {
@@ -1107,8 +1107,9 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         }
     }
 
-    public function  getPickupGeoPointType(){
-        if ($this->pickupLongitude && $this->pickupLatitude){
+    public function  getPickupGeoPointType()
+    {
+        if ($this->pickupLongitude && $this->pickupLatitude) {
             return self::GEOPOINT_TYPE_COORDINATION;
         } else {
             return self::GEOPOINT_TYPE_ADDRESS;
@@ -1124,9 +1125,10 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         }
     }
 
-    public function  getDeliveryGeoPointType(){
+    public function  getDeliveryGeoPointType()
+    {
 
-        if ($this->deliveryLongitude && $this->deliveryLatitude){
+        if ($this->deliveryLongitude && $this->deliveryLatitude) {
             return self::GEOPOINT_TYPE_COORDINATION;
         } else {
             return self::GEOPOINT_TYPE_ADDRESS;
@@ -1149,7 +1151,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * Get imgPath
      *
-     * @return string 
+     * @return string
      */
     public function getImgPath()
     {
@@ -1173,7 +1175,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * Get deliveryCode
      *
-     * @return integer 
+     * @return integer
      */
     public function getDeliveryCode()
     {
@@ -1196,10 +1198,11 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * Get category
      *
-     * @return integer 
+     * @return integer
      */
     public function getCategory()
     {
         return $this->category;
     }
+
 }

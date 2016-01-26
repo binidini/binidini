@@ -21,6 +21,7 @@ class WebExtension extends \Twig_Extension
             new \Twig_SimpleFilter('weight', array($this, 'weightFilter')),
             new \Twig_SimpleFilter('timeago', array($this, 'timeagoFilter')),
             new \Twig_SimpleFilter('cell', array($this, 'cellFilter')),
+            new \Twig_SimpleFilter('slug', array($this, 'slugFilter')),
         );
     }
 
@@ -60,6 +61,11 @@ class WebExtension extends \Twig_Extension
     public function cellFilter($username)
     {
         return '8 ('. substr($username, 0, 3) . ') ' . substr($username, 3);
+    }
+
+    public function slugFilter($str)
+    {
+        return 'доставка-'. (preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '-', $str ));
     }
 
     public function getName()

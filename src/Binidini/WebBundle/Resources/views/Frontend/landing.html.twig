@@ -45,8 +45,6 @@
                     <li><a class="navbar-brand" href="{{ path('binidini_search_shipment_private_index') }}">Вход</a><br/><br/><br/></li>
                     <li><a class="page-scroll" href="{{ path('fos_user_registration_register') }}">Регистрация</a></li>
                     <li><a class="page-scroll" href="{{ path('binidini_how_it_works') }}">О нас</a></li>
-                    <li><a class="page-scroll" href="#application">Загрузить</a></li>
-                    <li><a class="page-scroll" href="#rest">Rest API</a></li>
                     <li><a class="page-scroll" href="#contact">Контакты</a></li>
 
 
@@ -100,10 +98,12 @@
                                         <b class="time">быстро</b>
                                         <b class="price">дешево</b>
                                         <br/>
-                                        <h3>Ваш заказ</h3>
-                                        <h4>Откуда</h4><h4>Куда</h4>
+                                        <span class="text-center">
+                                            <h3>Ваш заказ</h3>
+                                            <h4>Откуда</h4><h4>Куда</h4>
+                                        </span>
                                         <br/>
-                                        <b>надежно</b>
+                                        <b class="insurance">удобно<br/> надежно</b>
                                     </a>
                                     <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
                                 </div>
@@ -169,21 +169,21 @@
             <div>
                 <i class="fa fa-rub features-icon"></i>
 
-                <h3>Малому Бизнесу</h3>
+                <h3>Малому бизнесу</h3>
 
                 <p>Экономьте на стоимости доставки. Выбирайте подходящих вашему бизнесу курьеров.</p>
             </div>
             <div class="m-t-lg">
                 <i class="fa fa-bitcoin features-icon"></i>
 
-                <h3>Интернет покупателям</h3>
+                <h3>Интернет-магазинам</h3>
 
                 <p>Найдите более дешевый способ отправки и доставки интернет покупок.</p>
             </div>
             <div class="m-t-lg">
                 <i class="fa fa-users features-icon"></i>
 
-                <h3>Всем</h3>
+                <h3>Частным лицам</h3>
 
                 <p>Экономьте на доставке товаров. Покройте расходы на бензин, став курьеров по пути своего маршрута.</p>
             </div>
@@ -270,33 +270,32 @@
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <h3>Самая дешевая доставка</h3>
+                <h3>Дешевая доставка</h3>
                 <i class="fa fa-dollar big-icon pull-right"></i>
-
-                <p>
-                    Титимити – сервис, помогающий отправителям и перевозчикам найти друг друга.
-                    Мы не устанавливаем цен, не навязываем свои правила, сроки и даже способы оплаты.
-                    Обо всех подробностях выполнения заданий вы договариваетесь напрямую!
-                </p>
-            </div>
-            <div class="col-lg-5 features-text">
-                <h3>Вы сами устанавливаете цены</h3>
-                <i class="fa fa-euro big-icon pull-right"></i>
 
                 <p>
                     Рыночный способ определения стоимости заданий позволяет установить по-настоящему справедливую цену.
                     Никаких ставок и тарифов! Ведите переговоры, торгуйтесь, экономьте и зарабатывайте на Титимити.
                 </p>
             </div>
+            <div class="col-lg-5 features-text">
+                <h3>Гарантия оплаты</h3>
+                <i class="fa fa-euro big-icon pull-right"></i>
+
+                <p>
+                    Отправитель может гарантировать оплату. При этом на счете отправителя замараживается необходимая сумма
+                    После выполнения заказа перевозчик разблокирует деньги отправителя.
+                </p>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <h3>Самая надежная страховка</h3>
+                <h3>Надежная страховка</h3>
                 <i class="fa fa-ruble big-icon pull-right"></i>
 
                 <p>
-                    В случае неоходимости система Титимити замораживает необходимую сумму на карте перевозчика до момента
-                    выполнения заказа. После выполнения заказа отправитель разблокирует деньги.
+                    В случае неоходимости система Титимити замораживает необходимую сумму на счете перевозчика до момента
+                    выполнения заказа. После выполнения заказа отправитель разблокирует деньги перевозчика.
                 </p>
             </div>
             <div class="col-lg-5 features-text">
@@ -324,21 +323,21 @@
         </div>
         <div class="row features-block">
             <div class="col-lg-3 features-text">
-                <h3>Страхование для отправителя</h3>
+                <h3>Страхование заказа для отправителя</h3>
 
                 <p>
-                    Сумма, назначаемая отправителем и  равная стоимости груза, замораживается на счете перевозчика и возвращается после подтверждения отправителем доставки.
+                    Сумма, назначаемая отправителем, замораживается на счете перевозчика и возвращается после подтверждения отправителем доставки.
                 </p>
                 <a href="{{ path('binidini_how_it_works')~'#faq3' }}" class="btn btn-primary">Подробнее...</a>
             </div>
             <div class="col-lg-6 text-right m-t-n-lg">
-                <img src="/bundles/binidiniweb/img/landing/laptop_key.png" class="img-responsive" alt="dashboard">
+                <img src="/bundles/binidiniweb/img/landing/strahovanie-gruzov.png" class="img-responsive" alt="Страхование заказов">
             </div>
             <div class="col-lg-3 features-text text-right">
                 <h3>Гарантия оплаты для перевозчика</h3>
 
                 <p>
-                    Сумма, равная стоимости перевозки, замораживается на счете отправителя и возвращается после подтверждения оплаты перевозчиком.
+                    Сумма, назначаемая отправителем, замораживается на счете отправителя и возвращается после подтверждения оплаты перевозчиком.
                 </p>
                 <a href="{{ path('binidini_how_it_works')~'#faq4' }}" class="btn btn-primary">Подробнее...</a>
             </div>

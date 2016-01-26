@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block title %}
-    Перевозчик, курьер, попутчик - необходимо перевезти '{{ shipping.name }}' за {{ shipping.deliveryPrice }} руб. - от {{ shipping.pickupAddress }} - до {{ shipping.deliveryAddress }}
+    Доставка {{ shipping.name | lower }} - {{ shipping.pickupAddress }}
 {% endblock %}
 
 {% if shipping.canHasReview() %}
@@ -153,7 +153,7 @@
                                         {{ ('binidini.shipping.state.' ~ shipping.state) | trans }}
                                     </span>
 
-                                    <h1>{{ shipping.name }}</h1>
+                                    <h1>Доставка <i class="fa fa-{{ ['usd', 'eur', 'rub', 'jpy', 'try', 'gbp', 'inr', 'krw'][shipping.id % 8]}}"></i> {{ shipping.name | lower }}</h1>
                                 </div>
 
                             </div>

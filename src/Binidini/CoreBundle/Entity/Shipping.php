@@ -305,6 +305,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 
     public function __construct()
     {
+
         $this->items = new ArrayCollection();
         $this->state = Shipping::STATE_NEW;
         $this->hasCarrierReview = false;
@@ -320,6 +321,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         $this->deliveryDatetime->setTimestamp(floor($this->deliveryDatetime->getTimestamp() / 3600) * 3600);
 
         $this->imgPath = 'parcels/pics/tytymyty_' . rand(1, 18) . '.jpg';
+
         $this->category = 0;
     }
 

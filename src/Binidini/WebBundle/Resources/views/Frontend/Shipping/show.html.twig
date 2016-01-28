@@ -212,8 +212,8 @@
                                 </dl>
                             </div>
                             <div class="col-lg-2">
-                                <a href="{{ '/media/img/' ~ shipping.imgPath }}" id="single_image">
-                                    <img alt="посылка Титимити" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
+                                <a href="{{ '/media/img/' ~ shipping.imgPath }}" id="single_image" title="Доставка {{ shipping.name | lower }}">
+                                    <img title="Доставка {{ shipping.name | lower }}" alt="Доставка {{ shipping.name | lower }}" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
                                 </a>
                             </div>
                             <div class="col-lg-5" id="cluster_info">

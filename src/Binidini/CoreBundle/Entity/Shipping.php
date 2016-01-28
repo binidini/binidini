@@ -671,7 +671,6 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -1193,6 +1192,10 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     public function setCategory($category)
     {
         $this->category = $category;
+
+        if ($category == -1) {
+            $this->imgPath = 'parcels/pics/доставка-'. (preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '-', mb_strtolower($this->getName(), 'UTF-8') )) . '.jpg';
+        }
 
         return $this;
     }

@@ -35,6 +35,8 @@ class NotificationService
     private $twig;
     private $em;
 
+    private $insiders;
+
     public function __construct(Producer $smsRabbitMqProducer, Producer $emailRabbitMqProducer, Producer $gcmRabbitMqProducer, \Twig_Environment $twig, EntityManager $em)
     {
         $this->smsRabbitMqProducer = $smsRabbitMqProducer;
@@ -42,6 +44,8 @@ class NotificationService
         $this->gcmRabbitMqProducer = $gcmRabbitMqProducer;
         $this->twig = $twig;
         $this->em = $em;
+
+        $this->insiders = [0, 2, 123792, 124290, 124292, 124343, 124344, 123642];
     }
 
     public function notifySender(SenderCarrierAwareInterface $resource, $event)
@@ -76,6 +80,12 @@ class NotificationService
 
         $uids = $this->em->getRepository('BinidiniCoreBundle:User')->findByCoordinates($shipping->getPickupLongitude(), $shipping->getPickupLatitude());
         foreach ($uids as $uid) {
+
+            //инсайдерам не надо
+            if (array_search($uid['id'], $this->insiders)) {
+                return;
+            }
+
             $user = $this->em->getRepository('BinidiniCoreBundle:User')->find($uid['id']);
             if ($shipping->getSender()->getId() != $uid['id'] && $user->isCarrier()) {
                 $this->notify($user, 'create_shipping', $shipping);
@@ -91,10 +101,7 @@ class NotificationService
             return;
         }
 
-        // инсайдеры
-        $uids = [2, 123792, 124290, 124292, 124343, 124344];
-
-        foreach ($uids as $uid) {
+        foreach ($this->insiders as $uid) {
             $user = $this->em->getRepository('BinidiniCoreBundle:User')->find($uid);
 
             $this->notify($user, 'create_shipping', $shipping);

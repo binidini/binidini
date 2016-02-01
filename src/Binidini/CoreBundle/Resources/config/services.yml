@@ -40,6 +40,7 @@ services:
             - @old_sound_rabbit_mq.binidini_geocode_producer
             - @logger
             - %kernel.root_dir%
+            - @binidini.notification.service
         tags:
             - { name: kernel.event_listener, event: binidini_core.shipping.post_create, method: onShippingPostCreate }
             - { name: kernel.event_listener, event: binidini_core.shipping.pre_create, method: onShippingPreCreate }

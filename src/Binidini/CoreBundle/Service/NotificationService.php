@@ -84,6 +84,24 @@ class NotificationService
 
     }
 
+    public function notifyInsidersAboutNewDffShipping(Shipping $shipping) {
+
+        if ($shipping->getSender()->getId() != 124281) {
+            //если не dff возврат
+            return;
+        }
+
+        // инсайдеры
+        $uids = [2, 123792, 124290, 124292, 124343, 124344];
+
+        foreach ($uids as $uid) {
+            $user = $this->em->getRepository('BinidiniCoreBundle:User')->find($uid);
+
+            $this->notify($user, 'create_shipping', $shipping);
+        }
+
+    }
+
     private function notify(User $user, $event, $resource)
     {
         $bitN = constant('Binidini\CoreBundle\Entity\User::BIT_' . strtoupper($event));

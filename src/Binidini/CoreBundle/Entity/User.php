@@ -120,6 +120,11 @@ class User extends BaseUser
     private $parcels;
 
     /**
+     * @ORM\OneToMany(targetEntity="Location", mappedBy="user")
+     */
+    private $locations;
+
+    /**
      * @ORM\OneToMany(targetEntity="Shipping", mappedBy="carrier")
      */
     private $shipments;
@@ -2098,5 +2103,38 @@ class User extends BaseUser
     public function getPlaces()
     {
         return $this->places;
+    }
+
+    /**
+     * Add locations
+     *
+     * @param \Binidini\CoreBundle\Entity\Location $locations
+     * @return User
+     */
+    public function addLocation(\Binidini\CoreBundle\Entity\Location $locations)
+    {
+        $this->locations[] = $locations;
+
+        return $this;
+    }
+
+    /**
+     * Remove locations
+     *
+     * @param \Binidini\CoreBundle\Entity\Location $locations
+     */
+    public function removeLocation(\Binidini\CoreBundle\Entity\Location $locations)
+    {
+        $this->locations->removeElement($locations);
+    }
+
+    /**
+     * Get locations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLocations()
+    {
+        return $this->locations;
     }
 }

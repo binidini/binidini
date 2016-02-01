@@ -9,6 +9,7 @@
  */
 namespace Binidini\CoreBundle\EventListener;
 
+use Binidini\CoreBundle\Service\NotificationService;
 use Binidini\SearchBundle\Document\Shipment;
 use Binidini\SearchBundle\Document\ShipmentItem;
 use Doctrine\ODM\MongoDB\DocumentManager;
@@ -28,14 +29,16 @@ class ShippingListener
     private $geocodeProducer;
     private $logger;
     private $rootDir;
+    private $ns;
 
-    public function __construct(DocumentManager $documentManager, EntityManager $em, Producer $geocodeProducer, LoggerInterface $logger, $rootDir)
+    public function __construct(DocumentManager $documentManager, EntityManager $em, Producer $geocodeProducer, LoggerInterface $logger, $rootDir, NotificationService $ns)
     {
         $this->dm = $documentManager;
         $this->em = $em;
         $this->geocodeProducer = $geocodeProducer;
         $this->logger = $logger;
         $this->rootDir = $rootDir;
+        $this->ns = $ns;
     }
 
 
@@ -122,6 +125,8 @@ class ShippingListener
         $msg = array('id' => $shipping->getId());
         $this->geocodeProducer->publish(serialize($msg));
 
+        //temporary stub
+        $this->ns->notifyInsidersAboutNewDffShipping($shipping);
     }
 
 }

@@ -12,6 +12,7 @@
 namespace Binidini\SearchBundle\Controller;
 
 
+use Binidini\CoreBundle\Entity\Location;
 use Binidini\SearchBundle\Model\MyPagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,9 +34,18 @@ class ShipmentController extends ResourceController
 
             if (!is_null($user)) {
 
+                $loc = new Location();
+                $loc
+                    ->setUser($user)
+                    ->setLatitude($latitude)
+                    ->setLongitude($longitude)
+                ;
+                $this->getDoctrine()->getManager()->persist($loc);
+
                 $user->setLatitude($latitude);
                 $user->setLongitude($longitude);
-                $this->getDoctrine()->getManager()->flush($user);
+
+                $this->getDoctrine()->getManager()->flush();
             }
         }
 

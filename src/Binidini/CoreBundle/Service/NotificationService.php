@@ -26,6 +26,7 @@ use Binidini\CoreBundle\Entity\User;
 use Binidini\CoreBundle\Model\SenderCarrierAwareInterface;
 use Doctrine\ORM\EntityManager;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use Symfony\Component\Validator\Constraints\False;
 
 class NotificationService
 {
@@ -45,7 +46,7 @@ class NotificationService
         $this->twig = $twig;
         $this->em = $em;
 
-        $this->insiders = [0, 2, 123792, 124290, 124292, 124343, 124344, 123642];
+        $this->insiders = [2, 123792, 124290, 124292, 124343, 124344, 123642];
     }
 
     public function notifySender(SenderCarrierAwareInterface $resource, $event)
@@ -82,7 +83,7 @@ class NotificationService
         foreach ($uids as $uid) {
 
             //инсайдерам не надо
-            if (array_search($uid['id'], $this->insiders)) {
+            if (array_search($uid['id'], $this->insiders) === FALSE) {
                 return;
             }
 

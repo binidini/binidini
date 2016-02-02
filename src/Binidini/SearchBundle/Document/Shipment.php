@@ -56,6 +56,13 @@ class Shipment
     /**
      * @var integer
      *
+     * @MongoDB\Field(name="guarantee", type="int")
+     */
+    private $guarantee;
+
+    /**
+     * @var integer
+     *
      * @MongoDB\Field(name="insurance", type="int")
      */
     private $insurance;
@@ -515,5 +522,34 @@ class Shipment
     public function getImgPath()
     {
         return $this->imgPath;
+    }
+
+    /**
+     * Set guarantee
+     *
+     * @param int $guarantee
+     * @return self
+     */
+    public function setGuarantee($guarantee)
+    {
+        $this->guarantee = $guarantee;
+
+        if ($guarantee > 0) {
+            $this->setPaymentGuarantee(true);
+        } else {
+            $this->setPaymentGuarantee(false);
+        }
+        
+        return $this;
+    }
+
+    /**
+     * Get guarantee
+     *
+     * @return int $guarantee
+     */
+    public function getGuarantee()
+    {
+        return $this->guarantee;
     }
 }

@@ -126,6 +126,16 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     /**
      * @var integer
      *
+     * @ORM\Column(name="guarantee", type="integer", options={"default" = 0})
+     * @Assert\Range(min=0)
+     * @Expose
+     */
+    private $guarantee;
+
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="insurance", type="integer", options={"default" = 0})
      * @Assert\Range(min=0)
      * @Expose
@@ -323,6 +333,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         $this->imgPath = 'parcels/pics/tytymyty_' . rand(1, 18) . '.jpg';
 
         $this->category = 0;
+        $this->guarantee = 0;
     }
 
     public function hold()
@@ -1210,4 +1221,33 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         return $this->category;
     }
 
+
+    /**
+     * Set guarantee
+     *
+     * @param integer $guarantee
+     * @return Shipping
+     */
+    public function setGuarantee($guarantee)
+    {
+        $this->guarantee = $guarantee;
+
+        if ($guarantee > 0) {
+            $this->setPaymentGuarantee(true);
+        } else {
+            $this->setPaymentGuarantee(false);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get guarantee
+     *
+     * @return integer 
+     */
+    public function getGuarantee()
+    {
+        return $this->guarantee;
+    }
 }

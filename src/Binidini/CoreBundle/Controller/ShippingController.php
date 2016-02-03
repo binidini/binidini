@@ -52,7 +52,7 @@ class ShippingController extends ResourceController
 
             // мы закрываем для отображения старые заказы
             if (new \DateTime() >  $shipping->getDeliveryDatetime() &&
-                (is_null($this->getUser()) ||($this->getUser() != $shipping->getSender() && $this->getUser() != $shipping->getCarrier())) &&
+                (is_null($this->getUser()) ||($this->getUser() != $shipping->getSender() && $this->getUser() != $shipping->getCarrier()) && !$this->getUser()->isAdmin()) &&
                 !$this->isBot())
             {
                 $this->flashHelper->setFlash('danger', 'show.error');

@@ -48,7 +48,7 @@ binidini_core_shipping_show:
         slug: 'интернет-доставка'
 
 #depricated use above route
-binidini_core_shipping_show:
+binidini_core_shipping_show_depricated:
     path: /public/shipping/{id}
     methods: [GET]
     defaults:

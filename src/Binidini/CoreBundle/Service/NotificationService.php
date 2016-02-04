@@ -46,7 +46,7 @@ class NotificationService
         $this->twig = $twig;
         $this->em = $em;
 
-        $this->insiders = [2, 123792, 124290, 124292, 124343, 124344, 123642];
+        $this->insiders = [2, 123792, 124290, 124292, 124343, 124344, 123642, 124468];
     }
 
     public function notifySender(SenderCarrierAwareInterface $resource, $event)

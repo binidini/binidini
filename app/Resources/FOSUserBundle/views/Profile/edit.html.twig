@@ -54,6 +54,17 @@
                                                     <div class="col-sm-8">
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">
+                                                                Деятельность:
+                                                            </label>
+
+                                                            <div class="col-sm-5 no-padding profile-type2">
+                                                                {{ form_widget(form.profileType, {'attr':{'class':'radio i-checks'}}) }}
+                                                                {{ form_errors(form.profileType) }}
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">
                                                                 Вы:
                                                             </label>
 
@@ -116,6 +127,31 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Город:</label>
+
+                                                            <div class="col-sm-5 no-padding">
+                                                                {{ form_widget(form.city, {'attr': {'class': 'form-control', 'placeholder': 'Город', 'list': 'city'}, 'data':user.city}) }}
+                                                                {{ form_errors(form.city) }}
+                                                                <datalist id="city">
+                                                                    <option value="Москва">
+                                                                    <option value="Санкт-Петербург">
+                                                                    <option value="Новосибирск">
+                                                                    <option value="Екатеринбург">
+                                                                    <option value="Нижний Новгород">
+                                                                    <option value="Казань">
+                                                                    <option value="Челябинск">
+                                                                    <option value="Омск">
+                                                                    <option value="Самара">
+                                                                    <option value="Ростов-на-Дону">
+                                                                    <option value="Уфа">
+                                                                    <option value="Красноярск">
+                                                                    <option value="Пермь">
+                                                                    <option value="Воронеж">
+                                                                    <option value="Волгоград">
+                                                                </datalist>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label class="col-sm-3 control-label">Адрес:</label>
 
                                                             <div class="col-sm-5 no-padding">
@@ -129,20 +165,9 @@
 
                                                             <div class="col-sm-5 no-padding">
 
-                                                                {{ form_widget(form.aboutMe, {'attr': {'class': 'form-control', 'placeholder': 'О себе'}, 'data':user.aboutme}) }}
+                                                                {{ form_widget(form.aboutMe, {'attr': {'class': 'form-control', 'placeholder': ''}, 'data':user.aboutme}) }}
                                                                 {{ form_errors(form.aboutMe) }}
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label">
-                                                                Деятельность:
-                                                            </label>
-
-                                                            <div class="col-sm-5 no-padding profile-type2">
-                                                                {{ form_widget(form.profileType, {'attr':{'class':'radio i-checks'}}) }}
-                                                                {{ form_errors(form.profileType) }}
-                                                            </div>
-
                                                         </div>
                                                         <input type="hidden" name="tab-switch" value="{{ activeTab }}">
                                                     </div>

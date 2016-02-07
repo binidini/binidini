@@ -36,6 +36,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             $builder
                 ->add('email', 'email', ['required' => false])
                 ->add('companyName')
+                ->add('city')
                 ->add('address')
                 ->add('type', 'choice',
                     [

@@ -23,6 +23,7 @@ class UserType extends AbstractType
             ->add('lastName')
             ->add('patronymic')
             ->add('companyName')
+            ->add('city')
             ->add('address')
             ->add('type', 'choice',
                 [

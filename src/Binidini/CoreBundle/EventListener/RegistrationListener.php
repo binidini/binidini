@@ -52,7 +52,7 @@ class RegistrationListener implements EventSubscriberInterface
     {
         $phoneNumber = $event->getRequest()->request->get('fos_user_registration_form')['username'];
         $user = $event->getUser();
-        $user->setEmail($phoneNumber . '@tytymyty.ru');
+        $user->setEmail('');
         $this->pwd = '' . rand(100000, 999999);
         $user->setPlainPassword($this->pwd);
 

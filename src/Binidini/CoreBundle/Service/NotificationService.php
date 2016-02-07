@@ -46,7 +46,11 @@ class NotificationService
         $this->twig = $twig;
         $this->em = $em;
 
+        //Все
         $this->insiders = [2, 123792, 124290, 124292, 124343, 124344, 123642, 124468];
+
+        //Люботинский
+        $this->insiders2 =[124513, 124408];
     }
 
     public function notifySender(SenderCarrierAwareInterface $resource, $event)
@@ -103,7 +107,14 @@ class NotificationService
             return;
         }
 
-        foreach ($this->insiders as $uid) {
+        if (mb_strpos($shipping->getPickupAddress(),'Люботинский', 0, 'UTF-8') !== false) {
+            $insiders = array_merge($this->insiders, $this->insiders2);
+        } else {
+            $insiders = $this->insiders;
+        }
+
+
+        foreach ($insiders as $uid) {
             $user = $this->em->getRepository('BinidiniCoreBundle:User')->find($uid);
 
             if (is_null($user)) {

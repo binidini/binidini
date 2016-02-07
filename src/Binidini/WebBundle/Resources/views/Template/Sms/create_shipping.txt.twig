@@ -1,1 +1,1 @@
-Новый заказ № {{ resource.id }} рядом с Вами за {{ resource.deliveryPrice }} руб. по адресу {{ resource.pickupAddress }}.
+{{ (resource.deliveryPrice ~ 'р. - ' ~ resource.pickupAddress | replace({"Россия, ": "", "Санкт-Петербург, ": ""}) ~ ' - ' ~ resource.deliveryAddress | replace({"Россия, ": "", "Санкт-Петербург, ": ""})) | slice(0, 69) }}

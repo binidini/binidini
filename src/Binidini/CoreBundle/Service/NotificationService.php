@@ -84,7 +84,7 @@ class NotificationService
 
             //инсайдерам не надо
             if (array_search($uid['id'], $this->insiders) === FALSE) {
-                return;
+                break;
             }
 
             $user = $this->em->getRepository('BinidiniCoreBundle:User')->find($uid['id']);
@@ -98,12 +98,17 @@ class NotificationService
     public function notifyInsidersAboutNewDffShipping(Shipping $shipping) {
 
         if ($shipping->getSender()->getId() != 124281) {
+//        if ($shipping->getSender()->getId() != 4) {
             //если не dff возврат
             return;
         }
 
         foreach ($this->insiders as $uid) {
             $user = $this->em->getRepository('BinidiniCoreBundle:User')->find($uid);
+
+            if (is_null($user)) {
+                break;
+            }
 
             $this->notify($user, 'create_shipping', $shipping);
         }

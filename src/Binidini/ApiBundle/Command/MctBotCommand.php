@@ -189,14 +189,15 @@ EOT
 
         $now= new \DateTime();
         $deliveryDatetime = $now->add(new \DateInterval('PT'.rand(2,10).'H'));
+        $price = $prices[array_rand($prices)];
         $post = [
             'name'=>$names[array_rand($names)],
             'pickupAddress'=>$pickupAddresses[array_rand($pickupAddresses)],
             'deliveryAddress'=>$deliveryAddresses[array_rand($deliveryAddresses)],
             'deliveryDatetime'=>$deliveryDatetime->format('d.m.y H').':'.$minutes[array_rand($minutes)],
-            'deliveryPrice'=>$prices[array_rand($prices)],
+            'deliveryPrice'=>$price,
             'insurance'=>$insurance[array_rand($insurance)],
-            'paymentGuarantee'=>rand(0,1)?null:1,
+            'guarantee'=>rand(0,1)?null:$price,
             'description' => $description[array_rand($description)],
             'access_token'=>$token,
             'category'=>-1];

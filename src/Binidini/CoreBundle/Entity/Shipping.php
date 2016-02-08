@@ -346,9 +346,9 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
             }
         }
 
-        if ($this->paymentGuarantee && $this->deliveryPrice > 0) {
+        if ($this->guarantee > 0) {
             try {
-                $this->user->hold($this->deliveryPrice);
+                $this->user->hold($this->guarantee);
             } catch (InsufficientUserBalance $ex) {
                 //вернем деньги перевозчику
                 $this->carrier->release($this->insurance);
@@ -365,9 +365,9 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 
     public function releaseSender()
     {
-        if ($this->paymentGuarantee && $this->deliveryPrice > 0) {
+        if ($this->guarantee > 0) {
             try {
-                $this->user->release($this->deliveryPrice);
+                $this->user->release($this->guarantee);
             } catch (InsufficientFrozenAmount $ex) {
                 throw new InsufficientFrozenAmount("У отправителя не достаточно средств");
             }
@@ -399,10 +399,10 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
 
     public function payPayment()
     {
-        if ($this->paymentGuarantee && $this->deliveryPrice > 0) {
+        if ($this->guarantee > 0) {
             try {
-                $this->user->decreaseHoldBalance($this->insurance);
-                $this->carrier->addBalance($this->insurance);
+                $this->user->decreaseHoldBalance($this->guarantee);
+                $this->carrier->addBalance($this->guarantee);
             } catch (InsufficientFrozenAmount $ex) {
                 throw new InsufficientFrozenAmount("У отправителя не достаточно средств");
             }

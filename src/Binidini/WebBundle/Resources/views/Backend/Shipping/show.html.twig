@@ -40,9 +40,7 @@
                                             </select>
                                         </span>
                                         {% endif %}
-                                        {% if shipping.paymentGuarantee %}
-                                            <span class="badge badge-primary"><i class="fa fa-thumbs-up"></i> гарантирована</span>
-                                        {% endif %}
+
                                     </dd>
                                     <dt>Страховка:</dt>
                                     <dd>{{ shipping.insurance | price }}
@@ -56,6 +54,10 @@
                                         </span>
                                         {% endif %}
                                     </dd>
+
+                                    <dt>Гарантия:</dt>
+                                    <dd>{{ shipping.guarantee | price }}</dd>
+
 
                                 </dl>
                             </div>

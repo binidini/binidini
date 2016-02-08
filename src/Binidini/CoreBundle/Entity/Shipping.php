@@ -333,7 +333,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         $this->imgPath = 'parcels/pics/tytymyty_' . rand(1, 18) . '.jpg';
 
         $this->category = 0;
-        $this->guarantee = 0;
+        $this->paymentGuarantee = false;
     }
 
     public function hold()

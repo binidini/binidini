@@ -33,7 +33,7 @@ class ShippingType extends AbstractType
             ->add('deliveryAddress')
             ->add('deliveryDatetime', 'datetime', ['widget' => 'single_text', 'format' => 'dd.MM.yy HH:mm'])
             ->add('deliveryPrice')
-            ->add('paymentGuarantee', 'checkbox', ['required' => false])
+            ->add('guarantee', null, ['required' => false])
             ->add('insurance', null, ['required' => false])
             ->add('deliveryCode', 'checkbox', ['required' => false])
             ->add('category', 'hidden', ['required' => false])

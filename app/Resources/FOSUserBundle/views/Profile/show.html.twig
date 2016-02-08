@@ -35,6 +35,10 @@
                                 <p><i class="fa fa-rouble"></i>&nbsp;<span class="text-success">{{ user.balance}}</span>/<span class="text-danger">{{ user.holdAmount }}</span> руб.</p>
                             {% endif %}
 
+                            {% if user.city %}
+                                <p><i class="fa fa-building"></i> {{ user.city }}</p>
+                            {% endif %}
+
                             {% if user.address %}
                                 <p><i class="fa fa-map-marker"></i> {{ user.address }}</p>
                             {% endif %}

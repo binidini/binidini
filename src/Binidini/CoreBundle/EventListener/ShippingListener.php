@@ -52,6 +52,11 @@ class ShippingListener
         if (is_null($shipping->getInsurance())) {
             $shipping->setInsurance(0);
         }
+
+        if (is_null($shipping->getGuarantee())) {
+            $shipping->setGuarantee(0);
+        }
+
     }
 
     /**
@@ -113,6 +118,7 @@ class ShippingListener
             ->setDescription($shipping->getDescription())
             ->setWeight($shipping->getWeight())
             ->setInsurance($shipping->getInsurance())
+            ->setGuarantee($shipping->getGuarantee())
             ->setX($shipping->getX())
             ->setY($shipping->getY())
             ->setZ($shipping->getZ())

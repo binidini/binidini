@@ -29,10 +29,14 @@
 
                             <p class="inline"><i class="fa fa-clock-o"></i> Время доставки: <strong>{{ shipping.deliveryDatetime | date('d.m H:i') }}</strong></p>
 
-                            <p class="{{ shipping.paymentGuarantee ? 'text-success' }}" style="font-size: 25px"> <strong>{{ shipping.deliveryPrice}}&nbsp;руб.</strong></p>
+                            <p style="font-size: 25px"> <strong>{{ shipping.deliveryPrice}}&nbsp;руб.</strong></p>
 
-                            <p class="inline"><i class="fa fa-credit-card"></i> Cтраховка: <strong>{{ shipping.insurance | price }}</strong></p>
-
+                            {% if shipping.insurance > 0 %}
+                                <p class="inline text-danger"><i class="fa fa-cc-visa"></i> Cтраховка: <strong>{{ shipping.insurance | price }}</strong></p>
+                            {% endif %}
+                            {% if shipping.guarantee > 0 %}
+                                <p class="inline text-success"><i class="fa fa-cc-mastercard"></i> Гарантия: <strong>{{ shipping.guarantee | price }}</strong></p>
+                            {% endif %}
                             <p><i class="fa fa-home"></i> {{ shipping.pickupAddress }}</p>
 
                             <p><i class="fa fa-map-marker"></i> {{ shipping.deliveryAddress }}</p>

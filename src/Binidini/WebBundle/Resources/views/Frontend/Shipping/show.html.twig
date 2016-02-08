@@ -165,13 +165,27 @@
                                     <dt>Оплата:</dt>
                                     <dd>
                                         {{ shipping.deliveryPrice | price }}
-                                        {% if shipping.paymentGuarantee %}
-                                            <span class="badge badge-primary"><i class="fa fa-thumbs-up"></i> гарантирована</span>
-                                        {% endif %}
                                     </dd>
-                                    <dt>Страховка:</dt>
-                                    <dd>{{ shipping.insurance | price }}</dd>
-
+                                    {% if shipping.insurance > 0 %}
+                                        <dt>Страховка:</dt>
+                                        <dd class="text-danger">
+                                            {{ shipping.insurance | price }}
+                                            <a href="#" data-container="body" data-toggle="popover" data-placement="right"
+                                               data-content="Сумма страховки блокируется со счета перевозчика до конца выполнения заказа. Деньги вернуться перевозчику только после подтверждения доставки заказчиком." data-original-title="" title="">
+                                                <i class="fa fa-question" style="font-size: large"></i>
+                                            </a>
+                                        </dd>
+                                    {% endif %}
+                                    {% if shipping.guarantee > 0 %}
+                                        <dt>Гарантия:</dt>
+                                        <dd class="text-success">
+                                            {{ shipping.guarantee | price }}
+                                            <a href="#" data-container="body" data-toggle="popover" data-placement="right"
+                                               data-content="Сумма гарантии блокируется со счета заказчика до конца выполнения заказа. Деньги вернутся заказчику только после подтверждения оплаты перевозчиком." data-original-title="" title="">
+                                                <i class="fa fa-question" style="font-size: large"></i>
+                                            </a>
+                                        </dd>
+                                    {% endif %}
                                     {% if shipping.deliveryCode > 0 %}
                                         <dt>Код доставки:</dt>
                                         <dd>

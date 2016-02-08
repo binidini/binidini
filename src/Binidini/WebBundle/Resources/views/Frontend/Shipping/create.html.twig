@@ -73,7 +73,7 @@
                                     <label class="col-sm-2 control-label">Цена*</label>
 
                                     <div class="col-sm-5">
-                                        {{ form_widget(form.deliveryPrice, {'attr': {'class': 'form-control', 'placeholder': 'Стоимость доставки в рублях', 'min': 0}}) }}
+                                        {{ form_widget(form.deliveryPrice, {'attr': {'class': 'form-control', 'placeholder': 'Стоимость доставки в рублях', 'min': 0, 'step': 5}}) }}
                                     </div>
                                     <div class="col-sm-5">
                                         {{ form_errors(form.deliveryPrice) }}
@@ -95,14 +95,14 @@
                                                         <label class="col-sm-2 control-label">Гарантия</label>
 
                                                         <div class="col-sm-2">
-                                                            {{ form_widget(form.paymentGuarantee, {'attr': {'class': 'checkbox-inline i-checks', 'style': 'position: absolute; opacity: 0;'}}) }}
+                                                            {{ form_widget(form.guarantee, {'attr': {'class': 'form-control', 'placeholder': 'руб.', 'min': 0, 'step': 5}}) }}
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            {{ form_errors(form.paymentGuarantee) }}
+                                                            {{ form_errors(form.guarantee) }}
                                                             <span class="help-block m-b-none">
-                                                                Гарантия оплаты перевозки.
-                                                                Сумма, равная стоимости перевозки, замораживается со счета отправителя и возвращается после подтверждения оплаты перевозчиком.
-                                                                Не ставьте галку, если у Вас нулевой баланс.
+                                                                Гарантия оплаты от получателя.
+                                                                Сумма, замораживается со счета заказчика и возвращается после подтверждения оплаты перевозчиком.
+                                                                Не устанавливайте гарантию, если она не требуется или осуществляется вне системы Титимити.
                                                             </span>
                                                         </div>
                                                     </div>
@@ -111,7 +111,7 @@
                                                         <label class="col-sm-2 control-label">Страховка</label>
 
                                                         <div class="col-sm-2">
-                                                            {{ form_widget(form.insurance, {'attr': {'class': 'form-control', 'placeholder': 'руб.', 'min': 0}}) }}
+                                                            {{ form_widget(form.insurance, {'attr': {'class': 'form-control', 'placeholder': 'руб.', 'min': 0, 'step': 5}}) }}
                                                         </div>
                                                         <div class="col-sm-8">
                                                             {{ form_errors(form.insurance) }}

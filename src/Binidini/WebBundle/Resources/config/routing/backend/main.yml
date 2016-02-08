@@ -12,8 +12,9 @@ binidini_admin_shipping:
     defaults:
         _controller: binidini_core.controller.shipping:indexAction
         _sylius:
-            method: findByArguments
-            arguments: [$id, $state, $deliveryPriceFrom, $deliveryPriceTo, $insurancePriceFrom, $insurancePriceTo, $deliveryTimeFrom, $deliveryTimeTo]
+            repository:
+                method: findByArguments
+                arguments: [$id, $state, $deliveryPriceFrom, $deliveryPriceTo, $insurancePriceFrom, $insurancePriceTo, $deliveryTimeFrom, $deliveryTimeTo]
             paginate: $paginate
             sortable: true
             sorting:
@@ -56,8 +57,9 @@ binidini_admin_user_index:
     defaults:
         _controller: binidini_core.controller.user:indexAction
         _sylius:
-            method: findByArguments
-            arguments: [$phone, $lastName, $firstName, $parentName, $email, $registrationFrom, $registrationTo, $countOfCarriers, $countOfSenders, $blocked, $enabled]
+            repository:
+                method: findByArguments
+                arguments: [$phone, $lastName, $firstName, $parentName, $email, $registrationFrom, $registrationTo, $countOfCarriers, $countOfSenders, $blocked, $enabled]
             paginate: $paginate
             sortable: true
             sorting:

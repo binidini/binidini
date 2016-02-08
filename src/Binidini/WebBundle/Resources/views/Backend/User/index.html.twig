@@ -73,10 +73,12 @@
                                     <tr>
                                         <th>{{ sylius_resource_sort('id', '#', 'desc') }}</th>
                                         <th>Телефон</th>
-                                        <th>Название</th>
-                                        <th>email</th>
+                                        <th>Имя</th>
+                                        <th>Email</th>
+                                        <th>Город</th>
                                         <th>Был</th>
                                         <th>Дата регистрации</th>
+                                        <th><i class="fa fa-rub"></i></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -95,8 +97,13 @@
                                             {% endif %}
                                             </td>
                                             <td>{{ user.email }}</td>
+                                            <td>{{ user.city }}</td>
                                             <td>{{ user.lastlogin | date('d.m H:i') }}</td>
                                             <td>{{ user.createdAt | date('d.m H:i') }}</td>
+                                            <td>
+                                                {% if user.isSender and not user.isCarrier %}<i class="fa fa-rub"></i>{% endif %}
+                                                {% if not user.isSender and user.isCarrier %}<i class="fa fa-truck"></i>{% endif %}
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

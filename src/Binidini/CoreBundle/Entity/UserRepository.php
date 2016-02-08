@@ -64,6 +64,9 @@ class UserRepository extends EntityRepository
             }
 
         }
+
+        $queryBuilder->addOrderBy($this->getPropertyName('id'), 'desc');
+
         return $this->getPaginator($queryBuilder);
     }
 

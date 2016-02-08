@@ -16,9 +16,6 @@ binidini_admin_shipping:
                 method: findByArguments
                 arguments: [$id, $state, $deliveryPriceFrom, $deliveryPriceTo, $insurancePriceFrom, $insurancePriceTo, $deliveryTimeFrom, $deliveryTimeTo]
             paginate: $paginate
-            sortable: true
-            sorting:
-                id: desc
             filterable: true
             template: BinidiniWebBundle::Backend/Shipping/index.html.twig
 
@@ -60,10 +57,8 @@ binidini_admin_user_index:
             repository:
                 method: findByArguments
                 arguments: [$phone, $lastName, $firstName, $parentName, $email, $registrationFrom, $registrationTo, $countOfCarriers, $countOfSenders, $blocked, $enabled]
+
             paginate: $paginate
-            sortable: true
-            sorting:
-                id: desc
             filterable: true
             template: BinidiniWebBundle::Backend/User/index.html.twig
 

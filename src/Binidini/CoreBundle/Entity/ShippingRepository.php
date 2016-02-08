@@ -2,6 +2,7 @@
 
 namespace Binidini\CoreBundle\Entity;
 
+use Doctrine\ORM\Query\Expr\OrderBy;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ShippingRepository extends EntityRepository
@@ -10,7 +11,7 @@ class ShippingRepository extends EntityRepository
     public function findByArguments($id, $state, $deliveryPriceFrom, $deliveryPriceTo, $insurancePriceFrom, $insurancePriceTo, $deliveryTimeFrom, $deliveryTimeTo)
     {
 
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->getCollectionQueryBuilder('s');
         if ($id) {
             $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('id'), ':id'))
                 ->setParameter(':id', $id);
@@ -44,6 +45,8 @@ class ShippingRepository extends EntityRepository
             $queryBuilder->andWhere($queryBuilder->expr()->lte($this->getPropertyName('deliveryDatetime'), ':dtt'))
                 ->setParameter(':dtt', $deliveryTimeTo);
         }
+
+        $queryBuilder->addOrderBy($this->getPropertyName('id'), 'desc');
 
         return $this->getPaginator($queryBuilder);
     }

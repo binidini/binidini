@@ -51,3 +51,9 @@ binidini_rest_api:
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/restapi.html.twig
+
+binidini_partners:
+    path: /partners
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/partners.html.twig

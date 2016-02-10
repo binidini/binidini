@@ -135,6 +135,7 @@
                         <li {{ croute.is_current_route('binidini_rules') }}><a href="{{ path('binidini_rules') }}" target="rules">Правила</a></li>
                     </ul>
                 </li>
+                <li {{ croute.is_current_route('binidini_partners') }}><a href="{{ path('binidini_partners') }}">Партнеры</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
                     <li>
                         <a href="{{ path('binidini_admin_shipping') }}"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Консоль</span></a>

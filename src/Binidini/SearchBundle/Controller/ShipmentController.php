@@ -157,13 +157,13 @@ class ShipmentController extends ResourceController
         # -->
 
         if (is_null($longitude) || is_null($latitude)) {
-            $shipments = $this->getRepository()->createPaginator();
+            $shipments = $this->getRepository()->findAll();
         } else {
-            $shipments = $this->getRepository()->findByLocation($longitude, $latitude);
+            $shipments = $this->getRepository()->findByLoc($longitude, $latitude);
         }
 
-        $shipments->setCurrentPage($request->get('page', 1), true, true);
-        $shipments->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        //$shipments->setCurrentPage($request->get('page', 1), true, true);
+        //$shipments->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
         if ($this->config->isApiRequest()) {
 

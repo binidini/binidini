@@ -6,6 +6,10 @@ binidini_api:
     resource: "@BinidiniApiBundle/Resources/config/routing.yml"
     prefix:   /api
 
+binidini_api:
+    resource: "@BinidiniApiBundle/Resources/config/routing2.yml"
+    prefix:   /api2
+
 binidini_web:
     resource: "@BinidiniWebBundle/Resources/config/routing/main.yml"
     prefix:   /

@@ -23,12 +23,12 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository;
 
 class ShipmentRepository extends DocumentRepository
 {
-    public function findByLocation($longitude, $latitude)
+    public function findByLocation($longitude, $latitude, $type = 'delivery')
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         if ( is_numeric($longitude) && is_numeric($latitude) ) {
-            $queryBuilder->field('pickupCoordinates')->near((float)$longitude, (float)$latitude);
+            $queryBuilder->field($type.'Coordinates')->near((float)$longitude, (float)$latitude);
         }
 
         return $this->getPaginator($queryBuilder);

@@ -1,0 +1,3 @@
+binidini_api_shipments:
+    resource: @BinidiniApiBundle/Resources/config/routing/v2/shipment.yml
+    prefix: /shipments

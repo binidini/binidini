@@ -164,6 +164,7 @@ class ShipmentController extends ResourceController
 
         $shipments = $this->getRepository()->findBy([], $orderBy);
 
+        $result = [];
         /** @var $shipment \Binidini\SearchBundle\Document\Shipment */
         foreach ($shipments as $shipment) {
 

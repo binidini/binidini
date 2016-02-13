@@ -2,4 +2,5 @@ binidini_api2_search_shipment_search:
     path: /search
     methods: [GET]
     defaults:
-        _controller: binidini_search.controller.shipment:search2Action
+        _controller: binidini_search.controller.shipment:distanceAction
+

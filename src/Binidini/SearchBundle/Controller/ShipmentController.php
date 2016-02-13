@@ -103,14 +103,13 @@ class ShipmentController extends ResourceController
 
     }
 
-    //https://github.com/binidini/tytymyty-ios/issues/35
-    public function search2Action(Request $request)
+    public function distanceAction(Request $request)
     {
-        $sort = $request->get('sort', 'delivery_time');
         $searchType = $request->get('search_type', 'pickup');
-        $longitude = $request->get('lon');
-        $latitude  = $request->get('lat');
-        $searchAddress = $request->get('top-search');
+        $sort = $request->get('sort', 'delivery_datetime');
+        $longitude = $request->get('lon', null);
+        $latitude  = $request->get('lat', null);
+        $searchAddress = $request->get('top-search', null);
 
         //<-- Ведем базу передвижения пользователя
         if (!is_null($longitude) && !is_null($latitude)) {
@@ -156,35 +155,36 @@ class ShipmentController extends ResourceController
         }
         # -->
 
-        if (is_null($longitude) || is_null($latitude)) {
-            $shipments = $this->getRepository()->findAll();
-        } else {
-            $shipments = $this->getRepository()->findByLoc($longitude, $latitude);
+        $orderBy = [];
+        if ($sort == 'delivery_time') {
+            $orderBy = ['deliveryDatetime' => 'asc'];
+        } elseif ($sort == 'delivery_price') {
+            $orderBy = ['deliveryPrice' => 'desc'];
         }
 
-        //$shipments->setCurrentPage($request->get('page', 1), true, true);
-        //$shipments->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        $shipments = $this->getRepository()->findBy([], $orderBy);
 
-        if ($this->config->isApiRequest()) {
+        /** @var $shipment \Binidini\SearchBundle\Document\Shipment */
+        foreach ($shipments as $shipment) {
 
-            $shipments = $this->getMyPagerfantaFactory()->createRepresentation(
-                $shipments,
-                new Route(
-                    $request->attributes->get('_route'),
-                    $request->attributes->get('_route_params')
-                )
-            );
-        } else {
-            if (!empty($searchAddress)) {
-                $this->flashHelper->setFlash('success', 'top_search', ['%address%' => $searchAddress]);
+            if (is_null($shipment->getPickupCoordinates())) {
+                $pickupDistance = 20000000;
+            } else {
+                $pickupDistance = $this->circle_distance($latitude, $longitude, $shipment->getPickupCoordinates()->getLatitude(), $shipment->getPickupCoordinates()->getLongitude());
             }
-        }
 
+            if (is_null($shipment->getDeliveryCoordinates())) {
+                $deliveryDistance = 20000000;
+            } else {
+                $deliveryDistance = $this->circle_distance($latitude, $longitude, $shipment->getDeliveryCoordinates()->getLatitude(), $shipment->getDeliveryCoordinates()->getLongitude());
+            }
+            $result[] = ['pickup_distance' => intval($pickupDistance), 'delivery_distance' => intval($deliveryDistance), 'order' => $shipment];
+        }
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate(''))
             ->setTemplateVar($this->config->getPluralResourceName())
-            ->setData($shipments);
+            ->setData($result);
 
         return $this->handleView($view);
 
@@ -194,9 +194,14 @@ class ShipmentController extends ResourceController
     /**
      * @return MyPagerfantaFactory
      */
-    protected function getMyPagerfantaFactory()
+    private function getMyPagerfantaFactory()
     {
         return new MyPagerfantaFactory();
+    }
+
+    private function circle_distance($lat1, $lon1, $lat2, $lon2) {
+        $rad = M_PI / 180;
+        return acos(sin($lat2*$rad) * sin($lat1*$rad) + cos($lat2*$rad) * cos($lat1*$rad) * cos($lon2*$rad - $lon1*$rad)) * 6371000;// Kilometers*1000
     }
 
 }

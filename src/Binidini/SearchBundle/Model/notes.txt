@@ -1,4 +1,4 @@
-MyCollectionRepresentation and MyPagerFantaFactory  iis created just for changing in
+MyCollectionRepresentation and MyPagerFantaFactory  is created just for changing in
 CollectionRepresentation.php
 
 $resources = iterator_to_array($resources); -> $resources = iterator_to_array($resources, false);

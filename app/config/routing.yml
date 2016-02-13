@@ -1,7 +1,3 @@
-binidini_search:
-    resource: "@BinidiniSearchBundle/Resources/config/routing.yml"
-    prefix:   /
-
 binidini_api:
     resource: "@BinidiniApiBundle/Resources/config/routing.yml"
     prefix:   /api

@@ -105,10 +105,9 @@ class ShipmentController extends ResourceController
 
     public function distanceAction(Request $request)
     {
-        $searchType = $request->get('search_type', 'pickup');
         $sort = $request->get('sort', 'delivery_datetime');
-        $longitude = $request->get('lon', null);
-        $latitude  = $request->get('lat', null);
+        $latitude  = $request->get('lat', 55.7522);
+        $longitude = $request->get('lon', 37.6156);
         $searchAddress = $request->get('top-search', null);
 
         //<-- Ведем базу передвижения пользователя
@@ -164,7 +163,6 @@ class ShipmentController extends ResourceController
 
         $shipments = $this->getRepository()->findBy([], $orderBy);
 
-        $result = [];
         /** @var $shipment \Binidini\SearchBundle\Document\Shipment */
         foreach ($shipments as $shipment) {
 
@@ -202,7 +200,7 @@ class ShipmentController extends ResourceController
 
     private function circle_distance($lat1, $lon1, $lat2, $lon2) {
         $rad = M_PI / 180;
-        return acos(sin($lat2*$rad) * sin($lat1*$rad) + cos($lat2*$rad) * cos($lat1*$rad) * cos($lon2*$rad - $lon1*$rad)) * 6371000;// Kilometers*1000
+        return acos(sin($lat2*$rad) * sin($lat1*$rad) + cos($lat2*$rad) * cos($lat1*$rad) * cos($lon2*$rad - $lon1*$rad)) * 6371000;// Kilometers*1000 = meters
     }
 
 }

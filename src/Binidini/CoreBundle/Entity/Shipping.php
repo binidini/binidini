@@ -228,6 +228,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @ORM\ManyToOne(targetEntity="User", inversedBy="shipments")
      * @ORM\JoinColumn(name="carrier_id", referencedColumnName="id")
      * @Gedmo\Versioned
+     * @Expose
      */
     private $carrier;
 

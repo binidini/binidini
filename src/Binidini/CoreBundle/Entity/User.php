@@ -191,6 +191,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @Expose
      */
 
     private $city;
@@ -199,6 +200,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     * @Expose
      */
 
     private $address;
@@ -223,7 +225,6 @@ class User extends BaseUser
      * @var integer
      *
      * @ORM\Column(name="gcm_mask", type="integer", options={"default"=0})
-     * @Expose
      */
 
     private $gcmMask;
@@ -239,6 +240,7 @@ class User extends BaseUser
      * @var integer
      *
      * @ORM\Column(name="sender_rating", type="float", scale=2, options={"default"=0})
+     * @Expose
      */
     private $senderRating;
 
@@ -260,6 +262,7 @@ class User extends BaseUser
      * @var integer
      *
      * @ORM\Column(name="carrier_rating", type="float", scale=2, options={"default"=0})
+     * @Expose
      */
     private $carrierRating;
 

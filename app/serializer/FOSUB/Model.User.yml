@@ -1,0 +1,27 @@
+#https://github.com/schmittjoh/JMSSerializerBundle/issues/78#issuecomment-3851573
+FOS\UserBundle\Model\User:
+    properties:
+        password:
+            exclude: true
+        salt:
+            exclude: true
+        roles:
+            exclude: true
+        groups:
+            exclude: true
+        usernameCanonical:
+            exclude: true
+        emailCanonical:
+            exclude: true
+        lastLogin:
+            exclude: true
+        enabled:
+            exclude: true
+        locked:
+            exclude: true
+        expired:
+            exclude: true
+        credentialsExpired:
+            exclude: true
+        confirmationToken:
+            exclude: true

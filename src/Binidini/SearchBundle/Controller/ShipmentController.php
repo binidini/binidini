@@ -177,6 +177,7 @@ class ShipmentController extends ResourceController
             } else {
                 $deliveryDistance = $this->circle_distance($latitude, $longitude, $shipment->getDeliveryCoordinates()->getLatitude(), $shipment->getDeliveryCoordinates()->getLongitude());
             }
+
             $result[] = ['pickup_distance' => intval($pickupDistance), 'delivery_distance' => intval($deliveryDistance), 'order' => $shipment];
         }
         $view = $this

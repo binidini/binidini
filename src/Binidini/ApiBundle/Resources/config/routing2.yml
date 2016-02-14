@@ -1,3 +1,15 @@
-binidini_api2_shipments:
+binidini_api2_bid:
+    resource: @BinidiniApiBundle/Resources/config/routing/v2/bid.yml
+    prefix: /bid
+binidini_api2_message:
+    resource: @BinidiniApiBundle/Resources/config/routing/v2/message.yml
+    prefix: /message
+binidini_api2_shipment:
     resource: @BinidiniApiBundle/Resources/config/routing/v2/shipment.yml
-    prefix: /shipments
+    prefix: /shipment
+binidini_api2_shipping:
+    resource: @BinidiniApiBundle/Resources/config/routing/v2/shipping.yml
+    prefix: /shipping
+binidini_api2_user:
+    resource: @BinidiniApiBundle/Resources/config/routing/v2/user.yml
+    prefix: /user

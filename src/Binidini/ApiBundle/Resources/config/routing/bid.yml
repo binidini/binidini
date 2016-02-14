@@ -12,7 +12,7 @@ binidini_api_shipping_bid_index:
                 id: desc
             filterable: true
 
-binidini_api_shipping_bid_for_accep:
+binidini_api_shipping_bid_for_accept:
     path: /shipping/{shipping_id}/bid/accepted
     methods: [GET]
     defaults:

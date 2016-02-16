@@ -1,0 +1,469 @@
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
+
+{% block title %}
+    Титимити для отправителей
+{% endblock %}
+
+{% block pagetitle %}{% endblock %}
+{% block sidebar %}sidebar-content{% endblock %}
+
+{% block content %}
+
+    <div class="sidebard-panel">
+        <div>
+            <h4>Отзывы</h4>
+
+            <div class="feed-element">
+                <a href="#" class="pull-left">
+                    <img alt="отзыв о титимити" class="img-circle" src="{{ asset('bundles/binidiniweb/img/review/a1.jpg') }}">
+                </a>
+
+                <div class="media-body">
+                    Цены ниже рыночных. Удобно и просто в использовании.
+                    <br>
+                    <small class="text-muted">Владимир, viktis.ru</small>
+                </div>
+            </div>
+            <div class="feed-element">
+                <a href="#" class="pull-left">
+                    <img alt="отзыв о народной доставке" class="img-circle" src="{{ asset('bundles/binidiniweb/img/review/a2.jpg') }}">
+                </a>
+
+                <div class="media-body">
+                    Удобная система страховки заказов.
+                    Снизили расходы на курьеров в 2 раза.
+                    <br>
+                    <small class="text-muted">Алексей, rosreal.com</small>
+                </div>
+            </div>
+            <div class="feed-element">
+                <a href="#" class="pull-left">
+                    <img alt="image" class="img-circle" src="{{ asset('bundles/binidiniweb/img/review/a3.jpg') }}">
+                </a>
+
+                <div class="media-body">
+                    Быстро и просто делать заказы через компьютер, планшет и телефон
+                    <br>
+                    <small class="text-muted">Валерия, Actavis</small>
+                </div>
+            </div>
+            <div class="feed-element">
+                <a href="#" class="pull-left">
+                    <img alt="image" class="img-circle" src="{{ asset('bundles/binidiniweb/img/review/a4.jpg') }}">
+                </a>
+
+                <div class="media-body">
+                    Очень экономично. Порадовала система отслеживания заказа.
+                    <br>
+                    <small class="text-muted">Рустам, предприниматель</small>
+                </div>
+            </div>
+        </div>
+        <div class="m-t-md">
+            <h4>Современная доставка</h4>
+
+            <p>
+                Оптимизируйте расходы на доставку, используя сервис народной доставки Титимити.Ру
+            </p>
+
+            <div class="row m-t-sm">
+                <div class="col-md-6">
+                    <span class="bar">12,10,8,7,6,5,4,3,2,1,1</span>
+                    <h5>Расходы</h5>
+                </div>
+                <div class="col-md-6">
+                    <span class="bar">1,1,2,3,4,5,6,8,10,12,14</span>
+                    <h5>Прибыль</h5>
+                </div>
+            </div>
+        </div>
+        <div class="m-t-md">
+            <h4>Титимити</h4>
+
+            <div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge badge-primary"><i class="fa fa-rub"></i></span>
+                        Выгодно
+                    </li>
+                    <li class="list-group-item ">
+                        <span class="badge badge-info"><i class="fa fa-eur"></i></span>
+                        Надежно
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge badge-success"><i class="fa fa-usd"></i></span>
+                        Быстро
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge badge-warning"><i class="fa fa-yen"></i></span>
+                        Просто
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge badge-danger"><i class="fa fa-gbp"></i></span>
+                        Удобно
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div>
+                            <span class="pull-right text-right">
+                                Увеличение прибыли<span class="label label-primary pull-right"><i class="fa fa-arrow-up"></i></span>
+                                <br/>
+                                Уменьшение расходов на доставку<span class="label pull-right"><i class="fa fa-arrow-down"></i></span>
+                            </span>
+
+                            <h1 class="m-b-xs"><i class="fa fa-rub"></i> Увеличивайте прибыль,</h1>
+
+                            <h3 class="font-bold no-margins">
+                                уменьшив расходы на доставку
+                            </h3>
+                            <small>оптимизация доставки</small>
+                        </div>
+
+                        <div>
+                            <canvas id="lineChart" height="70" style="background-image: url('{{ asset("bundles/binidiniweb/img/logo2.png") }}'); background-repeat: no-repeat; background-position: center;"></canvas>
+                        </div>
+                        <div class="m-t-md">
+                            <small class="pull-right">
+                                схематичный график
+                            </small>
+                            <small>
+                                <strong>Оптимизация расходов на доставку</strong>, позволит увеличить прибыль.
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">Надежно</span>
+                        <h5>Механизмы защиты</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <ul>
+                            <li>страхование заказа</li>
+                            <li>гарантия оплаты</li>
+                            <li>расписка перевозчика</li>
+                        </ul>
+
+                        <div class="stat-percent font-bold text-navy">25% <i class="fa fa-level-up"></i></div>
+
+
+                        <a href="#" class="pull-right" title="Титимити - надежный сервис доставки">
+                            <img alt="Титимити - надежный сервис доставки" class="img-circle img-thumbnail" src="{{ asset('bundles/binidiniweb/img/титимити_надежная_доставка.jpg') }}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-info pull-right">Быстро</span>
+                        <h5>Перевозчики рядом</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <ul>
+                            <li>тысячи попутчиков</li>
+                            <li>все со смартфонами</li>
+                            <li>sms и push уведомления</li>
+                        </ul>
+
+                        <div class="stat-percent font-bold text-info">25% <i class="fa fa-level-up"></i></div>
+
+
+                        <a href="#" class="pull-right" title="Титимити - срочная доставка">
+                            <img alt="Титимити срочная доставка" class="img-circle img-thumbnail" src="{{ asset('bundles/binidiniweb/img/титимити_быстрая_доставка.jpg') }}">
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-warning pull-right">Выгодно</span>
+                        <h5>Доставка по пути</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <ul>
+                            <li>цена договорная</li>
+                            <li>никаких тарифов</li>
+                            <li>сервис бесплатный</li>
+                        </ul>
+
+                        <div class="stat-percent font-bold text-warning">50% <i class="fa fa-level-up"></i></div>
+                        <a href="#" class="pull-right" title="Титимити - доставка по пути">
+                            <img alt="Титимити - доставка по пути" class="img-circle img-thumbnail" src="{{ asset('bundles/binidiniweb/img/титимити_дешевая_доставка.jpg') }}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Для бизнеса</h5>
+                        <span class="label label-info">оптимизация службы доставки</span>
+                    </div>
+                    <div class="ibox-content ibox-heading">
+                        <h3>Ресторанам и цветочным магазинам
+                            <div class="stat-percent text-navy">95% <i class="fa fa-level-up"></i></div>
+                        </h3>
+                        <small><i class="fa fa-stack-exchange"></i> Внедряйте новые технологии и будьте первыми.</small>
+                    </div>
+                    <div class="ibox-content">
+                        <div>
+
+                            <div class="pull-right text-right">
+
+                                <span class="bar_dashboard">5,3,9,6,5,9,7,3,5,2,4,7,3,2,7,9,6,4,5,7,3,2,1,0,9,5,6,8,3,2,1</span>
+                                <br/>
+                                <small class="font-bold">$ 20 054.43</small>
+                            </div>
+                            <h4>Автоматизация посредством REST API
+                                <br/>
+                                <small class="m-r"><a href="{{ path('binidini_rest_api') }}"> Титимити API </a></small>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Для каждого из нас</h5>
+                        <span class="label label-warning">нам по пути</span>
+                    </div>
+                    <div class="ibox-content no-padding">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <p><a class="text-info" href="#">@tytymyty.ru</a> Регистрация занимает 5 секунд. Достаточно ввести номер мобильного телефона и вы "в игре".</p>
+                                <small class="block text-muted">#быстрая_регистрация</small>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info" href="#">@tytymyty.com</a> Рутинная задача превращается в интересную игру на вашем любимом гаджете.</p>
+                                <small class="block text-muted">#tytymyty_mobile</small>
+                            </li>
+                            <li class="list-group-item">
+                                <p>
+                                    <a class="text-info" href="#">@tytymyty.de</a> Закажите продукты в любимом супермаркете или лекарства в Вашей аптеке.
+                                    Гарантируйте оплату и перевозчик купить все за свои деньги и рассчитается с вами по чеку.
+                                </p>
+                                <small class="block text-muted">#доставка_продуктов #доставка_лекарств</small>
+                            </li>
+                            <li class="list-group-item ">
+                                <p><a class="text-info" href="#">@Титимити.Ру</a> Титимити является социальным проектом. Мы приветсвуем и поддерживаем всех, кто использует сервис,
+                                    чтобы помогать пенсионерам, инвалидам и всем нуждающимся в помощи.
+                                </p>
+                                <small class="block text-muted">#помощь_нуждающимся</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Для магазинов</h5>
+                        <span class="label label-primary">интернет-магазинам</span>
+                    </div>
+
+                    <div class="ibox-content inspinia-timeline">
+
+                        <div class="timeline-item">
+                            <div class="row">
+                                <div class="col-xs-3 date">
+                                    <i class="fa fa-rub"></i>
+                                    Нам
+                                    <br/>
+                                    <small class="text-navy">по пути</small>
+                                </div>
+                                <div class="col-xs-7 content no-top-border">
+                                    <p class="m-b-xs"><strong>Нужна срочная доставка?</strong></p>
+
+                                    <p>Доставка за <b>2 часа</b> и меньше по Москве, Санкт-Петербургу, Новосибирску, Екатеринбургу, Нижниму Новгороду, Казани, Челябинску, Омску,
+                                        Самаре, Ростов-на-Дону, Уфе, Красноярску, Перми, Воронежу, Волгограду. Или <b>когда будет удобно</b>.</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="row">
+                                <div class="col-xs-3 date">
+                                    <i class="fa fa-usd"></i>
+                                    Народная
+                                    <br/>
+                                    <small class="text-navy">доставка</small>
+                                </div>
+                                <div class="col-xs-7 content">
+                                    <p class="m-b-xs"><strong>Заболел свой курьер?</strong></p>
+
+                                    <p>Все курьеры уже заняты и некому доставить новый заказ?</p>
+                                    <p>
+                                        В Титимити Вы всегда сможете заказать курьера на замену. В течение 1-2 часов он будет у Вас. В любое время суток. Без бюрократии и выматывающих звонков диспетчеру.
+                                        Просто заполните форму заказа на сате Титимити
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="row">
+                                <div class="col-xs-3 date">
+                                    <i class="fa fa-eur"></i>
+                                    Титимити
+                                    <br/>
+                                    <small class="text-navy">по пути</small>
+                                </div>
+                                <div class="col-xs-7 content">
+                                    <p class="m-b-xs"><strong>Мало заказов, чтобы держать курьера на зарплате?</strong></p>
+
+                                    <p>
+                                        Мы поможем сэкономить! Нам не важно сколько заказов вы делаете — раз в год или 1000 заказов — в месяц.
+                                        Просто сделайте заказ и дождитесь курьера.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="row">
+                                <div class="col-xs-3 date">
+                                    <i class="fa fa-yen"></i>
+                                    Доставка
+                                    <br/>
+                                    <small class="text-navy">по пути</small>
+                                </div>
+                                <div class="col-xs-7 content">
+                                    <p class="m-b-xs"><strong>Хотите иметь конкурентное преимущество, предлагая доставку день в день?</strong></p>
+
+                                    <p>
+                                        Кризис — возможность сделать рывок, пока конкуренты оглушены новыми вызовами рынка. А вы уже сегодня доставляете заказы день в день.
+                                    </p>
+                                    <p>
+                                        По статистике клиент, получивший желанную покупку через пару часов в 6 раз чаще говорит об этом друзьям и знакомым.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="row">
+                                <div class="col-xs-3 date">
+                                    <i class="fa fa-won"></i>
+                                    Доставка
+                                    <br/>
+                                    <small class="text-navy">краудсорсинг</small>
+                                </div>
+                                <div class="col-xs-7 content">
+                                    <p class="m-b-xs"><strong>Хотите протестировать новую рыночную нишу без лишних затрат и бюрократии?</strong></p>
+
+                                    <p>
+                                        Это проще, чем вы подумали! Просто используйте гарантию оплаты, а курьер Титимити выкупит у поставщика товар за свои собственные деньги и получит деньги с покупателя.
+                                        Таким образом, вы просто создаете витрину и оформляете покупку, а перевозчики Титимити делают доставку и все остальное.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="row">
+                                <div class="col-xs-3 date">
+                                    <i class="fa fa-inr"></i>
+                                    Доставка
+                                    <br/>
+                                    <small class="text-navy">p2p</small>
+                                </div>
+                                <div class="col-xs-7 content">
+                                    <p class="m-b-xs"><strong>Дак, что же такое Титимити?</strong></p>
+
+                                    <p>
+                                        Это отличный инструмент в умелых руках.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <!-- Peity -->
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/peity/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/demo/peity-demo.js') }}"></script>
+
+    <!-- ChartJS-->
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/chartJs/Chart.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var lineData = {
+                labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль"],
+                datasets: [
+                    {
+                        label: "Расходы на доставку",
+                        fillColor: "rgba(220,220,220,0.5)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [90, 65, 45, 30, 20, 15, 12]
+                    },
+                    {
+                        label: "Прибыль",
+                        fillColor: "rgba(26,179,148,0.5)",
+                        strokeColor: "rgba(26,179,148,0.7)",
+                        pointColor: "rgba(26,179,148,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(26,179,148,1)",
+                        data: [12, 15, 20, 30, 45, 65, 90]
+                    }
+                ]
+            };
+
+            var lineOptions = {
+                scaleShowGridLines: true,
+                scaleGridLineColor: "rgba(0,0,0,.05)",
+                scaleGridLineWidth: 1,
+                bezierCurve: true,
+                bezierCurveTension: 0.4,
+                pointDot: true,
+                pointDotRadius: 4,
+                pointDotStrokeWidth: 1,
+                pointHitDetectionRadius: 20,
+                datasetStroke: true,
+                datasetStrokeWidth: 2,
+                datasetFill: true,
+                responsive: true
+            };
+
+
+            var ctx = document.getElementById("lineChart").getContext("2d");
+            var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
+
+        });
+
+    </script>
+{% endblock %}

@@ -57,3 +57,27 @@ binidini_partners:
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/partners.html.twig
+
+binidini_shops:
+    path: /shops
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/shops.html.twig
+
+binidini_carriers:
+    path: /carriers
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/carriers.html.twig
+
+binidini_senders:
+    path: /senders
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/senders.html.twig
+
+binidini_transporters:
+    path: /transporters
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/transporters.html.twig

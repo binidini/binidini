@@ -126,16 +126,24 @@
                     </ul>
                 </li>
                 <li class="special_link"><hr/></li>
-                <li {{ croute.is_current_route(['binidini_how_it_works', 'binidini_payment']) }}>
+                <li {{ croute.is_current_route(['binidini_senders', 'binidini_transporters', 'binidini_payment', 'binidini_how_it_works']) }}>
                     <a href="#"><i class="fa fa-medkit"></i> <span class="nav-label">Как все работает</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li {{ croute.is_current_route('binidini_how_it_works') }}><a href="{{ path('binidini_how_it_works') }}">Вопрос-ответ</a></li>
+                        <li {{ croute.is_current_route('binidini_senders') }}><a href="{{ path('binidini_senders') }}">Отправителям</a></li>
+                        <li {{ croute.is_current_route('binidini_transporters') }}><a href="{{ path('binidini_transporters') }}">Перевозчикам</a></li>
                         <li {{ croute.is_current_route('binidini_payment') }}><a href="{{ path('binidini_payment') }}" target="rules">Оплата</a></li>
-                        <li><a href="http://blog.tytymyty.ru" target="blog">Блог</a></li>
+                        <li {{ croute.is_current_route('binidini_how_it_works') }}><a href="{{ path('binidini_how_it_works') }}">Вопрос-ответ</a></li>
                         <li {{ croute.is_current_route('binidini_rules') }}><a href="{{ path('binidini_rules') }}" target="rules">Правила</a></li>
                     </ul>
                 </li>
-                <li {{ croute.is_current_route('binidini_partners') }}><a href="{{ path('binidini_partners') }}">Партнеры</a></li>
+                <li {{ croute.is_current_route(['binidini_shops', 'binidini_carriers', 'binidini_partners']) }}>
+                    <a href="#"><i class="fa fa-group"></i><span class="nav-label">Сотрудничество</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('binidini_shops') }}><a href="{{ path('binidini_shops') }}">Магазинам</a></li>
+                        <li {{ croute.is_current_route('binidini_carriers') }}><a href="{{ path('binidini_carriers') }}">Службам доставки</a></li>
+                        <li {{ croute.is_current_route('binidini_partners') }}><a href="{{ path('binidini_partners') }}">Партнеры</a></li>
+                    </ul>
+                <li {{ croute.is_current_route('binidini_partners') }}><a href="http://blog.tytymyty.ru" target="blog"><i class="fa fa-comments"></i> <span class="nav-label">Блог</span></a></li>
                 {% if is_granted('ROLE_ADMIN') %}
                     <li>
                         <a href="{{ path('binidini_admin_shipping') }}"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Консоль</span></a>
@@ -147,9 +155,9 @@
         </div>
     </nav>
 
-    <div id="page-wrapper" class="gray-bg">
+    <div id="page-wrapper" class="gray-bg {% block sidebar %}{% endblock %}">
         <div class="row border-bottom">
-            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     {% block topsearch %}

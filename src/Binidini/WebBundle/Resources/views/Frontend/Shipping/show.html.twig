@@ -226,8 +226,8 @@
                                 </dl>
                             </div>
                             <div class="col-lg-2">
-                                <a href="{{ '/media/img/' ~ shipping.imgPath }}" id="single_image" title="Доставка {{ shipping.name | lower }}">
-                                    <img title="Доставка {{ shipping.name | lower }}" alt="Доставка {{ shipping.name | lower }}" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
+                                <a href="{{ '/media/img/' ~ shipping.imgPath }}" id="single_image" title="Доставка {{ shipping.name | lower }}" title="Доставка {{ shipping.name | lower }}">
+                                    <img  alt="Доставка {{ shipping.name | lower }}" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
                                 </a>
                             </div>
                             <div class="col-lg-5" id="cluster_info">
@@ -366,13 +366,14 @@
                 var pickupPoint = 0;
                 var deliveryPoint = 0;
 
-                {% if shipping.pickupGeoPointType =='address' %}
+                {%  if shipping.pickupGeoPointType =='address' %}
                 pickupPoint = $($showMapBtn).attr('data-map-pickup');
                 deliveryPoint = $($showMapBtn).attr('data-map-delivery');
                 {% else %}
                 pickupPoint = {{shipping.pickupGeoPoint}};
                 deliveryPoint = {{ shipping.deliveryGeoPoint}};
                 {% endif %}
+
                 ymaps.route([
                     pickupPoint,
                     deliveryPoint

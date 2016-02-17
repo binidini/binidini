@@ -30,7 +30,7 @@
                 </a>
 
                 <div class="media-body">
-                    Удобная система страховки заказов.
+                    Логичная система страховки заказов.
                     Снизили расходы на курьеров в 2 раза.
                     <br>
                     <small class="text-muted">Алексей, rosreal.com</small>
@@ -42,7 +42,7 @@
                 </a>
 
                 <div class="media-body">
-                    Быстро и просто делать заказы через компьютер, планшет и телефон
+                    Быстро и легко делать заказы через компьютер, планшет и телефон
                     <br>
                     <small class="text-muted">Валерия, Actavis</small>
                 </div>
@@ -127,7 +127,7 @@
                         </div>
 
                         <div>
-                            <canvas id="lineChart" height="70" style="background-image: url('{{ asset("bundles/binidiniweb/img/logo2.png") }}'); background-repeat: no-repeat; background-position: center;"></canvas>
+                            <canvas id="lineChart" height="70" {% if not is_mobile() %}style="background-image: url('{{ asset("bundles/binidiniweb/img/logo2.png") }}'); background-repeat: no-repeat; background-position: center;"{% endif %}></canvas>
                         </div>
                         <div class="m-t-md">
                             <small class="pull-right">
@@ -143,6 +143,54 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Калькулятор</h5>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-xs btn-white active">день</button>
+                                <button type="button" class="btn btn-xs btn-white">месяц</button>
+                                <button type="button" class="btn btn-xs btn-white">год</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <div >
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="ordersNumber" class="sr-only">Количество доставок</label>
+                                            <input type="number" placeholder="Количество доставок" id="ordersNumber" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="orderPrice" class="sr-only">Стоимость доставки</label>
+                                            <input type="number" placeholder="Средняя стоимость" id="orderPrice" class="form-control">
+                                        </div>
+                                        <button class="btn btn-primary">Рассчитать</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <ul class="stat-list">
+                                    <li>
+                                        <h2 class="no-margins" id="price">2346</h2>
+                                        <small><i class="fa fa-rub"></i> ваши расходы на доставку</small>
+                                        <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
+                                        <div class="progress progress-mini">
+                                            <div style="width: 48%;" class="progress-bar"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <div class="row">
 

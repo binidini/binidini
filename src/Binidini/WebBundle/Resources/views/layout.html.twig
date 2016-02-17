@@ -126,14 +126,14 @@
                     </ul>
                 </li>
                 <li class="special_link"><hr/></li>
-                <li {{ croute.is_current_route(['binidini_senders', 'binidini_transporters', 'binidini_payment', 'binidini_how_it_works']) }}>
+                <li {{ croute.is_current_route(['binidini_senders', 'binidini_transporters', 'binidini_payment', 'binidini_how_it_works', 'binidini_rules', 'binidini_rules_appendix_1','binidini_rules_appendix_2','binidini_rules_appendix_3', 'binidini_rules_appendix_4']) }}>
                     <a href="#"><i class="fa fa-medkit"></i> <span class="nav-label">Как все работает</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li {{ croute.is_current_route('binidini_senders') }}><a href="{{ path('binidini_senders') }}">Отправителям</a></li>
                         <li {{ croute.is_current_route('binidini_transporters') }}><a href="{{ path('binidini_transporters') }}">Перевозчикам</a></li>
                         <li {{ croute.is_current_route('binidini_payment') }}><a href="{{ path('binidini_payment') }}" target="rules">Оплата</a></li>
                         <li {{ croute.is_current_route('binidini_how_it_works') }}><a href="{{ path('binidini_how_it_works') }}">Вопрос-ответ</a></li>
-                        <li {{ croute.is_current_route('binidini_rules') }}><a href="{{ path('binidini_rules') }}" target="rules">Правила</a></li>
+                        <li {{ croute.is_current_route(['binidini_rules','binidini_rules_appendix_1','binidini_rules_appendix_2','binidini_rules_appendix_3','binidini_rules_appendix_4']) }}><a href="{{ path('binidini_rules') }}">Правила</a></li>
                     </ul>
                 </li>
                 <li {{ croute.is_current_route(['binidini_shops', 'binidini_carriers', 'binidini_partners']) }}>

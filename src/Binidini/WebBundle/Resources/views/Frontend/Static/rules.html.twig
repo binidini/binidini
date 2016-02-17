@@ -1,9 +1,14 @@
-{% extends 'BinidiniWebBundle::Frontend/Static/rules_layout.html.twig' %}
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
+
+{% block title %}
+        Договор оферты Титимити
+{% endblock %}
+
+{% block pageheader %}Договор оферты{% endblock %}
 
 {% block content %}
-<h1>Договор оферты</h1>
 
-
+<div class="wrapper wrapper-content"><div class="row"><div class="col-sm-12"><div class="ibox float-e-margins"><div class="ibox-content">
         <a name="1"></a>
         <h2>1.Общие положения.</h2>
         <a name="1.1"></a>
@@ -251,4 +256,5 @@
             <li><a href="{{ path('binidini_rules_appendix_4') }}">Приложение 4 </a> «Порядок рассмотрения обращений Пользователей»</li>
         </ul>
 
+</div></div></div></div></div>
 {% endblock %}

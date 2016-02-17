@@ -1,9 +1,23 @@
-{% extends 'BinidiniWebBundle::Frontend/Static/rules_layout.html.twig' %}
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
 
+{% block title %}
+    Порядок рассмотрения обращений Пользователей
+{% endblock %}
+
+{% block pageheader %}Порядок рассмотрения обращений Пользователей{% endblock %}
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ path('binidini_rules') }}">Правила</a>
+        </li>
+        <li class="active">
+            Приложение 4
+        </li>
+    </ol>
+{% endblock %}
 {% block content %}
-    <h1>Приложение 4 к Договору оферты</h1>
 
-    <h2>Порядок рассмотрения обращений Пользователей</h2>
+<div class="wrapper wrapper-content"><div class="row"><div class="col-sm-12"><div class="ibox float-e-margins"><div class="ibox-content">
 
     <p class="m-b-25">В Администрацию сайта можно обратиться:</p>
     <ul>
@@ -56,4 +70,6 @@
     <h3>Срок рассмотрения обращения:</h3>
     поступившие обращения рассматриваются в течение 30 дней со дня их регистрации.
 
+
+</div></div></div></div></div>
 {% endblock %}

@@ -107,9 +107,9 @@
         </div>
     </div>
     <div class="wrapper wrapper-content">
-        {% if not is_mobile() %}
+
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         <div>
@@ -126,63 +126,57 @@
                             </h3>
                             <small>оптимизация доставки</small>
                         </div>
-
-                        <div>
-                            <canvas id="lineChart" height="70" style="background-image: url('{{ asset("bundles/binidiniweb/img/logo2.png") }}'); background-repeat: no-repeat; background-position: center;"></canvas>
+                        <div class="flot-chart dashboard-chart">
+                            <div class="flot-chart-content" id="flot-dashboard-chart"></div>
                         </div>
                         <div class="m-t-md">
                             <small class="pull-right">
                                 схематичный график
                             </small>
                             <small>
-                                <strong>Оптимизация расходов на доставку</strong>, позволит увеличить прибыль.
+                                <strong>Оптимизация расходов на доставку</strong> позволит увеличить прибыль.
                             </small>
                         </div>
-
                     </div>
+
                 </div>
             </div>
         </div>
-        {% endif %}
 
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Калькулятор</h5>
+                        <h5>Калькулятор Титимити</h5>
                         <div class="pull-right">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-xs btn-white active">день</button>
-                                <button type="button" class="btn btn-xs btn-white">месяц</button>
-                                <button type="button" class="btn btn-xs btn-white">год</button>
-                            </div>
+                            <img src="{{ asset('bundles/binidiniweb/img/logo.png') }}" alt="Калькулятор Титимити" height="25">
                         </div>
                     </div>
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-lg-9">
                                 <div >
-                                    <form class="form-inline">
+                                    <div class="form-inline">
                                         <div class="form-group">
                                             <label for="ordersNumber" class="sr-only">Количество доставок</label>
-                                            <input type="number" placeholder="Количество доставок" id="ordersNumber" class="form-control">
+                                            <input type="number" placeholder="Количество доставок" id="ordersNumber" class="form-control" min="1">
                                         </div>
                                         <div class="form-group">
                                             <label for="orderPrice" class="sr-only">Стоимость доставки</label>
-                                            <input type="number" placeholder="Средняя стоимость" id="orderPrice" class="form-control">
+                                            <input type="number" placeholder="Средняя стоимость" id="orderPrice" class="form-control" min="10">
                                         </div>
-                                        <button class="btn btn-primary">Рассчитать</button>
-                                    </form>
+                                        <button class="btn btn-primary" id="calc">Рассчитать</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <ul class="stat-list">
                                     <li>
-                                        <h2 class="no-margins" id="price">2346</h2>
+                                        <h2 class="no-margins" id="price"></h2>
                                         <small><i class="fa fa-rub"></i> ваши расходы на доставку</small>
-                                        <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
-                                        <div class="progress progress-mini">
-                                            <div style="width: 48%;" class="progress-bar"></div>
+                                        <div class="stat-percent" id="stat-percent"></div>
+                                        <div class="progress progress-mini" id="progress-mini">
+                                            <div style="width: 100%;" class="progress-bar"></div>
                                         </div>
                                     </li>
                                 </ul>
@@ -456,7 +450,12 @@
 
 {% block javascripts %}
     {{ parent() }}
-
+    <!-- Flot -->
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/flot/jquery.flot.spline.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/flot/jquery.flot.resize.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/flot/jquery.flot.pie.js') }}"></script>
     <!-- Peity -->
     <script src="{{ asset('bundles/binidiniweb/js/plugins/peity/jquery.peity.min.js') }}"></script>
     <script src="{{ asset('bundles/binidiniweb/js/demo/peity-demo.js') }}"></script>
@@ -467,53 +466,75 @@
     <script>
         $(document).ready(function () {
 
-            var lineData = {
-                labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль"],
-                datasets: [
+            var data1 = [
+                [0,12],[2,15],[4,20],[6,30],[8,45],[10,65],[12,90]
+            ];
+            var data2 = [
+                [0,90],[2,65],[4,45],[6,30],[8,20],[10,15],[12,12]
+            ];
+            $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
+                        data1, data2
+                    ],
                     {
-                        label: "Расходы на доставку",
-                        fillColor: "rgba(220,220,220,0.5)",
-                        strokeColor: "rgba(220,220,220,1)",
-                        pointColor: "rgba(220,220,220,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: [90, 65, 45, 30, 20, 15, 12]
-                    },
-                    {
-                        label: "Прибыль",
-                        fillColor: "rgba(26,179,148,0.5)",
-                        strokeColor: "rgba(26,179,148,0.7)",
-                        pointColor: "rgba(26,179,148,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(26,179,148,1)",
-                        data: [12, 15, 20, 30, 45, 65, 90]
+                        series: {
+                            lines: {
+                                show: false,
+                                fill: true
+                            },
+                            splines: {
+                                show: true,
+                                tension: 0.4,
+                                lineWidth: 1,
+                                fill: 0.4
+                            },
+                            points: {
+                                radius: 0,
+                                show: true
+                            },
+                            shadowSize: 2
+                        },
+                        grid: {
+                            hoverable: true,
+                            clickable: true,
+                            tickColor: "#d5d5d5",
+                            borderWidth: 1,
+                            color: '#d5d5d5'
+                        },
+                        colors: ["#1ab394", "#464f88"],
+                        xaxis:{
+                        },
+                        yaxis: {
+                            ticks: 4
+                        },
+                        tooltip: false
                     }
-                ]
+            );
+
+            document.getElementById("calc").onclick = function () {
+                orderNum = document.getElementById("ordersNumber").value;
+                orderPrice = document.getElementById("orderPrice").value;
+
+                if (orderPrice >= 200 && orderNum > 0) {
+                    oldAmount = orderNum*orderPrice;
+                    newAmount = orderNum*150;
+                    percent = Math.round((newAmount-oldAmount)*100/oldAmount);
+                    document.getElementById("price").innerHTML = oldAmount + " -> " + newAmount;
+                    document.getElementById("stat-percent").innerHTML = percent + '% <i class="fa fa-level-down text-navy"></i>';
+                    document.getElementById("progress-mini").innerHTML = '<div style="width: ' + (100+percent) +'%;" class="progress-bar"></div>';
+                } else if (orderPrice >= 120 && orderPrice < 200 && orderNum > 0) {
+                    oldAmount = orderNum*orderPrice;
+                    newAmount = orderNum*100;
+                    percent = Math.round((newAmount-oldAmount)*100/oldAmount);
+                    document.getElementById("price").innerHTML = oldAmount + " -> " + newAmount;
+                    document.getElementById("stat-percent").innerHTML = percent + '% <i class="fa fa-level-down text-navy"></i>';
+                    document.getElementById("progress-mini").innerHTML = '<div style="width: ' + (100+percent) +'%;" class="progress-bar"></div>';
+                } else {
+                    document.getElementById("price").innerHTML = 'Нечего оптимизировать';
+                }
             };
-
-            var lineOptions = {
-                scaleShowGridLines: true,
-                scaleGridLineColor: "rgba(0,0,0,.05)",
-                scaleGridLineWidth: 1,
-                bezierCurve: true,
-                bezierCurveTension: 0.4,
-                pointDot: true,
-                pointDotRadius: 4,
-                pointDotStrokeWidth: 1,
-                pointHitDetectionRadius: 20,
-                datasetStroke: true,
-                datasetStrokeWidth: 2,
-                datasetFill: true,
-                responsive: true
-            };
-
-
-            var ctx = document.getElementById("lineChart").getContext("2d");
-            var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
 
         });
+
 
     </script>
 {% endblock %}

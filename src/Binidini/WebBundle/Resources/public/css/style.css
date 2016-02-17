@@ -4040,7 +4040,7 @@ body.skin-3 {
     float: left;
   }
   .sidebard-panel {
-    z-index: 2;
+   /* z-index: 2; */
     position: relative;
     width: auto;
     min-height: 100% !important;

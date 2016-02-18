@@ -139,11 +139,11 @@
                 <li {{ croute.is_current_route(['binidini_shops', 'binidini_carriers', 'binidini_partners']) }}>
                     <a href="#"><i class="fa fa-group"></i><span class="nav-label">Сотрудничество</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li {{ croute.is_current_route('binidini_shops') }}><a href="{{ path('binidini_shops') }}">Магазинам</a></li>
-                        <li {{ croute.is_current_route('binidini_carriers') }}><a href="{{ path('binidini_carriers') }}">Службам доставки</a></li>
+                        <!--li {{ croute.is_current_route('binidini_shops') }}><a href="{{ path('binidini_shops') }}">Магазинам</a></li>
+                        <li {{ croute.is_current_route('binidini_carriers') }}><a href="{{ path('binidini_carriers') }}">Службам доставки</a></li-->
                         <li {{ croute.is_current_route('binidini_partners') }}><a href="{{ path('binidini_partners') }}">Партнеры</a></li>
                     </ul>
-                <li {{ croute.is_current_route('binidini_partners') }}><a href="http://blog.tytymyty.ru" target="blog"><i class="fa fa-comments"></i> <span class="nav-label">Блог</span></a></li>
+                <li><a href="http://blog.tytymyty.ru" target="blog"><i class="fa fa-comments"></i> <span class="nav-label">Блог</span></a></li>
                 {% if is_granted('ROLE_ADMIN') %}
                     <li>
                         <a href="{{ path('binidini_admin_shipping') }}"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Консоль</span></a>

@@ -5,6 +5,16 @@
 {% endblock %}
 
 {% block pageheader %}Вопросы и ответы{% endblock %}
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li>
+            Не нашли ответ на свой вопрос?
+        </li>
+        <li class="active">
+            contacts<b>@</b>tytymyty.ru
+        </li>
+    </ol>
+{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -14,6 +24,7 @@
                     <div class="row">
                         <div class="col-md-7">
                             <a data-toggle="collapse" href="#faq0" class="faq-question collapsed" aria-expanded="false" >Почему Титимити?</a>
+                            <small>Добавлено по запросу <strong>Сергея Захарченко</strong> <i class="fa fa-clock-o"></i>18.02.2016 23:00</small>
                         </div>
                         <div class="col-md-3">
                             <span class="small font-bold">О сервисе Титимити</span>
@@ -23,14 +34,14 @@
                             </div>
                         </div>
                         <div class="col-md-2 text-right">
-
+                            <span class="small font-bold">Титимити по пути</span>
+                            <br/><i class="fa fa-rub"></i>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="faq0" class="panel-collapse faq-answer collapse" aria-expanded="false" style="height: 32px;">
 
-                                <img src="/bundles/binidiniweb/img/pics/доставка.jpg" alt="Доставка" align="right" height="250">
                                 <p>
                                     Поскольку мы путешествуем и пользуемся телефонами гораздо чаще, чем раньше, то и возможности, открывающиеся для нас становятся просто потрясающими. С помощью приложения отправить другу вещь, сидя при этом в любимой кофейне? Перестать беспокоиться, за какое время дойдет посылка, если вы воспользуетесь почтой? Забыть, что такое дорогая экспресс-доставка и отправить посылку с человеком, которому по пути? Еще вчера, если курьером не являлся ваш друг или знакомый, такое казалось просто невероятным. Сегодня это реальность.
                                 </p>
@@ -53,14 +64,11 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
                 <div class="faq-item">
                     <div class="row">
                         <div class="col-md-7">
-                            <a data-toggle="collapse" href="#faq1" class="faq-question collapsed" aria-expanded="false" >Как отправить что-либо ?</a>
+                            <a data-toggle="collapse" href="#faq1" class="faq-question collapsed" aria-expanded="false" >Как отправить что-либо куда-либо?</a>
+                            <small>Добавлено по запросу <strong>Алексея Николаева</strong> <i class="fa fa-clock-o"></i>17.01.2016 21:00</small>
                         </div>
                         <div class="col-md-3">
                             <span class="small font-bold">Отправляйте быстро и дешево!</span>
@@ -71,7 +79,8 @@
                             </div>
                         </div>
                         <div class="col-md-2 text-right">
-
+                            <span class="small font-bold">Деньги по пути</span>
+                            <br/><i class="fa fa-usd"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -136,7 +145,8 @@
                 <div class="faq-item">
                     <div class="row">
                         <div class="col-md-7">
-                            <a data-toggle="collapse" href="#faq2" class="faq-question collapsed" aria-expanded="false">Как получить заказ ?</a>
+                            <a data-toggle="collapse" href="#faq2" class="faq-question collapsed" aria-expanded="false">Как получить заказ?</a>
+                            <small>Добавлено по запросу <strong>Василия Петрова</strong> <i class="fa fa-clock-o"></i>15.12.2015 19:00</small>
                         </div>
                         <div class="col-md-3">
                             <span class="small font-bold">Зарабатывайте по пути!</span>
@@ -147,7 +157,8 @@
                             </div>
                         </div>
                         <div class="col-md-2 text-right">
-
+                            <span class="small font-bold">Тити мити по пути</span>
+                            <br/><i class="fa fa-eur"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -201,28 +212,31 @@
                 <div class="faq-item">
                     <div class="row">
                         <div class="col-md-7">
-                            <a data-toggle="collapse" href="#faq3" class="faq-question collapsed" aria-expanded="false">Что такое страховка ?</a>
-
+                            <a data-toggle="collapse" href="#faq3" class="faq-question collapsed" aria-expanded="false">Что такое страховка?</a>
+                            <small>Добавлено по запросу <strong>Андрея Савченко</strong> <i class="fa fa-clock-o"></i>01.11.2015 18:00</small>
                         </div>
                         <div class="col-md-3">
                             <span class="small font-bold">Страховка от порчи и утраты</span>
                             <div class="tag-list">
+                                <span class="tag-item">Отправителям</span>
                                 <span class="tag-item">Страховка заказа</span>
                                 <span class="tag-item">Безопасность отправки</span>
 
                             </div>
                         </div>
                         <div class="col-md-2 text-right">
-
+                            <span class="small font-bold">Народная доставка</span>
+                            <br/><i class="fa fa-gbp"></i>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="faq3" class="panel-collapse faq-answer collapse" aria-expanded="false" style="height: 32px;">
-                                <p>Благодаря специально созданной системе, вы можете бесплатно застраховать свою посылку.</p>
-                                <p>Сумму страхования определяете вы сами, для этого нужно просто указать ее в заявке. Для того, чтобы принять  заказ, требующий страховку, курьер пополняет  свой  счет в соответствии с суммой страхования. Таким образом, вы можете компенсировать стоимость посылки в случае ее потери или порчи.</p>
-                                <p>При возникновении спорных ситуаций, наш специалист свяжется с вами, чтобы оказать помощь. Титимити оставляет за собой  право переводить средства со счета на счет, компенсируя тем самым убытки потерпевшей стороны.</p>
-                                <p>Обратите внимание, что возврат денег производится на карты, с которых осуществлялось пополнение счета. Страховой счет не предназначен для оплаты заказов.</p>
+                                <p>
+                                    Депозит в рублях, требуемый от Перевозчика в качестве страховки на случай, например, утраты или порчи посылки.
+                                    Указывается Отправителем при создании Заказа. Сумма, равная страховке, замораживается со счета Перевозчика и возвращается после подтверждения Отправителем доставки.
+                                    Поле «Страховка» может не заполняться, если страховка не требуется или осуществляется вне Системы Титимити.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -230,25 +244,35 @@
                 <div class="faq-item">
                     <div class="row">
                         <div class="col-md-7">
-                            <a data-toggle="collapse" href="#faq4" class="faq-question">Что такое гарантия ?</a>
+                            <a data-toggle="collapse" href="#faq4" class="faq-question">Что такое гарантия?</a>
+                            <small>Добавлено по запросу <strong>Дмитрия К.</strong> <i class="fa fa-clock-o"></i>04.10.2015 17:00</small>
                         </div>
                         <div class="col-md-3">
                             <span class="small font-bold">Гарантия оплаты перевозки</span>
                             <div class="tag-list">
                                 <span class="tag-item">Гарантия оплаты</span>
+                                <span class="tag-item">Перевозчикам</span>
                             </div>
                         </div>
                         <div class="col-md-2 text-right">
-
+                            <span class="small font-bold">Доставка с попутчиком</span>
+                            <br/><i class="fa fa-inr"></i>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="faq4" class="panel-collapse collapse faq-answer">
-                                <p>Благодаря специально созданной системе, вы можете получить гарантию того, что ваша работа будет оплачена.</p>
-                                <p>Сумма гарантии равна сумме оплаты перевозки, назначенной отправителем. Для того, чтобы задействовать данную функцию, отправителю необходимо внести  денежные средства на свой счет и отразить  это в заявке. При совершении сделки данная сумма будет заморожена на счете отправителя и возвращена только  по завершению успешной доставки. Таким образом, вы можете повысить уровень доверия курьера, если вы намерены оплатить услуги  с задержкой или только  по адресу прибытия.</p>
-                                <p>При возникновении спорных ситуаций, наш специалист свяжется с вами, чтобы оказать помощь. В таком случае, заказ приобретает статус «спорный». ТитиМити оставляет за собой  право переводить средства со счета на счет, компенсируя тем самым убытки потерпевшей стороны.</p>
-                                <p>Обратите внимание, что возврат денег производится на карты, с которых осуществлялось пополнение счета. Гарантийный счет  не предназначен для оплаты заказов.</p>
+                                <p>Сумма гарантии определяется отправителем при создании заказа. Для того, чтобы задействовать данную функцию, отправителю необходимо внести  денежные средства на свой счет и отразить  это в заявке. При подтверждении заказа перевозчиком сумма гарантии будет заморожена на счете отправителя и возвращена по завершению успешной доставки.
+                                    Таким образом, перевозчик получает гарантию Титимити, что он получит деньги за заказ.
+                                </p>
+                                <p>
+                                    Данная опция повысит уровень доверия перевозчика к отправителю, если отправитель намерен оплатить услуги  с задержкой или  по адресу прибытия.
+                                    Возможно, отправитель попросит купить, например, продукты в супермаркете или лекарстве в аптеке.
+                                    Деньги блокируются со счета отправителя при переводе заказа из состояния <b>новый</b> в состояние <b>принят</b>.
+                                </p>
+                                <p>При возникновении спорных ситуаций, наш специалист свяжется с вами, чтобы оказать помощь. В таком случае, заказ приобретает статус «спорный».
+                                    ТитиМити оставляет за собой  право переводить средства со счета на счет, компенсируя тем самым убытки потерпевшей стороны.</p>
+                                <p>Обратите внимание, что возврат денег производится на карты, с которых осуществлялось пополнение счета.</p>
                             </div>
                         </div>
                     </div>
@@ -256,8 +280,8 @@
                 <div class="faq-item">
                     <div class="row">
                         <div class="col-md-7">
-                            <a data-toggle="collapse" href="#faq5" class="faq-question">Как оплатить доставку ?</a>
-
+                            <a data-toggle="collapse" href="#faq5" class="faq-question">Как оплатить доставку?</a>
+                            <small>Добавлено по запросу <strong>Сергея А.</strong> <i class="fa fa-clock-o"></i>14.09.2015 16:00</small>
                         </div>
                         <div class="col-md-3">
                             <span class="small font-bold">Оплата доставки</span>
@@ -267,7 +291,8 @@
                             </div>
                         </div>
                         <div class="col-md-2 text-right">
-
+                            <span class="small font-bold">Доставка по дороге домой</span>
+                            <br/><i class="fa fa-won"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -297,7 +322,7 @@
                     <div class="row">
                         <div class="col-md-7">
                             <a data-toggle="collapse" href="#faq6" class="faq-question">Для чего нужен счет ?</a>
-
+                            <small>Добавлено по запросу <strong>Валерии Струковой</strong> <i class="fa fa-clock-o"></i>14.08.2015 15:00</small>
                         </div>
                         <div class="col-md-3">
                             <span class="small font-bold">Счет не используется для оплаты перевозки</span>
@@ -308,7 +333,8 @@
                             </div>
                         </div>
                         <div class="col-md-2 text-right">
-
+                            <span class="small font-bold">Нам по пути</span>
+                            <br/><i class="fa fa-try"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -332,31 +358,26 @@
                 <div class="faq-item">
                     <div class="row">
                         <div class="col-md-7">
-                            <a data-toggle="collapse" href="#faq8" class="faq-question">Как выбрать отправителя ?</a>
-
+                            <a data-toggle="collapse" href="#faq7" class="faq-question">Как сменить пароль?</a>
+                            <small>Добавлено по запросу <strong>Валерии Струковой</strong> <i class="fa fa-clock-o"></i>14.08.2015 15:00</small>
                         </div>
                         <div class="col-md-3">
-                            <span class="small font-bold">Ответственный отправитель</span>
+                            <span class="small font-bold">Смена пароля</span>
                             <div class="tag-list">
-                                <span class="tag-item">Предоплата</span>
-                                <span class="tag-item">Гарантия</span>
-                                <span class="tag-item">Старый партнер</span>
+                                <span class="tag-item">Безопасность</span>
                             </div>
                         </div>
                         <div class="col-md-2 text-right">
-
+                            <span class="small font-bold">Титимити по дороге на работу</span>
+                            <br/><i class="fa fa-yen"></i>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="faq8" class="panel-collapse collapse faq-answer">
-                                <ul>
-                                    <li>Найдите интересующий вас заказ.</li>
-                                    <li>Проверьте есть ли гарантия оплаты.</li>
-                                    <li>Посмотрите профиль отправителя и его рейтинг</li>
-                                    <li>Уточните, способ расчет: предоплата, оплата по приезду, оплата на следуюший день или как-то еще.</li>
-                                    <li>Уточните метод оплаты: наличные, перевод на карту, перевод на телефон, оплата электронными деньгами</li>
-                                </ul>
+                            <div id="faq7" class="panel-collapse collapse faq-answer">
+                                <p>
+                                    В главном меню необходимо зайти в Мои профиль / Мои настройки / Сменить пароль.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -364,28 +385,104 @@
                 <div class="faq-item">
                     <div class="row">
                         <div class="col-md-7">
-                            <a data-toggle="collapse" href="#faq9" class="faq-question">Как выбрать перевозчика ?</a>
-
+                            <a data-toggle="collapse" href="#faq8" class="faq-question">Настройка оповещений</a>
+                            <small>Добавлено по запросу <strong>Алексея Семенова</strong> <i class="fa fa-clock-o"></i>13.07.2015 14:00</small>
                         </div>
                         <div class="col-md-3">
-                            <span class="small font-bold">Надежный перевозчик</span>
+                            <span class="small font-bold">Будь в курсе</span>
                             <div class="tag-list">
-                                <span class="tag-item">Страховка</span>
-                                <span class="tag-item">Система рейтингов</span>
+                                <span class="tag-item">Уведомления</span>
+                                <span class="tag-item">Оповещения</span>
+                                <span class="tag-item">Титимити mobile</span>
                             </div>
                         </div>
                         <div class="col-md-2 text-right">
-
+                            <span class="small font-bold">Краудсорсинг</span>
+                            <br/><i class="fa fa-btc"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="faq8" class="panel-collapse collapse faq-answer">
+                                <p>
+                                    Используется опция Мой профиль / Мои настройки/ Оповещения.
+                                </p>
+                                <p>
+                                    В данном разделе выставляются уведомления, которые Пользователь хочет получать
+                                    через смс (sms), мгновенные сообщения (gcm) на мобильный телефон и по
+                                    электронной почте (email) как Отправитель и/или Перевозчик.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a data-toggle="collapse" href="#faq9" class="faq-question">Что нельзя перевозить через Титимити?</a>
+                            <small>Добавлено по запросу <strong>Дениса М.</strong> <i class="fa fa-clock-o"></i>21.05.2015 10:00</small>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="small font-bold">запрещенные к перевозке грузы</span>
+                            <div class="tag-list">
+                                <span class="tag-item">Запрещено</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <span class="small font-bold">Титимити Uber</span>
+                            <br/><i class="fa fa-usd"></i>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="faq9" class="panel-collapse collapse faq-answer">
-                                <ul>
-                                    <li>Посмотрите профиль перевозчика и его рейтинг</li>
-                                    <li>Если есть альтернатива, выбирайте проверенных перевозчиков</li>
-                                    <li>Пользуйтесь страховкой Титимити</li>
-                                </ul>
+                                <p>
+                                    Список запрещенных к перевозке грузов регламентируется
+                                    <a href="{{ path('binidini_rules_appendix_1') }}" title="Запрещенные к перевозке через Систему Титимити грузы">
+                                        приложением 1 к Договору оферты.
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a data-toggle="collapse" href="#faq10" class="faq-question">Статусы заказов</a>
+                            <small>Добавлено по запросу <strong>Николая Черепкина</strong> <i class="fa fa-clock-o"></i>23.04.2015 12:00</small>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="small font-bold">Какие этапы проходит заказ?</span>
+                            <div class="tag-list">
+                                <span class="tag-item">Новый</span>
+                                <span class="tag-item">Принят</span>
+                                <span class="tag-item">Доставлен</span>
+                                <span class="tag-item">Оплачен</span>
+                                <span class="tag-item">Завершен</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <span class="small font-bold">P2P доставка</span>
+                            <br/><i class="fa fa-rub"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="faq10" class="panel-collapse collapse faq-answer">
+                                <dl>
+                                    <dt>Новый</dt>
+                                    <dd>Заказ создан отправителем и ожидает заявок от перевозчиков.</dd>
+                                    <dt>Принят</dt>
+                                    <dd>Перевозчик и отправитель договорились о стоимости заказа посредством заявок и заказ отдан в работу.
+                                        Отправитель принял заявку и перевозчик подтвердил, что берет заказ.</dd>
+                                    <dt>Доставлен</dt>
+                                    <dd>Перевозчик доставил заказ получателю.</dd>
+                                    <dt>Оплачен</dt>
+                                    <dd>Отправитель подтвердил доставку и оплатил услуги перевозчика.</dd>
+                                    <dt>Завершен</dt>
+                                    <dd>Перевозчик подтвердил оплату.</dd>
+                                </dl>
                             </div>
                         </div>
                     </div>

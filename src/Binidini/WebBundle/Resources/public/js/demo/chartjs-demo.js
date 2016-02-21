@@ -78,6 +78,10 @@ $(function () {
         barValueSpacing: 5,
         barDatasetSpacing: 1,
         responsive: true,
+        scaleOverride:true,
+        scaleSteps:10,
+        scaleStartValue:0,
+        scaleStepWidth:100
     }
 
 

@@ -4,6 +4,7 @@ namespace Binidini\CoreBundle\Controller;
 
 use Binidini\CoreBundle\Entity\Payment;
 use Binidini\CoreBundle\Entity\Shipping;
+use Binidini\CoreBundle\Entity\ShippingRepository;
 use Binidini\CoreBundle\Exception\IncorrectDeliveryCode;
 use Binidini\CoreBundle\Exception\TransitionCannotBeApplied;
 use Binidini\CoreBundle\Form\Type\BidType;
@@ -11,9 +12,13 @@ use Binidini\CoreBundle\Form\Type\MessageType;
 use Binidini\CoreBundle\Form\Type\ReviewType;
 use FOS\UserBundle\Doctrine\UserManager;
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class ShippingController extends ResourceController
 {
@@ -265,5 +270,61 @@ class ShippingController extends ResourceController
                 return true;
             }
         return false;
+    }
+
+    public function listAction(Request $request){
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse("Forbidden", 403);
+        }
+        $type = $request->get('type');
+        $status = $request->get('status');
+        if ($status == 'active') {
+            $states = ['new', 'dispatched', 'on_way', 'accepted', 'delivered', 'paid', 'rejected', 'refused'];
+        } elseif ($status == 'completed') {
+            $states = ['completed', 'canceled'];
+        } elseif ($status == 'conflict') {
+            $states = ['conflict'];
+        } else {
+            return new JsonResponse("Bad request", 400);
+        }
+        /**
+         * @var ShippingRepository $repository
+         */
+        $repository = $this->getRepository();
+        /**
+         * @var $shippingResult Pagerfanta
+         */
+        if ($type == 'sender') {
+            $shippingResult = $repository->findBySenderIdAndStates($user->getId(), $states);
+        } else if ($type == 'carrier') {
+            $shippingResult = $repository->findByCarrierIdAndStates($user->getId(), $states);
+        } else {
+            return new JsonResponse("Bad request", 400);
+        }
+        $shippingResult->setMaxPerPage(10);
+        $shippingResult->setCurrentPage($request->get('page', 1));
+        $result = [];
+        foreach($shippingResult->getIterator() as $iterate) {
+            /**
+             * @var $iterate Shipping
+             */
+            $result[] = array(
+                'id' => $iterate->getId(),
+                'name' => $iterate->getName(),
+                'deliveryPrice' => $iterate->getDeliveryPrice(),
+                'guarantee' => $iterate->getGuarantee(),
+                'insurance' => $iterate->getInsurance(),
+                'pickupAddress' => $iterate->getPickupAddress(),
+                'deliveryAddress' => $iterate->getDeliveryAddress(),
+                //'user_id'=>$iterate->getUser()->getId(),
+                //'carrier_id'=>$iterate->getCarrier()->getId(),
+                //'user' => $iterate->getUser(),
+                //'carrier' => $iterate->getCarrier(),
+                //'state' => $iterate->getId(),
+                'deliveryDatetime' => $iterate->getDeliveryDatetime()->format(\DateTime::ISO8601),
+            );
+        }
+        return new JsonResponse($result);
     }
 }

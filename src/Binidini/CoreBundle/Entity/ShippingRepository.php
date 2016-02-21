@@ -4,6 +4,7 @@ namespace Binidini\CoreBundle\Entity;
 
 use Doctrine\ORM\Query\Expr\OrderBy;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ShippingRepository extends EntityRepository
 {
@@ -47,6 +48,30 @@ class ShippingRepository extends EntityRepository
         }
 
         $queryBuilder->addOrderBy($this->getPropertyName('id'), 'desc');
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    public function findByCarrierIdAndStates($carrierId, $states)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder('s');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('carrier'), ':carrier_id'))
+            ->setParameter(':carrier_id', $carrierId);
+        /*$queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName('state'), ':st'))
+            ->setParameter(':st', $states);*/
+        $queryBuilder->addOrderBy($this->getPropertyName('id'), 'desc');
+        return $this->getPaginator($queryBuilder);
+    }
+
+    public function findBySenderIdAndStates($senderId, $states)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder('s');
+        $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('user'), ':sender_id'))
+            ->setParameter(':sender_id', $senderId);
+        /*$queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName('state'), ':st'))
+            ->setParameter(':st', $states);*/
+        $queryBuilder->addOrderBy($this->getPropertyName('id'), 'desc');
+        $queryBuilder->setMaxResults(40);
 
         return $this->getPaginator($queryBuilder);
     }

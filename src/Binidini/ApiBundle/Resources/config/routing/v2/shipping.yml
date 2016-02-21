@@ -1,5 +1,12 @@
+binidini_api2_shipping_list:
+    path: /list
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.shipping:listAction
+
 binidini_api2_shipping_show:
     path: /{id}
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.shipping:showAction
+

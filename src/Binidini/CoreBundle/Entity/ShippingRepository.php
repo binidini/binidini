@@ -57,8 +57,8 @@ class ShippingRepository extends EntityRepository
         $queryBuilder = $this->getCollectionQueryBuilder('s');
         $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('carrier'), ':carrier_id'))
             ->setParameter(':carrier_id', $carrierId);
-        /*$queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName('state'), ':st'))
-            ->setParameter(':st', $states);*/
+        $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName('state'), ':st'))
+            ->setParameter(':st', $states);
         $queryBuilder->addOrderBy($this->getPropertyName('id'), 'desc');
         return $this->getPaginator($queryBuilder);
     }
@@ -68,8 +68,8 @@ class ShippingRepository extends EntityRepository
         $queryBuilder = $this->getCollectionQueryBuilder('s');
         $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('user'), ':sender_id'))
             ->setParameter(':sender_id', $senderId);
-        /*$queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName('state'), ':st'))
-            ->setParameter(':st', $states);*/
+        $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName('state'), ':st'))
+            ->setParameter(':st', $states);
         $queryBuilder->addOrderBy($this->getPropertyName('id'), 'desc');
         $queryBuilder->setMaxResults(40);
 

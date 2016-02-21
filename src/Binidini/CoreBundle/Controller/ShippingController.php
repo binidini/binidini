@@ -24,7 +24,8 @@ class ShippingController extends ResourceController
 {
     protected $stateMachineGraph = Shipping::GRAPH;
 
-    public function checkDeliveryCodeAction(Request $request) {
+    public function checkDeliveryCodeAction(Request $request)
+    {
         /** @var $shipping Shipping */
         $shipping = $this->findOr404($request);
 
@@ -36,7 +37,7 @@ class ShippingController extends ResourceController
             $em->flush();
 
             $deliveryCode = (int)$request->get('delivery_code');
-            if ($deliveryCode != (10000 + $shipping->getId()*$this->container->getParameter('delivery_code_prime')%10000)) {
+            if ($deliveryCode != (10000 + $shipping->getId() * $this->container->getParameter('delivery_code_prime') % 10000)) {
                 throw new IncorrectDeliveryCode('Код подтверждения доставки некорректен.');
             }
 
@@ -56,10 +57,10 @@ class ShippingController extends ResourceController
             $shipping = $this->findOr404($request);
 
             // мы закрываем для отображения старые заказы
-            if (new \DateTime() >  $shipping->getDeliveryDatetime() &&
-                (is_null($this->getUser()) ||($this->getUser() != $shipping->getSender() && $this->getUser() != $shipping->getCarrier()) && !$this->getUser()->isAdmin()) &&
-                !$this->isBot())
-            {
+            if (new \DateTime() > $shipping->getDeliveryDatetime() &&
+                (is_null($this->getUser()) || ($this->getUser() != $shipping->getSender() && $this->getUser() != $shipping->getCarrier()) && !$this->getUser()->isAdmin()) &&
+                !$this->isBot()
+            ) {
                 $this->flashHelper->setFlash('danger', 'show.error');
                 return $this->redirectHandler->redirectToRoute('binidini_search_shipment_index');
             }
@@ -80,7 +81,8 @@ class ShippingController extends ResourceController
         }
     }
 
-    public function historyIndexAction(Request $request){
+    public function historyIndexAction(Request $request)
+    {
         /** @var $shipping Shipping */
         $shipping = $this->findOr404($request);
         /** @var $repository LogEntryRepository */
@@ -97,14 +99,14 @@ class ShippingController extends ResourceController
         $data = [
             'entries' => $entries,
         ];
-        if (!$this->config->isApiRequest()){
-          $data['history_users'] = $usersInHistory;
+        if (!$this->config->isApiRequest()) {
+            $data['history_users'] = $usersInHistory;
         }
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('history_index.html'))
             ->setData(
-               $data
+                $data
             );
         return $this->handleView($view);
 
@@ -146,8 +148,7 @@ class ShippingController extends ResourceController
                 ->setMethod(Payment::METHOD_INTERNAL_PAYMENT)
                 ->setState(Payment::STATE_COMPLETED)
                 ->setBalance($shipping->getCarrier()->getBalance() + $shipping->getCarrier()->getHoldAmount() + $shipping->getDeliveryPrice())
-                ->setDetails('Начисление гарантии по заказу №' . $shipping->getId())
-            ;
+                ->setDetails('Начисление гарантии по заказу №' . $shipping->getId());
 
             $guarantee2 = new Payment();
             $guarantee2
@@ -159,8 +160,7 @@ class ShippingController extends ResourceController
                 ->setMethod(Payment::METHOD_INTERNAL_PAYMENT)
                 ->setState(Payment::STATE_COMPLETED)
                 ->setBalance($shipping->getSender()->getBalance() + $shipping->getSender()->getHoldAmount() - $shipping->getDeliveryPrice())
-                ->setDetails('Списание гарантии по заказу №' . $shipping->getId())
-            ;
+                ->setDetails('Списание гарантии по заказу №' . $shipping->getId());
 
             $shipping->payPayment();
 
@@ -184,8 +184,7 @@ class ShippingController extends ResourceController
                 ->setState(Payment::STATE_COMPLETED)
                 ->setBalance($shipping->getCarrier()->getBalance() + $shipping->getCarrier()->getHoldAmount() - $shipping->getInsurance())
                 ->setDetails('Списание страховки по заказу №' . $shipping->getId())
-                ->setPaymentAt($insurance->getPaymentAt()->modify("+1 second"))
-            ;
+                ->setPaymentAt($insurance->getPaymentAt()->modify("+1 second"));
 
             $insurance2 = new Payment();
             $insurance2
@@ -198,8 +197,7 @@ class ShippingController extends ResourceController
                 ->setState(Payment::STATE_COMPLETED)
                 ->setBalance($shipping->getSender()->getBalance() + $shipping->getSender()->getHoldAmount() + $shipping->getInsurance())
                 ->setDetails('Начисление страховки по заказу №' . $shipping->getId())
-                ->setPaymentAt($insurance2->getPaymentAt()->modify("+1 second"))
-            ;
+                ->setPaymentAt($insurance2->getPaymentAt()->modify("+1 second"));
 
             $shipping->payInsurance();
 
@@ -243,9 +241,8 @@ class ShippingController extends ResourceController
             ->setTemplate($this->config->getTemplate('create.html'))
             ->setData(array(
                 $this->config->getResourceName() => $shipping,
-                'form'                           => $form->createView(),
-            ))
-        ;
+                'form' => $form->createView(),
+            ));
 
         return $this->handleView($view);
     }
@@ -254,25 +251,26 @@ class ShippingController extends ResourceController
     {
         /* Эта функция будет проверять, является ли посетитель роботом поисковой системы */
         $bots = array(
-            'rambler','googlebot','aport','yahoo','msnbot','turtle','mail.ru','omsktele',
-            'yetibot','picsearch','sape.bot','sape_context','gigabot','snapbot','alexa.com',
-            'megadownload.net','askpeter.info','igde.ru','ask.com','qwartabot','yanga.co.uk',
-            'scoutjet','similarpages','oozbot','shrinktheweb.com','aboutusbot','followsite.com',
-            'dataparksearch','google-sitemaps','appEngine-google','feedfetcher-google',
-            'liveinternet.ru','xml-sitemaps.com','agama','metadatalabs.com','h1.hrn.ru',
-            'googlealert.com','seo-rus.com','yaDirectBot','yandeG','yandex',
-            'yandexSomething','Copyscape.com','AdsBot-Google','domaintools.com',
-            'Nigma.ru','bing.com','dotnetdotcom'
+            'rambler', 'googlebot', 'aport', 'yahoo', 'msnbot', 'turtle', 'mail.ru', 'omsktele',
+            'yetibot', 'picsearch', 'sape.bot', 'sape_context', 'gigabot', 'snapbot', 'alexa.com',
+            'megadownload.net', 'askpeter.info', 'igde.ru', 'ask.com', 'qwartabot', 'yanga.co.uk',
+            'scoutjet', 'similarpages', 'oozbot', 'shrinktheweb.com', 'aboutusbot', 'followsite.com',
+            'dataparksearch', 'google-sitemaps', 'appEngine-google', 'feedfetcher-google',
+            'liveinternet.ru', 'xml-sitemaps.com', 'agama', 'metadatalabs.com', 'h1.hrn.ru',
+            'googlealert.com', 'seo-rus.com', 'yaDirectBot', 'yandeG', 'yandex',
+            'yandexSomething', 'Copyscape.com', 'AdsBot-Google', 'domaintools.com',
+            'Nigma.ru', 'bing.com', 'dotnetdotcom'
         );
-        foreach($bots as $bot)
-            if(stripos($_SERVER['HTTP_USER_AGENT'], $bot) !== false){
+        foreach ($bots as $bot)
+            if (stripos($_SERVER['HTTP_USER_AGENT'], $bot) !== false) {
                 $botname = $bot;
                 return true;
             }
         return false;
     }
 
-    public function listAction(Request $request){
+    public function listAction(Request $request)
+    {
         $user = $this->getUser();
         if (!$user) {
             return new JsonResponse("Forbidden", 403);
@@ -305,24 +303,25 @@ class ShippingController extends ResourceController
         $shippingResult->setMaxPerPage(10);
         $shippingResult->setCurrentPage($request->get('page', 1));
         $result = [];
-        foreach($shippingResult->getIterator() as $iterate) {
+        foreach ($shippingResult->getIterator() as $iterate) {
             /**
              * @var $iterate Shipping
              */
             $result[] = array(
                 'id' => $iterate->getId(),
                 'name' => $iterate->getName(),
-                'deliveryPrice' => $iterate->getDeliveryPrice(),
+                'delivery_price' => $iterate->getDeliveryPrice(),
                 'guarantee' => $iterate->getGuarantee(),
                 'insurance' => $iterate->getInsurance(),
-                'pickupAddress' => $iterate->getPickupAddress(),
-                'deliveryAddress' => $iterate->getDeliveryAddress(),
+                'pickup_address' => $iterate->getPickupAddress(),
+                'delivery_address' => $iterate->getDeliveryAddress(),
+                'payment_guarantee' => $iterate->getPaymentGuarantee(),
                 //'user_id'=>$iterate->getUser()->getId(),
                 //'carrier_id'=>$iterate->getCarrier()->getId(),
                 //'user' => $iterate->getUser(),
                 //'carrier' => $iterate->getCarrier(),
-                //'state' => $iterate->getId(),
-                'deliveryDatetime' => $iterate->getDeliveryDatetime()->format(\DateTime::ISO8601),
+                'state' => $iterate->getState(),
+                'delivery_datetime' => $iterate->getDeliveryDatetime()->format(\DateTime::ISO8601),
             );
         }
         return new JsonResponse($result);

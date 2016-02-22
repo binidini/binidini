@@ -13,4 +13,9 @@
 /.idea/
 /.vagrant/
 /web/media/*
+.DS_Store
+._.DS_Store
+web/android/
+web/app-develop.apk
+web/logo.jpg
 *~

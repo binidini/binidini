@@ -339,18 +339,12 @@
         var mapObject;
         var $showMapBtn = $('#show-map-btn');
         $($showMapBtn).click(function (e) {
-            $('#map-modal').modal('show');
+	    $('#map-modal').modal('show');
             if (mapObject == undefined) {
                 var pickupPoint = 0;
                 var deliveryPoint = 0;
-
-                {%  if shipping.pickupGeoPointType =='address' %}
-                pickupPoint = $($showMapBtn).attr('data-map-pickup');
-                deliveryPoint = $($showMapBtn).attr('data-map-delivery');
-                {% else %}
-                pickupPoint = {{shipping.pickupGeoPoint}};
-                deliveryPoint = {{ shipping.deliveryGeoPoint}};
-                {% endif %}
+                pickupPoint = '{{shipping.pickupAddress}}';
+                deliveryPoint = '{{ shipping.deliveryAddress}}';
 
                 ymaps.route([
                     pickupPoint,

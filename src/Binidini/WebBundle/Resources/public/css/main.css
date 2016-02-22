@@ -238,5 +238,17 @@ ul.notes li div.red {
 }
 
 .navbar-form-custom {
-    width: 500px;
+    width: 400px;
+}
+
+.bg-tyty {
+    background: url(../img/landing/myty.jpg) no-repeat center center fixed #000;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.green-bg {
+    background-color: #1ab394;
 }

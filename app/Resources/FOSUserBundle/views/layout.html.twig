@@ -8,7 +8,7 @@
     {% block meta %}{% endblock %}
     <title>
         {% block title %}
-            Титимити - p2p сервис доставки - Вход
+            Титимити - сервис доставки на краудсорсе - Вход
         {% endblock %}
     </title>
 
@@ -22,12 +22,12 @@
 
 </head>
 
-<body class="bg-tyty" style="color: #fff">
+<body class="bg-navy bg-tyty" style="color: #ffffff;">
 
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-                <h1 class="logo-name">&#165;++</h1>
+                <h1 class="logo-name">&#165;</h1>
             </div>
 
             {% for type, messages in app.session.flashbag.all() %}
@@ -41,9 +41,11 @@
 
             {% block fos_user_content %}{% endblock %}
 
-            <p class="m-t"> <small><a href="{{ path('binidini_home') }}">Титимити</a> - p2p сервис доставки &copy; 2015</small> </p>
+            <p class="m-t"> <small><a href="{{ path('binidini_home') }}">Титимити</a> - сервис доставки на краудсорсе &copy; {{ "now"|date("Y") }}</small> </p>
         </div>
     </div>
+
+
 
     {% block javascripts %}
         <script src="{{ asset('bundles/binidiniweb/js/jquery-2.1.1.js') }}"></script>

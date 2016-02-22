@@ -17,7 +17,16 @@
     </style>
 {% endblock %}
 
-{% block pageheader %}Поиск заказа{% endblock %}
+{% block pageheader %}
+    <form class="form-inline" method="get" action="{{ path('binidini_search_shipment_search') }}">
+        <span class="input-group"  style="width: 450px">
+            <input type="text" placeholder="Поиск заказа по адресу" class="form-control" name="top-search" id="top-search">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i></button>
+                </span>
+        </span>
+    </form>
+{% endblock %}
 
 {% block breadcrumb %}
     <ol class="breadcrumb">
@@ -28,14 +37,6 @@
 {% endblock %}
 
 {% block actions %}
-    <form role="search" class="" method="get" action="{{ path('binidini_search_shipment_search') }}">
-        <div class="input-group">
-            <input type="text" placeholder="Поиск заказа по адресу" class="form-control" name="top-search" id="top-search">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i></button>
-                </span>
-        </div>
-    </form>
 
 {% endblock %}
 

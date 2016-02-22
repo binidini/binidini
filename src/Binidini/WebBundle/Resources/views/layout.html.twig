@@ -48,9 +48,9 @@
 </head>
 
 <body class="md-skin {% if is_mobile() %}body-small{% endif %}">
-<div id="wrapper">
+<div id="wrapper" class="green-bg">
     <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
+        <div class="sidebar-collapse white-bg">
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
@@ -75,7 +75,7 @@
                         {% endif %}
                     </div>
                     <div class="logo-element">
-                        元
+                        ¥
                     </div>
                 </li>
 
@@ -150,7 +150,6 @@
                 {% endif %}
 
             </ul>
-
         </div>
     </nav>
 
@@ -199,8 +198,15 @@
 
         {% block pagetitle %}
             <div class="row wrapper border-bottom white-bg page-heading" >
-                <div class="col-sm-6" id="flashback">
-                    <h2>{% block pageheader %}{% endblock %}</h2>
+                <div class="col-sm-12" id="flashback">
+                    <h2>
+                        {% block pageheader %}{% endblock %}
+
+                        <span class="pull-right">
+                           {% block actions %}{% endblock %}
+                        </span>
+
+                    </h2>
                     {% block breadcrumb %}{% endblock %}
                     {% block flashes %}
                         {% for type, messages in app.session.flashbag.all() %}
@@ -211,11 +217,6 @@
                             {% endfor %}
                         {% endfor %}
                     {% endblock %}
-                </div>
-                <div class="col-sm-6">
-                    <div class="title-action">
-                        {% block actions %}{% endblock %}
-                    </div>
                 </div>
             </div>
         {% endblock %}

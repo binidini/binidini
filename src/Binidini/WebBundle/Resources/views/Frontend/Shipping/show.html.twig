@@ -29,49 +29,34 @@
 {% block actions %}
     {% if app.user is not empty %}
         {% if app.user.id == shipping.user.id and shipping.state == 'new' %}
-            <div class="p-xxs">
-                <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}"
-                   class="btn btn-primary">Отменить</a>
-            </div>
+            <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}"
+               class="btn btn-primary p-xxs">Отменить</a>
         {% endif %}
         {% if app.user.id == shipping.user.id and shipping.state in ['accepted', 'delivered', 'paid'] %}
             {% if shipping.insurance > 0 %}
-                <div class="p-xxs">
                     <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'dispute'}) }}"
-                       class="btn btn-danger btn-outline">Потребовать страховку</a>
-                </div>
+                       class="btn btn-danger btn-outline p-xxs">Потребовать страховку</a>
             {% endif %}
-            <div class="p-xxs">
                 <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'refuse'}) }}"
                    class="btn btn-primary">Отменить</a>
-            </div>
-
         {% endif %}
         {% if app.user.id == shipping.user.id and shipping.state == 'delivered' %}
-            <div class="p-xxs">
                 <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'pay'}) }}"
-                   class="btn btn-primary">Оплачен</a>
-            </div>
+                   class="btn btn-primary p-xxs">Оплачен</a>
         {% endif %}
         {% if app.user.id == shipping.user.id and shipping.state == 'rejected' %}
             {% if shipping.insurance > 0 %}
-                <div class="p-xxs">
                     <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'dispute'}) }}"
-                       class="btn btn-danger btn-outline">Потребовать страховку</a>
-                </div>
+                       class="btn btn-danger btn-outline p-xxs">Потребовать страховку</a>
             {% endif %}
-            <div class="p-xxs">
                 <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}"
-                   class="btn btn-primary">Аннулировать</a>
-            </div>
-
+                   class="btn btn-primary p-xxs">Аннулировать</a>
         {% endif %}
 
         {% if shipping.carrier is not null %}
             {% if app.user.id == shipping.carrier.id and shipping.state == 'accepted' %}
-                <div class="p-xxs">
                     {% if shipping.deliveryCode > 0 %}
-                        <a class="btn btn-primary"  data-toggle="modal" data-target="#deliveryCode">Доставлен</a>
+                        <a class="btn btn-primary p-xxs"  data-toggle="modal" data-target="#deliveryCode">Доставлен</a>
 
                         <div class="modal inmodal" id="deliveryCode" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                             <div class="modal-dialog">
@@ -116,25 +101,18 @@
 
                     {% else %}
                         <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'deliver'}) }}"
-                           class="btn btn-primary">Доставлен</a>
+                           class="btn btn-primary p-xxs">Доставлен</a>
                     {% endif %}
-                </div>
             {% endif %}
             {% if app.user.id == shipping.carrier.id and shipping.state == 'paid' %}
-                <div class="p-xxs">
                     <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'complete'}) }}"
-                       class="btn btn-primary">Подтвердить оплату</a>
-                </div>
+                       class="btn btn-primary p-xxs">Подтвердить оплату</a>
             {% endif %}
             {% if app.user.id == shipping.carrier.id and shipping.state == 'refused' %}
-                <div class="p-xxs">
                     <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'debate'}) }}"
-                       class="btn btn-danger btn-outline">Потребовать оплату</a>
-                </div>
-                <div class="p-xxs">
+                       class="btn btn-danger btn-outline p-xxs">Потребовать оплату</a>
                     <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'annul'}) }}"
-                       class="btn btn-primary">Аннулировать</a>
-                </div>
+                       class="btn btn-primary p-xxs">Аннулировать</a>
             {% endif %}
         {% endif %}
     {% endif %}

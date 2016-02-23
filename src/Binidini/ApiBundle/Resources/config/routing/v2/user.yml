@@ -1,5 +1,5 @@
-binidini_api2_user_show:
-    path: /{id}
+binidini_api2_user_get:
+    path: /
     methods: [GET]
     defaults:
-        _controller: binidini_core.controller.user:showAction
+        _controller: BinidiniCoreBundle:User:getUser

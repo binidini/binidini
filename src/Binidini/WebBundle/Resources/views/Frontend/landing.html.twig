@@ -46,7 +46,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="navbar-brand" href="{{ path('binidini_search_shipment_private_index') }}">Вход</a><br/><br/><br/></li>
                     <li><a class="page-scroll" href="{{ path('fos_user_registration_register') }}">Регистрация</a></li>
-                    <li><a class="page-scroll" href="{{ path('binidini_how_it_works') }}">О нас</a></li>
                     <li><a class="page-scroll" href="#contact">Контакты</a></li>
 
 
@@ -63,90 +62,27 @@
                     <div class="col-sm-12 wrapper wrapper-content animated fadeInUp">
                         <ul class="notes row text-center">
                             <li>
-                                <a class="navy-link" href="{{ path('binidini_search_shipment_index') }}">
+                                <a class="navy-link" href="{{ path('binidini_senders') }}">
                                     <div class="sender">
                                         <h2>Нужно что-то отвезти?</h2>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a class="navy-link" href="{{ path('binidini_search_shipment_index') }}">
+                                <a class="navy-link" href="{{ path('binidini_transporters') }}">
                                     <div class="carrier">
                                         <h2>Зарабатывайте по пути!</h2>
                                     </div>
                                 </a>
                             </li>
                         </ul>
-                        {% if not is_mobile() %}
-                        <ul class="notes row" id="orders">
 
-                            <li>
-                                <div>
-                                    <a href="{{ path('binidini_search_shipment_index') }}" class="navy-link">
-                                        <b class="time">{{ "now"|date("d.m") }} 23:45</b>
-                                        <b class="price"><i class="fa fa-rub"></i>150</b>
+                        <div align="center" class="embed-responsive embed-responsive-4by3">
+                            <video controls class="embed-responsive-item">
+                                <source src="{{ asset('/bundles/binidiniweb/video/tytymyty.mp4') }}" type="video/mp4">
+                            </video>
+                        </div>
 
-                                        <h3>Букет роз</h3>
-                                        <h4>Санкт-Петербург, ул. Маяковского, д. 22 </h4><h4> Санкт-Петербург, Нахимова
-                                            ул., 5</h4>
-                                    </a>
-                                    <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="red">
-                                    <a href="{{ path('binidini_search_shipment_index') }}" class="navy-link">
-
-                                        <b class="time">быстро</b>
-                                        <b class="price">дешево</b>
-                                        <br/>
-                                        <span class="text-center">
-                                            <h3>Ваш заказ</h3>
-                                            <h4>Откуда</h4><h4>Куда</h4>
-                                        </span>
-                                        <br/>
-                                        <b class="insurance">надежно</b>
-                                    </a>
-                                    <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <a href="{{ path('binidini_search_shipment_index') }}" class="navy-link">
-                                        <b class="time">{{ "now" | date_modify("+1 day") | date("d.m") }} 14:30</b>
-                                        <b class="price"><i class="fa fa-rub"></i>200</b>
-                                        <h3>Документы</h3>
-                                        <h4>Санкт-Петербург, Невский пр., д. 22 </h4><h4> Санкт-Петербург, Ветеранов пр., 5</h4>
-                                    </a>
-                                    <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="row notes" id="orders2">
-                            <li>
-                                <div >
-                                    <a href="{{ path('binidini_search_shipment_index') }}" class="navy-link">
-                                        <b class="time">{{ "now" | date_modify("+7 day") | date("d.m") }} 12:00</b>
-                                        <b class="price"><i class="fa fa-rub"></i>2000</b>
-                                        <h3>Фотоальбом</h3>
-                                        <h4>Россия, Москва, Тверская ул., д. 2 </h4><h4>234 West 48th Street, New York, NY, USA</h4>
-                                    </a>
-                                    <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <a href="{{ path('binidini_search_shipment_index') }}" class="navy-link">
-                                        <b class="time">{{ "now" | date_modify("+7 day") | date("d.m") }} 12:00</b>
-                                        <b class="price"><i class="fa fa-rub"></i>250</b>
-                                        <h3>Старый диван</h3>
-                                        <h4>Санкт-Петербург, Савушкина, д. 7 </h4><h4> Ленинградская обл., Тосно, Ленина пр., 5</h4>
-                                    </a>
-                                    <a href="#" class="clear"><i class="fa fa-trash-o "></i></a>
-                                </div>
-                            </li>
-                        </ul>
-                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -166,6 +102,7 @@
 
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-3 text-center">
             <div>
@@ -576,8 +513,6 @@
 <script src="{{ asset('bundles/binidiniweb/js/landing/classie.js') }}"></script>
 <script src="{{ asset('bundles/binidiniweb/js/landing/cbpAnimatedHeader.js') }}"></script>
 <script src="{{ asset('bundles/binidiniweb/js/landing/inspinia.js') }}"></script>
-
-<script src="{{ asset('bundles/binidiniweb/js/plugins/video/responsible-video.js') }}"></script>
 
 <script>
     $("#orders a.clear").click(function() {

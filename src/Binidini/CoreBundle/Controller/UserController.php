@@ -149,4 +149,37 @@ class UserController extends Controller
         return new RedirectResponse($this->generateUrl('binidini_admin_user_show', ['id' => $user->getId()]));
     }
 
+    public function getUserAction(Request $request)
+    {
+        /** @var $user User */
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse("Forbidden", 403);
+        }
+        $id = $request->get('id');
+        if ($id) {
+            /** @var $userManager UserManager */
+            $userManager = $this->container->get('fos_user.user_manager');
+            $user = $userManager->findUserBy(['id' => $id]);
+            if (!$user) {
+                return new JsonResponse("Bad request", 400);
+            }
+        } else {
+            if (!$user) {
+                return new JsonResponse("Bad request", 400);
+            }
+        }
+        $result = [
+            'user_id' => $user->getId(),
+            'firstname' => $user->getFirstName(),
+            'lastname' => $user->getLastName(),
+            'email' => $user->getEmail(),
+            'phone' => $user->getUsername(),
+            'about_me' => $user->getAboutMe(),
+            'img_path' => $user->getImgPath()
+        ];
+        return new JsonResponse($result);
+
+    }
+
 }

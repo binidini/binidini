@@ -11,8 +11,8 @@ use JMS\Serializer\Annotation\Expose;
 /**
  * Bid
  *
+ * @ORM\Entity(repositoryClass="Binidini\CoreBundle\Entity\BidRepository")
  * @ORM\Table(name = "bid")
- * @ORM\Entity
  * @ExclusionPolicy("all")
  */
 class Bid implements UserAwareInterface, SenderCarrierAwareInterface

@@ -7,60 +7,50 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-/*
- * This file is part of the Binidini project.
- *
- * (c) Denis Manilo
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace Binidini\CoreBundle\Entity;
 
 
+use Doctrine\ORM\Query\Expr\OrderBy;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class BidRepository extends EntityRepository
 {
 
-    public function findLastBids($id, $state, $deliveryPriceFrom, $deliveryPriceTo, $insurancePriceFrom, $insurancePriceTo, $deliveryTimeFrom, $deliveryTimeTo)
+    public function findLast5DaysNewBids($sender)
     {
 
-        $queryBuilder = $this->getCollectionQueryBuilder();
-        if ($id) {
-            $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('id'), ':id'))
-                ->setParameter(':id', $id);
-        }
-        if ($state) {
-            $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('state'), ':st'))
-                ->setParameter(':st',$state);
+        $queryBuilder = $this->getCollectionQueryBuilder('o');
 
-        }
-        if ($deliveryPriceFrom) {
-            $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName('deliveryPrice'), ':dpf'))
-                ->setParameter(':dpf', $deliveryPriceFrom);
-        }
-        if ($deliveryPriceTo) {
-            $queryBuilder->andWhere($queryBuilder->expr()->lte($this->getPropertyName('deliveryPrice'), ':dpt'))
-                ->setParameter(':dpt', $deliveryPriceTo);
-        }
-        if ($insurancePriceFrom) {
-            $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName('insurance'), ':inf'))
-                ->setParameter(':inf', $insurancePriceFrom);
-        }
-        if ($insurancePriceTo) {
-            $queryBuilder->andWhere($queryBuilder->expr()->lte($this->getPropertyName('insurance'), ':int'))
-                ->setParameter(':int', $insurancePriceTo);
-        }
-        if ($deliveryTimeFrom) {
-            $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName('deliveryDatetime'), ':dtf'))
-                ->setParameter(':dtf', $deliveryTimeFrom);
-        }
-        if ($deliveryTimeTo) {
-            $queryBuilder->andWhere($queryBuilder->expr()->lte($this->getPropertyName('deliveryDatetime'), ':dtt'))
-                ->setParameter(':dtt', $deliveryTimeTo);
-        }
+        $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('sender'), ':sender'))
+            ->setParameter(':sender', $sender);
+
+        $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('state'), ':state'))
+            ->setParameter(':state', 'new');
+
+        $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName('createdAt'), ':createdAt'))
+            ->setParameter(':createdAt', new \DateTime('5 days ago'));
+
+        $queryBuilder->addOrderBy($this->getPropertyName('id'), 'desc');
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    public function findLast5DaysAcceptedBids($user)
+    {
+
+        $queryBuilder = $this->getCollectionQueryBuilder('o');
+
+        $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('user'), ':user'))
+            ->setParameter(':user', $user);
+
+        $queryBuilder->andWhere($queryBuilder->expr()->eq($this->getPropertyName('state'), ':state'))
+            ->setParameter(':state', 'accepted');
+
+        $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName('createdAt'), ':createdAt'))
+            ->setParameter(':createdAt', new \DateTime('5 days ago'));
+
+        $queryBuilder->addOrderBy($this->getPropertyName('updatedAt'), 'desc');
 
         return $this->getPaginator($queryBuilder);
     }

@@ -27,13 +27,13 @@ sylius_resource:
             classes:
                 model: Binidini\CoreBundle\Entity\Message
                 controller: Binidini\CoreBundle\Controller\MessageController
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+                repository: Binidini\CoreBundle\Entity\MessageRepository
         binidini_core.bid:
             driver: doctrine/orm
             classes:
                 model: Binidini\CoreBundle\Entity\Bid
                 controller: Binidini\CoreBundle\Controller\BidController
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+                repository: Binidini\CoreBundle\Entity\BidRepository
         binidini_core.review:
             driver: doctrine/orm
             classes:

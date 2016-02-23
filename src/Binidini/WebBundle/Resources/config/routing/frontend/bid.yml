@@ -19,7 +19,7 @@ binidini_core_bid_index:
             paginate: false
             sortable: true
             sorting:
-                price: asc
+                id: desc
             filterable: true
             template: BinidiniWebBundle:Frontend/Bid:index.html.twig
 
@@ -36,14 +36,9 @@ binidini_user_bids_accepted:
     defaults:
         _controller: binidini_core.controller.bid:indexAction
         _sylius:
-            paginate: 10
-            sortable: true
-            sorting:
-                id: desc
-            filterable: true
-            criteria:
-                user: ['expr:service("security.context").getToken().getUser().getId()']
-                state: 'accepted'
+            repository:
+                method: findLast5DaysAcceptedBids
+                arguments: ['expr:service("security.context").getToken().getUser().getId()']
             template: BinidiniWebBundle:Frontend/Bid:alert_accepted.html.twig
 
 binidini_sender_bids_new:
@@ -52,12 +47,7 @@ binidini_sender_bids_new:
     defaults:
         _controller: binidini_core.controller.bid:indexAction
         _sylius:
-            paginate: 10
-            sortable: true
-            sorting:
-                id: desc
-            filterable: true
-            criteria:
-                sender: ['expr:service("security.context").getToken().getUser().getId()']
-                state: 'new'
+            repository:
+                method: findLast5DaysNewBids
+                arguments: ['expr:service("security.context").getToken().getUser().getId()']
             template: BinidiniWebBundle:Frontend/Bid:alert_new.html.twig

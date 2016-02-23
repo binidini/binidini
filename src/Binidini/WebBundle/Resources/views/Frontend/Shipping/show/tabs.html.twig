@@ -18,26 +18,26 @@
                             <a href="#tab-1"
                                data-url="{{ path('binidini_core_shipping_message_index', {'shipping_id':shipping.id}) }}"
                                data-content="#tab-1 .feed-activity-list"
-                               data-toggle="tab"><i class="fa fa-comments-o"></i></a>
+                               data-toggle="tab" title="Сообщения"><i class="fa fa-comments-o"></i></a>
                         </li>
                         <li class="{{ activeTab == 'bid'? 'active': '' }}">
                             <a href="#tab-2"
                                data-url="{{ path('binidini_core_bid_index', {'shipping_id':shipping.id}) }}"
                                data-content="#tab-2 .feed-activity-list"
-                               data-toggle="tab"><i class="fa fa-ruble"></i> </a>
+                               data-toggle="tab" title="Заявки на доставку"><i class="fa fa-ruble"></i> </a>
                         </li>
                         <li class="{{ activeTab == 'history'? 'active': '' }}">
                             <a href="#tab-3"
                                data-url="{{ path('binidini_core_shipping_history_index', {'id':shipping.id}) }}"
                                data-content="#tab-3 .history-content"
-                               data-toggle="tab"><i class="fa fa-history"></i> </a>
+                               data-toggle="tab" title="История заказа"><i class="fa fa-history"></i> </a>
                         </li>
                         {% if shipping.canHasReview() %}
                             <li class="{{ activeTab == 'review'? 'active': '' }}">
                                 <a href="#tab-4"
                                    data-content="#tab-4 .feed-activity-list"
                                    data-url="{{ path('binidini_core_shipping_review_index', {'shipping_id':shipping.id}) }}"
-                                   data-toggle="tab"><i class="fa fa-smile-o"></i> </a>
+                                   data-toggle="tab" title="Отзыв"><i class="fa fa-smile-o"></i> </a>
                             </li>
                         {% endif %}
                     </ul>

@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Binidini\CoreBundle\Entity\MessageRepository")
  * @ORM\Table(name = "message")
  * @ExclusionPolicy("all")
  */

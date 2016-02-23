@@ -3,3 +3,15 @@ binidini_api2_user_get:
     methods: [GET]
     defaults:
         _controller: BinidiniCoreBundle:User:getUser
+
+binidini_api2_user_reset_password:
+    path: /reset_password
+    methods: [POST]
+    defaults:
+        _controller: BinidiniCoreBundle:User:resetUserPassword
+
+binidini_api2_user_create:
+    path: /create
+    methods: [POST]
+    defaults:
+        _controller: BinidiniCoreBundle:User:registerUser

@@ -31,7 +31,7 @@ class RegistrationFormType extends RegistrationBaseType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        if ($this->routeName == "binidini_api_user_create") {
+        if ($this->routeName == "binidini_api_user_create" || $this->routeName == "binidini_api2_user_create") {
             $resolver->setDefaults(array(
                 'data_class' => $this->class,
                 'intention'  => 'registration',

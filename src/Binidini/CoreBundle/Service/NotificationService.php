@@ -47,7 +47,7 @@ class NotificationService
         $this->em = $em;
 
         //Все
-        $this->insiders = [2, 123792, 124290, 124292, 124343, 124344, 123642, 124468];
+        $this->insiders = [2, 123792, 124290, 124292, 124343, 124344, 123642, 124468, 124511];
 
         //Люботинский
         $this->insiders2 =[124513, 124408];
@@ -100,10 +100,10 @@ class NotificationService
     }
 
     public function notifyInsidersAboutNewDffShipping(Shipping $shipping) {
+        $senderId = $shipping->getSender()->getId();
 
-        if ($shipping->getSender()->getId() != 124281) {
-//        if ($shipping->getSender()->getId() != 4) {
-            //если не dff возврат
+        //Цветоптторг, Мосцветторг, Гиггз Райан,
+        if (in_array($senderId, [124096,  124130, 2])) {
             return;
         }
 

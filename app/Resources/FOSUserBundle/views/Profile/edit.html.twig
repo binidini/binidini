@@ -152,6 +152,19 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
+                                                            <label class="col-sm-3 control-label">
+                                                                Районы
+                                                                <a data-container="body" data-toggle="popover" data-placement="left" data-content="Перевозчики могут указать свои любимые районы, чтобы мы могли оповещать о заказах в этих районах.." data-original-title="" title="" aria-describedby="popover63435">
+                                                                    <i class="fa fa-question" style="font-size: large"></i>
+                                                                </a>:
+                                                            </label>
+
+                                                            <div class="col-sm-5 no-padding">
+                                                                {{ form_widget(form.districts, {'attr': {'class': 'form-control', 'placeholder': 'Мои районы'}, 'data':user.districts}) }}
+                                                                {{ form_errors(form.districts) }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label class="col-sm-3 control-label">Адрес:</label>
 
                                                             <div class="col-sm-5 no-padding">

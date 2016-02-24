@@ -199,6 +199,15 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="districts", type="string", length=255, nullable=true)
+     * @Expose
+     */
+
+    private $districts;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      * @Expose
      */
@@ -2170,5 +2179,28 @@ class User extends BaseUser
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set districts
+     *
+     * @param string $districts
+     * @return User
+     */
+    public function setDistricts($districts)
+    {
+        $this->districts = $districts;
+
+        return $this;
+    }
+
+    /**
+     * Get districts
+     *
+     * @return string 
+     */
+    public function getDistricts()
+    {
+        return $this->districts;
     }
 }

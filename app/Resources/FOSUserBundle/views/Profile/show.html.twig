@@ -39,6 +39,10 @@
                                 <p><i class="fa fa-building"></i> {{ user.city }}</p>
                             {% endif %}
 
+                            {% if user.districts %}
+                                <p><i class="fa fa-map-marker"></i> {{ user.districts }}</p>
+                            {% endif %}
+
                             {% if user.address %}
                                 <p><i class="fa fa-map-marker"></i> {{ user.address }}</p>
                             {% endif %}

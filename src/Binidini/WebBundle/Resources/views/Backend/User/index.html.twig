@@ -76,6 +76,7 @@
                                         <th>Имя</th>
                                         <th>Email</th>
                                         <th>Город</th>
+                                        <th>Районы</th>
                                         <th>Был</th>
                                         <th>Дата регистрации</th>
                                         <th><i class="fa fa-rub"></i></th>
@@ -98,6 +99,7 @@
                                             </td>
                                             <td>{{ user.email }}</td>
                                             <td>{{ user.city }}</td>
+                                            <td>{{ user.districts }}</td>
                                             <td>{{ user.lastlogin | date('d.m H:i') }}</td>
                                             <td>{{ user.createdAt | date('d.m H:i') }}</td>
                                             <td>

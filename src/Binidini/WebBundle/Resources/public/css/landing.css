@@ -939,8 +939,8 @@ ul.notes li div.sender {
     background: #1ab394;
     display: block;
     height: 120px;
-    width: 250px;
-    padding: 0.3em;
+    width: 220px;
+    padding: 0.0em;
     -moz-box-shadow: 5px 5px 7px #212121;
     -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
     box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);

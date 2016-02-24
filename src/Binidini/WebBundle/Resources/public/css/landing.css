@@ -802,6 +802,10 @@ ul.notes li h4 {
     margin-top: 10px;
     font-size: 18px;
 }
+
+ul.notes li h2 {
+    font-size: 28px;
+}
 ul.notes li div {
     text-decoration: none;
     color: #000;
@@ -956,7 +960,7 @@ ul.notes li div.carrier {
     background: #009ee0;
     display: block;
     height: 120px;
-    width: 250px;
+    width: 220px;
     padding: 0.3em;
     -moz-box-shadow: 5px 5px 7px #212121;
     -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);

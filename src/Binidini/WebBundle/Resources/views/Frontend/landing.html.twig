@@ -86,7 +86,11 @@
                     </div>
                 </div>
             </div>
-            <div class="header-back two"></div>
+            {% if is_mobile() %}
+                <div class="header-back mobile"></div>
+            {% else %}
+                <div class="header-back one"></div>
+            {% endif %}
         </div>
     </div>
 </div>

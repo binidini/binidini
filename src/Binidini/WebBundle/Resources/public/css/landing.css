@@ -149,8 +149,12 @@ h1 {
 .header-back.one {
     background: url('../img/landing/tyty.jpg') 50% 0 no-repeat;
 }
-.header-back.two {
-    background: url('../img/landing/tytymyty_girl.jpg') 50% 0 no-repeat;
+.header-back.mobile {
+    background: url('../img/landing/myty_mobile.jpg') 50% 0 no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .header-back.zero {
     background: url('../img/landing/myty.jpg') 50% 0 no-repeat;

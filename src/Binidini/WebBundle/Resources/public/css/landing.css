@@ -149,6 +149,9 @@ h1 {
 .header-back.one {
     background: url('../img/landing/tyty.jpg') 50% 0 no-repeat;
 }
+.header-back.two {
+    background: url('../img/landing/tytymyty_girl.jpg') 50% 0 no-repeat;
+}
 .header-back.zero {
     background: url('../img/landing/myty.jpg') 50% 0 no-repeat;
 }

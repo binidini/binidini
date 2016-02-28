@@ -15,13 +15,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class NovosibirskBotCommand  extends ContainerAwareCommand
+class EkaterinburgBotCommand  extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('bd:novosibirsk:order:create')
-            ->setDescription('Creates a novosibirsk fake order')
+            ->setName('bd:ekaterinburg:order:create')
+            ->setDescription('Creates a ekaterinburg fake order')
             ->addOption(
                 'random-mode',
                 'r',
@@ -48,7 +48,7 @@ EOT
         }
 
         $url = $this->getContainer()->getParameter('dff_url');
-        $token = $this->getContainer()->getParameter('novosibirsk_token');
+        $token = $this->getContainer()->getParameter('ekaterinburg_token');
         $names = [
             'Цветы',
             'Цветы',
@@ -63,19 +63,21 @@ EOT
             'Суши'
         ];
         $pickupAddresses = [
-            'Новосибирск, ул. Ленина, дом 17',
-            'Новосибирск, ул. Державина, дом 20'
+            'Екатеринбург, Репина, 99',
+            'Екатеринбург, пер. Центральный рынок, 6',
+            'Екатеринбург, ул. 8 Марта, 57'
         ];
         $deliveryAddresses = [
-            'ул. Каменская, 7, Новосибирск',
-            'ул. Советская, 18, Новосибирск',
-            'Чаплыгина ул., 65/1, Новосибирск',
-            'ул. Советская, 64, Новосибирск',
-            'Вокзальная магистраль ул., 1, Новосибирск',
-            'Октябрьская ул., д. 49, Новосибирск',
-            'Красный проспект, д. 22, Новосибирск',
-            'Ленина ул., 48, Новосибирск',
-            'Фрунзе, 4, Новосибирск'
+            'ул. 8 Марта, 66, Екатеринбург',
+            'ул. Малышева, 51, Екатеринбург',
+            'ул. Академика Шварца, 17, Екатеринбург',
+            'ул. Готвальда, 6/2, Екатеринбург',
+            'ул. Челюскинцев, 106, Екатеринбург',
+            'пр. Ленина, 69/10, Екатеринбург',
+            'ул. Малышева, 74, Екатеринбург',
+            'просп. Ленина, 99, Екатеринбург',
+            'б-р Культуры, 30А, Екатеринбург',
+            'Восточная ул., 82, Екатеринбург'
         ];
         $minutes = ['00', '15', '30', '45'];
         $prices = [100, 150, 150, 200, 200, 250];

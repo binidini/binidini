@@ -102,8 +102,8 @@ class NotificationService
     public function notifyInsidersAboutNewDffShipping(Shipping $shipping) {
         $senderId = $shipping->getSender()->getId();
 
-        //Цветоптторг, Мосцветторг, Гиггз Райан,
-        if (in_array($senderId, [124096,  124130, 2])) {
+        //Вбукете.рф(Екатеринбург), Сфинкс(Новосибирск), Цветоптторг, Мосцветторг, Гиггз Райан,
+        if (in_array($senderId, [125116, 125114, 124096,  124130, 2])) {
             return;
         }
 

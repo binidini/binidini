@@ -20,8 +20,8 @@ class DffBotCommand  extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('bd:dff:order:create')
-            ->setDescription('Creates a dff fake order')
+            ->setName('bd:novosibirsk:order:create')
+            ->setDescription('Creates a novosibirsk fake order')
             ->addOption(
                 'random-mode',
                 'r',
@@ -31,7 +31,7 @@ class DffBotCommand  extends ContainerAwareCommand
             )
             ->setHelp(
                 <<<EOT
-                    The <info>%command.name%</info> command creates a dff fake order.
+                    The <info>%command.name%</info> command creates a novosibirsk fake order.
 
 <info>php %command.full_name%</info>
 

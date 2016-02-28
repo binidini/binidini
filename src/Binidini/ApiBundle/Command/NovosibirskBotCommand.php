@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class DffBotCommand  extends ContainerAwareCommand
+class NovosibirskBotCommand  extends ContainerAwareCommand
 {
     protected function configure()
     {

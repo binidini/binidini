@@ -163,7 +163,7 @@ EOT
                 'deliveryDatetime'=>$deliveryDatetime->format('d.m.y H').':'.$minutes[array_rand($minutes)],
                 'deliveryPrice'=>$price,
                 'insurance'=>$insurance[array_rand($insurance)],
-                'guarantee'=>rand(0,1)?0:$price,
+                'guarantee'=>rand(0,5)?0:$price,
                 'description' => $description[array_rand($description)],
                 'access_token'=>$token,
                 'category'=>-1];

@@ -31,7 +31,7 @@ class KazanBotCommand  extends ContainerAwareCommand
             )
             ->setHelp(
                 <<<EOT
-                    The <info>%command.name%</info> command creates a novosibirsk fake order.
+                    The <info>%command.name%</info> command creates a kazan fake order.
 
 <info>php %command.full_name%</info>
 

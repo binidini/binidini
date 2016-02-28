@@ -31,7 +31,7 @@ class NnBotCommand  extends ContainerAwareCommand
             )
             ->setHelp(
                 <<<EOT
-                    The <info>%command.name%</info> command creates a novosibirsk fake order.
+                    The <info>%command.name%</info> command creates a nn fake order.
 
 <info>php %command.full_name%</info>
 

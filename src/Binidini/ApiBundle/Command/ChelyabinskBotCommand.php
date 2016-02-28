@@ -15,13 +15,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class MctBotCommand  extends ContainerAwareCommand
+class ChelyabinskBotCommand  extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('bd:mtc:order:create')
-            ->setDescription('Creates a mtc fake order')
+            ->setName('bd:chelyabinsk:order:create')
+            ->setDescription('Creates a chelyabinsk fake order')
             ->addOption(
                 'random-mode',
                 'r',
@@ -31,7 +31,7 @@ class MctBotCommand  extends ContainerAwareCommand
             )
             ->setHelp(
                 <<<EOT
-                    The <info>%command.name%</info> command creates a mct fake order.
+                    The <info>%command.name%</info> command creates a chelyabinsk fake order.
 
 <info>php %command.full_name%</info>
 
@@ -48,7 +48,7 @@ EOT
         }
 
         $url = $this->getContainer()->getParameter('dff_url');
-        $token = $this->getContainer()->getParameter('mtc_token');
+        $token = $this->getContainer()->getParameter('chelyabinsk_token');
         $names = [
             'Цветы',
             'Цветы',

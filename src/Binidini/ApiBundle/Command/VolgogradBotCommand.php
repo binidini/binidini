@@ -20,7 +20,7 @@ class VolgogradBotCommand  extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('bd:omsk:order:create')
+            ->setName('bd:volgograd:order:create')
             ->setDescription('Creates a volgograd fake order')
             ->addOption(
                 'random-mode',

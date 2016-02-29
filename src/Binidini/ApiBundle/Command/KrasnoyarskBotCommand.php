@@ -20,7 +20,7 @@ class KrasnoyarskBotCommand  extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('bd:omsk:order:create')
+            ->setName('bd:krasnoyarsk:order:create')
             ->setDescription('Creates a krasnoyarsk fake order')
             ->addOption(
                 'random-mode',

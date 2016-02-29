@@ -15,13 +15,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class OmskBotCommand  extends ContainerAwareCommand
+class SamaraBotCommand  extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('bd:omsk:order:create')
-            ->setDescription('Creates a Omsk fake order')
+            ->setName('bd:samara:order:create')
+            ->setDescription('Creates a samara fake order')
             ->addOption(
                 'random-mode',
                 'r',
@@ -31,7 +31,7 @@ class OmskBotCommand  extends ContainerAwareCommand
             )
             ->setHelp(
                 <<<EOT
-                    The <info>%command.name%</info> command creates a omsk fake order.
+                    The <info>%command.name%</info> command creates a samara fake order.
 
 <info>php %command.full_name%</info>
 
@@ -48,38 +48,45 @@ EOT
         }
 
         $url = $this->getContainer()->getParameter('dff_url');
-        $token = $this->getContainer()->getParameter('omsk_token');
+        $token = $this->getContainer()->getParameter('samara_token');
         $names = [
             'Цветы',
             'Цветы',
             'Цветы',
             'Цветы',
-            'Цветы',
-            'Цветы Омск',
+            'Цветы Самара',
             'Розы',
             'Букет',
             'Документы',
-            'Пицца',
-            'Суши'
+            'Мягкая игрушка'
         ];
         $pickupAddresses = [
-            'Омск, ул. Маяковского,18/Жукова,105',
-            'Омск, проспект К. Маркса, 48',
-            'Омск, ул. Учебная, 83'
+            'Самара, ул. Революционная 90',
+            'ул. Тимирязева, 4, Челябинск',
+            'ул. Марченко, 13 а, Челябинск',
+            'ул. Сталеваров, 66, Челябинск',
+            'Свердловский пр., 21, Челябинск',
+            'Комсомольский пр., 69, Челябинск',
+            'ул. Бр. Кашириных, 95, Челябинск',
+            'ул. Гагарина, 19, Челябинск'
         ];
         $deliveryAddresses = [
-            'ул. Красный Путь, 5, Омск',
-            'Съездовская ул., 1, Омск',
-            'ул. Ленина, 22, Омск',
-            'ул. Броз Тито, 2/1, Омск',
-            'ул. Тарская, 10, Омск',
-            'ул. Поворотникова, 6, Омск',
-            'ул. Фрунзе, 80, Омск',
-            'Карла Маркса просп., 5А, Омск',
-            'ул. Иртышская Набережная, 11, к. 2, Омск'
+            'ул. Энтузиастов, 36 а, Челябинск',
+            'пр. Ленина, 57, Челябинск',
+            'ул. Тимирязева, 28, Челябинск',
+            'ул. Сони Кривой, 33, Челябинск',
+            'ул. Труда, 183, Челябинск',
+            'пр. Ленина, 66-А, Челябинск',
+            'улица Коммуны, 87, Челябинск',
+            'просп. Комсомольский, 111, Челябинск',
+            'ул. Монакова, 4, Челябинск',
+            'ул. Кирова, 94, Челябинск',
+            'ул. Братьев Кашириных, 134Б, Челябинск',
+            'ул. Свободы, 88, Челябинск',
+            'ул. Молодогвардейцев, 68, Челябинск'
         ];
         $minutes = ['00', '15', '30', '45'];
-        $prices = [100, 150, 150, 200, 200, 250];
+        $prices = [150, 200, 200, 250];
         $insurance = [0, 0, 0, 0, 0, 0, 0, 0, 1000];
 
         $description = [
@@ -101,16 +108,16 @@ EOT
         $deliveryDatetime = $now->add(new \DateInterval('PT'.rand(2,10).'H'));
         $price = $prices[array_rand($prices)];
         $post = [
-                'name'=>$names[array_rand($names)],
-                'pickupAddress'=>$pickupAddresses[array_rand($pickupAddresses)],
-                'deliveryAddress'=>$deliveryAddresses[array_rand($deliveryAddresses)],
-                'deliveryDatetime'=>$deliveryDatetime->format('d.m.y H').':'.$minutes[array_rand($minutes)],
-                'deliveryPrice'=>$price,
-                'insurance'=>$insurance[array_rand($insurance)],
-                'guarantee'=>rand(0,5)?0:$price,
-                'description' => $description[array_rand($description)],
-                'access_token'=>$token,
-                'category'=>-1];
+            'name'=>$names[array_rand($names)],
+            'pickupAddress'=>$pickupAddresses[array_rand($pickupAddresses)],
+            'deliveryAddress'=>$deliveryAddresses[array_rand($deliveryAddresses)],
+            'deliveryDatetime'=>$deliveryDatetime->format('d.m.y H').':'.$minutes[array_rand($minutes)],
+            'deliveryPrice'=>$price,
+            'insurance'=>$insurance[array_rand($insurance)],
+            'guarantee'=>rand(0,5)?null:$price,
+            'description' => $description[array_rand($description)],
+            'access_token'=>$token,
+            'category'=>-1];
 
 
         $ch = curl_init();

@@ -15,13 +15,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class NnBotCommand  extends ContainerAwareCommand
+class OmskBotCommand  extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('bd:nn:order:create')
-            ->setDescription('Creates a n.novgorod fake order')
+            ->setName('bd:novosibirsk:order:create')
+            ->setDescription('Creates a Omsk fake order')
             ->addOption(
                 'random-mode',
                 'r',
@@ -31,7 +31,7 @@ class NnBotCommand  extends ContainerAwareCommand
             )
             ->setHelp(
                 <<<EOT
-                    The <info>%command.name%</info> command creates a nn fake order.
+                    The <info>%command.name%</info> command creates a omsk fake order.
 
 <info>php %command.full_name%</info>
 
@@ -48,14 +48,14 @@ EOT
         }
 
         $url = $this->getContainer()->getParameter('dff_url');
-        $token = $this->getContainer()->getParameter('nn_token');
+        $token = $this->getContainer()->getParameter('omsk_token');
         $names = [
             'Цветы',
             'Цветы',
             'Цветы',
             'Цветы',
             'Цветы',
-            'Цветы Нижний Новгород',
+            'Цветы Новосибирск',
             'Розы',
             'Букет',
             'Документы',
@@ -63,21 +63,20 @@ EOT
             'Суши'
         ];
         $pickupAddresses = [
-            'Нижний Новгород, ул. Звездинка 12 А',
-            'ул. Белинского, 61, Нижний Новгород',
-            'ул. Пискунова, 22, Нижний Новгород'
+            'Омск, ул. Маяковского,18/Жукова,105',
+            'Омск, проспект К. Маркса, 48',
+            'Омск, ул. Учебная, 83'
         ];
         $deliveryAddresses = [
-            'ул. Рождественская, 25, Нижний Новгород',
-            'Сормовское ш., 15A, Нижний Новгород',
-            'ул. Ванеева, 110Д, Нижний Новгород',
-            'Ижорская ул., д. 4, Нижний Новгород',
-            'ул. Рождественская, 23, Нижний Новгород',
-            'ул. Костина, 3, Нижний Новгород',
-            'Московское ш., 142, Нижний Новгород',
-            'ул. Политбойцов, 8, Нижний Новгород',
-            'ул. Рождественская, 45, Нижний Новгород',
-            'пр. Ленина, 98, Нижний Новгород'
+            'ул. Красный Путь, 5, Омск',
+            'Съездовская ул., 1, Омск',
+            'ул. Ленина, 22, Омск',
+            'ул. Броз Тито, 2/1, Омск',
+            'ул. Тарская, 10, Омск',
+            'ул. Поворотникова, 6, Омск',
+            'ул. Фрунзе, 80, Омск',
+            'Карла Маркса просп., 5А, Омск',
+            'ул. Иртышская Набережная, 11, к. 2, Омск'
         ];
         $minutes = ['00', '15', '30', '45'];
         $prices = [100, 150, 150, 200, 200, 250];

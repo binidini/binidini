@@ -20,7 +20,7 @@ class OmskBotCommand  extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('bd:novosibirsk:order:create')
+            ->setName('bd:omsk:order:create')
             ->setDescription('Creates a Omsk fake order')
             ->addOption(
                 'random-mode',

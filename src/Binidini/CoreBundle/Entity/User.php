@@ -400,9 +400,9 @@ class User extends BaseUser
         $this->carrierRatingAmount = 0;
         $this->carrierRatingCount = 0;
 
-        //$this->smsMask =   0b1111111111111111111111111111;
-        $this->smsMask =   0;
-        
+        $this->smsMask =   0b1111111111111111111111111111;
+        //$this->smsMask =   0;
+
         $this->emailMask = 0b1111111111111111111111111111;
         $this->gcmMask =   0b1111111111111111111111111111;
 

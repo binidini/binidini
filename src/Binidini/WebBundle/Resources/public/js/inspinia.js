@@ -264,6 +264,9 @@ function animationHover(element, animation) {
 function SmoothlyMenu() {
     if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
         // Hide menu in order to smoothly turn on when maximize menu
+
+        $('#left-side-adv').hide();
+
         $('#side-menu').hide();
         // For smoothly turn on menu
         setTimeout(
@@ -271,6 +274,7 @@ function SmoothlyMenu() {
                 $('#side-menu').fadeIn(400);
             }, 200);
     } else if ($('body').hasClass('fixed-sidebar')) {
+        $('#left-side-adv').hide();
         $('#side-menu').hide();
         setTimeout(
             function () {

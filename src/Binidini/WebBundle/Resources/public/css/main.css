@@ -252,3 +252,10 @@ ul.notes li div.red {
 .green-bg {
     background-color: #1ab394;
 }
+
+/* DIFF */
+/* Поменял  из-за google adsense*/
+ins {
+    background-color: #ffffff;
+    text-decoration: none;
+}

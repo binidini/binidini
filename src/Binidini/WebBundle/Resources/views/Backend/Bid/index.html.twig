@@ -1,0 +1,111 @@
+{% import 'BinidiniWebBundle:Frontend/Macros:page.html.twig' as page %}
+
+{% extends 'BinidiniWebBundle::Backend/layout.html.twig' %}
+
+{% block pageheader %}Все заявки{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        {% if bids.nbresults > 0 %}
+                            {{ page.paging(bids) }}
+
+                            <div class="ibox-tools">
+
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    по {{ bids.maxperpage() }} записей
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li>
+                                        <a href="{{ path('binidini_admin_bid_index', {'paginate': 15 } ) }}">по
+                                            15 записей</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('binidini_admin_bid_index', {'paginate': 30 } ) }}">по
+                                            30 записей</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('binidini_admin_bid_index', {'paginate': 60 } ) }}">по
+                                            60 записей</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('binidini_admin_bid_index', {'paginate': 90 } ) }}">по
+                                            90 записей</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        {% else %}
+                            заявок нет
+                        {% endif %}
+                    </div>
+                    <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-sm-8">
+
+                                </div>
+                                <div class="col-sm-4 text-right">
+                                    {{ page.pagination(bids) }}
+                                </div>
+                            </div>
+
+                        {% if bids.nbresults > 0 %}
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>№</th>
+                                        <th>Что</th>
+                                        <th>Отправитель</th>
+                                        <th>Перевозчик</th>
+                                        <th>Откуда</th>
+                                        <th>Куда</th>
+                                        <th>Подана</th>
+                                        <th>Прибытие</th>
+                                        <th>Статус</th>
+                                        <th class="text-right">Цена</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for bid in bids %}
+                                        <tr>
+                                            <td>
+                                                {{ bid.id }}
+                                            </td>
+                                            <td><a href="{{ path('binidini_admin_shipping_show', {'id': bid.shipping.id}) }}">{{ bid.shipping.name[:24] }}</a></td>
+                                            <td><a href="{{ path('binidini_admin_user_show', {'id': bid.sender.id}) }}">{{ bid.sender.name }}</a></td>
+                                            <td><a href="{{ path('binidini_admin_user_show', {'id': bid.carrier.id}) }}">{{ bid.carrier.name }}</a></td>
+                                            <td> {{ bid.shipping.pickupAddress[:64] }}</td>
+                                            <td>{{ bid.shipping.deliveryAddress[:64] }}</td>
+                                            <td>{{ bid.createdAt | date('d.m H:i') }}</td>
+                                            <td>{{ bid.shipping.deliveryDatetime | date('d.m H:i') }}</td>
+                                            <td>
+                                                <span class="text-{{ bid.state }}">{{ ('binidini.bid.state.' ~ bid.state) | trans }}</span>
+                                            </td>
+                                            <td class="text-right">{{ bid.price | price }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                </div>
+
+                                <div class="col-sm-6 text-right">
+                                    {{ page.pagination(bids) }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -85,3 +85,15 @@ binidini_admin_user_unlock:
 binidini_payment:
     resource: @BinidiniWebBundle/Resources/config/routing/backend/payment.yml
     prefix: /
+
+binidini_admin_bid_index:
+    path: /bid
+    methods: [GET]
+    defaults:
+        _controller: binidini_core.controller.bid:indexAction
+        _sylius:
+            paginate: $paginate
+            sortable: true
+            sorting:
+                id: desc
+            template: BinidiniWebBundle::Backend/Bid/index.html.twig

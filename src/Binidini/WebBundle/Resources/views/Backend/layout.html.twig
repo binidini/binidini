@@ -58,6 +58,9 @@
                 <li {{ croute.is_current_route('binidini_admin_shipping') }}>
                     <a href="{{ path('binidini_admin_shipping') }}"><i class="fa fa-truck"></i> <span class="nav-label">Заказы</span></a>
                 </li>
+                <li {{ croute.is_current_route('binidini_admin_bid_index') }}>
+                    <a href="{{ path('binidini_admin_bid_index') }}"><i class="fa fa-comments"></i> <span class="nav-label">Заявки</span></a>
+                </li>
                 <li {{ croute.is_current_route('binidini_admin_user_index') }}>
                     <a href="{{ path('binidini_admin_user_index') }}"><i class="fa fa-users"></i> <span class="nav-label">Пользователи</span> </a>
                 </li>
@@ -66,13 +69,6 @@
                 </li>
                 <li {{ croute.is_current_route('binidini_admin_shipping_conflict') }}>
                     <a href="{{ path('binidini_admin_shipping_conflict') }}"><i class="fa fa-delicious"></i> <span class="nav-label">Споры</span></a>
-                </li>
-                <li {{ croute.is_current_route('fos_user_profile_edit') }}>
-                    <a href="#"><i class="fa fa-bar-chart"></i> <span class="nav-label">Отчеты</span> </a>
-                    <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                        <li><a href="#">По заказам</a></li>
-                        <li><a href="#">По пользователям</a></li>
-                    </ul>
                 </li>
                 <li class="special_link"><hr/></li>
                 <li>

@@ -13,3 +13,6 @@ binidini_api2_shipping:
 binidini_api2_user:
     resource: @BinidiniApiBundle/Resources/config/routing/v2/user.yml
     prefix: /user
+binidini_api2_address:
+    resource: @BinidiniApiBundle/Resources/config/routing/v2/address.yml
+    prefix: /address

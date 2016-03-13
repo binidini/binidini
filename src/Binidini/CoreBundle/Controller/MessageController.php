@@ -12,7 +12,9 @@ namespace Binidini\CoreBundle\Controller;
 
 
 use Binidini\CoreBundle\Entity\Message;
+use Binidini\CoreBundle\Entity\MessageRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -57,5 +59,41 @@ class MessageController extends ResourceController
         }
 
         return $this->redirectHandler->redirectToRoute($this->config->getRedirectRoute('index'), $this->config->getRedirectParameters());
+    }
+
+    public function listAction(Request $request)
+    {
+        $user = $this->getUser();
+        $shippingId = $request->get('shipping_id');
+        if (!$shippingId || $shippingId <= 0) {
+            return new JsonResponse("Bad request", 400);
+        }
+        /**
+         * @var MessageRepository $repository
+         */
+        $repository = $this->getRepository();
+        /**
+         * @var Message[] $bids
+         */
+        $bids = $repository->findBy(['shipping' => $shippingId]);
+        if (!$bids) {
+            return new JsonResponse('Not found', 404);
+        } else {
+            $result = [];
+            foreach ($bids as $bid) {
+                $result[] = array(
+                    'id' => $bid->getId(),
+                    'user' => [
+                        'user_id' => $bid->getUser()->getId(),
+                        'firstname' => $bid->getUser()->getFirstName(),
+                        'lastname' => $bid->getUser()->getLastName(),
+                        'img_path' => $bid->getUser()->getImgPath(),
+                    ],
+                    'created_at' => $bid->getCreatedAt()->format(\DateTime::ISO8601),
+                    'comment' => $bid->getText(),
+                );
+            }
+        }
+        return new JsonResponse($result);
     }
 }

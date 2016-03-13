@@ -326,4 +326,71 @@ class ShippingController extends ResourceController
         }
         return new JsonResponse($result);
     }
+
+    public function oneShippingAction(Request $request)
+    {
+        $id = $request->get('id');
+        if (!$id) {
+            return new JsonResponse("Bad request", 400);
+        }
+        $user = $this->getUser();
+        /**
+         * @var ShippingRepository $repository
+         */
+        $repository = $this->getRepository();
+        /**
+         * @var Shipping $shippingResult
+         */
+        $shippingResult = $repository->find($id);
+        if (!$shippingResult) {
+            return new JsonResponse("Not found", 404);
+        }
+        $result = array(
+            'id' => $shippingResult->getId(),
+            'name' => $shippingResult->getName(),
+            'state' => $shippingResult->getState(),
+            'delivery_price' => $shippingResult->getDeliveryPrice(),
+            'guarantee' => $shippingResult->getGuarantee(),
+            'insurance' => $shippingResult->getInsurance(),
+            'payment_guarantee' => $shippingResult->getPaymentGuarantee(),
+            'comment'=> $shippingResult->getDescription(),
+            'img' => $shippingResult->getImgPath(),
+            'pickup_address' => $shippingResult->getPickupAddress(),
+            'delivery_datetime' => $shippingResult->getDeliveryDatetime()->format(\DateTime::ISO8601),
+            'delivery_address' => $shippingResult->getDeliveryAddress(),
+        );
+        if ($shippingResult->getPickupDatetime()) {
+            $result['pickup_datetime'] = $shippingResult->getPickupDatetime();
+        }
+        if ($user) {
+            if ($shippingResult->getUser() == $user) {
+
+            } else if ($shippingResult->getCarrier() == $user) {
+
+            } else {
+
+            }
+            $result += array(
+                'sender' => [
+                    'user_id' => $shippingResult->getUser()->getId(),
+                    'firstname' => $shippingResult->getUser()->getFirstName(),
+                    'lastname' => $shippingResult->getUser()->getLastName(),
+                    'phone' => $shippingResult->getUser()->getUsername(),
+                ],
+                'current_user'=> [
+                    'user_id' => $user->getId(),
+                    'firstname' =>$user->getFirstName(),
+                    'lastname' => $user->getLastName(),
+                    'phone' => $user->getUsername(),
+                ]
+            );
+
+        }
+
+
+
+
+        return new JsonResponse($result);
+
+    }
 }

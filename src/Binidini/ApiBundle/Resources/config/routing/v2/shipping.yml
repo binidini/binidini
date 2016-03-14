@@ -15,3 +15,9 @@ binidini_api2_shipping_new:
     methods: [POST]
     defaults:
         _controller: binidini_core.controller.shipping:createAction
+
+binidini_api2_shipping_state_transition:
+    path: /{id}/state/{transition}
+    methods: [POST]
+    defaults:
+        _controller: binidini_core.controller.shipping:updateStateAction

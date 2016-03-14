@@ -108,6 +108,7 @@ class BidController extends ResourceController
                         'user_id' => $bid->getUser()->getId(),
                         'firstname' => $bid->getUser()->getFirstName(),
                         'lastname' => $bid->getUser()->getLastName(),
+                        'patronymic' => $bid->getUser()->getPatronymic(),
                         'img_path' => $bid->getUser()->getImgPath(),
                     ],
                     'created_at' => $bid->getCreatedAt()->format(\DateTime::ISO8601),

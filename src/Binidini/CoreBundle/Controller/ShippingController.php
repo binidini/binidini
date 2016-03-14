@@ -269,6 +269,8 @@ class ShippingController extends ResourceController
         return false;
     }
 
+    #region API 2
+
     public function listAction(Request $request)
     {
         $user = $this->getUser();
@@ -375,22 +377,21 @@ class ShippingController extends ResourceController
                     'user_id' => $shippingResult->getUser()->getId(),
                     'firstname' => $shippingResult->getUser()->getFirstName(),
                     'lastname' => $shippingResult->getUser()->getLastName(),
+                    'patronymic' => $shippingResult->getUser()->getPatronymic(),
                     'phone' => $shippingResult->getUser()->getUsername(),
                 ],
                 'current_user'=> [
                     'user_id' => $user->getId(),
                     'firstname' =>$user->getFirstName(),
                     'lastname' => $user->getLastName(),
+                    'patronymic' => $user->getPatronymic(),
                     'phone' => $user->getUsername(),
                 ]
             );
 
         }
-
-
-
-
         return new JsonResponse($result);
-
     }
+
+    #endregion
 }

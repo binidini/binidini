@@ -77,7 +77,7 @@ class ProfileController extends Controller
     {
         $user = $this->getUser();
         if (!$user) {
-            return new JsonResponse("Bad request", 400);
+            return new JsonResponse("Bad requesasdfasdt", 400);
         }
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
@@ -117,7 +117,7 @@ class ProfileController extends Controller
 
             $view = View::create($user, 200);
         } else {
-            $view = View::create($form, 400);
+            $view = View::create($form, 405);
         }
         return $this->get('fos_rest.view_handler')->handle($view);
     }

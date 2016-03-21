@@ -5,7 +5,12 @@
     <link href="{{ asset('bundles/binidiniweb/css/plugins/raty/jquery.raty.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% if app.user is not empty %}
 {% set isItMe = user.id == app.user.id %}
+{% else %}
+{% set isItMe = false %}
+{% endif %}
+
 {% set isItCompany = user.type == 2 %}
 
 {% block pageheader %}

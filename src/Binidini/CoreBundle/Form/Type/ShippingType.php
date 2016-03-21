@@ -59,7 +59,7 @@ class ShippingType extends AbstractType
             ))
         ;
 
-        if ($this->routeName == "binidini_api_shipping_new") {
+        if ($this->routeName == "binidini_api_shipping_new" || $this->routeName="binidini_api2_shipping_new") {
             $builder
                 ->add('imgBase64', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true])
                 ->add('fileName', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true]);
@@ -72,7 +72,7 @@ class ShippingType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        if ($this->routeName == "binidini_api_shipping_new") {
+        if ($this->routeName == "binidini_api_shipping_new" || $this->routeName="binidini_api2_shipping_new") {
             $resolver->setDefaults(array(
                 'data_class' => 'Binidini\CoreBundle\Entity\Shipping',
                 'csrf_protection' => false

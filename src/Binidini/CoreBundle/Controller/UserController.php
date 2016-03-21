@@ -159,7 +159,7 @@ class UserController extends Controller
     }
 
 
-    //API V2
+    #region API2
 
     public function getUserAction(Request $request)
     {
@@ -185,6 +185,7 @@ class UserController extends Controller
             'user_id' => $user->getId(),
             'firstname' => $user->getFirstName(),
             'lastname' => $user->getLastName(),
+            'patronymic' => $user->getPatronymic(),
             'email' => $user->getEmail(),
             'phone' => $user->getUsername(),
             'about_me' => $user->getAboutMe(),
@@ -241,6 +242,7 @@ class UserController extends Controller
         return new JsonResponse(['code' => 3, 'message' => 'Новый пароль отправлен по SMS']);
     }
 
+
     /**
      * @param Request $request
      * @return null|Response|Response
@@ -288,63 +290,8 @@ class UserController extends Controller
             }
         }
         return new JsonResponse("Bad requests", 400);
-
-
-
-        /** @var $formFactory FactoryInterface */
-        $formFactory = $this->container->get('fos_user.registration.form.factory');
-        /** @var $dispatcher EventDispatcherInterface */
-        $dispatcher = $this->container->get('event_dispatcher');
-        $user = $userManager->createUser();
-        $user->setEnabled(true);
-        $event = new GetResponseUserEvent($user, $request);
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
-        $form = $formFactory->createForm();
-        $form->setData($user);
-        $data = $this->get('request')->request->all();
-        $form->bind($data);
-        if ($form->isValid()) {
-            $event = new FormEvent($form, $request);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-            $userManager->updateUser($user);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-            return new JsonResponse(['code' => 2, 'message' => 'Пользователь создан, пароль отправлен по SMS']);
-        }
-        return new JsonResponse("Bad requests", 400);
-
-//        if ($this->getUser()) {
-//            return new JsonResponse("Forbidden", 403);
-//        }
-//        $username = $request->get('username');
-//        if (!$username) {
-//            return new JsonResponse("Bad request", 400);
-//        }
-//        /** @var $userManager UserManagerInterface */
-//        $userManager = $this->container->get('fos_user.user_manager');
-//        $user = $userManager->findUserByUsername($username);
-//        if ($user) {
-//            return new JsonResponse(['code' => 1, 'message' => 'Пользователь уже существует']);
-//        }
-//        /** @var $formFactory FactoryInterface */
-//        $formFactory = $this->container->get('fos_user.registration.form.factory');
-//        $form = $formFactory->createForm();
-//        $form->setData($user);
-//        $data = $this->get('request')->request->all();
-//        if ('POST' === $request->getMethod()) {
-//            $form->bind($data);
-//        }
-//        /** @var $user User */
-//        $user = $userManager->createUser();
-//        $user->setEnabled(true);
-//        $user->setEmail('');
-//        $plainPwd = rand(100000, 999999);
-//        $user->setPlainPassword("{$plainPwd}");
-//        $userManager->updateUser($user);
-//        $msg = array('mobile' => $user->getUsername(), 'sms' => "Ваш пароль: {$plainPwd}");
-//        /** @var $rabbitMqProducer Producer */
-//        $rabbitMqProducer = $this->get("old_sound_rabbit_mq.binidini_sms_producer");
-//        $rabbitMqProducer->publish(serialize($msg));
-//        return new JsonResponse(['code' => 2, 'message' => 'Пользователь создан, пароль отправлен по SMS']);
     }
+
+    #endregion
 
 }

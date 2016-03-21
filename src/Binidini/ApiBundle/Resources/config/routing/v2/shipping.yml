@@ -8,5 +8,16 @@ binidini_api2_shipping_show:
     path: /{id}
     methods: [GET]
     defaults:
-        _controller: binidini_core.controller.shipping:showAction
+        _controller: binidini_core.controller.shipping:oneShippingAction
 
+binidini_api2_shipping_new:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: binidini_core.controller.shipping:createAction
+
+binidini_api2_shipping_state_transition:
+    path: /{id}/state/{transition}
+    methods: [POST]
+    defaults:
+        _controller: binidini_core.controller.shipping:updateStateAction

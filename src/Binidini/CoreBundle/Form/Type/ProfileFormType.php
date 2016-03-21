@@ -28,7 +28,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
             ->add('lastName')
             ->add('patronymic')
             ->add('aboutMe', 'textarea', ['required' => false]);
-        if ($this->routeName == "binidini_api_user_update") {
+        if ($this->routeName == "binidini_api_user_update" || $this->routeName == "binidini_api2_user_update") {
             $builder
                 ->add('imgBase64', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true])
                 ->add('fileName', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true]);
@@ -112,7 +112,7 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        if ($this->routeName == "binidini_api_user_update") {
+        if ($this->routeName == "binidini_api_user_update" || $this->routeName == "binidini_api2_user_update") {
             $resolver->setDefaults(array(
                 'data_class' => $this->class,
                 'intention' => 'profile',

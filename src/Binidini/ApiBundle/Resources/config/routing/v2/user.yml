@@ -15,3 +15,9 @@ binidini_api2_user_create:
     methods: [POST]
     defaults:
         _controller: BinidiniCoreBundle:User:registerUser
+
+binidini_api2_user_update:
+    path: /update
+    methods: [POST]
+    defaults:
+        _controller: BinidiniApiBundle:Profile:editUser

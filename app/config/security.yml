@@ -43,6 +43,7 @@ security:
 
         - { path: ^/public/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/доставка/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/, role: ROLE_ADMIN }
         - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }
         - { path: ^/, role: ROLE_USER}

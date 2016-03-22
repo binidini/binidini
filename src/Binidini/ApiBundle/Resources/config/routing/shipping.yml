@@ -65,7 +65,7 @@ binidini_api_my_shipping_active_index:
             filterable: true
             criteria:
                 user: ['expr:service("security.context").getToken().getUser().getId()']
-                state: ['dispatched', 'on_way', 'accepted', 'delivered', 'paid', 'rejected', 'refused']
+                state: ['accepted', 'delivered', 'paid', 'rejected', 'refused' , 'conflict']
 
 binidini_api_my_shipping_active_index_new:
     path: /sender/active_with_new
@@ -80,7 +80,7 @@ binidini_api_my_shipping_active_index_new:
             filterable: true
             criteria:
                 user: ['expr:service("security.context").getToken().getUser().getId()']
-                state: ['new', 'dispatched', 'on_way', 'accepted', 'delivered', 'paid', 'rejected', 'refused']
+                state: ['new', 'accepted', 'delivered', 'paid', 'rejected', 'refused', 'conflict']
 
 
 binidini_api_my_shipping_conflict_index:

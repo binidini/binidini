@@ -14,28 +14,18 @@
     Доставка {{ shipping.name | lower }}  
 {% endblock %}
 
-{% if shipping.canHasReview() %}
-    {% block stylesheets %}
-
-        <link href="{{ asset('bundles/binidiniweb/css/plugins/raty/jquery.raty.css') }}" rel="stylesheet">
-        <link href="{{ asset('bundles/binidiniweb/js/plugins/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
-        {{ parent() }}
-    {% endblock %}
-{% endif %}
-
-
 {% block pageheader %}Детализация заказа{% endblock %}
 
 {% block actions %}
     {% if app.user is not empty %}
         {% if app.user.id == shipping.user.id and shipping.state == 'new' %}
             <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}"
-               class="btn btn-primary p-xxs">Отменить</a>
+               class="btn btn-primary p-xxs">Аннулировать</a>
         {% endif %}
         {% if app.user.id == shipping.user.id and shipping.state in ['accepted', 'delivered', 'paid'] %}
             {% if shipping.insurance > 0 %}
                     <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'dispute'}) }}"
-                       class="btn btn-danger btn-outline p-xxs">Потребовать страховку</a>
+                       class="btn btn-warning p-xxs">Потребовать страховку</a>
             {% endif %}
                 <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'refuse'}) }}"
                    class="btn btn-primary">Отменить</a>
@@ -47,7 +37,7 @@
         {% if app.user.id == shipping.user.id and shipping.state == 'rejected' %}
             {% if shipping.insurance > 0 %}
                     <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'dispute'}) }}"
-                       class="btn btn-danger btn-outline p-xxs">Потребовать страховку</a>
+                       class="btn btn-warning  p-xxs">Потребовать страховку</a>
             {% endif %}
                 <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'cancel'}) }}"
                    class="btn btn-primary p-xxs">Аннулировать</a>

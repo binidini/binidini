@@ -110,7 +110,7 @@
             {% endif %}
             {% if app.user.id == shipping.carrier.id and shipping.state == 'refused' %}
                     <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'debate'}) }}"
-                       class="btn btn-danger btn-outline p-xxs">Потребовать оплату</a>
+                       class="btn btn-warning ">Потребовать оплату</a>
                     <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'annul'}) }}"
                        class="btn btn-primary p-xxs">Аннулировать</a>
             {% endif %}

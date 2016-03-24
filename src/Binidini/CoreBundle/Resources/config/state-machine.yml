@@ -8,8 +8,6 @@ winzou_state_machine:
             - init
             - new
             - accepted
-#            - dispatched
-#            - on_way
             - delivered     #awaiting_payment
             - paid          #awaiting_payment_confirmation
             - completed
@@ -24,12 +22,6 @@ winzou_state_machine:
             accept: #by carrier
                 from: [new]
                 to: accepted
-#            dispatch: #by sender
-#                from: [accepted]
-#                to: dispatched
-#            load:  #by carrier
-#                from: [dispatched]
-#                to: on_way
             deliver:  #by carrier
                 from: [accepted]
                 to: delivered
@@ -66,8 +58,6 @@ winzou_state_machine:
         callbacks:
             before:
                 check_accept:   { on: 'accept',   do: [@binidini.security.service, 'checkCarrier'],    args: ['object'] }
-#                check_dispatch: { on: 'dispatch', do: [@binidini.security.service, 'checkSender'],    args: ['object'] }
-#                check_load:     { on: 'load',     do: [@binidini.security.service, 'checkCarrier'],   args: ['object'] }
                 check_deliver:  { on: 'deliver',  do: [@binidini.security.service, 'checkCarrier'],   args: ['object'] }
                 check_pay:      { on: 'pay',      do: [@binidini.security.service, 'checkSender'],    args: ['object'] }
                 check_complete: { on: 'complete', do: [@binidini.shipping.logic.service, 'beforeComplete'], args: ['object'] }
@@ -75,7 +65,7 @@ winzou_state_machine:
                 check_refuse:   { on: 'refuse',   do: [@binidini.security.service, 'checkSender'],   args: ['object'] }
                 check_cancel:   { on: 'cancel',   do: [@binidini.security.service, 'checkSender'],    args: ['object'] }
                 check_nullify:  { on: 'nullify',  do: [@binidini.security.service, 'checkResolver'],  args: ['object'] }
-                check_annul:    { on: 'annul',    do: [@binidini.security.service, 'checkResolver'],  args: ['object'] }
+                check_annul:    { on: 'annul',    do: [@binidini.security.service, 'checkCarrier'],  args: ['object'] }
                 check_dispute:  { on: 'dispute',  do: [@binidini.security.service, 'checkSender'],    args: ['object'] }
                 check_debate:   { on: 'debate',   do: [@binidini.security.service, 'checkCarrier'],   args: ['object'] }
                 check_resolve:  { on: 'resolve',  do: [@binidini.security.service, 'checkResolver'],  args: ['object'] }

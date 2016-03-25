@@ -5,6 +5,7 @@ namespace Binidini\CoreBundle\Controller;
 use Binidini\CoreBundle\Entity\Payment;
 use Binidini\CoreBundle\Entity\Shipping;
 use Binidini\CoreBundle\Entity\ShippingRepository;
+use Binidini\CoreBundle\Exception\AppException;
 use Binidini\CoreBundle\Exception\IncorrectDeliveryCode;
 use Binidini\CoreBundle\Exception\TransitionCannotBeApplied;
 use Binidini\CoreBundle\Form\Type\BidType;
@@ -13,6 +14,7 @@ use Binidini\CoreBundle\Form\Type\ReviewType;
 use FOS\UserBundle\Doctrine\UserManager;
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
 use Pagerfanta\Pagerfanta;
+use SM\SMException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -404,6 +406,15 @@ class ShippingController extends ResourceController
             'code' => 100,
         );
         return new JsonResponse($result);
+    }
+
+    public function updateStateAction(Request $request, $transition, $graph = null) {
+        try {
+            return parent::updateStateAction($request, $transition, $graph);
+        } catch (NotFoundHttpException $e) {
+            throw new AppException("Данная операция уже не может быть выполнена.");
+        }
+
     }
 
     #endregion

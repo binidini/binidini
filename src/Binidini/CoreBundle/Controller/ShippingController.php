@@ -386,10 +386,23 @@ class ShippingController extends ResourceController
                     'lastname' => $user->getLastName(),
                     'patronymic' => $user->getPatronymic(),
                     'phone' => $user->getUsername(),
-                ]
+                ],
+                'is_mine_shipping' => $shippingResult->getUser()->getId() ==  $user->getId(),
             );
 
         }
+        $result += array(
+            'carrier' => [
+                'user_id' => $shippingResult->getUser()->getId(),
+                'firstname' => $shippingResult->getUser()->getFirstName(),
+                'lastname' => $shippingResult->getUser()->getLastName(),
+                'patronymic' => $shippingResult->getUser()->getPatronymic(),
+                'phone' => $shippingResult->getUser()->getUsername(),
+            ],
+            'carrier_price'=>100,
+            'carrier_comment'=>"Хелпа",
+            'code' => 100,
+        );
         return new JsonResponse($result);
     }
 

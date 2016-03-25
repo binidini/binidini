@@ -3,3 +3,12 @@ binidini_api2_shipping_message_index:
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.message:listAction
+
+binidini_api2_shipping_message_new:
+    path: /shipping/{shipping_id}/messages/new
+    methods: [POST]
+    defaults:
+        _controller: binidini_core.controller.message:createAction
+        _sylius:
+            criteria:
+                shipping: $shipping_id

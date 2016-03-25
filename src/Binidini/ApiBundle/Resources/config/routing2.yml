@@ -4,6 +4,9 @@ binidini_api2_bid:
 binidini_api2_message:
     resource: @BinidiniApiBundle/Resources/config/routing/v2/message.yml
     prefix: /message
+binidini_api2_review:
+    resource: @BinidiniApiBundle/Resources/config/routing/v2/review.yml
+    prefix: /review
 binidini_api2_shipment:
     resource: @BinidiniApiBundle/Resources/config/routing/v2/shipment.yml
     prefix: /shipment

@@ -3,7 +3,16 @@
 {% extends 'BinidiniWebBundle::layout.html.twig' %}
 
 {% block pageheader %}Мои финансы{% endblock %}
-
+{% block breadcrumb %}
+<ul>
+    <li>
+        Счет: {{ app.user.balance | price}}
+    </li>
+    <li>
+        Блокировано: {{ app.user.holdAmount | price }}
+    </li>
+</ul>
+{% endblock %}
 {% block actions %}
     <a class="btn btn-primary"  data-toggle="modal" data-target="#depositModal">Пополнить</a>
     <a class="btn btn-primary"  data-toggle="modal" data-target="#promoCode">Промо код</a>
@@ -16,15 +25,9 @@
                 <div class="ibox float-e-margins">
 
                     <div class="ibox-title">
-                        <ol class="breadcrumb">
-                            <li>
-                                Счет: {{ app.user.balance | price}}
-                            </li>
-                            <li>
-                                Блокировано: {{ app.user.holdAmount | price }}
-                            </li>
-                        </ol>
                         {% if payments.nbresults > 0 %}
+                            Платежи {{ page.paging(payments) }}
+
                             <div class="ibox-tools">
 
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -51,7 +54,7 @@
                                 </ul>
 
                             </div>
-                        {% endif %}
+                        {% else %}платежей нет{% endif %}
                     </div>
                     <div class="ibox-content">
                         <div class="row">

@@ -25,7 +25,7 @@ binidini_api2_shipping_state_transition:
         transition:  create|accept|pay|complete|reject|refuse|cancel|nullify|annul|dispute|debate|resolve
 
 
-binidini_core_shipping_deliver_transition:
+binidini_api2_shipping_deliver_transition:
     path: /{id}/deliver/
     methods: [GET]
     defaults:

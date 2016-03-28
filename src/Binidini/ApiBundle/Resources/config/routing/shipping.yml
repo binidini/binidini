@@ -22,7 +22,7 @@ binidini_api_shipping_history_index:
     path: /{id}/history/
     methods: [GET]
     defaults:
-        _controller: binidini_core.controller.shipping:historyIndexAction
+        _controller: binidini_coreco.ntroller.shipping:historyIndexAction
 
 
 binidini_api_shipping_state_transition:
@@ -30,6 +30,9 @@ binidini_api_shipping_state_transition:
     methods: [POST]
     defaults:
         _controller: binidini_core.controller.shipping:updateStateAction
+    requirements:
+        transition:  create|accept|pay|complete|reject|refuse|cancel|nullify|annul|dispute|debate|resolve
+
 
 binidini_api_shipping_new:
     path: /new

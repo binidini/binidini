@@ -31,7 +31,7 @@ class ShippingController extends ResourceController
         /** @var $shipping Shipping */
         $shipping = $this->findOr404($request);
 
-        if ($shipping->getCarrier() == $this->getUser()) {
+        if ($shipping->getDeliveryCode() > 0) {
 
             $shipping->setDeliveryCode($shipping->getDeliveryCode() + 1);
             $em = $this->getDoctrine()->getManager();
@@ -412,7 +412,7 @@ class ShippingController extends ResourceController
         try {
             return parent::updateStateAction($request, $transition, $graph);
         } catch (NotFoundHttpException $e) {
-            throw new AppException("Данная операция уже не может быть выполнена.");
+            throw new AppException("Данная операция не может быть выполнена.");
         }
 
     }

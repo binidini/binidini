@@ -5,12 +5,9 @@
 {% block pageheader %}Мои финансы{% endblock %}
 {% block breadcrumb %}
 <ol class="breadcrumb">
-    <br/>
     <li>
-        Счет: {{ app.user.balance | price}}
-    </li>
-    <li>
-        Блокировано: {{ app.user.holdAmount | price }}
+        {{ app.user.balance}}
+        {% if app.user.holdAmount > 0 %}/<span class="text-danger">{{ app.user.holdAmount }}</span>{% endif %}&nbsp;<i class="fa fa-rub"></i>
     </li>
 </ol>
 {% endblock %}

@@ -4,14 +4,14 @@
 
 {% block pageheader %}Мои финансы{% endblock %}
 {% block breadcrumb %}
-<ul>
+<ol class="breadcrumb">
     <li>
         Счет: {{ app.user.balance | price}}
     </li>
     <li>
         Блокировано: {{ app.user.holdAmount | price }}
     </li>
-</ul>
+</ol>
 {% endblock %}
 {% block actions %}
     <a class="btn btn-primary"  data-toggle="modal" data-target="#depositModal">Пополнить</a>

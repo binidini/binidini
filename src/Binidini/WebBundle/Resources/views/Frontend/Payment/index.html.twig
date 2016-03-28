@@ -5,6 +5,7 @@
 {% block pageheader %}Мои финансы{% endblock %}
 {% block breadcrumb %}
 <ol class="breadcrumb">
+    <br/>
     <li>
         Счет: {{ app.user.balance | price}}
     </li>

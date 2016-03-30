@@ -17,10 +17,10 @@ security:
         oauth_token:
             pattern:    ^/oauth/v2/token
             security:   false
+            context: my_context
         api:
             pattern:    ^/api
             fos_oauth:  true
-            stateless:  true
             anonymous:  false # can be omitted as its default value
             context: my_context
         main:

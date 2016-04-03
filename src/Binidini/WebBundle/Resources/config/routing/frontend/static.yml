@@ -93,3 +93,9 @@ binidini_transporters:
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/transporters.html.twig
+
+binidini_android_faq:
+    path: /faq/android
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/howitworks.html.twig

@@ -7,7 +7,6 @@ resetting.password.success.send: Ваш новый пароль выслан п�
 
 binidini.shipping.state.init: начальный
 binidini.shipping.state.new: новый
-binidini.shipping.state.dispatched: выдан
 binidini.shipping.state.accepted: принят
 binidini.shipping.state.delivered: доставлен
 binidini.shipping.state.paid: оплачен

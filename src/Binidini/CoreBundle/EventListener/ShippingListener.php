@@ -61,6 +61,9 @@ class ShippingListener
             $shipping->setCategory(0);
         }
 
+        if (is_null($shipping->getDeliveryCode())) {
+            $shipping->setDeliveryCode(0);
+        }
     }
 
     /**

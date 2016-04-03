@@ -10,6 +10,18 @@ binidini_rules:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/rules.html.twig
 
+binidini_rules_api:
+  path: /rules_api
+  defaults:
+    _controller: FrameworkBundle:Template:template
+    template:    BinidiniWebBundle::Frontend/Static/rules_api.html.twig
+
+binidini_about_api:
+  path: /about_api
+  defaults:
+    _controller: FrameworkBundle:Template:template
+    template:    BinidiniWebBundle::Frontend/Static/about_api.html.twig
+
 binidini_rules_appendix_1:
     path: /rules/appendix_1
     defaults:

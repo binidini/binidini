@@ -194,7 +194,7 @@
                                 </dl>
                             </div>
                             <div class="col-lg-2">
-                                <a href="{{ '/media/img/' ~ shipping.imgPath }}" id="single_image" title="Доставка {{ shipping.name | lower }}" title="Доставка {{ shipping.name | lower }}">
+                                <a href="{{ '/media/img/' ~ shipping.imgPath }}" id="single_image" title="Доставка {{ shipping.name | lower }}">
                                     <img  alt="Доставка {{ shipping.name | lower }}" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
                                 </a>
                             </div>
@@ -363,7 +363,13 @@
 
 
         $(document).ready(function() {
-            $("a#single_image").fancybox(
+            $("a#single_image").fancybox({
+                        helpers : {
+                            overlay : {
+                                locked : false
+                            }
+                        }
+                    }
             );
         });
 

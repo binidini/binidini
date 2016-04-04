@@ -139,7 +139,7 @@ class ShippingListener
         $this->geocodeProducer->publish(serialize($msg));
 
         //temporary stub
-        $this->ns->notifyInsidersAboutNewDffShipping($shipping);
+        //$this->ns->notifyInsidersAboutNewDffShipping($shipping);
     }
 
 }

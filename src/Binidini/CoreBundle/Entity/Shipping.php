@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use doctrine\annotations;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\VirtualProperty;
@@ -304,7 +305,6 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
      * @var integer
      *
      * @ORM\Column(name="delivery_code", type="integer", options={"default" = 0})
-     * @Expose
      */
     private $deliveryCode;
 
@@ -1251,5 +1251,44 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
     public function getGuarantee()
     {
         return $this->guarantee;
+    }
+
+    public function getResultWrapper($withSender = false, User $addCurrent = null, $withCode = false, $withCarrier = false)
+    {
+        $result = [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'state' => $this->getState(),
+            'delivery_price' => $this->getDeliveryPrice(),
+            'guarantee' => $this->getGuarantee(),
+            'insurance' => $this->getInsurance(),
+            'payment_guarantee' => $this->getPaymentGuarantee(),
+            'comment' => $this->getDescription(),
+            'img' => $this->getImgPath(),
+            'pickup_address' => $this->getPickupAddress(),
+            'delivery_datetime' => $this->getDeliveryDatetime()->format(\DateTime::ISO8601),
+            'delivery_address' => $this->getDeliveryAddress(),
+        ];
+        if ($this->getPickupDatetime()) {
+            $result['pickup_datetime'] = $this->getPickupDatetime();
+        }
+        if ($withSender) {
+            $result['sender'] = $this->getUser()->getResultWrapper();
+        }
+        if ($addCurrent) {
+            $result['current_user'] = $addCurrent->getResultWrapper();
+        }
+        if ($withCode) {
+            if ($this->getDeliveryCode()) {
+                $result['code'] = $this->getDeliveryCode();
+            }
+        }
+        if ($withCarrier) {
+            if ($this->getCarrier()) {
+                $result['carrier'] = $this->getCarrier()->getResultWrapper();
+            }
+        }
+        return $result;
+
     }
 }

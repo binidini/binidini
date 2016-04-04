@@ -39,7 +39,7 @@ sylius_resource:
             classes:
                 model: Binidini\CoreBundle\Entity\Review
                 controller: Binidini\CoreBundle\Controller\ReviewController
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+                repository: Binidini\CoreBundle\Entity\ReviewRepository
         binidini_core.payment:
             driver: doctrine/orm
             classes:

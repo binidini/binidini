@@ -21,3 +21,9 @@ binidini_api2_user_update:
     methods: [POST]
     defaults:
         _controller: BinidiniApiBundle:Profile:editUser
+
+binidini_api2_user_review:
+    path: /{user_id}/reviews/
+    methods: [GET]
+    defaults:
+        _controller: BinidiniApiBundle:Profile:getReviews

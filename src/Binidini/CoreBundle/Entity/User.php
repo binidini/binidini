@@ -2205,4 +2205,21 @@ class User extends BaseUser
     {
         return $this->districts;
     }
+
+    public function getResultWrapper()
+    {
+        return [
+            'user_id' => $this->getId(),
+            'firstname' => $this->getFirstName(),
+            'lastname' => $this->getLastName(),
+            'patronymic' => $this->getPatronymic(),
+            'companyName' => $this->getCompanyName(),
+            'email' => $this->getEmail(),
+            'phone' => $this->getUsername(),
+            'about_me' => $this->getAboutMe(),
+            'img_path' => $this->getImgPath(),
+            'rate' => "{$this->getCarrierRating()}",
+            'rate_sender' => "{$this->getSenderRating()}",
+        ];
+    }
 }

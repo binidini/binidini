@@ -1,0 +1,62 @@
+{% extends 'BinidiniWebBundle::layout_api.html.twig' %}
+
+{% block title %}
+    Контакты
+{% endblock %}
+{% block content %}
+<section id="contact" class="features gray-section">
+    <div class="container">
+        <div class="row m-b-lg">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Контакты</h1>
+
+                <h2>Свяжитесь с Титимити удобным для Вас способом.</h2>
+            </div>
+        </div>
+        <div class="row m-b-lg">
+            <div class="col-lg-3 col-lg-offset-3">
+                <address>
+                    <strong><span class="navy">ООО "Рудив"</span></strong><br/>
+                    ОГРН: 1157847148326,<br/> ИНН: 7810349272<br/>
+                    Россия, Санкт-Петербург,<br/>
+                    ул. Благодатная, дом 69, корпус 1,<br/>
+                    литер А, помещение 2/3 <br/>
+                    <abbr title="Телефон">Тел:</abbr> +7 (921) 093-43-34 <br/>
+                    <abbr title="Электронный адрес">Email:</abbr> contacts<b>@</b>tytymyty.ru
+                </address>
+            </div>
+            <div class="col-lg-4">
+                <p class="text-color">
+                    Мы ищем партнеров во всех регионах России, а также по всему миру. Мы будем рады обсудить любые
+                    варианты сотрудничества с потенциальными партнерами. Мы верим в открытость и искренность и уверены,
+                    что это ключи к успеху.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+
+                <p class="m-t-sm">
+                    Мы в социальных сетях
+                </p>
+                <ul class="list-inline social-icon">
+                    <li><a href="https://twitter.com/_tytymyty"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/tytymyty.ru"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://instagram.com/tytymyty.ru/"><i class="fa fa-instagram"></i> </a> </li>
+                    <li><a href="https://vk.com/tytymyty"><i class="fa fa-vk"></i></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
+                <p><strong>&copy; {{ "now"|date("Y") }} Титимити</strong><br/> Титимити 24/7 доставка и отправка чего-либо куда-либо</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

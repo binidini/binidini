@@ -46,7 +46,7 @@ binidini_api_my_shipping_available_index:
     defaults:
         _controller: binidini_core.controller.shipping:indexAction
         _sylius:
-            paginate: $paginate
+            paginate: 500
             sortable: true
             sorting:
                 id: desc
@@ -61,7 +61,7 @@ binidini_api_my_shipping_active_index:
     defaults:
         _controller: binidini_core.controller.shipping:indexAction
         _sylius:
-            paginate: $paginate
+            paginate: 500
             sortable: true
             sorting:
                 id: desc
@@ -76,7 +76,7 @@ binidini_api_my_shipping_active_index_new:
     defaults:
         _controller: binidini_core.controller.shipping:indexAction
         _sylius:
-            paginate: $paginate
+            paginate: 500
             sortable: true
             sorting:
                 id: desc
@@ -92,7 +92,7 @@ binidini_api_my_shipping_conflict_index:
     defaults:
         _controller: binidini_core.controller.shipping:indexAction
         _sylius:
-            paginate: $paginate
+            paginate: 500
             sortable: true
             sorting:
                 id: desc
@@ -107,7 +107,7 @@ binidini_api_my_shipping_completed_index:
     defaults:
         _controller: binidini_core.controller.shipping:indexAction
         _sylius:
-            paginate: $paginate
+            paginate: 500
             sortable: true
             sorting:
                 id: desc

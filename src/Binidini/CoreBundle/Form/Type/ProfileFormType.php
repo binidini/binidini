@@ -31,7 +31,8 @@ class ProfileFormType extends \FOS\UserBundle\Form\Type\ProfileFormType
         if ($this->routeName == "binidini_api_user_update" || $this->routeName == "binidini_api2_user_update") {
             $builder
                 ->add('imgBase64', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true])
-                ->add('fileName', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true]);
+                ->add('fileName', 'textarea', ['required' => false, 'data_class' => null, 'mapped' => true])
+                ->add('companyName');
         } else {
             $builder
                 ->add('email', 'email', ['required' => false])

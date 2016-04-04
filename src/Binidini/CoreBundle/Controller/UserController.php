@@ -181,16 +181,7 @@ class UserController extends Controller
                 return new JsonResponse("Bad request", 400);
             }
         }
-        $result = [
-            'user_id' => $user->getId(),
-            'firstname' => $user->getFirstName(),
-            'lastname' => $user->getLastName(),
-            'patronymic' => $user->getPatronymic(),
-            'email' => $user->getEmail(),
-            'phone' => $user->getUsername(),
-            'about_me' => $user->getAboutMe(),
-            'img_path' => $user->getImgPath()
-        ];
+        $result = $user->getResultWrapper();
         return new JsonResponse($result);
     }
 

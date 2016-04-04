@@ -83,12 +83,7 @@ class MessageController extends ResourceController
             foreach ($bids as $bid) {
                 $result[] = array(
                     'id' => $bid->getId(),
-                    'user' => [
-                        'user_id' => $bid->getUser()->getId(),
-                        'firstname' => $bid->getUser()->getFirstName(),
-                        'lastname' => $bid->getUser()->getLastName(),
-                        'img_path' => $bid->getUser()->getImgPath(),
-                    ],
+                    'user' => $bid->getUser()->getResultWrapper(),
                     'created_at' => $bid->getCreatedAt()->format(\DateTime::ISO8601),
                     'comment' => $bid->getText(),
                 );

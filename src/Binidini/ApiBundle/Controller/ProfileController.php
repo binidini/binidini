@@ -2,6 +2,8 @@
 
 namespace Binidini\ApiBundle\Controller;
 
+use Binidini\CoreBundle\Entity\Review;
+use Binidini\CoreBundle\Entity\ReviewRepository;
 use FOS\RestBundle\View\View;
 use FOS\UserBundle\Form\Type\ProfileFormType;
 use FOS\UserBundle\FOSUserEvents;
@@ -120,6 +122,37 @@ class ProfileController extends Controller
             $view = View::create($form, 405);
         }
         return $this->get('fos_rest.view_handler')->handle($view);
+    }
+
+    public function getReviewsAction(Request $request)
+    {
+        if (!$this->getUser()) {
+            return new JsonResponse("Forbidden", 403);
+        }
+        $userId = $request->get('user_id', 0);
+        if ($userId <= 0) {
+            return new JsonResponse("Bad request", 400);
+        }
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * @var ReviewRepository $repository
+         */
+        $repository = $em->getRepository(get_class(new Review()));
+        /**
+         * @var Review[] $reviews
+         */
+        $reviews = $repository->findBy(["userTo" => $userId]);
+        $result = [];
+        foreach ($reviews as $review) {
+            $result[] = array(
+                'id' => $review->getId(),
+                'comment' => $review->getText(),
+                'created_at' => $review->getCreatedAt()->format(\DateTime::ISO8601),
+                'user_from' => $review->getUser()->getResultWrapper(),
+                'rate' => $review->getRating()
+            );
+        }
+        return new JsonResponse($result);
     }
 
     #endregion

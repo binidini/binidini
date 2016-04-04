@@ -2,10 +2,11 @@
 
 namespace Binidini\CoreBundle\Controller;
 
+use Binidini\CoreBundle\Entity\Bid;
+use Binidini\CoreBundle\Entity\BidRepository;
 use Binidini\CoreBundle\Entity\Payment;
 use Binidini\CoreBundle\Entity\Shipping;
 use Binidini\CoreBundle\Entity\ShippingRepository;
-use Binidini\CoreBundle\Exception\AppException;
 use Binidini\CoreBundle\Exception\IncorrectDeliveryCode;
 use Binidini\CoreBundle\Exception\TransitionCannotBeApplied;
 use Binidini\CoreBundle\Form\Type\BidType;
@@ -14,7 +15,6 @@ use Binidini\CoreBundle\Form\Type\ReviewType;
 use FOS\UserBundle\Doctrine\UserManager;
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
 use Pagerfanta\Pagerfanta;
-use SM\SMException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class ShippingController extends ResourceController
         /** @var $shipping Shipping */
         $shipping = $this->findOr404($request);
 
-        if ($shipping->getDeliveryCode() > 0) {
+        if ($shipping->getCarrier() == $this->getUser()) {
 
             $shipping->setDeliveryCode($shipping->getDeliveryCode() + 1);
             $em = $this->getDoctrine()->getManager();
@@ -349,72 +349,58 @@ class ShippingController extends ResourceController
         if (!$shippingResult) {
             return new JsonResponse("Not found", 404);
         }
-        $result = array(
-            'id' => $shippingResult->getId(),
-            'name' => $shippingResult->getName(),
-            'state' => $shippingResult->getState(),
-            'delivery_price' => $shippingResult->getDeliveryPrice(),
-            'guarantee' => $shippingResult->getGuarantee(),
-            'insurance' => $shippingResult->getInsurance(),
-            'payment_guarantee' => $shippingResult->getPaymentGuarantee(),
-            'comment'=> $shippingResult->getDescription(),
-            'img' => $shippingResult->getImgPath(),
-            'pickup_address' => $shippingResult->getPickupAddress(),
-            'delivery_datetime' => $shippingResult->getDeliveryDatetime()->format(\DateTime::ISO8601),
-            'delivery_address' => $shippingResult->getDeliveryAddress(),
-        );
-        if ($shippingResult->getPickupDatetime()) {
-            $result['pickup_datetime'] = $shippingResult->getPickupDatetime();
-        }
         if ($user) {
-            if ($shippingResult->getUser() == $user) {
-
-            } else if ($shippingResult->getCarrier() == $user) {
+            if ($shippingResult->getUser()->getId() == $user->getId()) {
+                $result = $shippingResult->getResultWrapper(true, $user, true, true);
+                $result['is_mine_shipping'] = 1;
+                if ($shippingResult->getCarrier()) {
+                    $em = $this->getDoctrine()->getManager();
+                    $repository = $em->getRepository(get_class(new Bid()));
+                    /**
+                     * @var Bid[] $bids
+                     */
+                    $bids = $repository->findBy(["shipping" => $shippingResult->getId()]);
+                    foreach ($bids as $bid) {
+                        if ($bid->isAgreed()) {
+                            $result['carrier_price'] = $bid->getPrice();
+                            break;
+                        }
+                    }
+                }
 
             } else {
+                if ($shippingResult->getCarrier()) {
+                    if ($shippingResult->getCarrier()->getId() == $user->getId()) {
+                        $result = $shippingResult->getResultWrapper(true, $user, true, true);
+                        $result['is_mine_shipping'] = 0;
+                        if ($shippingResult->getCarrier()) {
+                            $em = $this->getDoctrine()->getManager();
+                            $repository = $em->getRepository(get_class(new Bid()));
+                            /**
+                             * @var Bid[] $bids
+                             */
+                            $bids = $repository->findBy(["shipping" => $shippingResult->getId()]);
 
+                            foreach ($bids as $bid) {
+                                if ($bid->isAgreed()) {
+                                    $result['carrier_price'] = $bid->getPrice();
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        $result = $shippingResult->getResultWrapper(true, $user);
+                        $result['is_mine_shipping'] = 0;
+                    }
+                } else {
+                    $result = $shippingResult->getResultWrapper(true, $user);
+                    $result['is_mine_shipping'] = 0;
+                }
             }
-            $result += array(
-                'sender' => [
-                    'user_id' => $shippingResult->getUser()->getId(),
-                    'firstname' => $shippingResult->getUser()->getFirstName(),
-                    'lastname' => $shippingResult->getUser()->getLastName(),
-                    'patronymic' => $shippingResult->getUser()->getPatronymic(),
-                    'phone' => $shippingResult->getUser()->getUsername(),
-                ],
-                'current_user'=> [
-                    'user_id' => $user->getId(),
-                    'firstname' =>$user->getFirstName(),
-                    'lastname' => $user->getLastName(),
-                    'patronymic' => $user->getPatronymic(),
-                    'phone' => $user->getUsername(),
-                ],
-                'is_mine_shipping' => $shippingResult->getUser()->getId() ==  $user->getId(),
-            );
-
+        } else {
+            $result =  $shippingResult->getResultWrapper(true);
         }
-        $result += array(
-            'carrier' => [
-                'user_id' => $shippingResult->getUser()->getId(),
-                'firstname' => $shippingResult->getUser()->getFirstName(),
-                'lastname' => $shippingResult->getUser()->getLastName(),
-                'patronymic' => $shippingResult->getUser()->getPatronymic(),
-                'phone' => $shippingResult->getUser()->getUsername(),
-            ],
-            'carrier_price'=>100,
-            'carrier_comment'=>"Хелпа",
-            'code' => 100,
-        );
         return new JsonResponse($result);
-    }
-
-    public function updateStateAction(Request $request, $transition, $graph = null) {
-        try {
-            return parent::updateStateAction($request, $transition, $graph);
-        } catch (NotFoundHttpException $e) {
-            throw new AppException("Данная операция не может быть выполнена.");
-        }
-
     }
 
     #endregion

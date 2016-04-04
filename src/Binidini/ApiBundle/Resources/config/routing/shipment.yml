@@ -4,7 +4,7 @@ binidini_api_shipment_index:
     defaults:
         _controller: binidini_search.controller.shipment:indexAction
         _sylius:
-            paginate: 100
+            paginate: 500
             sortable: true
             sorting:
                 id: desc
@@ -15,3 +15,5 @@ binidini_api_search_shipment_search:
     methods: [GET]
     defaults:
         _controller: binidini_search.controller.shipment:searchAction
+       _sylius:
+           paginate: 500

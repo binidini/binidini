@@ -4,7 +4,7 @@ binidini_api_shipment_index:
     defaults:
         _controller: binidini_search.controller.shipment:indexAction
         _sylius:
-            paginate: $limit
+            paginate: 100
             sortable: true
             sorting:
                 id: desc

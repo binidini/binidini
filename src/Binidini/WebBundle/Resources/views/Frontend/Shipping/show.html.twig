@@ -195,11 +195,11 @@
                             </div>
                             <div class="col-lg-2">
                                 {% if is_mobile() %}
-                                <a href="{{ '/media/img/' ~ shipping.imgPath }}" id="single_image" title="Доставка {{ shipping.name | lower }}">
                                     <img  alt="Доставка {{ shipping.name | lower }}" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
-                                </a>
                                 {% else %}
-                                    <img  alt="Доставка {{ shipping.name | lower }}" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
+                                    <a href="{{ '/media/img/' ~ shipping.imgPath }}" id="single_image" title="Доставка {{ shipping.name | lower }}">
+                                        <img  alt="Доставка {{ shipping.name | lower }}" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
+                                    </a>
                                 {% endif %}
                             </div>
                             <div class="col-lg-5" id="cluster_info">

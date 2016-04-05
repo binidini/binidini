@@ -34,7 +34,8 @@
         "leaseweb/memcache-bundle": "~1.2",
         "friendsofsymfony/oauth-server-bundle": "dev-master",
         "willdurand/hateoas-bundle": "0.5.*",
-        "suncat/mobile-detect-bundle": "^0.10.1"
+        "suncat/mobile-detect-bundle": "^0.10.1",
+        "apple/apn-push": "^2.2"
     },
     "scripts": {
         "post-install-cmd": [

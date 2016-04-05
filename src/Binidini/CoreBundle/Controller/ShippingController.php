@@ -2,6 +2,9 @@
 
 namespace Binidini\CoreBundle\Controller;
 
+use Apple\ApnPush\Notification\Message;
+use Apple\ApnPush\Queue\Adapter\ArrayAdapter;
+use Apple\ApnPush\Queue\Queue;
 use Binidini\CoreBundle\Entity\Bid;
 use Binidini\CoreBundle\Entity\BidRepository;
 use Binidini\CoreBundle\Entity\Payment;
@@ -21,6 +24,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Apple\ApnPush\Certificate\Certificate;
+use Apple\ApnPush\Notification;
+use Apple\ApnPush\Notification\Connection;
 
 class ShippingController extends ResourceController
 {
@@ -361,7 +367,7 @@ class ShippingController extends ResourceController
                      */
                     $bids = $repository->findBy(["shipping" => $shippingResult->getId()]);
                     foreach ($bids as $bid) {
-                        if ($bid->isAgreed()) {
+                        if ($bid->isAccepted()) {
                             $result['carrier_price'] = $bid->getPrice();
                             break;
                         }

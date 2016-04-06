@@ -194,9 +194,9 @@
                                 </dl>
                             </div>
                             <div class="col-lg-2">
-                                <a href="{{ '/media/img/' ~ shipping.imgPath }}" id="single_image" title="Доставка {{ shipping.name | lower }}" title="Доставка {{ shipping.name | lower }}">
-                                    <img  alt="Доставка {{ shipping.name | lower }}" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
-                                </a>
+                                    <a href="{{ '/media/img/' ~ shipping.imgPath }}"  id="single_image" title="Доставка {{ shipping.name | lower }}">
+                                        <img  alt="Доставка {{ shipping.name | lower }}" class="img-thumbnail" src="{{ shipping.imgPath | imagine_filter('photo150x150') }}"/>
+                                    </a>
                             </div>
                             <div class="col-lg-5" id="cluster_info">
 
@@ -303,10 +303,14 @@
 
 {% endblock %}
 
+{% block stylesheets %}
+    {{  parent() }}
+    <link href="{{ asset('bundles/binidiniweb/js/plugins/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/binidiniweb/js/plugins/fancybox/jquery.fancybox.js') }}"></script>
-
 
     {% if shipping.canHasReview() %}
         <script src="{{ asset('bundles/binidiniweb/js/plugins/raty/jquery.raty.js') }}"></script>

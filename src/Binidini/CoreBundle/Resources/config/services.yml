@@ -105,6 +105,7 @@ services:
         arguments:
             - @logger
             - %gcm_api_key%
+            - %aps_pass_key%
         tags:
               - { name: monolog.logger, channel: gcm }
 

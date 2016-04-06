@@ -2,6 +2,9 @@
 
 namespace Binidini\CoreBundle\Controller;
 
+use Apple\ApnPush\Notification\Message;
+use Apple\ApnPush\Queue\Adapter\ArrayAdapter;
+use Apple\ApnPush\Queue\Queue;
 use Binidini\CoreBundle\Entity\Bid;
 use Binidini\CoreBundle\Entity\BidRepository;
 use Binidini\CoreBundle\Entity\Payment;
@@ -21,6 +24,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Apple\ApnPush\Certificate\Certificate;
+use Apple\ApnPush\Notification;
+use Apple\ApnPush\Notification\Connection;
 
 class ShippingController extends ResourceController
 {
@@ -349,10 +355,15 @@ class ShippingController extends ResourceController
         if (!$shippingResult) {
             return new JsonResponse("Not found", 404);
         }
+
         if ($user) {
             if ($shippingResult->getUser()->getId() == $user->getId()) {
                 $result = $shippingResult->getResultWrapper(true, $user, true, true);
                 $result['is_mine_shipping'] = 1;
+                if ($shippingResult->getDeliveryCode()) {
+                    $dcprime = $this->container->getParameter('delivery_code_prime');
+                    $result['code'] = 10000 + $shippingResult->getId() * $dcprime % 10000;
+                }
                 if ($shippingResult->getCarrier()) {
                     $em = $this->getDoctrine()->getManager();
                     $repository = $em->getRepository(get_class(new Bid()));
@@ -372,6 +383,10 @@ class ShippingController extends ResourceController
                 if ($shippingResult->getCarrier()) {
                     if ($shippingResult->getCarrier()->getId() == $user->getId()) {
                         $result = $shippingResult->getResultWrapper(true, $user, true, true);
+                        if ($shippingResult->getDeliveryCode()) {
+                            $dcprime = $this->container->getParameter('delivery_code_prime');
+                            $result['code'] = 10000 + $shippingResult->getId() * $dcprime % 10000;
+                        }
                         $result['is_mine_shipping'] = 0;
                         if ($shippingResult->getCarrier()) {
                             $em = $this->getDoctrine()->getManager();

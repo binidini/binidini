@@ -4,9 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "20d9a00ebbc594a1996a79392bee2d7a",
-    "content-hash": "5fb0299ef36fdb8053885e28bbbbd8b1",
+    "hash": "7f3539688cff0e7d99909d549e075884",
     "packages": [
+        {
+            "name": "apple/apn-push",
+            "version": "v2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ZhukV/AppleApnPush.git",
+                "reference": "d03a4d44e058fc7b308f5a317df78ae7e199f9a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ZhukV/AppleApnPush/zipball/d03a4d44e058fc7b308f5a317df78ae7e199f9a9",
+                "reference": "d03a4d44e058fc7b308f5a317df78ae7e199f9a9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "monolog/monolog": "Use logger system",
+                "symfony/console": "Send push notifications from console",
+                "symfony/event-dispatcher": "Use events in apple apn push"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Apple\\ApnPush\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vitaliy Zhuk",
+                    "email": "zhuk2205@gmail.com"
+                }
+            ],
+            "description": "Push notifications to Apple devices",
+            "homepage": "https://github.com/ZhukV/AppleApnPush",
+            "keywords": [
+                "apn",
+                "apple",
+                "notifications",
+                "push"
+            ],
+            "time": "2015-11-11 11:38:38"
+        },
         {
             "name": "behat/transliterator",
             "version": "v1.0.1",
@@ -793,7 +840,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/870791a258080ed1bdaa3094c40166afe28d3444",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/5f9429e5e6dd31d0f36c8951daa184112a39e195",
                 "reference": "70c580174e4e16a79296a02256fb40a34192731c",
                 "shasum": ""
             },
@@ -922,7 +969,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/256863346b93ec7aed4bb1da473f09217ec0661e",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/c1e9777d1e083d819a354553522903b3b83a6f39",
                 "reference": "b1089b723df8ae2230694a3899941e05d560c41f",
                 "shasum": ""
             },
@@ -1148,7 +1195,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/0c72d8baf707dce59c59a4daa1549c06e510bbed",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/59229c28c05326f0d0892e45bc0553768915bbb1",
                 "reference": "0c72d8baf707dce59c59a4daa1549c06e510bbed",
                 "shasum": ""
             },
@@ -1354,7 +1401,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/e5e7a2b8984da8dfedaf44adc7e5f60a62ad280c",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/16b04c49af05dd3fb381e4abe04f0e5e231ac76d",
                 "reference": "e5e7a2b8984da8dfedaf44adc7e5f60a62ad280c",
                 "shasum": ""
             },
@@ -2839,7 +2886,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/6672ca37fe19a8e2a8ae52a93a7163e1b00ef7d5",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/4e7499d25dc5d0862da09fa8e336164948a29a25",
                 "reference": "2ff8473e33e224af87dc00d48a552a35a75115af",
                 "shasum": ""
             },
@@ -4082,12 +4129,12 @@
             "version": "v2.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/videlalvaro/php-amqplib.git",
+                "url": "https://github.com/php-amqplib/php-amqplib.git",
                 "reference": "3eb257444961f1ca7e6415c6e6f3c3e7a8e1d3fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/3eb257444961f1ca7e6415c6e6f3c3e7a8e1d3fa",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/3eb257444961f1ca7e6415c6e6f3c3e7a8e1d3fa",
                 "reference": "3eb257444961f1ca7e6415c6e6f3c3e7a8e1d3fa",
                 "shasum": ""
             },

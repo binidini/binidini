@@ -1269,6 +1269,11 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
             'pickup_address' => $this->getPickupAddress(),
             'delivery_datetime' => $this->getDeliveryDatetime()->format(\DateTime::ISO8601),
             'delivery_address' => $this->getDeliveryAddress(),
+            'pickup_coordinate_lat'=>$this->getPickupLatitude(),
+            'pickup_coordinate_lon'=>$this->getPickupLongitude(),
+            'delivery_coordinate_lat'=>$this->getDeliveryLatitude(),
+            'delivery_coordinate_lon'=>$this->getDeliveryLongitude(),
+
         ];
         if ($this->getPickupDatetime()) {
             $result['pickup_datetime'] = $this->getPickupDatetime();
@@ -1279,11 +1284,7 @@ class Shipping implements UserAwareInterface, SenderCarrierAwareInterface
         if ($addCurrent) {
             $result['current_user'] = $addCurrent->getResultWrapper();
         }
-        if ($withCode) {
-            if ($this->getDeliveryCode()) {
-                $result['code'] = $this->getDeliveryCode();
-            }
-        }
+
         if ($withCarrier) {
             if ($this->getCarrier()) {
                 $result['carrier'] = $this->getCarrier()->getResultWrapper();

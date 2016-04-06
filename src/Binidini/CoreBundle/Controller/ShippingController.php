@@ -355,10 +355,15 @@ class ShippingController extends ResourceController
         if (!$shippingResult) {
             return new JsonResponse("Not found", 404);
         }
+
         if ($user) {
             if ($shippingResult->getUser()->getId() == $user->getId()) {
                 $result = $shippingResult->getResultWrapper(true, $user, true, true);
                 $result['is_mine_shipping'] = 1;
+                if ($shippingResult->getDeliveryCode()) {
+                    $dcprime = $this->container->getParameter('delivery_code_prime');
+                    $result['code'] = 10000 + $shippingResult->getId() * $dcprime % 10000;
+                }
                 if ($shippingResult->getCarrier()) {
                     $em = $this->getDoctrine()->getManager();
                     $repository = $em->getRepository(get_class(new Bid()));
@@ -367,7 +372,7 @@ class ShippingController extends ResourceController
                      */
                     $bids = $repository->findBy(["shipping" => $shippingResult->getId()]);
                     foreach ($bids as $bid) {
-                        if ($bid->isAccepted()) {
+                        if ($bid->isAgreed()) {
                             $result['carrier_price'] = $bid->getPrice();
                             break;
                         }
@@ -378,6 +383,10 @@ class ShippingController extends ResourceController
                 if ($shippingResult->getCarrier()) {
                     if ($shippingResult->getCarrier()->getId() == $user->getId()) {
                         $result = $shippingResult->getResultWrapper(true, $user, true, true);
+                        if ($shippingResult->getDeliveryCode()) {
+                            $dcprime = $this->container->getParameter('delivery_code_prime');
+                            $result['code'] = 10000 + $shippingResult->getId() * $dcprime % 10000;
+                        }
                         $result['is_mine_shipping'] = 0;
                         if ($shippingResult->getCarrier()) {
                             $em = $this->getDoctrine()->getManager();

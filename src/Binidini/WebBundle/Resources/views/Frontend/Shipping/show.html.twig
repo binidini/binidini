@@ -50,7 +50,7 @@
 
                         <div class="modal inmodal" id="deliveryCode" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                             <div class="modal-dialog">
-                                <form action="{{ path('binidini_core_shipping_deliver_transition', {'id': shipping.id}) }}" method="GET" class="form-horizontal" id="promocode">
+                                <form action="{{ path('binidini_core_shipping_deliver_transition', {'id': shipping.id}) }}" method="GET" class="form-horizontal" id="deliverycode">
                                     <div class="modal-content animated flipInY">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">
@@ -90,7 +90,7 @@
                         </div>
 
                     {% else %}
-                        <a href="{{ path('binidini_core_shipping_state_transition', {'id': shipping.id, 'transition': 'deliver'}) }}"
+                        <a href="{{ path('binidini_core_shipping_deliver_transition', {'id': shipping.id}) }}"
                            class="btn btn-primary p-xxs">Доставлен</a>
                     {% endif %}
             {% endif %}

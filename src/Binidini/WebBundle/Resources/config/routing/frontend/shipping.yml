@@ -93,6 +93,8 @@ binidini_core_shipping_state_transition:
     methods: [GET]
     defaults:
         _controller: binidini_core.controller.shipping:updateStateAction
+    requirements:
+        transition:  pay|complete|refuse|cancel|annul|dispute|debate
 
 binidini_core_shipping_deliver_transition:
     path: /shipping/{id}/deliver/

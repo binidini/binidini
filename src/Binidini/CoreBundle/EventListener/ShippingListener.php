@@ -57,13 +57,6 @@ class ShippingListener
             $shipping->setGuarantee(0);
         }
 
-        if (is_null($shipping->getCategory())) {
-            $shipping->setCategory(0);
-        }
-
-        if (is_null($shipping->getDeliveryCode())) {
-            $shipping->setDeliveryCode(0);
-        }
     }
 
     /**
@@ -77,13 +70,11 @@ class ShippingListener
          */
         $shipping = $event->getSubject();
 
-        if (!empty($shipping->imgBase64)) {
-
+        if ($shipping->imgBase64) {
             try {
                 $file = tmpfile();
                 if ($file === false)
                     throw new \Exception('File can not be opened.');
-
                 $filename = 'tytymyty_' . $shipping->getId() .uniqid().".jpg";
                 $content = base64_decode($shipping->imgBase64);
 
@@ -96,9 +87,7 @@ class ShippingListener
             } catch(\Exception $ex){
                 $this->logger->critical('Не удалось загрузить файл.' . $ex->getMessage() . '.' . $ex->getTraceAsString());
             }
-        }
-
-        if (!empty($shipping->imgFile)) {
+        } else if ($shipping->imgFile) {
             try {
                 $filename = 'tytymyty_' . $shipping->getId() . '.' . $shipping->imgFile->guessExtension();
                 $shipping->imgFile->move(
@@ -110,7 +99,9 @@ class ShippingListener
             } catch (\Exception $ex) {
                 $this->logger->critical('Не удалось загрузить файл.' . $ex->getMessage() . '.' . $ex->getTraceAsString());
             }
-
+        } else {
+            $shipping->setImgPath('parcels/pics/tytymyty_' . rand(1, 18) . '.jpg');
+            $this->em->flush($shipping);
         }
 
         $shipment = new Shipment();
@@ -139,7 +130,7 @@ class ShippingListener
         $this->geocodeProducer->publish(serialize($msg));
 
         //temporary stub
-        //$this->ns->notifyInsidersAboutNewDffShipping($shipping);
+        $this->ns->notifyInsidersAboutNewDffShipping($shipping);
     }
 
 }

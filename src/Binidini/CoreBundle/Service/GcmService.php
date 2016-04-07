@@ -96,13 +96,21 @@ class GcmService
             $notification = new Notification($connection);
             $adapter = new ArrayAdapter();
             $queue = new Queue($adapter, $notification);
+            $msg = str_replace("\n", " ", $data['message']);
             foreach ($ios_ids as $id) {
+                if (strlen($id) > 64) {
+                    continue;
+                }
                 $message = new Message();
-                $message->setBody($data['message']);
+                $message->setBody($msg);
                 $message->setContentAvailable(true);
                 $message->setSound("default");
                 $message->setDeviceToken($id);
-                $message->addCustomData(["shippingId" => $data['shippingId'], 'event' => $data['event']]);
+                $customData = ['event' => $data['event']];
+                if (isset($data['shippingId']) && $data['shippingId']) {
+                    $customData['shippingId'] = $data['shippingId'];
+                }
+                $message->addCustomData([$customData]);
                 $queue->addMessage($message);
             }
             $queue->runReceiver();

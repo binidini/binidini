@@ -37,7 +37,7 @@ class ShippingController extends ResourceController
         /** @var $shipping Shipping */
         $shipping = $this->findOr404($request);
 
-        if ($shipping->getCarrier() == $this->getUser()) {
+        if ($shipping->getCarrier() == $this->getUser() && $shipping->getDeliveryCode() > 0) {
 
             $shipping->setDeliveryCode($shipping->getDeliveryCode() + 1);
             $em = $this->getDoctrine()->getManager();

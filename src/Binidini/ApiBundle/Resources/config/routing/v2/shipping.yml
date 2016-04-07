@@ -22,7 +22,7 @@ binidini_api2_shipping_state_transition:
     defaults:
         _controller: binidini_core.controller.shipping:updateStateAction
     requirements:
-        transition:  create|accept|pay|complete|reject|refuse|cancel|nullify|annul|dispute|debate|resolve|deliver
+        transition:  pay|complete|refuse|cancel|annul|dispute|debate
 
 
 binidini_api2_shipping_deliver_transition:

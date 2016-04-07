@@ -90,7 +90,7 @@ class GcmService
         }
 
         if (count($ios_ids) > 0) {
-            $certificate = new Certificate('../app/config/aps.pem', $this->apnsKey);
+            $certificate = new Certificate(__DIR__.'/../../../../app/config/aps.pem', $this->apnsKey);
             // Second argument - sandbox mode
             $connection = new Connection($certificate, false);
             $notification = new Notification($connection);
@@ -106,9 +106,6 @@ class GcmService
                 $queue->addMessage($message);
             }
             $queue->runReceiver();
-            $this->logger->info(
-                'ids: ' . implode(",", $ios_ids) . ', data: ' . json_encode($data) . ', result: ' . $result
-            );
         }
 
     }

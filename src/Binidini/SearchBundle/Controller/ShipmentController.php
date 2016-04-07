@@ -156,7 +156,7 @@ class ShipmentController extends ResourceController
         }
         $shipments = $repository->findByLocation($longitude, $latitude);
         $shipments->setCurrentPage($request->get('page', 1));
-        $shipments->setMaxPerPage(10);
+        $shipments->setMaxPerPage(500);
         $result = array();
         /** @var $shipment Shipment */
         foreach ($shipments->getIterator() as $shipment) {

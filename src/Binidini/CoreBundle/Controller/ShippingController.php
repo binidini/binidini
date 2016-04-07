@@ -310,7 +310,7 @@ class ShippingController extends ResourceController
         } else {
             return new JsonResponse("Bad request", 400);
         }
-        $shippingResult->setMaxPerPage(10);
+        $shippingResult->setMaxPerPage(500);
         $shippingResult->setCurrentPage($request->get('page', 1));
         $result = [];
         foreach ($shippingResult->getIterator() as $iterate) {

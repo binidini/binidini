@@ -57,6 +57,13 @@ class ShippingListener
             $shipping->setGuarantee(0);
         }
 
+        if (is_null($shipping->getCategory())) {
+            $shipping->setCategory(0);
+        }
+
+        if (is_null($shipping->getDeliveryCode())) {
+            $shipping->setDeliveryCode(0);
+        }
     }
 
     /**

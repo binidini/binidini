@@ -104,13 +104,7 @@ class BidController extends ResourceController
             foreach ($bids as $bid) {
                 $result[] = array(
                     'id' => $bid->getId(),
-                    'user' => [
-                        'user_id' => $bid->getUser()->getId(),
-                        'firstname' => $bid->getUser()->getFirstName(),
-                        'lastname' => $bid->getUser()->getLastName(),
-                        'patronymic' => $bid->getUser()->getPatronymic(),
-                        'img_path' => $bid->getUser()->getImgPath(),
-                    ],
+                    'user' => $bid->getUser()->getResultWrapper(),
                     'created_at' => $bid->getCreatedAt()->format(\DateTime::ISO8601),
                     'price' => $bid->getPrice(),
                     'state' => $bid->getState(),

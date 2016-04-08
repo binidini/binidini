@@ -47,10 +47,10 @@ class NotificationService
         $this->em = $em;
 
         //Все
-        $this->insiders = [2, 123792, 124290, 124292, 124343, 124344, 123642, 124468, 124511];
+        $this->insiders = [2 ];
 
         //Люботинский
-        $this->insiders2 =[124513, 124408];
+        $this->insiders2 =[];
     }
 
     public function notifySender(SenderCarrierAwareInterface $resource, $event)

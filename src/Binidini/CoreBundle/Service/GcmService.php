@@ -106,7 +106,10 @@ class GcmService
                 $message->setContentAvailable(true);
                 $message->setSound("default");
                 $message->setDeviceToken($id);
-                $customData = ['event' => $data['event']];
+                $customData = [
+                    'event' => $data['event'],
+                    'msg' => $data['message']
+                ];
                 if (isset($data['shippingId']) && $data['shippingId']) {
                     $customData['shippingId'] = $data['shippingId'];
                 }

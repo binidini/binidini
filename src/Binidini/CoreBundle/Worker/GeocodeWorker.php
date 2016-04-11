@@ -112,6 +112,9 @@ class GeocodeWorker implements ConsumerInterface
         }
 
         //после того как у заказа появились координаты, можно проинформировать курьеров возле заказа
-        //$this->ns->notifyAboutNewShipping($shipping);
+        if (in_array($shipping->getSender()->getId(), [125129, 125128, 125127, 125126, 125125, 125124, 125123, 125121, 125120, 125118, 125117, 125116, 125114, 124096,  124130])) {
+            $this->ns->notifyAboutNewShipping($shipping);
+        }
+
     }
 }

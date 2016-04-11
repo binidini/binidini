@@ -37,7 +37,7 @@ class ShippingController extends ResourceController
         /** @var $shipping Shipping */
         $shipping = $this->findOr404($request);
 
-        if ($shipping->getCarrier() == $this->getUser() && $shipping->getDeliveryCode() > 0) {
+        if ($shipping->getCarrier() == $this->getUser()) {
 
             $shipping->setDeliveryCode($shipping->getDeliveryCode() + 1);
             $em = $this->getDoctrine()->getManager();
@@ -408,6 +408,18 @@ class ShippingController extends ResourceController
                         $result['is_mine_shipping'] = 0;
                     }
                 } else {
+                    $em = $this->getDoctrine()->getManager();
+                    $repository = $em->getRepository(get_class(new Bid()));
+                    /**
+                     * @var Bid[] $bids
+                     */
+                    $bids = $repository->findBy(["shipping" => $shippingResult->getId(), 'user' => $user->getId()]);
+                    foreach ($bids as $bid) {
+                        if ($bid->isAccepted()) {
+                            $result['current_has_accepted'] = 1;
+                            break;
+                        }
+                    }
                     $result = $shippingResult->getResultWrapper(true, $user);
                     $result['is_mine_shipping'] = 0;
                 }

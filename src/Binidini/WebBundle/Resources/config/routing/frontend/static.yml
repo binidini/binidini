@@ -99,3 +99,10 @@ binidini_android_faq:
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/howitworks.html.twig
+
+binidini_android_faq:
+    path: /faq/iphone
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/howitworks.html.twig
+

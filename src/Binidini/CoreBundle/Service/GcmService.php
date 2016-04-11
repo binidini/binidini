@@ -110,8 +110,8 @@ class GcmService
                     'event' => $data['event'],
                     'msg' => $data['message']
                 ];
-                if (isset($data['shippingId']) && $data['shippingId']) {
-                    $customData['shippingId'] = $data['shippingId'];
+                if (isset($data['shipping_id']) && $data['shipping_id']) {
+                    $customData['shippingId'] = $data['shipping_id'];
                 }
                 $message->addCustomData([$customData]);
                 $queue->addMessage($message);

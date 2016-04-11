@@ -47,7 +47,7 @@ class NotificationService
         $this->em = $em;
 
         //Все
-        $this->insiders = [2 ];
+        $this->insiders = [];
 
         //Люботинский
         $this->insiders2 =[];
@@ -78,6 +78,7 @@ class NotificationService
     }
 
     public function notifyAboutNewShipping(Shipping $shipping) {
+
 
         if (is_null($shipping->getPickupLongitude()) or is_null($shipping->getPickupLatitude())) {
             return;

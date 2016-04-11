@@ -79,6 +79,8 @@ class NotificationService
 
     public function notifyAboutNewShipping(Shipping $shipping) {
 
+        return;
+        
         if (is_null($shipping->getPickupLongitude()) or is_null($shipping->getPickupLatitude())) {
             return;
         }

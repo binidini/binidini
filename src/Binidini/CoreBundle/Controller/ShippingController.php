@@ -38,19 +38,18 @@ class ShippingController extends ResourceController
         $shipping = $this->findOr404($request);
 
         if ($shipping->getCarrier() == $this->getUser()) {
+            if ($shipping->getDeliveryCode()) {
+                $shipping->setDeliveryCode($shipping->getDeliveryCode() + 1);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($shipping);
+                $em->flush();
 
-            $shipping->setDeliveryCode($shipping->getDeliveryCode() + 1);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($shipping);
-            $em->flush();
-
-            $deliveryCode = (int)$request->get('delivery_code');
-            if ($deliveryCode != (10000 + $shipping->getId() * $this->container->getParameter('delivery_code_prime') % 10000)) {
-                throw new IncorrectDeliveryCode('Код подтверждения доставки некорректен.');
+                $deliveryCode = (int)$request->get('delivery_code');
+                if ($deliveryCode != (10000 + $shipping->getId() * $this->container->getParameter('delivery_code_prime') % 10000)) {
+                    throw new IncorrectDeliveryCode('Код подтверждения доставки некорректен.');
+                }
             }
-
         }
-
         return $this->updateStateAction($request, 'deliver');
     }
 
@@ -384,8 +383,7 @@ class ShippingController extends ResourceController
                     if ($shippingResult->getCarrier()->getId() == $user->getId()) {
                         $result = $shippingResult->getResultWrapper(true, $user, true, true);
                         if ($shippingResult->getDeliveryCode()) {
-                            $dcprime = $this->container->getParameter('delivery_code_prime');
-                            $result['code'] = 10000 + $shippingResult->getId() * $dcprime % 10000;
+                            $result['code'] = 1;
                         }
                         $result['is_mine_shipping'] = 0;
                         if ($shippingResult->getCarrier()) {

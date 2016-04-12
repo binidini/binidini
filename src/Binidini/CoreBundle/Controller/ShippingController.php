@@ -408,6 +408,7 @@ class ShippingController extends ResourceController
                         $result['is_mine_shipping'] = 0;
                     }
                 } else {
+                    $result = $shippingResult->getResultWrapper(true, $user);
                     $em = $this->getDoctrine()->getManager();
                     $repository = $em->getRepository(get_class(new Bid()));
                     /**
@@ -420,7 +421,6 @@ class ShippingController extends ResourceController
                             break;
                         }
                     }
-                    $result = $shippingResult->getResultWrapper(true, $user);
                     $result['is_mine_shipping'] = 0;
                 }
             }

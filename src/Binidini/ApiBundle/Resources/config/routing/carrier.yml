@@ -41,7 +41,7 @@ binidini_api_carrier_shipping_active_new:
             filterable: true
             criteria:
                 carrier: ['expr:service("security.context").getToken().getUser().getId()']
-                state: ['new', 'accepted', 'delivered', 'paid', 'rejected', 'refused', 'conflict']
+                state: ['accepted', 'delivered', 'paid', 'rejected', 'refused', 'conflict']
 
 binidini_api_carrier_shipping_completed:
     path: /shipping/completed/

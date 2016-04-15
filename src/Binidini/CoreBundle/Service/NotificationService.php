@@ -128,7 +128,7 @@ class NotificationService
     {
         $bitN = constant('Binidini\CoreBundle\Entity\User::BIT_' . strtoupper($event));
 
-        if ($user->getSmsN($bitN)) {
+        if ($user->getSmsN($bitN) && $event !== "create_shipping" && $event !== "message_shipping") {
             $sms = $this->twig->render('BinidiniWebBundle::Template/Sms/' . $event . '.txt.twig', ['resource' => $resource]);
             $msg = ['mobile' => $user->getUsername(), 'sms' => $sms];
             $this->smsRabbitMqProducer->publish(serialize($msg));

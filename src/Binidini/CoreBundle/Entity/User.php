@@ -401,6 +401,8 @@ class User extends BaseUser
         $this->carrierRatingCount = 0;
 
         $this->smsMask =   0b1111111111111111111111111111;
+        $this->setSmsShippingCreateNotification(false);
+        $this->setSmsShippingMessageNotification(false);
         //$this->smsMask =   0;
 
         $this->emailMask = 0b1111111111111111111111111111;

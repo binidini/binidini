@@ -80,7 +80,7 @@ class UserRepository extends EntityRepository
             'lat' => $lat
         ];
 
-        $sql = 'SELECT id FROM user u WHERE u.type !=2 AND (POW(69.1 * (u.latitude - :lat), 2) + POW(69.1 * (:lon - u.longitude) * COS(u.latitude / 57.3), 2)) < 4 ORDER BY u.updated_at DESC';
+        $sql = 'SELECT id FROM user u WHERE u.type !=2 AND (POW(69.1 * (u.latitude - :lat), 2) + POW(69.1 * (:lon - u.longitude) * COS(u.latitude / 57.3), 2)) < 16 ORDER BY u.updated_at DESC';
 
         $em = $this->getEntityManager();
         $stmt = $em->getConnection()->prepare($sql);

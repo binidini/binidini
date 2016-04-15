@@ -87,11 +87,6 @@ class NotificationService
         $uids = $this->em->getRepository('BinidiniCoreBundle:User')->findByCoordinates($shipping->getPickupLongitude(), $shipping->getPickupLatitude());
         foreach ($uids as $uid) {
 
-            //инсайдерам не надо
-            if (array_search($uid['id'], $this->insiders) === FALSE) {
-                break;
-            }
-
             $user = $this->em->getRepository('BinidiniCoreBundle:User')->find($uid['id']);
             if ($shipping->getSender()->getId() != $uid['id'] && $user->isCarrier()) {
                 $this->notify($user, 'create_shipping', $shipping);

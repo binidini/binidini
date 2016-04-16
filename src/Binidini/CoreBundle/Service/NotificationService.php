@@ -87,11 +87,6 @@ class NotificationService
         $uids = $this->em->getRepository('BinidiniCoreBundle:User')->findByCoordinates($shipping->getPickupLongitude(), $shipping->getPickupLatitude());
         foreach ($uids as $uid) {
 
-            //инсайдерам не надо
-            if (array_search($uid['id'], $this->insiders) === FALSE) {
-                break;
-            }
-
             $user = $this->em->getRepository('BinidiniCoreBundle:User')->find($uid['id']);
             if ($shipping->getSender()->getId() != $uid['id'] && $user->isCarrier()) {
                 $this->notify($user, 'create_shipping', $shipping);
@@ -133,7 +128,7 @@ class NotificationService
     {
         $bitN = constant('Binidini\CoreBundle\Entity\User::BIT_' . strtoupper($event));
 
-        if ($user->getSmsN($bitN)) {
+        if ($user->getSmsN($bitN) && $event !== "create_shipping" && $event !== "message_shipping") {
             $sms = $this->twig->render('BinidiniWebBundle::Template/Sms/' . $event . '.txt.twig', ['resource' => $resource]);
             $msg = ['mobile' => $user->getUsername(), 'sms' => $sms];
             $this->smsRabbitMqProducer->publish(serialize($msg));

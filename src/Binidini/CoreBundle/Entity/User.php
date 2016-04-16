@@ -42,26 +42,26 @@ class User extends BaseUser
     const BIT_REJECT_BID = 1;
     const BIT_CANCEL_BID = 2;
     const BIT_RECALL_BID = 3;
-    const BIT_AGREE_BID  = 4;
+    const BIT_AGREE_BID = 4;
     const BIT_CREATE_BID = 5;
 
-    const BIT_CREATE_SHIPPING   = 10;
-    const BIT_ACCEPT_SHIPPING   = 11;
+    const BIT_CREATE_SHIPPING = 10;
+    const BIT_ACCEPT_SHIPPING = 11;
     const BIT_DISPATCH_SHIPPING = 12;
-    const BIT_LOAD_SHIPPING     = 13;
-    const BIT_DELIVER_SHIPPING  = 14;
-    const BIT_PAY_SHIPPING      = 15;
+    const BIT_LOAD_SHIPPING = 13;
+    const BIT_DELIVER_SHIPPING = 14;
+    const BIT_PAY_SHIPPING = 15;
     const BIT_COMPLETE_SHIPPING = 16;
-    const BIT_REJECT_SHIPPING   = 17;
-    const BIT_REFUSE_SHIPPING   = 18;
-    const BIT_CANCEL_SHIPPING   = 19;
-    const BIT_NULLIFY_SHIPPING  = 20;
-    const BIT_ANNUL_SHIPPING    = 21;
-    const BIT_DISPUTE_SHIPPING  = 22;
-    const BIT_DEBATE_SHIPPING   = 23;
-    const BIT_RESOLVE_SHIPPING  = 24;
+    const BIT_REJECT_SHIPPING = 17;
+    const BIT_REFUSE_SHIPPING = 18;
+    const BIT_CANCEL_SHIPPING = 19;
+    const BIT_NULLIFY_SHIPPING = 20;
+    const BIT_ANNUL_SHIPPING = 21;
+    const BIT_DISPUTE_SHIPPING = 22;
+    const BIT_DEBATE_SHIPPING = 23;
+    const BIT_RESOLVE_SHIPPING = 24;
 
-    const BIT_MESSAGE_SHIPPING    = 25;
+    const BIT_MESSAGE_SHIPPING = 25;
 
     const PASSWORD_RECOVER_TTL = 259200;
     const PASSWORD_RECOVER_PREFIX = 'password_recover:';
@@ -375,7 +375,7 @@ class User extends BaseUser
         $this->places = new ArrayCollection();
 
         $this->senderRating = 0;
-        $this->senderRatingAmount= 0;
+        $this->senderRatingAmount = 0;
         $this->senderRatingCount = 0;
         $this->carrierRating = 0;
         $this->carrierRatingAmount = 0;
@@ -400,13 +400,13 @@ class User extends BaseUser
         $this->carrierRatingAmount = 0;
         $this->carrierRatingCount = 0;
 
-        $this->smsMask =   0b1111111111111111111111111111;
+        $this->smsMask = 0b1111111111111111111111111111;
         //$this->smsMask =   0;
 
         $this->emailMask = 0b1111111111111111111111111111;
-        $this->gcmMask =   0b1111111111111111111111111111;
+        $this->gcmMask = 0b1111111111111111111111111111;
 
-        $this->imgPath = 'profile/'.rand(1,39).'.jpg';
+        $this->imgPath = 'profile/' . rand(1, 39) . '.jpg';
     }
 
     public function hold($amount)
@@ -433,7 +433,7 @@ class User extends BaseUser
         $this->balance += $amount;
     }
 
-    public function decreaseHoldBalance ($amount)
+    public function decreaseHoldBalance($amount)
     {
         if ($amount > $this->holdAmount) {
             throw new InsufficientFrozenAmount("Нет средств для разморозки.");
@@ -464,9 +464,9 @@ class User extends BaseUser
         $name = '';
         if ($this->isIndividual()) {
             if (empty($this->patronymic)) {
-                $name = $this->lastName.' '.$this->firstName;
+                $name = $this->lastName . ' ' . $this->firstName;
             } else {
-                $name = $this->firstName.' '.$this->patronymic;
+                $name = $this->firstName . ' ' . $this->patronymic;
             }
         } elseif ($this->isBusiness()) {
             $name .= $this->companyName;
@@ -484,9 +484,9 @@ class User extends BaseUser
 
     public function getFio()
     {
-        $name = $this->lastName.' '.$this->firstName;
+        $name = $this->lastName . ' ' . $this->firstName;
         if ($this->patronymic) {
-            $name .= ' '.$this->patronymic;
+            $name .= ' ' . $this->patronymic;
         }
         $name = trim($name);
 
@@ -1373,6 +1373,7 @@ class User extends BaseUser
     {
         return $this->getSmsN(self::BIT_MESSAGE_SHIPPING);
     }
+
     /**
      * @param bool $flag
      */
@@ -1388,6 +1389,7 @@ class User extends BaseUser
     {
         return $this->getSmsN(self::BIT_CREATE_SHIPPING);
     }
+
     /**
      * @param bool $flag
      */
@@ -1415,7 +1417,7 @@ class User extends BaseUser
     }
 
     /**
-    * @return bool
+     * @return bool
      */
     public function getEmailBidAcceptNotification()
     {
@@ -1609,27 +1611,33 @@ class User extends BaseUser
 
     // End notifications
 
-    public function getSmsN($n) {
+    public function getSmsN($n)
+    {
         return ($this->smsMask & (1 << $n)) != 0;
     }
 
-    private function setSmsN($n, $new) {
+    private function setSmsN($n, $new)
+    {
         $this->smsMask = ($this->smsMask & ~(1 << $n)) | ($new << $n);
     }
 
-    public function getGcmN($n) {
+    public function getGcmN($n)
+    {
         return ($this->gcmMask & (1 << $n)) != 0;
     }
 
-    private function setGcmN($n, $new) {
+    private function setGcmN($n, $new)
+    {
         $this->gcmMask = ($this->gcmMask & ~(1 << $n)) | ($new << $n);
     }
 
-    public function getEmailN($n) {
+    public function getEmailN($n)
+    {
         return ($this->emailMask & (1 << $n)) != 0;
     }
 
-    private function setEmailN($n, $new=true) {
+    private function setEmailN($n, $new = true)
+    {
         $this->emailMask = ($this->emailMask & ~(1 << $n)) | ($new << $n);
     }
 
@@ -1649,7 +1657,7 @@ class User extends BaseUser
     /**
      * Get emailVerified
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEmailVerified()
     {
@@ -1695,7 +1703,7 @@ class User extends BaseUser
     /**
      * Get senderRatingCount
      *
-     * @return integer 
+     * @return integer
      */
     public function getSenderRatingCount()
     {
@@ -1740,7 +1748,7 @@ class User extends BaseUser
     /**
      * Get carrierRatingCount
      *
-     * @return integer 
+     * @return integer
      */
     public function getCarrierRatingCount()
     {
@@ -1763,7 +1771,7 @@ class User extends BaseUser
     /**
      * Get senderRatingAmount
      *
-     * @return integer 
+     * @return integer
      */
     public function getSenderRatingAmount()
     {
@@ -1786,7 +1794,7 @@ class User extends BaseUser
     /**
      * Get carrierRatingAmount
      *
-     * @return integer 
+     * @return integer
      */
     public function getCarrierRatingAmount()
     {
@@ -1809,7 +1817,7 @@ class User extends BaseUser
     /**
      * Get recoverPassword
      *
-     * @return string 
+     * @return string
      */
     public function getRecoverPassword()
     {
@@ -1832,7 +1840,7 @@ class User extends BaseUser
     /**
      * Get recoverSalt
      *
-     * @return string 
+     * @return string
      */
     public function getRecoverSalt()
     {
@@ -1855,7 +1863,7 @@ class User extends BaseUser
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -1878,7 +1886,7 @@ class User extends BaseUser
     /**
      * Get senderCount
      *
-     * @return integer 
+     * @return integer
      */
     public function getSenderCount()
     {
@@ -1901,7 +1909,7 @@ class User extends BaseUser
     /**
      * Get carrierCount
      *
-     * @return integer 
+     * @return integer
      */
     public function getCarrierCount()
     {
@@ -1922,7 +1930,8 @@ class User extends BaseUser
         return $this;
     }
 
-    public function isAdmin(){
+    public function isAdmin()
+    {
         return $this->hasRole(self::ROLE_ADMIN) || $this->isSuperAdmin();
     }
 
@@ -1942,7 +1951,7 @@ class User extends BaseUser
     /**
      * Get profileType
      *
-     * @return integer 
+     * @return integer
      */
     public function getProfileType()
     {
@@ -1986,7 +1995,7 @@ class User extends BaseUser
     /**
      * Get gcmTokens
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getGcmTokens()
     {
@@ -2040,7 +2049,7 @@ class User extends BaseUser
     /**
      * Get longitude
      *
-     * @return string 
+     * @return string
      */
     public function getLongitude()
     {
@@ -2063,7 +2072,7 @@ class User extends BaseUser
     /**
      * Get latitude
      *
-     * @return string 
+     * @return string
      */
     public function getLatitude()
     {
@@ -2120,7 +2129,7 @@ class User extends BaseUser
     /**
      * Get places
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPlaces()
     {
@@ -2153,7 +2162,7 @@ class User extends BaseUser
     /**
      * Get locations
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLocations()
     {
@@ -2176,7 +2185,7 @@ class User extends BaseUser
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -2199,7 +2208,7 @@ class User extends BaseUser
     /**
      * Get districts
      *
-     * @return string 
+     * @return string
      */
     public function getDistricts()
     {
@@ -2208,12 +2217,11 @@ class User extends BaseUser
 
     public function getResultWrapper()
     {
-        return [
+        $result = [
             'user_id' => $this->getId(),
             'firstname' => $this->getFirstName(),
             'lastname' => $this->getLastName(),
             'patronymic' => $this->getPatronymic(),
-            'companyName' => $this->getCompanyName(),
             'email' => $this->getEmail(),
             'phone' => $this->getUsername(),
             'about_me' => $this->getAboutMe(),
@@ -2221,5 +2229,9 @@ class User extends BaseUser
             'rate' => "{$this->getCarrierRating()}",
             'rate_sender' => "{$this->getSenderRating()}",
         ];
+        if ($this->isBusiness()) {
+            $result['companyName'] = $this->getCompanyName();
+        }
+        return $result;
     }
 }

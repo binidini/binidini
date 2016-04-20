@@ -10,6 +10,10 @@
 
 {% block actions %}
     <a class="btn btn-primary"
+       href="{{ user.verification?path('binidini_admin_user_unverify', {id:user.id}):path('binidini_admin_user_verify',{id:user.id}) }}">
+        {{ user.verification? 'Отменить идентификацию': 'Идентифицировать'}}
+    </a>
+    <a class="btn btn-primary"
        href="{{ user.isLocked?path('binidini_admin_user_unlock', {id:user.id}):path('binidini_admin_user_lock',{id:user.id}) }}">
         {{ user.isLocked? 'Разблокировать': 'Заблокировать'}}
     </a>
@@ -32,8 +36,13 @@
                             <img alt="image" class="img-responsive"
                                  src="{{ user.imgPath | imagine_filter('photo600x600') }}">
                         </div>
-                        <div class="ibox-content profile-content">
+                        <div class="ibox-content profile-content" style="min-height: 175px">
                             <h4><strong>{{ isItCompany? user.name: user.Fio }}</strong></h4>
+
+                            {% if user.verification > 0 %}
+                                <img src="{{ asset('bundles/binidiniweb/img/verified.jpg') }}" alt="Проверка личноси пройдена" align="right" width="130">
+                            {% endif %}
+
                             <p><i class="fa fa-rouble"></i>&nbsp;<span class="text-success">{{ user.balance}}</span>/<span class="text-danger">{{ user.holdAmount }}</span>руб.</p>
 
                             {% if user.city %}

@@ -159,6 +159,45 @@ class UserController extends Controller
     }
 
 
+    public function verifyAction(Request $request)
+    {
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+        $userId = $request->get('id');
+        if ($userId) {
+            /** @var User $user */
+            $user = $userManager->findUserBy(['id' => $userId]);
+            if (!$user) {
+                throw new NotFoundHttpException('Пользователь не найден');
+            }
+            $user->setVerification(1);
+            $userManager->updateUser($user);
+        } else {
+            throw new InvalidParameterException('Id пользователя не передано');
+        }
+
+        return new RedirectResponse($this->generateUrl('binidini_admin_user_show', ['id' => $user->getId()]));
+    }
+
+    public function unverifyAction(Request $request)
+    {
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+        $userId = $request->get('id');
+        if ($userId) {
+            /** @var User $user */
+            $user = $userManager->findUserBy(['id' => $userId]);
+            if (!$user) {
+                throw new NotFoundHttpException('Пользователь не найден');
+            }
+            $user->setVerification(0);
+            $userManager->updateUser($user);
+        } else {
+            throw new InvalidParameterException('Id пользователя не передано');
+        }
+        return new RedirectResponse($this->generateUrl('binidini_admin_user_show', ['id' => $user->getId()]));
+    }
+
     #region API2
 
     public function getUserAction(Request $request)

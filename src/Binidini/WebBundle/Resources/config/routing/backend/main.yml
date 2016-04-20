@@ -82,6 +82,18 @@ binidini_admin_user_unlock:
     defaults:
         _controller: BinidiniCoreBundle:User:unlock
 
+binidini_admin_user_verify:
+    path: /user/{id}/verify
+    methods: [GET]
+    defaults:
+        _controller: BinidiniCoreBundle:User:verify
+
+binidini_admin_user_unverify:
+    path: /user/{id}/unverify
+    methods: [GET]
+    defaults:
+        _controller: BinidiniCoreBundle:User:unverify
+
 binidini_payment:
     resource: @BinidiniWebBundle/Resources/config/routing/backend/payment.yml
     prefix: /

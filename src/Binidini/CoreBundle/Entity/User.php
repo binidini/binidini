@@ -360,6 +360,15 @@ class User extends BaseUser
     private $updatedAt;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="verification", type="integer", options={"default"=0})
+     * @Expose
+     */
+
+    private $verification;
+
+    /**
      * @ORM\OneToMany(targetEntity="Place", mappedBy="user")
      */
     private $places;
@@ -2223,5 +2232,28 @@ class User extends BaseUser
             'rate' => "{$this->getCarrierRating()}",
             'rate_sender' => "{$this->getSenderRating()}",
         ];
+    }
+
+    /**
+     * Set verification
+     *
+     * @param integer $verification
+     * @return User
+     */
+    public function setVerification($verification)
+    {
+        $this->verification = $verification;
+
+        return $this;
+    }
+
+    /**
+     * Get verification
+     *
+     * @return integer 
+     */
+    public function getVerification()
+    {
+        return $this->verification;
     }
 }

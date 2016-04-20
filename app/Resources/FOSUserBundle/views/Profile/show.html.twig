@@ -27,14 +27,20 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>О {{ isItCompany? 'компании': 'пользователе' }}</h5>
+                        {% if user.verification > 0 %}
+                            <span class="pull-right"><i class="fa fa-check-square-o text-navy"></i> пользователь проверен</span>
+                        {% endif %}
                     </div>
                     <div>
                         <div class="ibox-content border-left-right">
                             <img alt="image" class="img-thumbnail"
                                  src="{{ user.imgPath | imagine_filter('photo600x600') }}">
                         </div>
-                        <div class="ibox-content profile-content">
+                        <div class="ibox-content profile-content" style="min-height: 175px">
                                 <h4><strong>{{ isItCompany? user.name: user.Fio }}</strong></h4>
+                            {% if user.verification > 0 %}
+                                <img src="{{ asset('bundles/binidiniweb/img/verified.jpg') }}" alt="Проверка личноси пройдена" align="right" width="130">
+                            {% endif %}
 
                             {% if isItMe %}
                                 <p><i class="fa fa-rouble"></i>&nbsp;<span class="text-success">{{ user.balance}}</span>/<span class="text-danger">{{ user.holdAmount }}</span> руб.</p>
@@ -57,12 +63,8 @@
                                 <h5><strong>{{ user.Fio }}</strong></h5>
                             {% endif %}
                             <p><i class="fa fa-phone-square"></i> {{ user.mobilexxx }} <i class="fa fa-check-square-o text-navy"></i>
-
                                 {% if user.email %}
-
                             <p><i class="fa fa-envelope"></i> {{ user.emailxxx }}
-
-
                                 {% if user.emailVerified %}
                                     <i class="fa fa-check-square-o text-navy"></i>
                                 {% else %}

@@ -418,6 +418,7 @@ class User extends BaseUser
         $this->gcmMask = 0b1111111111111111111111111111;
 
         $this->imgPath = 'profile/' . rand(1, 39) . '.jpg';
+        $this->verification = 0;
     }
 
     public function hold($amount)

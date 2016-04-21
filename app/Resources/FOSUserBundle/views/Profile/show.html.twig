@@ -26,16 +26,16 @@
             <div class="col-sm-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>О {{ isItCompany? 'компании': 'пользователе' }}</h5>
                         {% if user.verification > 0 %}
                             <span class="pull-right text-success" style="font-size: larger">
-                                <i class="fa fa-check-square-o text-navy"></i> {{ isItCompany? 'компания проверена': 'пользователь проверен' }}
+                                <i class="fa fa-check-square-o text-navy"></i> {{ isItCompany? 'Компания проверена': 'Пользователь проверен' }}
 
                                 <a href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Данный пользователь прошел процесс идентификации и мы подтверждаем, что указанные пользователем данные соответствуют действительности." data-original-title="" title="" aria-describedby="popover">
                                     <i class="fa fa-question" style="font-size: large"></i>
                                 </a>
                             </span>
-
+                        {% else %}
+                            <h5>О {{ isItCompany? 'компании': 'пользователе' }}</h5>
                         {% endif %}
                     </div>
                     <div>

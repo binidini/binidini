@@ -1,0 +1,158 @@
+{% extends 'BinidiniWebBundle::layout.html.twig' %}
+
+{% block title %}
+    Как работает сервис Титимити - Вопросы и ответы
+{% endblock %}
+
+{% block pageheader %}Гаранты народной доставки{% endblock %}
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li>
+            Хотите стать Гарантом Титимити?
+        </li>
+        <li class="active">
+            contacts<b>@</b>tytymyty.ru
+        </li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper wrapper-content">
+        <div class="row animated fadeInRight">
+            <div class="col-md-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Гарант проверяет и гарантирует</h5>
+                    </div>
+                    <div>
+                        <div class="ibox-content no-padding border-left-right">
+                            <img alt="Рой Джонс" class="img-responsive" src="{{ asset('bundles/binidiniweb/img/rjhones.jpg') }}">
+                        </div>
+                        <div class="ibox-content profile-content">
+                            <img src="{{ asset('bundles/binidiniweb/img/verified.jpg') }}" alt="Проверка личноси пройдена" align="right" width="130">
+                            <h4>Рой Джонс-младший <small> получил гражданство РФ</small></h4>
+
+                            <p>
+                                Если в регионе нет Гаранта, клиент может прислать отсканированный паспорт и свою фотографию с паспортом в руке, оплатить стоимость проверки в размере 500 руб. и в течение недели
+                                мы верифицируем его. Если в регионе Гарант присутсвует, мы всегда  направляем пользователя в офис Гаранта.
+                            </p>
+
+                            <div class="embed-responsive embed-responsive-16by9">
+
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/aetCkMMktbE?rel=0" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Что делает Гарант Титимити?</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div>
+                            <div class="feed-activity-list">
+
+                                <div class="feed-element">
+                                    <img alt="image" class="img-circle pull-left" src="{{ asset('bundles/binidiniweb/img/pics/tytymyty_1.jpg') }}">
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy"><i class="fa fa-rub"></i></small>
+                                        Гарант <strong>проверяет</strong> паспортные данные, место регистрации, при наличии автомобиля, документы на машину. В случае компании - проверяются уставные документы компании.
+                                        Гарант может проверять как перевозчиков, так и отправителей системы Титимити.
+                                    </div>
+                                </div>
+
+                                <div class="feed-element">
+                                    <img alt="image" class="img-circle pull-left" src="{{ asset('bundles/binidiniweb/img/pics/tytymyty_2.jpg') }}">
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy"><i class="fa fa-eur"></i></small>
+                                        Гарант <strong>рекламирует</strong> сервис Титимити у себя в регионе с целью популяризации сервиса. Сервис Титимити в свою очередь продвигает
+                                        своих Гарантов во всех уголках рунета и на федеральных каналах.
+                                    </div>
+                                </div>
+
+                                <div class="feed-element">
+                                    <img alt="image" class="img-circle pull-left" src="{{ asset('bundles/binidiniweb/img/pics/tytymyty_3.jpg') }}">
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy"><i class="fa fa-usd"></i></small>
+                                        Гарант <strong>разрешает</strong> спорные ситуации между отправителем и перевозчиком совместно с конфликт-менеджером Титимити.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Условия сорудничества Гаранта с севрисом Титимити.</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div>
+                            <div class="feed-activity-list">
+
+                                <div class="feed-element">
+                                    <img alt="image" class="img-circle pull-left" src="{{ asset('bundles/binidiniweb/img/pics/tytymyty_4.jpg') }}">
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy"><i class="fa fa-yen"></i></small>
+                                        Гарант может стать только юридическое лицо. У Гаранта должен быть представительский офис, сайт, номер телефона и электронный адрес. Между
+                                        Гарантом и сервисом Титимити заключается договор сотрудничества на 1 год с возможностью пролонгации.
+                                    </div>
+                                </div>
+
+                                <div class="feed-element">
+                                    <img alt="image" class="img-circle pull-left" src="{{ asset('bundles/binidiniweb/img/pics/tytymyty_5.jpg') }}">
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy"><i class="fa fa-inr"></i></small>
+                                        Проверка документов - это платная услуга. Стоимость данной услуги - 500 рублей. 50% от стоимости Гарант пересылает сервису Титимити,
+                                        50% - остаются у Гаранта в качестве вознаграждения.
+                                    </div>
+                                </div>
+
+                                <div class="feed-element">
+                                    <img alt="image" class="img-circle pull-left" src="{{ asset('bundles/binidiniweb/img/pics/tytymyty_6.jpg') }}">
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy"><i class="fa fa-try"></i></small>
+                                        При заключение договора Гарант платит вступительный взнос в размере 10 000 рублей.
+                                    </div>
+                                </div>
+
+                                <div class="feed-element">
+                                    <img alt="image" class="img-circle pull-left" src="{{ asset('bundles/binidiniweb/img/pics/tytymyty_7.jpg') }}">
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy"><i class="fa fa-won"></i></small>
+                                        В случае большого количества спорных ситуаций с участием перевозчиков и отправителей, которых проверил Гарант, сервис Титимити
+                                        оставляет за собой право прекратить договор сотрудничества и отозвать статус Гаранта у контрагента.
+                                    </div>
+                                </div>
+
+                                <div class="feed-element">
+                                    <img alt="image" class="img-circle pull-left" src="{{ asset('bundles/binidiniweb/img/pics/tytymyty_13.jpg') }}">
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy"><i class="fa fa-yen"></i></small>
+                                        Гарант пересылает информацию о всех проверяемых перевозчиках и отправителях в сервис Титимити с рекомендацией верифицировать или нет данного клиента.
+                                        Окончательное решение о верификации принимает менеджер Титимити.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Peity -->
+    <script src="{{ asset('bundles/binidiniweb/js/plugins/peity/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('bundles/binidiniweb/js/demo/peity-demo.js') }}"></script>
+{% endblock %}

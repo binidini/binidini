@@ -98,11 +98,16 @@ binidini_android_faq:
     path: /faq/android
     defaults:
         _controller: FrameworkBundle:Template:template
-        template:    BinidiniWebBundle::Frontend/Static/howitworks.html.twig
+        template:    BinidiniWebBundle::Frontend/Static/android_app.html.twig
 
-binidini_android_faq:
+binidini_iphone_faq:
     path: /faq/iphone
     defaults:
         _controller: FrameworkBundle:Template:template
-        template:    BinidiniWebBundle::Frontend/Static/howitworks.html.twig
+        template:    BinidiniWebBundle::Frontend/Static/iphone_app.html.twig
 
+binidini_guarantors:
+    path: /guarantors
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/guarantors.html.twig

@@ -29,13 +29,13 @@
                         {% if user.verification > 0 %}
                             <span class="pull-right text-success" style="font-size: larger">
                                 <i class="fa fa-check-square-o text-navy"></i> {{ isItCompany? 'Компания проверена': 'Пользователь проверен' }}
-
-                                <a href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Данный пользователь прошел процесс идентификации и мы подтверждаем, что указанные пользователем данные соответствуют действительности." data-original-title="" title="" aria-describedby="popover">
-                                    <i class="fa fa-question" style="font-size: large"></i>
-                                </a>
+                                <a href="{{ path('binidini_how_it_works') ~ '#faq11'}}"><i class="fa fa-question" style="font-size: large"></i></a>
                             </span>
                         {% else %}
-                            <h5>О {{ isItCompany? 'компании': 'пользователе' }}</h5>
+                            <span class="pull-right text-danger" style="font-size: larger">
+                                <i class="fa fa-minus-square-o text-danger"></i> {{ isItCompany? 'Компания НЕ проверена': 'Пользователь НЕ проверен' }}
+                                <a href="{{ path('binidini_how_it_works') ~ '#faq11'}}"><i class="fa fa-question" style="font-size: large"></i></a>
+                            </span>
                         {% endif %}
                     </div>
                     <div>

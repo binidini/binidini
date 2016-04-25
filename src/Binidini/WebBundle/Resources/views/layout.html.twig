@@ -139,9 +139,9 @@
                 <li {{ croute.is_current_route(['binidini_shops', 'binidini_carriers', 'binidini_guarantors', 'binidini_partners']) }}>
                     <a href="#"><i class="fa fa-group"></i><span class="nav-label">Сотрудничество</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
+                        <li {{ croute.is_current_route('binidini_guarantors') }}><a href="{{ path('binidini_guarantors') }}">Гаранты</a></li>
                         <li {{ croute.is_current_route('binidini_shops') }}><a href="{{ path('binidini_shops') }}">Магазинам</a></li>
                         <li {{ croute.is_current_route('binidini_carriers') }}><a href="{{ path('binidini_carriers') }}">Службам доставки</a></li>
-                        <li {{ croute.is_current_route('binidini_guarantors') }}><a href="{{ path('binidini_guarantors') }}">Гаранты</a></li>
                         <li {{ croute.is_current_route('binidini_partners') }}><a href="{{ path('binidini_partners') }}">Обмен ссылками</a></li>
                     </ul>
                 <li><a href="http://blog.tytymyty.ru" target="blog"><i class="fa fa-comments"></i> <span class="nav-label">Блог</span></a></li>

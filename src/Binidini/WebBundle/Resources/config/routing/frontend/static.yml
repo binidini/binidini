@@ -100,6 +100,12 @@ binidini_android_faq:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/android_app.html.twig
 
+binidini_android_faq2:
+    path: /faq/android2
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/android_app2.html.twig
+
 binidini_iphone_faq:
     path: /faq/iphone
     defaults:

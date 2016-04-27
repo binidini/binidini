@@ -9,6 +9,7 @@
 
 {% block content %}
 
+    {% if not is_mobile() %}
     <div class="sidebard-panel">
         <div>
             <h4>Отзывы</h4>
@@ -106,6 +107,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     <div class="wrapper wrapper-content">
 
         <div class="row">

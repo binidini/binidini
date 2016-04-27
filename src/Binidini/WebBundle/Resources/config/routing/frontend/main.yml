@@ -3,8 +3,11 @@
 
 binidini_home:
     path: /
+#    defaults:
+#        _controller: BinidiniWebBundle:Default:index
     defaults:
-        _controller: BinidiniWebBundle:Default:index
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/senders.html.twig
 
 binidini_static:
     resource: @BinidiniWebBundle/Resources/config/routing/frontend/static.yml

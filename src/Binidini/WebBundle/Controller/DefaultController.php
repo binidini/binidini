@@ -31,9 +31,9 @@ class DefaultController extends Controller
 
         if ($user && $user->hasRole('ROLE_USER')) {
 
-            return $this->redirect($this->generateUrl('binidini_search_shipment_index'));
+            return $this->redirect($this->generateUrl('binidini_arch_shipment_index'));
         }
 
-        return $this->render('BinidiniWebBundle::Frontend/landing.html.twig');
+        return $this->render('BinidiniWebBundle::Frontend/Static/senders.html.twig');
     }
 }

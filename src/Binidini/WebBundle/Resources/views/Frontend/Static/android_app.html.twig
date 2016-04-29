@@ -19,9 +19,8 @@
 
 {% block content %}
 
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-lg-4">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        {% if is_mobile() %}
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>Титимити - Google Play</h5>
@@ -41,78 +40,6 @@
             </div>
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>Титимити - боковое меню</h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="team-members">
-                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_leftside_menu.jpg') }}" alt="Титимити - боковое меню" title="Боковое меню">
-                    </div>
-                    <p>
-                        В меню слева находятся разделы: «Заказы» («Ближайшие и «Все), «Мои перевозки» («Активные» и «Завершенные), «Мои отправки» («Активные», «Завершенные» и «Новый заказ»)
-                    </p>
-                    <p>
-                        В «Заказах» находятся новые заказы, отсортированные по удаленности от клиента или по времени попадания в систему. «Мои перевозки» - раздел для перевозчиков, «Мои отправки» -
-                        раздел для отправителей.
-                    </p>
-                </div>
-            </div>
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5>Титимити - заявки на перевозку</h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="team-members">
-                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_bids.jpg') }}" alt="Титимити - заявки на перевозку" title="Заявки на перевозку">
-                    </div>
-                    <p >
-                        Заявки на перевозку заказа от всех перевозчиков отображаются во вкладке «Заявки».
-                    </p>
-                    <p>
-                        В заявках можно посмотреть статус заявки, ее цену и ссылку на перевозчика.
-                    </p>
-                </div>
-            </div>
-            <div class="ibox" id="messages">
-                <div class="ibox-title">
-                    <h5>Титимити - переписка по заказу</h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="team-members">
-                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_messages.jpg') }}" alt="Титимити - переписка по заказу" title="Переписка по заказу">
-                    </div>
-                    <p >
-                        Перевозчик и отправитель могут общаться друг с другом посредством сообщений.
-                    </p>
-                    <p>
-                        Это бесплатная функция идет в дополнение к возможности позвонить друг другу.
-                    </p>
-                </div>
-            </div>
-            <div class="ibox" id="complete">
-                <div class="ibox-title">
-                    <h5>Титимити - заказ завершен</h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="team-members">
-                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_complete.jpg') }}" alt="Титимити - заказ завершен" title="Заказ завершен">
-                    </div>
-                    <p >
-                        После подтверждения оплаты, заказ переходит в статус «Завершен» и переносится в архив заявок.
-                    </p>
-                    <p>
-                        На сайте tytymyty.ru отправитель и перевозчик могут оставить отзыв друг о друге и выставить оценку по заказу, что отразится на рейтинге и отправителя, и перевозчика.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-lg-4">
-            <div class="ibox">
-                <div class="ibox-title">
                     <h5>Титимити - регистрация</h5>
                 </div>
                 <div class="ibox-content">
@@ -129,74 +56,6 @@
                     </p>
                 </div>
             </div>
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5>Титимити - боковое меню 2</h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="team-members">
-                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_leftside_menu2.jpg') }}" alt="Титимити - боковое меню 2" title="Боковое меню 2">
-                    </div>
-                    <p >
-                        В нижней части бокового меню находится раздел «Помощь», в котором есть пункт «Настройки», ссылка на данную страницу, а также кнопка «Выход» из программы.
-                    </p>
-
-                </div>
-            </div>
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5>Титимити - согласование заявки</h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="team-members">
-                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_agree_bid.jpg') }}" alt="Титимити - согласовать заявку" title="Согласование заявки">
-                    </div>
-                    <p>
-                        После того, как отправитель принял заявку, перевозчик может либо отказаться "в последний момент", либо принять заявку к исполнению, нажав кнопку «Поехать».
-                    </p>
-                    <p>
-                        Перед принятием окончательного решения перевозчик может позвонить отправителю и уточнить детали заказа. Например, время забора заказа в пункте отправления,
-                        порядок оплаты, информацию о получателе и др.
-                    </p>
-                </div>
-            </div>
-            <div class="ibox" id="delivered">
-                <div class="ibox-title">
-                    <h5>Титимити - заказ доставлен</h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="team-members">
-                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_delivered.jpg') }}" alt="Титимити - заказ доставлен" title="Заказ доставлен">
-                    </div>
-                    <p>
-                        После того, как перевозчик доставил заказ и нажал кнопку «Доставлен», заказ переходит в статус «Доставлен» и ожидается, когда отправитель оплатит заказ, если
-                        еще этого не было сделано.
-                    </p>
-                    <p>
-                        Возможно, что была произведена предоплата и тогда отправитель сразу нажмет кнопку «Оплатить».
-                    </p>
-
-                </div>
-            </div>
-            <div class="ibox" id="map">
-                <div class="ibox-title">
-                    <h5>Титимити - карта маршрута</h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="team-members">
-                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_map.jpg') }}" alt="Титимити - карта маршрута" title="Карта маршрута">
-                    </div>
-                    <p>
-                        Перевозчик может воспользоваться картой маршрута. Для этого необходимо установить Яндекс.Карты и Яндекс.Навигатор
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>Титимити - ближайшие заказы</h5>
@@ -221,6 +80,40 @@
             </div>
             <div class="ibox">
                 <div class="ibox-title">
+                    <h5>Титимити - боковое меню</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="team-members">
+                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_leftside_menu.jpg') }}" alt="Титимити - боковое меню" title="Боковое меню">
+                    </div>
+                    <p>
+                        В меню слева находятся разделы: «Заказы» («Ближайшие и «Все), «Мои перевозки» («Активные» и «Завершенные), «Мои отправки» («Активные», «Завершенные» и «Новый заказ»)
+                    </p>
+                    <p>
+                        В «Заказах» находятся новые заказы, отсортированные по удаленности от клиента или по времени попадания в систему. «Мои перевозки» - раздел для перевозчиков, «Мои отправки» -
+                        раздел для отправителей.
+                    </p>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Титимити - боковое меню 2</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="team-members">
+                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_leftside_menu2.jpg') }}" alt="Титимити - боковое меню 2" title="Боковое меню 2">
+                    </div>
+                    <p >
+                        В нижней части бокового меню находится раздел «Помощь», в котором есть пункт «Настройки», ссылка на данную страницу, а также кнопка «Выход» из программы.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-title">
                     <h5>Титимити - детали заказа</h5>
                 </div>
                 <div class="ibox-content">
@@ -234,6 +127,43 @@
                     </p>
                     <p>
                         Перевозчик может подать заявку на перевозку, по цене отправителя или по своей цене.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Титимити - заявки на перевозку</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="team-members">
+                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_bids.jpg') }}" alt="Титимити - заявки на перевозку" title="Заявки на перевозку">
+                    </div>
+                    <p >
+                        Заявки на перевозку заказа от всех перевозчиков отображаются во вкладке «Заявки».
+                    </p>
+                    <p>
+                        В заявках можно посмотреть статус заявки, ее цену и ссылку на перевозчика.
+                    </p>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Титимити - согласование заявки</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="team-members">
+                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_agree_bid.jpg') }}" alt="Титимити - согласовать заявку" title="Согласование заявки">
+                    </div>
+                    <p>
+                        После того, как отправитель принял заявку, перевозчик может либо отказаться "в последний момент", либо принять заявку к исполнению, нажав кнопку «Поехать».
+                    </p>
+                    <p>
+                        Перед принятием окончательного решения перевозчик может позвонить отправителю и уточнить детали заказа. Например, время забора заказа в пункте отправления,
+                        порядок оплаты, информацию о получателе и др.
                     </p>
                 </div>
             </div>
@@ -256,6 +186,43 @@
 
                 </div>
             </div>
+
+            <div class="ibox" id="messages">
+                <div class="ibox-title">
+                    <h5>Титимити - переписка по заказу</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="team-members">
+                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_messages.jpg') }}" alt="Титимити - переписка по заказу" title="Переписка по заказу">
+                    </div>
+                    <p >
+                        Перевозчик и отправитель могут общаться друг с другом посредством сообщений.
+                    </p>
+                    <p>
+                        Это бесплатная функция идет в дополнение к возможности позвонить друг другу.
+                    </p>
+                </div>
+            </div>
+            <div class="ibox" id="delivered">
+                <div class="ibox-title">
+                    <h5>Титимити - заказ доставлен</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="team-members">
+                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_delivered.jpg') }}" alt="Титимити - заказ доставлен" title="Заказ доставлен">
+                    </div>
+                    <p>
+                        После того, как перевозчик доставил заказ и нажал кнопку «Доставлен», заказ переходит в статус «Доставлен» и ожидается, когда отправитель оплатит заказ, если
+                        еще этого не было сделано.
+                    </p>
+                    <p>
+                        Возможно, что была произведена предоплата и тогда отправитель сразу нажмет кнопку «Оплатить».
+                    </p>
+
+                </div>
+            </div>
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>Титимити - заказ оплачен</h5>
@@ -272,6 +239,38 @@
                         После это заказ переходит в статус «Завершен» и переходит в архив заказов.
                     </p>
 
+                </div>
+            </div>
+
+            <div class="ibox" id="complete">
+                <div class="ibox-title">
+                    <h5>Титимити - заказ завершен</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="team-members">
+                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_complete.jpg') }}" alt="Титимити - заказ завершен" title="Заказ завершен">
+                    </div>
+                    <p >
+                        После подтверждения оплаты, заказ переходит в статус «Завершен» и переносится в архив заявок.
+                    </p>
+                    <p>
+                        На сайте tytymyty.ru отправитель и перевозчик могут оставить отзыв друг о друге и выставить оценку по заказу, что отразится на рейтинге и отправителя, и перевозчика.
+                    </p>
+                </div>
+            </div>
+            <div class="ibox" id="map">
+                <div class="ibox-title">
+                    <h5>Титимити - карта маршрута</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="team-members">
+                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_map.jpg') }}" alt="Титимити - карта маршрута" title="Карта маршрута">
+                    </div>
+                    <p>
+                        Перевозчик может воспользоваться картой маршрута. Для этого необходимо установить Яндекс.Карты и Яндекс.Навигатор
+                    </p>
                 </div>
             </div>
             <div class="ibox">
@@ -292,9 +291,303 @@
 
                 </div>
             </div>
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Титимити - поиск по адресу или городу</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="team-members">
+                        <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_search.jpg') }}" alt="Титимити - поиск по адресу" title="Поиск по адресу">
+                    </div>
+                    <p>
+                        Задав адрес (или город, или населенный пункт), можно найти заказы по мере удаления от этого адреса.
+                    </p>
+                    <p>
+                        Наберайте адрес до тех пор пока не появится подсказка.
+                    </p>
+
+                </div>
+            </div>
+        {% else %}
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - Google Play</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_google_play.jpg') }}" alt="Tytynyty on Google Play" title="Google Play">
+                        </div>
+                        <p >
+                            Чтобы начать работать с приложением Титимити под Android, прежде всего Вам нужно установить его с Google Play.
+                        </p>
+                        <p>
+                            Наберите в поиске Google Play «титимити» или «tytymyty» и Google Play предложит Вам установить приложение народной доставки Титимити.
+                        </p>
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - боковое меню</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_leftside_menu.jpg') }}" alt="Титимити - боковое меню" title="Боковое меню">
+                        </div>
+                        <p>
+                            В меню слева находятся разделы: «Заказы» («Ближайшие и «Все), «Мои перевозки» («Активные» и «Завершенные), «Мои отправки» («Активные», «Завершенные» и «Новый заказ»)
+                        </p>
+                        <p>
+                            В «Заказах» находятся новые заказы, отсортированные по удаленности от клиента или по времени попадания в систему. «Мои перевозки» - раздел для перевозчиков, «Мои отправки» -
+                            раздел для отправителей.
+                        </p>
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - заявки на перевозку</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_bids.jpg') }}" alt="Титимити - заявки на перевозку" title="Заявки на перевозку">
+                        </div>
+                        <p >
+                            Заявки на перевозку заказа от всех перевозчиков отображаются во вкладке «Заявки».
+                        </p>
+                        <p>
+                            В заявках можно посмотреть статус заявки, ее цену и ссылку на перевозчика.
+                        </p>
+                    </div>
+                </div>
+                <div class="ibox" id="messages">
+                    <div class="ibox-title">
+                        <h5>Титимити - переписка по заказу</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_messages.jpg') }}" alt="Титимити - переписка по заказу" title="Переписка по заказу">
+                        </div>
+                        <p >
+                            Перевозчик и отправитель могут общаться друг с другом посредством сообщений.
+                        </p>
+                        <p>
+                            Это бесплатная функция идет в дополнение к возможности позвонить друг другу.
+                        </p>
+                    </div>
+                </div>
+                <div class="ibox" id="complete">
+                    <div class="ibox-title">
+                        <h5>Титимити - заказ завершен</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_complete.jpg') }}" alt="Титимити - заказ завершен" title="Заказ завершен">
+                        </div>
+                        <p >
+                            После подтверждения оплаты, заказ переходит в статус «Завершен» и переносится в архив заявок.
+                        </p>
+                        <p>
+                            На сайте tytymyty.ru отправитель и перевозчик могут оставить отзыв друг о друге и выставить оценку по заказу, что отразится на рейтинге и отправителя, и перевозчика.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - регистрация</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_registration.jpg') }}" alt="Титимити - регистрация" title="Регистрация">
+                        </div>
+                        <p >
+                            Если Вы не зарегистрировались на сайте Титимити.Ру, Вы можете зарегистрироваться также в приложении Титимити под Android. Для этого на начальном экране
+                            приложения кликните на текстовую ссылку «ЗАРЕГИСТРИРОВАТЬСЯ»
+                        </p>
+                        <p>
+                            На следующем экране введите 10 значный номер Вашего телефона, например 9213334455.
+                        </p>
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - боковое меню 2</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_leftside_menu2.jpg') }}" alt="Титимити - боковое меню 2" title="Боковое меню 2">
+                        </div>
+                        <p >
+                            В нижней части бокового меню находится раздел «Помощь», в котором есть пункт «Настройки», ссылка на данную страницу, а также кнопка «Выход» из программы.
+                        </p>
+
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - согласование заявки</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_agree_bid.jpg') }}" alt="Титимити - согласовать заявку" title="Согласование заявки">
+                        </div>
+                        <p>
+                            После того, как отправитель принял заявку, перевозчик может либо отказаться "в последний момент", либо принять заявку к исполнению, нажав кнопку «Поехать».
+                        </p>
+                        <p>
+                            Перед принятием окончательного решения перевозчик может позвонить отправителю и уточнить детали заказа. Например, время забора заказа в пункте отправления,
+                            порядок оплаты, информацию о получателе и др.
+                        </p>
+                    </div>
+                </div>
+                <div class="ibox" id="delivered">
+                    <div class="ibox-title">
+                        <h5>Титимити - заказ доставлен</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_delivered.jpg') }}" alt="Титимити - заказ доставлен" title="Заказ доставлен">
+                        </div>
+                        <p>
+                            После того, как перевозчик доставил заказ и нажал кнопку «Доставлен», заказ переходит в статус «Доставлен» и ожидается, когда отправитель оплатит заказ, если
+                            еще этого не было сделано.
+                        </p>
+                        <p>
+                            Возможно, что была произведена предоплата и тогда отправитель сразу нажмет кнопку «Оплатить».
+                        </p>
+
+                    </div>
+                </div>
+                <div class="ibox" id="map">
+                    <div class="ibox-title">
+                        <h5>Титимити - карта маршрута</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_map.jpg') }}" alt="Титимити - карта маршрута" title="Карта маршрута">
+                        </div>
+                        <p>
+                            Перевозчик может воспользоваться картой маршрута. Для этого необходимо установить Яндекс.Карты и Яндекс.Навигатор
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - ближайшие заказы</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_nearest.jpg') }}" alt="Титимити заказы рядом" title="Заказы рядом">
+                        </div>
+                        <p >
+                            Заказы рядом - основной экран, который появляется после входа в программу. Здесь отображаются все заказы по мере удаления от
+                            пользователя. В телефоне необходимо включить функцию определения местоположения, без этого заказы будут отображаться в неотсортированном порядке.
+                        </p>
+                        <p>
+                            В списке находится краткая информация о заказе: что, откуда и куда вести, крайнее время прибытия к получателю, а также стоимость, предложенная отправителем.
+                        </p>
+                        <p>
+                            В верхней части экрана находится иконка бокового меню, иконка поиска заказа по адресу, иконка добавления нового заказа и иконка обновления списка заказов рядом.
+                            Обновить список можно также, потянув список вниз.
+                        </p>
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - детали заказа</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_details.jpg') }}" alt="Титимити - детали заказа" title="Детали заказа">
+                        </div>
+                        <p>
+                            В деталях заказа находится вся информация о заказе, в том числе сумма страховки, сумма гарантии, фото заказа, отправитель, комментарии отправителя,
+                            ссылка на карту в Яндекс.картах
+                        </p>
+                        <p>
+                            Перевозчик может подать заявку на перевозку, по цене отправителя или по своей цене.
+                        </p>
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - заказ принят</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_accepted.jpg') }}" alt="Титимити - заказ принят" title="Заказ принят">
+                        </div>
+                        <p >
+                            После того как перевозчик нажал кнопку «Поехать», заказ переходит в состояние «Принят» и больше не доступен для других перевозчиков.
+                            После доставки перевозчик должен нажать кнопку «Доставлен».
+                        </p>
+                        <p>
+                            У перевозчика появляется кнопка <i class="fa fa-phone"></i> - позвонить отправителю, а у отправителя - позвонить перевозчику.
+                        </p>
+
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - заказ оплачен</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_paid.jpg') }}" alt="Титимити - заказ оплачен" title="Заказ оплачен">
+                        </div>
+                        <p >
+                            Только после того как перевозчик действительно получил оплату за заказ, он должен подтвердить оплату нажав кнопку «Подтвердить оплату».
+                        </p>
+                        <p>
+                            После это заказ переходит в статус «Завершен» и переходит в архив заказов.
+                        </p>
+
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Титимити - поиск по адресу или городу</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="team-members">
+                            <img class="thumbnail center-block img-responsive" src="{{ asset('bundles/binidiniweb/img/android/tytymyty_search.jpg') }}" alt="Титимити - поиск по адресу" title="Поиск по адресу">
+                        </div>
+                        <p>
+                            Задав адрес (или город, или населенный пункт), можно найти заказы по мере удаления от этого адреса.
+                        </p>
+                        <p>
+                            Наберайте адрес до тех пор пока не появится подсказка.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    </div>
+    {% endif %}
 </div>
 
     {% endblock %}

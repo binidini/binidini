@@ -112,6 +112,12 @@ binidini_iphone_faq:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/iphone_app.html.twig
 
+binidini_iphone_faq2:
+    path: /faq/iphone2
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/iphone_app2.html.twig
+
 binidini_guarantors:
     path: /guarantors
     defaults:

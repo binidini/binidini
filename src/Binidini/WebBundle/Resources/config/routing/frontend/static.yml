@@ -107,16 +107,29 @@ binidini_android_faq2:
         template:    BinidiniWebBundle::Frontend/Static/android_app2.html.twig
 
 binidini_iphone_faq:
-    path: /faq/iphone
+    path: /faq/iphone/8.0
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/iphone_app.html.twig
 
 binidini_iphone_faq2:
-    path: /faq/iphone2
+    path: /faq/iphone/8.0/senders
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    BinidiniWebBundle::Frontend/Static/iphone_app2.html.twig
+
+binidini_iphone_faq00:
+    path: /faq/iphone
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/iphone_app_00.html.twig
+
+binidini_iphone_faq02:
+    path: /faq/iphone/senders
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    BinidiniWebBundle::Frontend/Static/iphone_app_02.html.twig
+
 
 binidini_guarantors:
     path: /guarantors

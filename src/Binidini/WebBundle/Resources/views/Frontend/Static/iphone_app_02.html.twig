@@ -1,0 +1,171 @@
+{% extends 'BinidiniWebBundle::layout_api.html.twig' %}
+
+{% block title %}
+    Титимити iPhone
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+
+        <a href="{{ path('binidini_iphone_faq00') }}" class="btn btn-primary pull-right">Перевозчикам сюда</a>
+
+
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Титимити - «Отправки» - верхнее меню</h5>
+            </div>
+            <div class="ibox-content">
+
+                <div class="team-members">
+                    <img class="thumbnail center-block img-responsive"
+                         src="{{ asset('bundles/binidiniweb/img/iphone/tytymyty_iphone_top_menu2.jpg') }}"
+                         alt="Титимити - верхнее меню" title="Верхнее меню">
+                </div>
+                <p>
+                    Отправитель может нажать на значок <i class="fa fa-plus"></i> в верхнем меню, чтобы создать новый
+                    заказ.
+                </p>
+            </div>
+        </div>
+        <div class="ibox">
+            <div class="ibox-title" id="new">
+                <h5>Титимити - новый заказ</h5>
+            </div>
+            <div class="ibox-content">
+
+                <div class="team-members">
+                    <img class="thumbnail center-block img-responsive"
+                         src="{{ asset('bundles/binidiniweb/img/iphone/tytymyty_iphone_new.jpg') }}"
+                         alt="Титимити - новый закаа" title="Новый заказ">
+                </div>
+                <p>
+                    Чтобы создать заказ, нужно обязательно указать, что перевозиться, откуда, куда, крайнее время
+                    доставки и предлагаемая цена.
+                    Остальные параметры необязательны.
+                </p>
+
+                <p>
+                    Большинство отправителей предпочитает пользоваться сайтом tytymyty.ru для создания заказов.
+                </p>
+            </div>
+        </div>
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Титимити - ближайшие заказы</h5>
+            </div>
+            <div class="ibox-content">
+
+                <div class="team-members">
+                    <img class="thumbnail center-block img-responsive"
+                         src="{{ asset('bundles/binidiniweb/img/iphone/tytymyty_iphone_near.jpg') }}"
+                         alt="Титимити заказы рядом" title="Заказы рядом">
+                </div>
+                <p>
+                    Ближайшие заказы - основной экран, который появляется после входа в программу. Здесь отображаются
+                    все заказы по мере удаления от
+                    пользователя. В телефоне необходимо включить функцию определения местоположения, без этого заказы
+                    будут отображаться в неотсортированном порядке.
+                </p>
+
+                <p>
+                    В списке находится краткая информация о заказе: что, откуда и куда вести, крайнее время прибытия к
+                    получателю, а также стоимость, предложенная отправителем.
+                </p>
+
+                <p>
+                    В верхней части экрана находится иконка сортировки, форма поиска заказа по адресу, переключатель
+                    сортировки заказов по адресу отправления или адресу доставки.
+                </p>
+
+                <p>
+                    Обновить список можно потянув список вниз.
+                </p>
+            </div>
+        </div>
+
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Титимити - заявки на перевозку</h5>
+            </div>
+            <div class="ibox-content">
+
+                <div class="team-members">
+                    <img class="thumbnail center-block img-responsive"
+                         src="{{ asset('bundles/binidiniweb/img/iphone/tytymyty_iphone_bid_agree2.jpg') }}"
+                         alt="Титимити - заявки на перевозку" title="Заявки на перевозку">
+                </div>
+                <p>
+                    Заявки на перевозку заказа от всех перевозчиков отображаются во вкладке «Заявки».
+                </p>
+
+                <p>
+                    В заявках можно посмотреть статус заявки, ее цену и ссылку на перевозчика.
+                </p>
+
+                <p>
+                    Отправитель решает чью заявку принять, а кому отказать. При необходимости отправитель может
+                    позвонить перевозчику и уточнить вопросы прежде, чем принять решение.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="ibox" id="delivered">
+            <div class="ibox-title">
+                <h5>Титимити - заказ доставлен</h5>
+            </div>
+            <div class="ibox-content">
+
+                <div class="team-members">
+                    <img class="thumbnail center-block img-responsive"
+                         src="{{ asset('bundles/binidiniweb/img/iphone/tytymyty_iphone_delivered2.jpg') }}"
+                         alt="Титимити - заказ доставлен" title="Заказ доставлен">
+                </div>
+                <p>
+                    После того, как перевозчик доставил заказ, заказ переходит в статус «Доставлен» и ожидается, когда
+                    отправитель оплатит заказ и нажмет кнопку «Оплатить».
+                </p>
+
+                <p>
+                    Возможно, что была произведена предоплата и тогда отправитель сразу нажмет кнопку «Оплатить».
+                </p>
+
+            </div>
+        </div>
+
+
+        <div class="ibox" id="complete">
+            <div class="ibox-title">
+                <h5>Титимити - заказ завершен</h5>
+            </div>
+            <div class="ibox-content">
+
+                <div class="team-members">
+                    <img class="thumbnail center-block img-responsive"
+                         src="{{ asset('bundles/binidiniweb/img/iphone/tytymyty_iphone_complete2.jpg') }}"
+                         alt="Титимити - заказ завершен" title="Заказ завершен">
+                </div>
+                <p>
+                    После подтверждения оплаты, заказ переходит в статус «Завершен» и переносится в архив заказов.
+                </p>
+
+                <p>
+                    На сайте tytymyty.ru отправитель и перевозчик могут оставить отзыв друг о друге и выставить оценку
+                    по заказу, что отразится на рейтинге и отправителя, и перевозчика.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(location.hash).collapse('show');
+    </script>
+{% endblock %}

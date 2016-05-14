@@ -11,7 +11,7 @@ binidini_email_confirm:
         _controller: BinidiniCoreBundle:Email:confirm
 
 binidini_unsubscribe_newsletter:
-    path: /pubic/unsubscribe
+    path: /public/unsubscribe
     methods: [GET]
     defaults:
         _controller: BinidiniWebBundle:Default:unsubscribe

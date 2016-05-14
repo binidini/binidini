@@ -55,7 +55,7 @@ EOT
                 $headers->addTextHeader('List-Unsubscribe', '<' . $link . '>');
 
                 $message->setContentType("text/html");
-                $message->setTo($email, $company);
+                $message->setTo(explode(",", $email));
                 $message->setSubject("Народная доставка Титимити - " . $company . ".");
                 $message->setFrom("info@tytymyty.ru", "Титимити.ру");
                 $message->setBody(
@@ -65,8 +65,11 @@ EOT
                     )
                 );
 
+
                 $mailer = $this->getContainer()->get('mailer');
                 $response = $mailer->send($message);
+                $this->setContainer(null);
+
                 $output->writeln($email . " - ok");
                 sleep(18);
             } catch (\Exception $ex) {

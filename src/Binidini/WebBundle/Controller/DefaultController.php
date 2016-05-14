@@ -36,4 +36,12 @@ class DefaultController extends Controller
 
         return $this->render('BinidiniWebBundle::Frontend/Static/senders.html.twig');
     }
+
+    public function unsubscribeAction(Request $request)
+    {
+        $flashBag = $this->get('session')->getFlashBag();
+        $flashBag->add('success','Вы успешно отписаны от рассылки!');
+
+        return $this->redirect($this->generateUrl('binidini_search_shipment_index'));
+    }
 }

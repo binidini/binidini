@@ -10,3 +10,8 @@ binidini_email_confirm:
     defaults:
         _controller: BinidiniCoreBundle:Email:confirm
 
+binidini_unsubscribe_newsletter:
+    path: /unsubscribe
+    methods: [GET]
+    defaults:
+        _controller: BinidiniWebBundle:Default:unsubscribe

@@ -43,7 +43,7 @@ EOT
         $filename = $input->getArgument('filename');
         $file = fopen( $filename, "r" ) or die("Couldn't open $filename");
         while (!feof($file)) {
-            $link = 'http://tytymyty.ru/unsubscribe?id='. rand(1000000, 9999999);
+            $link = 'http://tytymyty.ru/public/unsubscribe?id='. rand(1000000, 9999999);
             $line = rtrim(fgets($file));
             if (empty($line)) break;
             list($company, $email) = explode(";", $line);
@@ -70,7 +70,7 @@ EOT
                 $output->writeln($email . " - ok");
                 sleep(18);
             } catch (\Exception $ex) {
-                $output->writeln($ex->getMessage());
+                $output->writeln('<error>'.$ex->getMessage().'</error>');
             }
 
 

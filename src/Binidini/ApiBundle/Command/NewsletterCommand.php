@@ -48,21 +48,32 @@ EOT
             if (empty($line)) break;
             list($company, $email) = explode(";", $line);
 
-            $message = new \Swift_Message();
-            $headers = $message->getHeaders();
-            $headers->addTextHeader('Precedence', 'bulk');
-            $headers->addTextHeader('List-Unsubscribe', '<'.$link.'>');
+            try {
+                $message = new \Swift_Message();
+                $headers = $message->getHeaders();
+                $headers->addTextHeader('Precedence', 'bulk');
+                $headers->addTextHeader('List-Unsubscribe', '<' . $link . '>');
 
-            $message->setContentType("text/html");
-            $message->setTo($email, $company);
-            $message->setSubject("Народная доставка Титимити для ".$company.".");
-            $message->setFrom("info@tytymyty.ru", "Титимити.ру");
-            $message->setBody($this->getContainer()->get('templating')->render('BinidiniWebBundle::Template/Email/newsletter.html.twig', ['link'=>$link, 'company'=>$company]));
+                $message->setContentType("text/html");
+                $message->setTo($email, $company);
+                $message->setSubject("Народная доставка Титимити - " . $company . ".");
+                $message->setFrom("info@tytymyty.ru", "Титимити.ру");
+                $message->setBody(
+                    $this->getContainer()->get('templating')->render(
+                        'BinidiniWebBundle::Template/Email/newsletter.html.twig',
+                        ['link' => $link, 'company' => $company]
+                    )
+                );
 
-            $mailer = $this->getContainer()->get('mailer');
-            $response = $mailer->send($message);
+                $mailer = $this->getContainer()->get('mailer');
+                $response = $mailer->send($message);
+                $output->writeln($email . " - ok");
+                sleep(18);
+            } catch (\Exception $ex) {
+                $output->writeln($ex->getMessage());
+            }
 
-            $output->writeln($response);
+
         }
         fclose($file);
 

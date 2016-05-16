@@ -71,7 +71,8 @@ EOT
                 $this->setContainer(null);
 
                 $output->writeln($email . " - ok");
-                sleep(rand(1,80));
+                $mailer->getTransport()->stop();
+                sleep(rand(1,60));
             } catch (\Exception $ex) {
                 $output->writeln('<error>'.$ex->getMessage().'</error>');
                 if (strpos($ex->getMessage(), '554')) exit;

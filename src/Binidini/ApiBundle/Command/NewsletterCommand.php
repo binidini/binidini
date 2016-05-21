@@ -40,18 +40,19 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $emails = ['rus', 'sonya', 'a', 'serg', 'agolovin'];
         $filename = $input->getArgument('filename');
         $file = fopen( $filename, "r" ) or die("Couldn't open $filename");
         $i = 0;
         while (!feof($file)) {
-            $n = ($i % 5) + 1;
+            $n = ($i % 5);
             $link = 'http://tytymyty.ru/public/unsubscribe?id='. rand(1000000, 9999999);
             $line = rtrim(fgets($file));
             if (empty($line)) break;
             list($company, $email) = explode(";", $line);
 
             try {
-                $semail = 'info'.$n.'@tytymyty.ru';
+                $semail = $emails[$n].'@tytymyty.ru';
 
                 $message = new \Swift_Message();
                 $headers = $message->getHeaders();

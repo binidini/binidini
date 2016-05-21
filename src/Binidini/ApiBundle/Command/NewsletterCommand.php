@@ -45,7 +45,8 @@ EOT
         $file = fopen( $filename, "r" ) or die("Couldn't open $filename");
         $i = 0;
         while (!feof($file)) {
-            $n = ($i % 5);
+
+            $n = ($i++ % 5);
             $link = 'http://tytymyty.ru/public/unsubscribe?id='. rand(1000000, 9999999);
             $line = rtrim(fgets($file));
             if (empty($line)) break;

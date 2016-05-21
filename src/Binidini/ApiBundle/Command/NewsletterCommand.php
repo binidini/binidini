@@ -42,13 +42,17 @@ EOT
     {
         $filename = $input->getArgument('filename');
         $file = fopen( $filename, "r" ) or die("Couldn't open $filename");
+        $i = 0;
         while (!feof($file)) {
+            $n = ($i % 5) + 1;
             $link = 'http://tytymyty.ru/public/unsubscribe?id='. rand(1000000, 9999999);
             $line = rtrim(fgets($file));
             if (empty($line)) break;
             list($company, $email) = explode(";", $line);
 
             try {
+                $semail = 'info'.$n.'@tytymyty.ru';
+
                 $message = new \Swift_Message();
                 $headers = $message->getHeaders();
                 $headers->addTextHeader('Precedence', 'bulk');
@@ -57,7 +61,7 @@ EOT
                 $message->setContentType("text/html");
                 $message->setTo(explode(",", $email));
                 $message->setSubject("Народная доставка Титимити - " . $company . ".");
-                $message->setFrom("info@tytymyty.ru", "Титимити.ру");
+                $message->setFrom($semail, "Титимити.ру");
                 $message->setBody(
                     $this->getContainer()->get('templating')->render(
                         'BinidiniWebBundle::Template/Email/newsletter.html.twig',
@@ -66,13 +70,28 @@ EOT
                 );
 
 
-                $mailer = $this->getContainer()->get('mailer');
-                $response = $mailer->send($message);
-                $this->setContainer(null);
+                #$mailer = $this->getContainer()->get('mailer');
+                #$mailer->send($message);
+                #$this->setContainer(null);
+                #$output->writeln($email . " - ok");
+                #$mailer->getTransport()->stop();
 
-                $output->writeln($email . " - ok");
-                $mailer->getTransport()->stop();
+                // Create the Transport
+                $transport = \Swift_SmtpTransport::newInstance('smtp.yandex.ru', 465, 'ssl')
+                    ->setUsername($semail)
+                    ->setPassword('rusden77')
+                ;
+
+
+                $mailer = \Swift_Mailer::newInstance($transport);
+
+
+// Send the message
+                $result = $mailer->send($message);
+                $output->writeln($email . " - " . $semail . " - " . $result);
+
                 sleep(rand(1,60));
+
             } catch (\Exception $ex) {
                 $output->writeln('<error>'.$ex->getMessage().'</error>');
                 if (strpos($ex->getMessage(), '554')) exit;

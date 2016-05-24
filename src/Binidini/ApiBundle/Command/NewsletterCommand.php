@@ -41,6 +41,7 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $emails = ['rus', 'sonya', 'a', 'serg', 'agolovin'];
+        #$emails = ['tytymyty77','tatamata78','titimiti79','tetemete76','tyty-a-myty'];
         $filename = $input->getArgument('filename');
         $file = fopen( $filename, "r" ) or die("Couldn't open $filename");
         $i = 0;
@@ -72,18 +73,10 @@ EOT
                 );
 
 
-                #$mailer = $this->getContainer()->get('mailer');
-                #$mailer->send($message);
-                #$this->setContainer(null);
-                #$output->writeln($email . " - ok");
-                #$mailer->getTransport()->stop();
-
-                // Create the Transport
                 $transport = \Swift_SmtpTransport::newInstance('smtp.yandex.ru', 465, 'ssl')
                     ->setUsername($semail)
                     ->setPassword('rusden77')
                 ;
-
 
                 $mailer = \Swift_Mailer::newInstance($transport);
 
@@ -95,6 +88,7 @@ EOT
                 sleep(rand(1,60));
 
             } catch (\Exception $ex) {
+                $output->writeln($email . " - " . $semail );
                 $output->writeln('<error>'.$ex->getMessage().'</error>');
                 if (strpos($ex->getMessage(), '554')) exit;
             }

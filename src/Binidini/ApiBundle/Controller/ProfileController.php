@@ -79,7 +79,7 @@ class ProfileController extends Controller
     {
         $user = $this->getUser();
         if (!$user) {
-            return new JsonResponse("Bad requesasdfasdt", 400);
+            return new JsonResponse("Bad request", 400);
         }
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */

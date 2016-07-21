@@ -47,7 +47,7 @@ class NotificationService
         $this->em = $em;
 
         //Все
-        $this->insiders = [2, 57, 123792];
+        $this->insiders = [2, 57, 123792, 126702];
 
         //Люботинский
         $this->insiders2 =[];
